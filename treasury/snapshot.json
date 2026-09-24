@@ -1,22 +1,22 @@
 {
-  "as_of": "2026-09-24T18:09:24Z",
+  "as_of": "2026-09-24T19:09:56Z",
   "cash": 266.95,
-  "nav": 913.5,
-  "cash_pct_of_nav": 29.22,
+  "nav": 913.22,
+  "cash_pct_of_nav": 29.23,
   "realized_pl": {
     "mtd": 0.0,
     "ytd": 0.0
   },
   "concentration_flags": [
-    "UBER is ~70.78% of NAV -- a single adverse event (the pending $40M California wrongful-death ruling, a broader rideshare-safety litigation wave, the pending Delivery Hero acquisition's integration/financing risk, execution/leverage risk from the EUR4.5B euro bond raise, or intensifying robotaxi competition from Tesla's Cybercab rollout) would disproportionately hit the portfolio; cash (~29.22% of NAV) is the only offsetting buffer."
+    "UBER is ~70.77% of NAV -- a single adverse event (the pending $40M California wrongful-death ruling, a broader rideshare-safety litigation wave, the pending Delivery Hero acquisition's integration/financing risk, execution/leverage risk from the EUR4.5B euro bond raise, or intensifying robotaxi competition from Tesla's Cybercab rollout) would disproportionately hit the portfolio; cash (~29.23% of NAV) is the only offsetting buffer."
   ],
   "trim_considerations": [
     {
       "ticker": "UBER",
-      "pct_nav": 70.78,
+      "pct_nav": 70.77,
       "target_pct_nav": 25.0,
-      "excess_usd": 418.17,
-      "note": "Bringing this back to the ~25% single-name guideline would mean reducing exposure by roughly $418.17 -- a consideration, not an instruction, and one that doesn't account for any tax consequences of selling, which this pipeline has no visibility into."
+      "excess_usd": 417.96,
+      "note": "Bringing this back to the ~25% single-name guideline would mean reducing exposure by roughly $417.96 -- a consideration, not an instruction, and one that doesn't account for any tax consequences of selling, which this pipeline has no visibility into."
     }
   ],
   "positions": [
@@ -25,10 +25,10 @@
       "qty": null,
       "basis_mode": "aggregate",
       "cost_basis": 701.75,
-      "market_value": 646.55,
-      "last_price": 69.18,
-      "price_as_of": "2026-09-24T18:09:24Z",
-      "pct_nav": 70.78
+      "market_value": 646.27,
+      "last_price": 69.15,
+      "price_as_of": "2026-09-24T19:09:56Z",
+      "pct_nav": 70.77
     }
   ]
 }
