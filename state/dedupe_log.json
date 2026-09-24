@@ -1,46 +1,6 @@
 {
   "events": [
     {
-      "event_id": "uber-tony-west-insider-buy-257k-20260916",
-      "first_seen": "2026-09-21T14:15:00Z",
-      "tickers": [
-        "UBER"
-      ],
-      "headline_fingerprint": "tony west uber officer buys 3626 shares at 70.97 sept 16 2026"
-    },
-    {
-      "event_id": "sofi-citizens-bank-poaching-lawsuit-20260909",
-      "first_seen": "2026-09-21T14:15:00Z",
-      "tickers": [
-        "SOFI"
-      ],
-      "headline_fingerprint": "citizens bank sues sofi mortgage loan officer poaching trade secrets sept 9 2026"
-    },
-    {
-      "event_id": "avav-analyst-target-moves-bofa-jpm-20260921",
-      "first_seen": "2026-09-21T14:15:00Z",
-      "tickers": [
-        "AVAV"
-      ],
-      "headline_fingerprint": "avav bofa cuts pt to 185 jpm raises to 210 ark buys shares sept 2026"
-    },
-    {
-      "event_id": "ryaay-ceo-apology-priority-boarding-20260921",
-      "first_seen": "2026-09-21T14:15:00Z",
-      "tickers": [
-        "RYAAY"
-      ],
-      "headline_fingerprint": "ryanair ceo apology priority boarding product change sept 21 2026"
-    },
-    {
-      "event_id": "duol-citi-tmt-conference-dau-target-super-max-20260921",
-      "first_seen": "2026-09-21T14:15:00Z",
-      "tickers": [
-        "DUOL"
-      ],
-      "headline_fingerprint": "duolingo citi tmt conference 100m dau 2028 super max bundling stock +5.6% sept 21 2026"
-    },
-    {
       "event_id": "duol-insider-selling-cluster-6.9m-20260908-16",
       "first_seen": "2026-09-21T17:15:43Z",
       "tickers": [
