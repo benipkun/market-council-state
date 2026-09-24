@@ -55,6 +55,14 @@
         "NVO"
       ],
       "headline_fingerprint": "novo nordisk capital markets day post-wegovy growth strategy stock falls 7.7pct sept 21 2026"
+    },
+    {
+      "event_id": "asml-dutch-pm-trump-match-act-export-curbs-20260924",
+      "first_seen": "2026-09-24T22:12:23Z",
+      "tickers": [
+        "ASML"
+      ],
+      "headline_fingerprint": "dutch pm jetten discusses match act with trump to prevent new us export curbs on asml sept 24 2026"
     }
   ]
 }
