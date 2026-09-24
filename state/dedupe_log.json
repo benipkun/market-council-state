@@ -1,22 +1,6 @@
 {
   "events": [
     {
-      "event_id": "uber-zagreb-autonomous-launch-verne-ponyai-20260921",
-      "first_seen": "2026-09-21T20:26:00Z",
-      "tickers": [
-        "UBER"
-      ],
-      "headline_fingerprint": "uber verne pony.ai launch autonomous rides zagreb croatia sept 2026"
-    },
-    {
-      "event_id": "ryaay-aena-airport-charges-decision-20260921",
-      "first_seen": "2026-09-21T20:26:00Z",
-      "tickers": [
-        "RYAAY"
-      ],
-      "headline_fingerprint": "ryanair welcomes spanish aena airport charges decision sept 21 2026"
-    },
-    {
       "event_id": "ryaay-uk-atc-failure-140flights-20260921",
       "first_seen": "2026-09-22T08:22:58Z",
       "tickers": [
