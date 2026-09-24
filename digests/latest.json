@@ -1,67 +1,39 @@
 {
-  "as_of": "2026-09-24T22:12:23Z",
-  "picks": [],
-  "scrap": [
+  "as_of": "2026-09-24T23:12:29Z",
+  "picks": [
     {
       "ticker": "UBER",
-      "headline": "Price $69.42, unchanged vs last cycle's close (still pre-market, Wed Sept 23 close confirmed final). RSI(14) carried forward 36.9, still below 50d SMA ($73.52) and 200d SMA ($75.59). Alpha Vantage news-sentiment: zero new items since 10:10 UTC. Insider transactions re-confirmed no new filings since Sept 16 (CFO Krishnamurthy sale). DCF ($121.11) and consensus ($104.56) mispricing thesis unchanged, not re-flagged -- no fresh catalyst.",
+      "lean": "neutral",
+      "confidence": 3,
       "severity": 1,
-      "first_seen": "2026-09-24T11:07:37Z"
-    },
-    {
-      "ticker": "SPY",
-      "headline": "Price $767.81, unchanged vs last cycle's close. No new market-wide catalyst found via structured news check. No stock-specific signal for any watchlist name.",
-      "severity": 1,
-      "first_seen": "2026-09-24T11:07:37Z"
-    },
-    {
-      "ticker": "AVAV",
-      "headline": "Price $155.94, unchanged vs last cycle's close, RSI(14) carried forward 51.78. No new catalyst found via structured news check. Undervaluation thesis (~41.9% vs $221.50 consensus) unchanged, not re-flagged.",
-      "severity": 1,
-      "first_seen": "2026-09-24T11:07:37Z"
-    },
-    {
-      "ticker": "CHWY",
-      "headline": "Price $18.55, unchanged vs last cycle's close, RSI(14) carried forward 27.68 -- still the deepest oversold reading on the watchlist, near the 52-week low ($17.40). No new catalyst found beyond the already-logged Sept 9-11 beat-and-raise/JPMorgan-downgrade story. Mispricing thesis (~71.3% vs $31.78 target) unchanged, not re-flagged.",
-      "severity": 2,
-      "first_seen": "2026-09-24T11:07:37Z"
-    },
-    {
-      "ticker": "SOFI",
-      "headline": "Price $16.55, unchanged vs last cycle's close. DCF ($16.42) essentially at parity with price, no mispricing gap. No new catalyst found via structured news check.",
-      "severity": 1,
-      "first_seen": "2026-09-24T11:07:37Z"
-    },
-    {
-      "ticker": "DUOL",
-      "headline": "Price $145.98, unchanged vs last cycle's close. No new catalyst found via structured news check. Price remains ~8.7% above the $134.29 consensus target -- not a mispricing flag.",
-      "severity": 1,
-      "first_seen": "2026-09-24T11:07:37Z"
-    },
-    {
-      "ticker": "RYAAY",
-      "headline": "Price $54.69, unchanged vs last cycle's close (ADR trades on NASDAQ, only updates during US hours). No new catalyst found via structured news check beyond already-logged O'Leary no-fuel-surcharge comment. Consensus-target mispricing thesis (~35.9% undervalued vs $74.30 target) unchanged, not re-flagged.",
-      "severity": 1,
-      "first_seen": "2026-09-24T11:07:37Z"
-    },
-    {
-      "ticker": "ASML",
-      "headline": "Price $1744.61, unchanged vs last cycle's close. No new catalyst found via structured news check. Consensus-target mispricing gap ~22.4% vs $2135.00 target, below the 25% flag threshold and no fresh reason, not re-flagged -- already picked 2026-09-23T16:19:50Z.",
-      "severity": 1,
-      "first_seen": "2026-09-24T11:07:37Z"
-    },
-    {
-      "ticker": "SAP",
-      "headline": "Price $210.62, unchanged vs last cycle's close. No new catalyst found via structured news check. Consensus target ~$245.01 implies only ~16.3% upside -- below the mispricing threshold, not flagged.",
-      "severity": 1,
-      "first_seen": "2026-09-24T11:07:37Z"
-    },
-    {
-      "ticker": "NVO",
-      "headline": "Price $38.17, unchanged vs last cycle's close, RSI(14) carried forward 27.51 -- still the most oversold name on the watchlist, continuing the post-Capital-Markets-Day selloff. No new press release found via structured news check. Consensus-target mispricing gap ~23.7% unchanged, not re-flagged -- already picked 2026-09-23T16:19:50Z (half-tier).",
-      "severity": 2,
-      "first_seen": "2026-09-24T11:07:37Z"
-    },
+      "brief": "Daily long-term check-in on the largest holding, independent of today's news",
+      "why": "Daily long-term check-in on the largest holding, independent of today's news",
+      "price_at_pick": 69.22,
+      "bull_case": "Not applicable -- daily check-in, not a Council-driven pick.",
+      "bear_case": "Not applicable -- daily check-in, not a Council-driven pick.",
+      "risks": [],
+      "position_suggestion": {
+        "tier": "none",
+        "suggested_size_usd": 0.0,
+        "suggested_size_pct_of_cash": 0.0,
+        "resulting_pct_nav": 70.79,
+        "execution_floor_usd": 50.0,
+        "basis": "Daily check-in, not a new-money decision",
+        "concentration_note": "UBER is already ~70.79% of NAV, well past the ~25% single-name guideline; no additional sizing considered here.",
+        "caveat": "Mechanical sizing based on this portfolio's own numbers, not personalized financial advice."
+      },
+      "advisor_questions": {
+        "framing": "business decision (fundamentals, multi-year)",
+        "questions": [
+          "Price has sat within a few cents of $69 for six straight cycles today with zero fresh news -- does a quiet, newsless day like this tell you anything about how much of the current DCF/consensus gap is really mispricing versus the market simply having priced in litigation and AV-competition risk you haven't fully underwritten?",
+          "The Delivery Hero acquisition and the EUR4.5B bond raise both remain unresolved -- if either turns out worse than expected (financing strain, integration costs), how many quarters would it take for that to show up in the numbers rather than in a stock price that's already 45%+ below your models?",
+          "Wayve's London robotaxi launch (with safety drivers) is a live, ongoing test of whether Uber's aggregator model coexists with AV operators or gets squeezed by them -- what specific data point from that rollout would change your read on Uber's long-term moat?",
+          "This position is still ~71% of NAV without a fresh decision made today to hold it there -- does today's non-event simply confirm inertia, or has something in the last few days actually strengthened the case for staying this concentrated?"
+        ]
+      }
+    }
+  ],
+  "scrap": [
     {
       "ticker": "UBER",
       "headline": "Pre-market flat at $69.42 (unchanged vs last cycle's close), still below 50d SMA ($73.52) and 200d SMA ($75.59), RSI(14) 36.90 (fresh, matches carried-forward value). Alpha Vantage news-sentiment confirms zero new items across all 10 tickers since 11:07 UTC; insider transactions check rate-limited (25/day free-tier cap exhausted), last confirmed no new filings since Sept 16. Fresh FMP DCF $121.11 matches stored value -- mispricing thesis unchanged, not re-flagged.",
@@ -721,6 +693,66 @@
       "headline": "Price $38.62 (+1.18% vs prior close $38.17, same close as prior cycle -- European home session closed). RSI(14) 29.99 fresh, still the most oversold name on the watchlist. Web search found CNBC/Bloomberg follow-up coverage of CEO Doustdar's rebuilding-investor-trust comments and openness to M&A -- these are continued color on the already-logged Sept 21 Capital Markets Day selloff (dedupe fingerprint 'nvo-capital-markets-day-selloff-7.7pct-20260921') with no new numbers, treated as a duplicate, not a fresh catalyst. Mispricing gap vs consensus $47.23 (carried) ~22.3%, still below the 25% flag threshold, not re-flagged.",
       "severity": 1,
       "first_seen": "2026-09-24T22:12:23Z"
+    },
+    {
+      "ticker": "UBER",
+      "headline": "Price $69.22 (unchanged vs last cycle's close, market closed since 20:00 ET). RSI(14) 36.36 fresh-confirmed (same daily bar). Web search found no fresh catalyst beyond already-known Wayve/London robotaxi and Sept workforce-cut coverage. FMP DCF $121.11 and consensus $104.56 fresh-confirmed match stored values -- mispricing thesis unchanged, not re-flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-24T23:12:29Z"
+    },
+    {
+      "ticker": "SPY",
+      "headline": "Price $767.18 (unchanged vs last cycle's close). RSI(14) 52.47 fresh-confirmed. No market-wide catalyst found.",
+      "severity": 1,
+      "first_seen": "2026-09-24T23:12:29Z"
+    },
+    {
+      "ticker": "AVAV",
+      "headline": "Price $158.55 (unchanged vs last cycle's close). RSI(14) 52.27 fresh-confirmed. Undervaluation thesis (~39.7% vs $221.50 consensus, carried) unchanged, not re-flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-24T23:12:29Z"
+    },
+    {
+      "ticker": "CHWY",
+      "headline": "Price $18.32 (unchanged vs last cycle's close), still near its 52-week low ($17.40). RSI(14) 26.79 fresh-confirmed, still the deepest oversold reading on the watchlist. Mispricing thesis (~73.5% vs $31.78 target, carried) unchanged, established (possible value-trap), not re-flagged.",
+      "severity": 2,
+      "first_seen": "2026-09-24T23:12:29Z"
+    },
+    {
+      "ticker": "SOFI",
+      "headline": "Price $16.80 (unchanged vs last cycle's close). RSI(14) 43.56 fresh-confirmed. DCF $16.42 (carried) essentially at parity with price, no mispricing gap.",
+      "severity": 1,
+      "first_seen": "2026-09-24T23:12:29Z"
+    },
+    {
+      "ticker": "DUOL",
+      "headline": "Price $147.75 (unchanged vs last cycle's close). RSI(14) 52.03 fresh-confirmed. Overvalued gap vs consensus $134.29 (carried) ~10.0%, well under the 20-25% short-thesis threshold, not flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-24T23:12:29Z"
+    },
+    {
+      "ticker": "RYAAY",
+      "headline": "Price $54.04 (unchanged vs last cycle's close; ADR trades on Nasdaq, only updates during US hours). European home session (XETRA/Euronext) closed. RSI(14) 45.34 fresh-confirmed. Mispricing thesis (~37.5% vs $74.30 target, carried) unchanged, established, not re-flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-24T23:12:29Z"
+    },
+    {
+      "ticker": "ASML",
+      "headline": "Price $1722.50 (unchanged vs last cycle's close). European home session (Amsterdam/XETRA) closed. RSI(14) 52.31 fresh-confirmed. No new news since the Dutch PM/MATCH Act item logged last cycle. Mispricing gap vs consensus $2135.00 (carried) ~23.95%, still just below the 25% flag threshold, not re-flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-24T23:12:29Z"
+    },
+    {
+      "ticker": "SAP",
+      "headline": "Price $209.11 (unchanged vs last cycle's close). European home session (XETRA/Frankfurt) closed. RSI(14) 50.13 fresh-confirmed. Mispricing gap ~17.2% vs consensus $245.01 (carried), below threshold, not flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-24T23:12:29Z"
+    },
+    {
+      "ticker": "NVO",
+      "headline": "Price $38.62 (unchanged vs last cycle's close). European home session (Amsterdam/Copenhagen) closed. RSI(14) 29.99 fresh-confirmed, still the most oversold name on the watchlist. Mispricing gap vs consensus $47.23 (carried) ~22.3%, still below the 25% flag threshold, not re-flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-24T23:12:29Z"
     }
   ],
   "technicals": {
