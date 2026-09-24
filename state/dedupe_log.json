@@ -1,14 +1,6 @@
 {
   "events": [
     {
-      "event_id": "duol-insider-selling-cluster-6.9m-20260908-16",
-      "first_seen": "2026-09-21T17:15:43Z",
-      "tickers": [
-        "DUOL"
-      ],
-      "headline_fingerprint": "duolingo insider selling cluster ceo von ahn gc chen director gordon 6.9m 10b5-1 sept 8-16 2026"
-    },
-    {
       "event_id": "uber-zagreb-autonomous-launch-verne-ponyai-20260921",
       "first_seen": "2026-09-21T20:26:00Z",
       "tickers": [
