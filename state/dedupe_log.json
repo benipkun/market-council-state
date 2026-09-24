@@ -1,1 +1,124 @@
-{"events": [{"event_id": "uber-tony-west-insider-buy-257k-20260916", "first_seen": "2026-09-21T14:15:00Z", "tickers": ["UBER"], "headline_fingerprint": "tony west uber officer buys 3626 shares at 70.97 sept 16 2026"}, {"event_id": "sofi-citizens-bank-poaching-lawsuit-20260909", "first_seen": "2026-09-21T14:15:00Z", "tickers": ["SOFI"], "headline_fingerprint": "citizens bank sues sofi mortgage loan officer poaching trade secrets sept 9 2026"}, {"event_id": "avav-analyst-target-moves-bofa-jpm-20260921", "first_seen": "2026-09-21T14:15:00Z", "tickers": ["AVAV"], "headline_fingerprint": "avav bofa cuts pt to 185 jpm raises to 210 ark buys shares sept 2026"}, {"event_id": "ryaay-ceo-apology-priority-boarding-20260921", "first_seen": "2026-09-21T14:15:00Z", "tickers": ["RYAAY"], "headline_fingerprint": "ryanair ceo apology priority boarding product change sept 21 2026"}, {"event_id": "duol-citi-tmt-conference-dau-target-super-max-20260921", "first_seen": "2026-09-21T14:15:00Z", "tickers": ["DUOL"], "headline_fingerprint": "duolingo citi tmt conference 100m dau 2028 super max bundling stock +5.6% sept 21 2026"}, {"event_id": "duol-insider-selling-cluster-6.9m-20260908-16", "first_seen": "2026-09-21T17:15:43Z", "tickers": ["DUOL"], "headline_fingerprint": "duolingo insider selling cluster ceo von ahn gc chen director gordon 6.9m 10b5-1 sept 8-16 2026"}, {"event_id": "uber-zagreb-autonomous-launch-verne-ponyai-20260921", "first_seen": "2026-09-21T20:26:00Z", "tickers": ["UBER"], "headline_fingerprint": "uber verne pony.ai launch autonomous rides zagreb croatia sept 2026"}, {"event_id": "ryaay-aena-airport-charges-decision-20260921", "first_seen": "2026-09-21T20:26:00Z", "tickers": ["RYAAY"], "headline_fingerprint": "ryanair welcomes spanish aena airport charges decision sept 21 2026"}, {"event_id": "ryaay-uk-atc-failure-140flights-20260921", "first_seen": "2026-09-22T08:22:58Z", "tickers": ["RYAAY"], "headline_fingerprint": "uk air traffic control failure delays 140 ryanair flights sept 21 2026"}, {"event_id": "duol-ceo-foundation-share-sales-10m-20260921", "first_seen": "2026-09-22T08:22:58Z", "tickers": ["DUOL"], "headline_fingerprint": "duolingo ceo von ahn foundation file additional 10.3m share sales sept 21 2026"}, {"event_id": "sofi-stablecoin-mastercard-settlement-20260922", "first_seen": "2026-09-22T15:21:54Z", "tickers": ["SOFI"], "headline_fingerprint": "sofi stablecoin settlement live mastercard network 25b card program sept 22 2026"}, {"event_id": "avav-locust-laser-intl-order-50m-20260922", "first_seen": "2026-09-22T17:21:16Z", "tickers": ["AVAV"], "headline_fingerprint": "aerovironment first international locust laser weapon system order over 50m sept 22 2026"}, {"event_id": "ryaay-alphavalue-target-cut-2550-20260922", "first_seen": "2026-09-22T23:22:00Z", "tickers": ["RYAAY"], "headline_fingerprint": "ryanair alphavalue cuts target to eur25.50 from eur26.90 reduces eps forecasts sept 22 2026"}, {"event_id": "ryaay-oleary-no-fuel-surcharge-20260923", "first_seen": "2026-09-23T14:24:00Z", "tickers": ["RYAAY"], "headline_fingerprint": "ryanair ceo oleary says no fuel surcharge despite higher jet fuel prices sept 23 2026"}, {"event_id": "nvo-capital-markets-day-selloff-7.7pct-20260921", "first_seen": "2026-09-23T16:19:50Z", "tickers": ["NVO"], "headline_fingerprint": "novo nordisk capital markets day post-wegovy growth strategy stock falls 7.7pct sept 21 2026"}]}
+{
+  "events": [
+    {
+      "event_id": "uber-tony-west-insider-buy-257k-20260916",
+      "first_seen": "2026-09-21T14:15:00Z",
+      "tickers": [
+        "UBER"
+      ],
+      "headline_fingerprint": "tony west uber officer buys 3626 shares at 70.97 sept 16 2026"
+    },
+    {
+      "event_id": "sofi-citizens-bank-poaching-lawsuit-20260909",
+      "first_seen": "2026-09-21T14:15:00Z",
+      "tickers": [
+        "SOFI"
+      ],
+      "headline_fingerprint": "citizens bank sues sofi mortgage loan officer poaching trade secrets sept 9 2026"
+    },
+    {
+      "event_id": "avav-analyst-target-moves-bofa-jpm-20260921",
+      "first_seen": "2026-09-21T14:15:00Z",
+      "tickers": [
+        "AVAV"
+      ],
+      "headline_fingerprint": "avav bofa cuts pt to 185 jpm raises to 210 ark buys shares sept 2026"
+    },
+    {
+      "event_id": "ryaay-ceo-apology-priority-boarding-20260921",
+      "first_seen": "2026-09-21T14:15:00Z",
+      "tickers": [
+        "RYAAY"
+      ],
+      "headline_fingerprint": "ryanair ceo apology priority boarding product change sept 21 2026"
+    },
+    {
+      "event_id": "duol-citi-tmt-conference-dau-target-super-max-20260921",
+      "first_seen": "2026-09-21T14:15:00Z",
+      "tickers": [
+        "DUOL"
+      ],
+      "headline_fingerprint": "duolingo citi tmt conference 100m dau 2028 super max bundling stock +5.6% sept 21 2026"
+    },
+    {
+      "event_id": "duol-insider-selling-cluster-6.9m-20260908-16",
+      "first_seen": "2026-09-21T17:15:43Z",
+      "tickers": [
+        "DUOL"
+      ],
+      "headline_fingerprint": "duolingo insider selling cluster ceo von ahn gc chen director gordon 6.9m 10b5-1 sept 8-16 2026"
+    },
+    {
+      "event_id": "uber-zagreb-autonomous-launch-verne-ponyai-20260921",
+      "first_seen": "2026-09-21T20:26:00Z",
+      "tickers": [
+        "UBER"
+      ],
+      "headline_fingerprint": "uber verne pony.ai launch autonomous rides zagreb croatia sept 2026"
+    },
+    {
+      "event_id": "ryaay-aena-airport-charges-decision-20260921",
+      "first_seen": "2026-09-21T20:26:00Z",
+      "tickers": [
+        "RYAAY"
+      ],
+      "headline_fingerprint": "ryanair welcomes spanish aena airport charges decision sept 21 2026"
+    },
+    {
+      "event_id": "ryaay-uk-atc-failure-140flights-20260921",
+      "first_seen": "2026-09-22T08:22:58Z",
+      "tickers": [
+        "RYAAY"
+      ],
+      "headline_fingerprint": "uk air traffic control failure delays 140 ryanair flights sept 21 2026"
+    },
+    {
+      "event_id": "duol-ceo-foundation-share-sales-10m-20260921",
+      "first_seen": "2026-09-22T08:22:58Z",
+      "tickers": [
+        "DUOL"
+      ],
+      "headline_fingerprint": "duolingo ceo von ahn foundation file additional 10.3m share sales sept 21 2026"
+    },
+    {
+      "event_id": "sofi-stablecoin-mastercard-settlement-20260922",
+      "first_seen": "2026-09-22T15:21:54Z",
+      "tickers": [
+        "SOFI"
+      ],
+      "headline_fingerprint": "sofi stablecoin settlement live mastercard network 25b card program sept 22 2026"
+    },
+    {
+      "event_id": "avav-locust-laser-intl-order-50m-20260922",
+      "first_seen": "2026-09-22T17:21:16Z",
+      "tickers": [
+        "AVAV"
+      ],
+      "headline_fingerprint": "aerovironment first international locust laser weapon system order over 50m sept 22 2026"
+    },
+    {
+      "event_id": "ryaay-alphavalue-target-cut-2550-20260922",
+      "first_seen": "2026-09-22T23:22:00Z",
+      "tickers": [
+        "RYAAY"
+      ],
+      "headline_fingerprint": "ryanair alphavalue cuts target to eur25.50 from eur26.90 reduces eps forecasts sept 22 2026"
+    },
+    {
+      "event_id": "ryaay-oleary-no-fuel-surcharge-20260923",
+      "first_seen": "2026-09-23T14:24:00Z",
+      "tickers": [
+        "RYAAY"
+      ],
+      "headline_fingerprint": "ryanair ceo oleary says no fuel surcharge despite higher jet fuel prices sept 23 2026"
+    },
+    {
+      "event_id": "nvo-capital-markets-day-selloff-7.7pct-20260921",
+      "first_seen": "2026-09-23T16:19:50Z",
+      "tickers": [
+        "NVO"
+      ],
+      "headline_fingerprint": "novo nordisk capital markets day post-wegovy growth strategy stock falls 7.7pct sept 21 2026"
+    }
+  ]
+}
