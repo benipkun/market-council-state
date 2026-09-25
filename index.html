@@ -398,6 +398,14 @@ function pfVisible(){return store(K.pf)==="1"||tokenOn();}
 function positions(){return (S.treasury&&S.treasury.positions)||[];}
 function held(tk){return positions().some(function(p){return p.ticker===tk;});}
 function get(path){
+var tok=store(K.tok);
+if(tok)return fetch(API+"/contents/"+path+"?ref=main",{cache:"no-store",
+headers:{"Authorization":"Bearer "+tok,"Accept":"application/vnd.github.raw+json"}})
+.then(function(r){if(r.ok)return r.json();if(r.status===404)return null;throw new Error("api "+r.status);})
+.catch(function(){return getRaw(path);});
+return getRaw(path);
+}
+function getRaw(path){
 return fetch(RAW+path+"?t="+Date.now(),{cache:"no-store"})
 .then(function(r){return r.ok?r.json():null;})
 .catch(function(){return undefined;});
@@ -671,7 +679,7 @@ var id=stamp(), path="inbox/queue/"+id+".md", tok=store(K.tok), go=$("f-go");
 if(!tok){
 addPending(id,L.text);
 window.open(REPO+"/new/main?filename="+encodeURIComponent(path)+"&value="+encodeURIComponent(L.text+NL),"_blank","noopener");
-fstat("wait","<b>Finish on GitHub:</b> press <i>Commit changes</i>. Come back here &mdash; this confirms once it's applied.");
+fstat("wait","<b>Finish on GitHub:</b> press <i>Commit changes</i>. Come back here &mdash; this confirms once it's applied, which can take up to five minutes to show without direct posting.");
 clearAmounts(); poll(); return;
 }
 go.disabled=true; fstat("wait","Sending&hellip;");
