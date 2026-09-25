@@ -1,4 +1,4 @@
-var CACHE = "mc-v2";
+var CACHE = "mc-v3";
 var SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
 self.addEventListener("install", function (e) {
 e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(SHELL); }));
