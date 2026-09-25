@@ -1,0 +1,82 @@
+{
+  "as_of": "2026-09-25T13:40:47Z",
+  "theses": [
+    {
+      "id": "movie-bet",
+      "title": "Movie bet",
+      "ticker": "AMC",
+      "idea": "AMC Entertainment (cinema chain) as a box-office bet: Dune: Part Three and Avengers: Doomsday both open in US cinemas on Dec 18, 2026.",
+      "catalyst_date": "2026-12-18",
+      "check_in": "2026-11-10",
+      "stake_note": "Your plan: about $100, only money you are prepared to lose.",
+      "status": "watching",
+      "quote": {
+        "price": null,
+        "change_pct": null,
+        "low_52w": null,
+        "high_52w": null,
+        "at": "2026-09-25T13:40:47Z",
+        "source": null
+      },
+      "films": [
+        {
+          "title": "Avengers: Doomsday",
+          "studio": "Disney / Marvel",
+          "release_date": "2026-12-18",
+          "date_status": "confirmed",
+          "tracking_usd_low": null,
+          "tracking_usd_high": null,
+          "tracking_note": null,
+          "tracking_source": null,
+          "tracking_at": null,
+          "actual_opening_usd": null,
+          "actual_source": null
+        },
+        {
+          "title": "Dune: Part Three",
+          "studio": "Warner Bros.",
+          "release_date": "2026-12-18",
+          "date_status": "confirmed",
+          "tracking_usd_low": null,
+          "tracking_usd_high": null,
+          "tracking_note": null,
+          "tracking_source": null,
+          "tracking_at": null,
+          "actual_opening_usd": null,
+          "actual_source": null
+        }
+      ],
+      "red_flags": [
+        {
+          "date": "2026-09-24",
+          "kind": "dilution",
+          "headline": "AMC stockholders approved doubling shares for 2024 equity incentive plan to 50 million; other charter amendments failed to pass.",
+          "source": "Stock Titan"
+        }
+      ],
+      "log": [
+        {
+          "date": "2026-09-25",
+          "text": "Movie bet tracker created; AMC quote unavailable this run (Twelve Data not authorized).",
+          "source": "Books"
+        },
+        {
+          "date": "2026-09-25",
+          "text": "Dune: Part Three release date confirmed for Dec 18, 2026.",
+          "source": "Deadline"
+        },
+        {
+          "date": "2026-09-25",
+          "text": "Avengers: Doomsday release date confirmed for Dec 18, 2026.",
+          "source": "Marvel.com"
+        },
+        {
+          "date": "2026-09-24",
+          "text": "AMC stockholders approved doubling equity incentive plan shares to 50 million.",
+          "source": "Stock Titan"
+        }
+      ],
+      "last_scan": "2026-09-25T13:40:47Z"
+    }
+  ]
+}
