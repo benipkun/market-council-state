@@ -63,6 +63,14 @@
         "ASML"
       ],
       "headline_fingerprint": "dutch pm jetten discusses match act with trump to prevent new us export curbs on asml sept 24 2026"
+    },
+    {
+      "event_id": "ryaay-boeing-737max10-first-delivery-spring2027-20260925",
+      "first_seen": "2026-09-25T07:10:00Z",
+      "tickers": [
+        "RYAAY"
+      ],
+      "headline_fingerprint": "ryanair expects first 15 boeing 737 max 10 aircraft spring 2027 certification coming weeks"
     }
   ]
 }

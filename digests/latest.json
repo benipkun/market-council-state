@@ -1,67 +1,7 @@
 {
-  "as_of": "2026-09-25T06:15:00Z",
+  "as_of": "2026-09-25T07:10:00Z",
   "picks": [],
   "scrap": [
-    {
-      "ticker": "UBER",
-      "headline": "Pre-market flat at $69.42 (unchanged vs last cycle's close, Wed Sept 23 close still final), still below 50d SMA ($73.52) and 200d SMA ($75.59), RSI(14) 36.90 (fresh, matches carried-forward value). Alpha Vantage news-sentiment confirms zero new items across all 10 tickers since 12:08 UTC; insider transactions re-confirmed no new filings after Sept 16 (CFO/exec RSU vest sales). Fresh FMP DCF $121.11 matches stored value -- mispricing thesis unchanged, not re-flagged.",
-      "severity": 1,
-      "first_seen": "2026-09-24T13:07:56Z"
-    },
-    {
-      "ticker": "SPY",
-      "headline": "Pre-market flat at $767.81 (unchanged vs last cycle's close). Zero new market-wide news items found. No stock-specific signal for any watchlist name.",
-      "severity": 1,
-      "first_seen": "2026-09-24T13:07:56Z"
-    },
-    {
-      "ticker": "AVAV",
-      "headline": "Pre-market flat at $155.94 (unchanged vs last cycle's close). Zero new news items found. Undervaluation thesis (~41.9% vs $221.50 consensus) unchanged, not re-flagged.",
-      "severity": 1,
-      "first_seen": "2026-09-24T13:07:56Z"
-    },
-    {
-      "ticker": "CHWY",
-      "headline": "Pre-market flat at $18.55 (unchanged vs last cycle's close), RSI(14) carried forward 27.68 -- still the deepest oversold reading on the watchlist, near the 52-week low ($17.40). Zero new news items found. Mispricing thesis (~71.3% vs $31.78 target) unchanged, not re-flagged.",
-      "severity": 2,
-      "first_seen": "2026-09-24T13:07:56Z"
-    },
-    {
-      "ticker": "SOFI",
-      "headline": "Pre-market flat at $16.55 (unchanged vs last cycle's close). DCF ($16.42) essentially at parity with price, no mispricing gap. Zero new news items found.",
-      "severity": 1,
-      "first_seen": "2026-09-24T13:07:56Z"
-    },
-    {
-      "ticker": "DUOL",
-      "headline": "Pre-market flat at $145.98 (unchanged vs last cycle's close). Zero new news items found. Price remains ~8.7% above the $134.29 consensus target -- not a mispricing flag.",
-      "severity": 1,
-      "first_seen": "2026-09-24T13:07:56Z"
-    },
-    {
-      "ticker": "RYAAY",
-      "headline": "Pre-market flat at $54.69 (unchanged vs last cycle's close; ADR trades on Nasdaq, only updates during US hours). European home session (XETRA/Euronext) underway. Zero new news items found. Consensus-target mispricing thesis (~35.9% undervalued vs $74.30 target) unchanged, not re-flagged.",
-      "severity": 1,
-      "first_seen": "2026-09-24T13:07:56Z"
-    },
-    {
-      "ticker": "ASML",
-      "headline": "Pre-market flat at $1744.61 (unchanged vs last cycle's close). Amsterdam/XETRA home session open. Zero new news items found. Consensus-target gap ~22.4% vs $2135.00 target, below the 25% flag threshold, not re-flagged.",
-      "severity": 1,
-      "first_seen": "2026-09-24T13:07:56Z"
-    },
-    {
-      "ticker": "SAP",
-      "headline": "Price $208.90 (-0.16% vs last cycle), RSI(14) 49.57 (down from 54.12). European session closed. Mispricing gap ~17.3% vs consensus $245.01, below threshold.",
-      "severity": 1,
-      "first_seen": "2026-09-24T13:07:56Z"
-    },
-    {
-      "ticker": "NVO",
-      "headline": "Price carried forward at $38.17 (Twelve Data rate-limited this cycle for this symbol), RSI(14) carried forward 27.51 -- still the most oversold name on the watchlist, continuing the post-Capital-Markets-Day selloff. Zero new news items found. Consensus-target mispricing gap ~23.7% unchanged, not re-flagged -- already picked 2026-09-23T16:19:50Z (half-tier).",
-      "severity": 2,
-      "first_seen": "2026-09-24T13:07:56Z"
-    },
     {
       "ticker": "UBER",
       "headline": "Price $69.625 (+0.30% vs prior close $69.42, mid-session US regular trading), RSI(14) 39.17 (fresh, up from 36.90), still below 50d SMA ($73.52) and 200d SMA ($75.59). Alpha Vantage news-sentiment: zero new items across all 10 tickers since 13:07 UTC. Insider transactions re-confirmed via Alpha Vantage full history: still no filings after Sept 16 (CFO Krishnamurthy RSU-vest tax-withholding sales). Fresh FMP DCF $121.11 matches stored value -- mispricing thesis unchanged, not re-flagged.",
@@ -721,6 +661,66 @@
       "headline": "Price $38.62 unchanged vs last cycle's close. European home session (Copenhagen) not yet open. RSI(14) 29.99 fresh-confirmed, still the most oversold name on the watchlist. Web search surfaced two items dated before the last cycle's cutoff -- the Sept 21 CagriSema REIMAGINE 5 phase-3 trial readout (12.4% vs 9.1% weight loss vs. tirzepatide) and CEO Doustdar's Sept 23 FT interview floating openness to a direct NYSE listing -- both older than this cycle's news window and not fresh catalysts; logged for visibility only. Mispricing gap vs consensus $47.23 (carried) ~22.3%, still below the 25% flag threshold, not re-flagged.",
       "severity": 2,
       "first_seen": "2026-09-25T06:15:00Z"
+    },
+    {
+      "ticker": "UBER",
+      "headline": "Price $69.22 unchanged vs last cycle's close (fresh Twelve Data quote confirms same daily bar, pre-US-premarket). RSI(14) carried forward 36.36 (same daily bar). FMP DCF $121.11 and price-target consensus $104.56 fresh-confirmed via FMP, match stored values. FMP latest-insider-trade feed shows no new UBER filings. Web search found only already-known Costco Eats 47-state expansion (Sept 16) and Wayve/London robotaxi coverage, plus generic 'may be undervalued' commentary -- no fresh catalyst. Mispricing thesis (~75.0% DCF / ~51.1% consensus) unchanged, not re-flagged. Next earnings 2026-10-29 (carried).",
+      "severity": 1,
+      "first_seen": "2026-09-25T07:10:00Z"
+    },
+    {
+      "ticker": "SPY",
+      "headline": "Price $767.18 unchanged vs last cycle's close (fresh Twelve Data quote confirms same daily bar). No market-wide catalyst found. No stock-specific signal for any watchlist name.",
+      "severity": 1,
+      "first_seen": "2026-09-25T07:10:00Z"
+    },
+    {
+      "ticker": "AVAV",
+      "headline": "Price $158.55 unchanged vs last cycle's close (fresh Twelve Data quote confirms same daily bar). Web search found nothing new. Undervaluation thesis (~39.7% vs $221.50 consensus, carried -- FMP analyst endpoint plan-gated) unchanged, not re-flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-25T07:10:00Z"
+    },
+    {
+      "ticker": "CHWY",
+      "headline": "Price $18.32 unchanged vs last cycle's close (fresh Twelve Data quote confirms same daily bar), still near its 52-week low ($17.40). RSI(14) carried forward 26.79, still the deepest oversold reading on the watchlist. Web search found nothing new. Mispricing thesis (~73.5% vs $31.78 target, carried) unchanged, established (possible value-trap), not re-flagged.",
+      "severity": 2,
+      "first_seen": "2026-09-25T07:10:00Z"
+    },
+    {
+      "ticker": "SOFI",
+      "headline": "Price $16.80 unchanged vs last cycle's close (fresh Twelve Data quote confirms same daily bar). Fresh FMP DCF $16.42 confirmed, essentially at parity with price, no mispricing gap. Web search found only the already-logged Mastercard stablecoin-settlement item.",
+      "severity": 1,
+      "first_seen": "2026-09-25T07:10:00Z"
+    },
+    {
+      "ticker": "DUOL",
+      "headline": "Price $147.75 unchanged vs last cycle's close (fresh Twelve Data quote confirms same daily bar). Web search found nothing new. Overvalued gap vs consensus $134.29 (carried) ~10.0%, well under the 20-25% short-thesis threshold, not flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-25T07:10:00Z"
+    },
+    {
+      "ticker": "RYAAY",
+      "headline": "Price $54.04 unchanged vs last cycle's close (fresh Twelve Data quote confirms same daily bar; ADR trades on Nasdaq, only updates during US hours -- European home session (Euronext Dublin) open since 07:00 UTC but ADR price frozen until US premarket). NEW: web search found Ryanair expects its first 15 Boeing 737 MAX 10 aircraft in spring 2027, with certification expected in the coming weeks -- routine fleet-delivery update, no quantifiable fair-value impact, logged for visibility, not a pick. Mispricing thesis (~37.5% vs $74.30 target, carried) unchanged, established, not re-flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-25T07:10:00Z"
+    },
+    {
+      "ticker": "ASML",
+      "headline": "Price $1722.50 unchanged vs last cycle's close (fresh Twelve Data quote confirms same daily bar; ADR only updates during US hours). European home session (Amsterdam/XETRA) open since 07:00 UTC. No new news since the Dutch PM/MATCH Act item logged last cycle. Mispricing gap vs consensus $2135.00 (carried) ~23.95%, still just below the 25% flag threshold, not re-flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-25T07:10:00Z"
+    },
+    {
+      "ticker": "SAP",
+      "headline": "Price $209.11 unchanged vs last cycle's close (fresh Twelve Data quote confirms same daily bar; ADR only updates during US hours). European home session (XETRA/Frankfurt) open. Web search found no SAP-specific news for today. Mispricing gap ~17.2% vs consensus $245.01 (carried), below threshold, not flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-25T07:10:00Z"
+    },
+    {
+      "ticker": "NVO",
+      "headline": "Price $38.62 unchanged vs last cycle's close (fresh Twelve Data quote confirms same daily bar; ADR only updates during US hours). European home session (Copenhagen) open. RSI(14) carried forward 29.99, still the most oversold name on the watchlist. Web search confirmed only the already-logged Sept 21 Capital Markets Day selloff story, no fresh catalyst. Mispricing gap vs consensus $47.23 (carried) ~22.3%, still below the 25% flag threshold, not re-flagged.",
+      "severity": 2,
+      "first_seen": "2026-09-25T07:10:00Z"
     }
   ],
   "technicals": {
@@ -732,7 +732,7 @@
       "fair_value": 121.11,
       "fair_value_method": "DCF",
       "analyst_consensus_target": 104.56,
-      "next_earnings_date": "2026-11-03",
+      "next_earnings_date": "2026-10-29",
       "region": "US"
     },
     "SPY": {
