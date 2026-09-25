@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-09-25T11:08:00Z",
+  "as_of": "2026-09-25T12:10:00Z",
   "picks": [],
   "scrap": [
     {
@@ -601,6 +601,66 @@
       "headline": "Price $38.6199 (unchanged vs prior close), fresh Twelve Data quote (ADR only updates during US hours). European home session (Copenhagen) open. Web search returned a stale/conflicting price snapshot ($43.07, dated Sept 14) and a Deutsche Bank Sell/DKK245 target that could not be confirmed as a fresh action this cycle -- disregarded pending corroboration. No fresh NVO-specific catalyst confirmed. Mispricing gap vs consensus $47.23 (carried) ~22.3%, still below the 25% flag threshold, not re-flagged.",
       "severity": 2,
       "first_seen": "2026-09-25T11:08:00Z"
+    },
+    {
+      "ticker": "UBER",
+      "headline": "Price $69.175 (unchanged vs prior close $69.22), fresh Twelve Data quote confirms same Sept 24 daily bar, pre-US-premarket/European session hour. FMP DCF $120.25 and price-target consensus $104.56 fresh-confirmed match stored values. FMP latest-insider-trade feed (general SEC Form 4 stream) shows no new UBER filings. Web search: only already-known Wayve/London robotaxi and 'Only on Uber 2026' driver-features coverage, plus generic analyst commentary (Evercore $150 target, Ackman AV-aggregator thesis) already reflected in prior cycles -- no fresh catalyst. Mispricing thesis (~73.8% DCF / ~51.2% consensus) unchanged, not re-flagged. Next earnings 2026-10-29 (carried).",
+      "severity": 1,
+      "first_seen": "2026-09-25T12:10:00Z"
+    },
+    {
+      "ticker": "SPY",
+      "headline": "Price $767.24 unchanged vs prior close $767.24 (fresh Twelve Data quote confirms same Sept 24 daily bar). No market-wide catalyst found.",
+      "severity": 1,
+      "first_seen": "2026-09-25T12:10:00Z"
+    },
+    {
+      "ticker": "AVAV",
+      "headline": "Price $158.485 unchanged vs prior close $158.485, fresh Twelve Data quote confirms same Sept 24 daily bar. FMP analyst-consensus endpoint plan-gated this cycle; fair value ($221.50) carried forward. Undervaluation thesis (~39.8% vs consensus) unchanged, not re-flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-25T12:10:00Z"
+    },
+    {
+      "ticker": "CHWY",
+      "headline": "Price $18.325 unchanged vs prior close $18.325, fresh Twelve Data quote confirms same Sept 24 daily bar, still near 52-week low ($17.40). FMP price-target-consensus endpoint plan-gated this cycle; fair value ($31.78) carried forward. Mispricing thesis (~73.4% vs target) unchanged, established (possible value-trap), not re-flagged.",
+      "severity": 2,
+      "first_seen": "2026-09-25T12:10:00Z"
+    },
+    {
+      "ticker": "SOFI",
+      "headline": "Price $16.7918 unchanged vs prior close, fresh Twelve Data quote confirms same Sept 24 daily bar. Fresh FMP DCF $16.43 confirmed, essentially at parity with price, no mispricing gap.",
+      "severity": 1,
+      "first_seen": "2026-09-25T12:10:00Z"
+    },
+    {
+      "ticker": "DUOL",
+      "headline": "Price $147.755 unchanged vs prior close, fresh Twelve Data quote confirms same Sept 24 daily bar. Overvalued gap vs consensus $134.29 (carried) ~10.0%, well under the 20-25% short-thesis threshold, not flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-25T12:10:00Z"
+    },
+    {
+      "ticker": "RYAAY",
+      "headline": "Price $54.02 unchanged vs prior close (ADR trades on Nasdaq, only updates during US hours; fresh Twelve Data quote confirms same Sept 24 daily bar). European home session (Euronext Dublin) open since 07:00 UTC but ADR price frozen until US premarket. No fresh news beyond already-logged 737 MAX 10 delivery timeline. Mispricing thesis (~37.6% vs $74.30 target, carried) unchanged, not re-flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-25T12:10:00Z"
+    },
+    {
+      "ticker": "ASML",
+      "headline": "Price $1722.52 unchanged vs prior close (ADR only updates during US hours; fresh Twelve Data quote confirms same Sept 24 daily bar). European home session (Amsterdam/XETRA) open. No new news since the Dutch PM/MATCH Act item logged Sept 24. Mispricing gap vs consensus $2135.00 (carried) ~23.95%, still just below the 25% flag threshold, not re-flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-25T12:10:00Z"
+    },
+    {
+      "ticker": "SAP",
+      "headline": "Price $209.11 unchanged vs prior close (ADR only updates during US hours; fresh Twelve Data quote confirms same Sept 24 daily bar). European home session (XETRA/Frankfurt) open. Mispricing gap ~17.2% vs consensus $245.01 (carried), below threshold, not flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-25T12:10:00Z"
+    },
+    {
+      "ticker": "NVO",
+      "headline": "Price $38.6199 unchanged vs prior close (ADR only updates during US hours; fresh Twelve Data quote confirms same Sept 24 daily bar). European home session (Copenhagen) open. RSI(14) carried forward 29.99, still the most oversold name on the watchlist. No fresh NVO-specific catalyst confirmed. Mispricing gap vs consensus $47.23 (carried) ~22.3%, still below the 25% flag threshold, not re-flagged.",
+      "severity": 2,
+      "first_seen": "2026-09-25T12:10:00Z"
     }
   ],
   "technicals": {
