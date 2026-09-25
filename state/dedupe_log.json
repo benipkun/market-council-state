@@ -1,22 +1,6 @@
 {
   "events": [
     {
-      "event_id": "sofi-stablecoin-mastercard-settlement-20260922",
-      "first_seen": "2026-09-22T15:21:54Z",
-      "tickers": [
-        "SOFI"
-      ],
-      "headline_fingerprint": "sofi stablecoin settlement live mastercard network 25b card program sept 22 2026"
-    },
-    {
-      "event_id": "avav-locust-laser-intl-order-50m-20260922",
-      "first_seen": "2026-09-22T17:21:16Z",
-      "tickers": [
-        "AVAV"
-      ],
-      "headline_fingerprint": "aerovironment first international locust laser weapon system order over 50m sept 22 2026"
-    },
-    {
       "event_id": "ryaay-alphavalue-target-cut-2550-20260922",
       "first_seen": "2026-09-22T23:22:00Z",
       "tickers": [
