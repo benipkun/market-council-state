@@ -53,8 +53,26 @@
       "cash_after": 171.95,
       "nav_after": 913.45,
       "reconciled": false
+    },
+    {
+      "id": "20260925T120736Z-h5whj",
+      "at": "2026-09-25T12:10:34Z",
+      "line": "buy CHWY 4 @ 18.78",
+      "source": "queue",
+      "action": "buy",
+      "ticker": "CHWY",
+      "usd": 75.12,
+      "fee": 0,
+      "qty": 4,
+      "price": 18.78,
+      "status": "applied",
+      "reason": null,
+      "cash_before": 171.95,
+      "cash_after": 96.83,
+      "nav_after": 913.45,
+      "reconciled": false
     }
   ],
-  "expected_cash": 171.95,
+  "expected_cash": 96.83,
   "last_mismatch_alert": null
 }

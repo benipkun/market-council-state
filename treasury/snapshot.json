@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-09-25T12:08:36Z",
-  "cash": 171.95,
+  "as_of": "2026-09-25T12:10:34Z",
+  "cash": 96.83,
   "nav": 913.45,
-  "cash_pct_of_nav": 18.82,
+  "cash_pct_of_nav": 10.6,
   "realized_pl": {
     "mtd": 0.0,
     "ytd": 0.0
@@ -39,6 +39,16 @@
       "last_price": 38.62,
       "price_as_of": "2026-09-25T12:08:36Z",
       "pct_nav": 10.4
+    },
+    {
+      "ticker": "CHWY",
+      "qty": 4,
+      "basis_mode": "aggregate",
+      "cost_basis": 75.12,
+      "market_value": 75.12,
+      "last_price": 18.32,
+      "price_as_of": "2026-09-25T12:10:34Z",
+      "pct_nav": 8.22
     }
   ]
 }
