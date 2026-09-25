@@ -9,7 +9,7 @@
 #   buy NVO 2 @ 38.40     bought 2 shares at $38.40
 #   sell UBER 100 usd     sold $100 worth
 #   sell UBER all         closed the position
-#   deposit 50 usd
-#   withdraw 50 usd
+#   deposit 50 usd        or: deposit 20000 huf
+#   withdraw 50 usd       or: withdraw 20000 huf
 #
 # Optional extras anywhere on the line: a fee (fee 0.35).

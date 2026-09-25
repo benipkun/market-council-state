@@ -89,6 +89,24 @@
       "cash_after": 96.83,
       "nav_after": 912.07,
       "reconciled": false
+    },
+    {
+      "id": "deploy-check-20260925T130708Z",
+      "at": "2026-09-25T13:08:08Z",
+      "line": "ping",
+      "source": "queue",
+      "action": "ping",
+      "ticker": null,
+      "usd": null,
+      "fee": null,
+      "qty": null,
+      "price": null,
+      "status": "test",
+      "reason": "loop check",
+      "cash_before": 96.83,
+      "cash_after": 96.83,
+      "nav_after": 912.07,
+      "reconciled": false
     }
   ],
   "expected_cash": 96.83,
