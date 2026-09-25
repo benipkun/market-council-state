@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-09-25T12:52:37Z",
+  "as_of": "2026-09-25T21:17:24Z",
   "rules": {
     "position_selection": "every pick in digests/history.json with lean bullish (long) or bearish (short); neutral picks skipped",
     "notional": "position_suggestion.suggested_size_usd when tier is not 'none' and size > 0 (sized true); otherwise 100 (sized false)",
@@ -20,13 +20,13 @@
       "entry_price": 71.05,
       "spy_entry": 774.15,
       "entry_source": "digest-later",
-      "last_price": 69.175,
-      "spy_last": 767.24,
+      "last_price": 69.62,
+      "spy_last": 771.36,
       "status": "open",
       "closed_at": null,
       "days_held": 4,
-      "pl_usd": -2.64,
-      "spy_pl_usd": -0.89
+      "pl_usd": -2.01,
+      "spy_pl_usd": -0.36
     },
     {
       "id": "2026-09-21T09:24:05Z|RYAAY",
@@ -41,13 +41,13 @@
       "entry_price": 53.51,
       "spy_entry": 774.15,
       "entry_source": "digest-later",
-      "last_price": 54.02,
-      "spy_last": 767.24,
+      "last_price": 55.3,
+      "spy_last": 771.36,
       "status": "open",
       "closed_at": null,
       "days_held": 4,
-      "pl_usd": 0.95,
-      "spy_pl_usd": -0.89
+      "pl_usd": 3.35,
+      "spy_pl_usd": -0.36
     },
     {
       "id": "2026-09-21T14:15:00Z|DUOL",
@@ -62,13 +62,13 @@
       "entry_price": 148.17,
       "spy_entry": 774.15,
       "entry_source": "digest-later",
-      "last_price": 147.755,
-      "spy_last": 767.24,
+      "last_price": 143.51,
+      "spy_last": 771.36,
       "status": "open",
       "closed_at": null,
       "days_held": 4,
-      "pl_usd": -0.28,
-      "spy_pl_usd": -0.89
+      "pl_usd": -3.15,
+      "spy_pl_usd": -0.36
     },
     {
       "id": "2026-09-22T14:22:48Z|AVAV",
@@ -83,13 +83,13 @@
       "entry_price": 156.13,
       "spy_entry": 773.67,
       "entry_source": "digest",
-      "last_price": 158.485,
-      "spy_last": 767.24,
+      "last_price": 158.55,
+      "spy_last": 771.36,
       "status": "open",
       "closed_at": null,
       "days_held": 3,
       "pl_usd": 0.12,
-      "spy_pl_usd": -0.07
+      "spy_pl_usd": -0.02
     },
     {
       "id": "2026-09-22T15:21:54Z|SOFI",
@@ -104,13 +104,13 @@
       "entry_price": 17.255,
       "spy_entry": 773.41,
       "entry_source": "digest",
-      "last_price": 16.7918,
-      "spy_last": 767.24,
+      "last_price": 16.58,
+      "spy_last": 771.36,
       "status": "open",
       "closed_at": null,
       "days_held": 3,
-      "pl_usd": -0.57,
-      "spy_pl_usd": -0.17
+      "pl_usd": -0.84,
+      "spy_pl_usd": -0.06
     },
     {
       "id": "2026-09-22T19:25:47Z|CHWY",
@@ -125,13 +125,13 @@
       "entry_price": 19.64,
       "spy_entry": 774.205,
       "entry_source": "digest",
-      "last_price": 18.325,
-      "spy_last": 767.24,
+      "last_price": 18.285,
+      "spy_last": 771.36,
       "status": "open",
       "closed_at": null,
       "days_held": 3,
-      "pl_usd": -0.54,
-      "spy_pl_usd": -0.07
+      "pl_usd": -0.55,
+      "spy_pl_usd": -0.03
     },
     {
       "id": "2026-09-23T16:19:50Z|ASML",
@@ -146,13 +146,13 @@
       "entry_price": 1727.98,
       "spy_entry": 768.62,
       "entry_source": "digest",
-      "last_price": 1722.52,
-      "spy_last": 767.24,
+      "last_price": 1743.94,
+      "spy_last": 771.36,
       "status": "open",
       "closed_at": null,
       "days_held": 2,
-      "pl_usd": -0.32,
-      "spy_pl_usd": -0.18
+      "pl_usd": 0.92,
+      "spy_pl_usd": 0.36
     },
     {
       "id": "2026-09-23T16:19:50Z|NVO",
@@ -167,31 +167,31 @@
       "entry_price": 38.42,
       "spy_entry": 768.62,
       "entry_source": "digest",
-      "last_price": 38.6199,
-      "spy_last": 767.24,
+      "last_price": 38.62,
+      "spy_last": 771.36,
       "status": "open",
       "closed_at": null,
       "days_held": 2,
       "pl_usd": 0.42,
-      "spy_pl_usd": -0.14
+      "spy_pl_usd": 0.29
     }
   ],
   "totals": {
     "positions": 8,
     "open": 8,
     "closed": 0,
-    "pl_usd": -2.86,
-    "spy_pl_usd": -3.3,
-    "diff_usd": 0.44,
+    "pl_usd": -1.74,
+    "spy_pl_usd": -0.54,
     "closed_wins": 0,
     "closed_beat_spy": 0,
+    "diff_usd": -1.2,
     "hit_rate": null
   },
   "series": [
     {
       "date": "2026-09-25",
-      "pl_usd": -2.86,
-      "spy_pl_usd": -3.3
+      "pl_usd": -1.74,
+      "spy_pl_usd": -0.54
     }
   ]
 }
