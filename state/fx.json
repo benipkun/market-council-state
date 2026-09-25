@@ -1,0 +1,11 @@
+{
+  "note": "Official MNB rates unless source says market",
+  "rates": [
+    {
+      "date": "2026-09-25",
+      "usd_huf": 320.69139,
+      "eur_huf": 365.65628,
+      "source": "market"
+    }
+  ]
+}

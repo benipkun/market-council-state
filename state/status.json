@@ -1,0 +1,19 @@
+{
+  "books_ran_at": "2026-09-25T12:52:37Z",
+  "mode": "FULL",
+  "pipeline_last": "2026-09-25T12:10:00Z",
+  "inbox_last_entry_at": "2026-09-25T12:10:34Z",
+  "fx_date": "2026-09-25",
+  "fx_source": "market",
+  "paper_positions": 8,
+  "paper_open": 8,
+  "alerts_active": 0,
+  "alerts_checked_at": "2026-09-25T12:52:37Z",
+  "loop": {
+    "ping_id": "selftest-20260925T125237Z",
+    "sent_at": "2026-09-25T12:52:37Z",
+    "ok": null,
+    "checked_at": null
+  },
+  "notified_earnings": []
+}
