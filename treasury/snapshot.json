@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-09-25T11:08:00Z",
-  "cash": 266.95,
+  "as_of": "2026-09-25T12:08:36Z",
+  "cash": 171.95,
   "nav": 913.45,
-  "cash_pct_of_nav": 29.23,
+  "cash_pct_of_nav": 18.82,
   "realized_pl": {
     "mtd": 0.0,
     "ytd": 0.0
@@ -28,7 +28,17 @@
       "market_value": 646.5,
       "last_price": 69.175,
       "price_as_of": "2026-09-25T11:08:00Z",
-      "pct_nav": 70.77
+      "pct_nav": 70.78
+    },
+    {
+      "ticker": "NVO",
+      "qty": 2.471384,
+      "basis_mode": "aggregate",
+      "cost_basis": 95.0,
+      "market_value": 95.0,
+      "last_price": 38.62,
+      "price_as_of": "2026-09-25T12:08:36Z",
+      "pct_nav": 10.4
     }
   ]
 }

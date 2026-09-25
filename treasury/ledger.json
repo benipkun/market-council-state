@@ -35,8 +35,26 @@
       "cash_after": 266.95,
       "nav_after": 913.45,
       "reconciled": false
+    },
+    {
+      "id": "20260925T120642Z-vbpy2",
+      "at": "2026-09-25T12:08:36Z",
+      "line": "buy NVO 2.47138397 @ 38.44",
+      "source": "queue",
+      "action": "buy",
+      "ticker": "NVO",
+      "usd": 95.0,
+      "fee": 0,
+      "qty": 2.471384,
+      "price": 38.44,
+      "status": "applied",
+      "reason": null,
+      "cash_before": 266.95,
+      "cash_after": 171.95,
+      "nav_after": 913.45,
+      "reconciled": false
     }
   ],
-  "expected_cash": 266.95,
+  "expected_cash": 171.95,
   "last_mismatch_alert": null
 }
