@@ -39,6 +39,14 @@
         "RYAAY"
       ],
       "headline_fingerprint": "ryanair expects first 15 boeing 737 max 10 aircraft spring 2027 certification coming weeks"
+    },
+    {
+      "event_id": "ryaay-bofa-target-raise-28-20260925",
+      "first_seen": "2026-09-25T21:10:00Z",
+      "tickers": [
+        "RYAAY"
+      ],
+      "headline_fingerprint": "ryanair bofa reiterates buy raises target to eur28 from eur27.50 sept 25 2026"
     }
   ]
 }
