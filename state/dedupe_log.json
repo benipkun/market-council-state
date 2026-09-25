@@ -1,22 +1,6 @@
 {
   "events": [
     {
-      "event_id": "ryaay-uk-atc-failure-140flights-20260921",
-      "first_seen": "2026-09-22T08:22:58Z",
-      "tickers": [
-        "RYAAY"
-      ],
-      "headline_fingerprint": "uk air traffic control failure delays 140 ryanair flights sept 21 2026"
-    },
-    {
-      "event_id": "duol-ceo-foundation-share-sales-10m-20260921",
-      "first_seen": "2026-09-22T08:22:58Z",
-      "tickers": [
-        "DUOL"
-      ],
-      "headline_fingerprint": "duolingo ceo von ahn foundation file additional 10.3m share sales sept 21 2026"
-    },
-    {
       "event_id": "sofi-stablecoin-mastercard-settlement-20260922",
       "first_seen": "2026-09-22T15:21:54Z",
       "tickers": [
