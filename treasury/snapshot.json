@@ -1,22 +1,22 @@
 {
-  "as_of": "2026-09-25T12:10:00Z",
+  "as_of": "2026-09-25T13:13:00Z",
   "cash": 96.83,
-  "nav": 912.07,
-  "cash_pct_of_nav": 10.62,
+  "nav": 912.49,
+  "cash_pct_of_nav": 10.61,
   "realized_pl": {
     "mtd": 0.0,
     "ytd": 0.0
   },
   "concentration_flags": [
-    "UBER is ~70.88% of NAV -- a single adverse event (the pending $40M California wrongful-death ruling, a broader rideshare-safety litigation wave, the pending Delivery Hero acquisition's integration/financing risk, execution/leverage risk from the EUR4.5B euro bond raise, or intensifying robotaxi competition from Tesla's Cybercab rollout, Wayve/London and Uber's own $10B robotaxi commitment) would disproportionately hit the portfolio; cash fell to ~10.62% of NAV this cycle (two new starter positions -- NVO and CHWY -- were funded from the cash buffer via queued trades), so the offsetting cushion against a UBER-specific shock is now thinner than in prior cycles."
+    "UBER is ~70.9% of NAV -- a single adverse event (the pending $40M California wrongful-death ruling, a broader rideshare-safety litigation wave, the pending Delivery Hero acquisition's integration/financing risk, execution/leverage risk from the EUR4.5B euro bond raise, or intensifying robotaxi competition from Tesla's Cybercab rollout, Wayve/London and Uber's own $10B robotaxi commitment) would disproportionately hit the portfolio; cash remains thin at ~10.61% of NAV, so the offsetting cushion against a UBER-specific shock stays limited."
   ],
   "trim_considerations": [
     {
       "ticker": "UBER",
-      "pct_nav": 70.88,
+      "pct_nav": 70.9,
       "target_pct_nav": 25.0,
-      "excess_usd": 418.48,
-      "note": "Bringing this back to the ~25% single-name guideline would mean reducing exposure by roughly $418.48 -- a consideration, not an instruction, and one that doesn't account for any tax consequences of selling, which this pipeline has no visibility into."
+      "excess_usd": 418.8,
+      "note": "Bringing this back to the ~25% single-name guideline would mean reducing exposure by roughly $418.8 -- a consideration, not an instruction, and one that doesn't account for any tax consequences of selling, which this pipeline has no visibility into."
     }
   ],
   "positions": [
@@ -25,10 +25,10 @@
       "qty": null,
       "basis_mode": "aggregate",
       "cost_basis": 701.75,
-      "market_value": 646.5,
-      "last_price": 69.175,
-      "price_as_of": "2026-09-25T12:10:00Z",
-      "pct_nav": 70.88
+      "market_value": 646.92,
+      "last_price": 69.22,
+      "price_as_of": "2026-09-25T13:13:00Z",
+      "pct_nav": 70.9
     },
     {
       "ticker": "NVO",
@@ -37,7 +37,7 @@
       "cost_basis": 95.0,
       "market_value": 95.44,
       "last_price": 38.6199,
-      "price_as_of": "2026-09-25T12:10:00Z",
+      "price_as_of": "2026-09-25T13:13:00Z",
       "pct_nav": 10.46
     },
     {
@@ -47,8 +47,8 @@
       "cost_basis": 75.12,
       "market_value": 73.3,
       "last_price": 18.325,
-      "price_as_of": "2026-09-25T12:10:00Z",
-      "pct_nav": 8.04
+      "price_as_of": "2026-09-25T13:13:00Z",
+      "pct_nav": 8.03
     }
   ]
 }
