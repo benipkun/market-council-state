@@ -280,6 +280,7 @@ footer{margin-top:26px;font-size:11.5px;color:var(--dim);line-height:1.55}
 <div id="install"></div>
 <div id="today-cash"></div>
 <div id="today-alerts"></div>
+<div id="today-thesis"></div>
 <div class="sh"><h2>Needs attention</h2><span class="note" id="n-picks"></span></div>
 <div id="picks"></div>
 <div class="sh"><h2>Mispriced</h2><span class="note" id="n-mis"></span></div>
@@ -440,6 +441,7 @@ loop and changes nothing in your records.</p>
 </div>
 </section>
 <section class="view" id="v-watch" hidden>
+<div id="thesis"></div>
 <div class="sh"><h2>Your price alerts</h2><span class="note">checked around midday and after the US close</span></div>
 <div class="card" id="alerts"></div>
 <div class="panel gap">
@@ -506,7 +508,7 @@ var TABS=["today","portfolio","log","watch","review"];
 var MONEY=["buy","sell","deposit","withdraw"];
 var FILES={digest:"digests/latest.json",treasury:"treasury/snapshot.json",ledger:"treasury/ledger.json",
 track:"state/track_record.json",history:"digests/history.json",paper:"state/paper.json",fx:"state/fx.json",
-alerts:"state/alerts.json",alstat:"state/alerts_status.json",plan:"state/plan.json",status:"state/status.json"};
+alerts:"state/alerts.json",alstat:"state/alerts_status.json",plan:"state/plan.json",status:"state/status.json",theses:"state/theses.json"};
 var S={};
 var DASH=String.fromCharCode(8212),MINUS=String.fromCharCode(8722),MID=String.fromCharCode(183),
 ELL=String.fromCharCode(8230),ARROW=String.fromCharCode(8594),NL=String.fromCharCode(10),
@@ -1151,6 +1153,53 @@ $("feed").innerHTML=sh.length?sh.map(function(s){
 return '<div class="fr"><span class="aw">'+esc(when(s.first_seen))+'</span><span class="fk">'+esc(s.ticker)+'</span><span class="fx">'+esc(s.headline)+'</span></div>';
 }).join(""):'<div class="fr fx">Nothing logged yet.</div>';
 }
+function thesis(){var a=(S.theses&&S.theses.theses)||[];for(var i=0;i<a.length;i++){if(a[i].status!=="done")return a[i];}return null;}
+function daysTo(s){if(!s)return null;var x=Math.round((new Date(String(s).slice(0,10)+"T12:00:00Z").getTime()-Date.now())/86400000);return isFinite(x)?x:null;}
+function dayLabel(d){return d==null?DASH:d>1?d+" days":d===1?"tomorrow":d===0?"today":(-d)+" days ago";}
+function bigUsd(v){var n=num(v);if(n==null)return DASH;return n>=1000000?"$"+Math.round(n/1000000)+"M":usd(n);}
+function renderThesis(){
+var th=thesis(), el=$("thesis"), tt=$("today-thesis");
+if(!th){el.innerHTML="";tt.innerHTML="";return;}
+var q=th.quote||{}, p=num(q.price), chg=num(q.change_pct), dOpen=daysTo(th.catalyst_date), dCheck=daysTo(th.check_in);
+var flags=(th.red_flags||[]).slice().sort(function(a,b){return String(b.date).localeCompare(String(a.date));});
+var fresh=flags.filter(function(f){return Date.now()-new Date(f.date).getTime()<14*86400000;}).length;
+tt.innerHTML='<div class="msg gap" style="display:flex;justify-content:space-between;gap:10px;align-items:center">'+
+'<span><b>'+esc(th.title)+'</b> '+MID+' opening day '+(dOpen!=null&&dOpen>1?"in ":"")+esc(dayLabel(dOpen))+(fresh?' <span class="tag bear" style="white-space:nowrap">red flag</span>':"")+'</span>'+
+'<button class="link" style="white-space:nowrap" data-tab="watch">'+esc(th.ticker)+(p!=null?" "+usd(p):"")+'</button></div>';
+var rng="", lo=num(q.low_52w), hi=num(q.high_52w);
+if(p!=null&&lo!=null&&hi!=null&&hi>lo)rng='<div class="bar"><i style="width:'+Math.max(2,Math.min(100,(p-lo)/(hi-lo)*100)).toFixed(0)+'%"></i></div>'+
+'<div class="prm"><span>52-week low '+usd(lo)+'</span><span>high '+usd(hi)+'</span></div>';
+var films=(th.films||[]).map(function(f){
+var hasAct=num(f.actual_opening_usd)!=null, hasTr=num(f.tracking_usd_low)!=null;
+var line=hasAct?"opened with "+bigUsd(f.actual_opening_usd):(hasTr?"tracking "+bigUsd(f.tracking_usd_low)+
+(num(f.tracking_usd_high)>num(f.tracking_usd_low)?" to "+bigUsd(f.tracking_usd_high):"")+" opening weekend":"no tracking numbers yet");
+var src=hasAct?f.actual_source:(hasTr?f.tracking_source:"");
+return '<div class="kv"><span><b style="color:var(--tx)">'+esc(f.title)+'</b><br>'+esc(f.studio||"")+'</span>'+
+'<span style="text-align:right">'+(f.date_status==="moved"?'<span class="tag bear">moved</span> ':"")+esc(shortDate(f.release_date))+
+'<br><span class="note">'+esc(line)+(src?" ("+esc(src)+")":"")+'</span></span></div>';
+}).join("");
+var fl=flags.length?flags.slice(0,4).map(function(f){
+return '<div class="arow"><span class="aw">'+esc(shortDate(f.date))+'</span><div class="ax">'+esc(f.headline)+
+'<div class="ar">'+esc(f.kind||"")+(f.source?" "+MID+" "+esc(f.source):"")+'</div></div></div>';
+}).join(""):'<div class="arow fl">None found'+(th.last_scan?" in the news checked so far":" yet")+'.</div>';
+var logs=(th.log||[]).slice(0,8), lg=logs.map(function(x){
+return '<div class="arow"><span class="aw">'+esc(shortDate(x.date))+'</span><div class="ax">'+esc(x.text)+(x.source?'<div class="ar">'+esc(x.source)+'</div>':"")+'</div></div>';
+}).join("");
+el.innerHTML='<div class="sh" style="margin-top:4px"><h2>'+esc(th.title)+'</h2><span class="note">'+(th.last_scan?"news checked "+esc(ago(th.last_scan)):"news not checked yet")+'</span></div>'+
+'<div class="panel"><div class="prh"><span class="tk">'+esc(th.ticker)+'</span><span class="v mono">'+usd(p)+
+(chg!=null?' <span class="'+(chg>=0?"up":"dn")+'">'+pct(chg)+'</span>':"")+'</span></div>'+rng+
+'<div class="note gap">'+esc(th.idea||"")+(q.at?" Price "+esc(ago(q.at))+".":"")+'</div>'+
+'<div class="tiles gap">'+tile("Opening day",esc(dayLabel(dOpen)),th.catalyst_date?shortDate(th.catalyst_date):"")+
+tile("Your check-in",esc(dayLabel(dCheck)),th.check_in?shortDate(th.check_in):"")+'</div>'+
+(p?'<div class="note gap">$100 buys about '+Math.floor(100/p)+' shares at this price. '+esc(th.stake_note||"")+'</div>':"")+'</div>'+
+(films?'<div class="card gap">'+films+'</div>':"")+
+'<div class="sh"><h2>Red flags</h2><span class="note">new shares, debt, lawsuits</span></div><div class="card">'+fl+'</div>'+
+(lg?'<details class="more"><summary>Latest facts ('+logs.length+')</summary><div class="card">'+lg+'</div></details>':"")+
+'<p class="note">Facts collected for your idea, not a recommendation. News is checked weekly, and daily from 1 December. '+
+'Your phone gets a notification only when something material changes.</p>'+
+'<div class="pact"><button class="btn sm" data-altk="'+esc(th.ticker)+'">Set a price alert</button>'+
+'<button class="btn sm" data-log="1" data-t="'+esc(th.ticker)+'" data-act="buy">Log a buy</button></div>';
+}
 var ADIR="below";
 function addAlert(){
 var tk=($("a-tick").value||"").trim().toUpperCase().replace(/[^A-Z0-9.-]/g,""), px=num($("a-px").value);
@@ -1307,7 +1356,7 @@ fstat("",""); syncForm(); show("log");
 if(!d.t&&(F.act==="deposit"||F.act==="withdraw"))$("f-amt").focus();
 }
 function renderAll(offline){
-health(offline); renderToday(); renderPortfolio(); renderToken(); quickChips(); preview(); renderWatch(); renderLogRecent();
+health(offline); renderToday(); renderPortfolio(); renderToken(); quickChips(); preview(); renderWatch(); renderThesis(); renderLogRecent();
 if(current==="review")renderReview();
 }
 document.addEventListener("click",function(e){
