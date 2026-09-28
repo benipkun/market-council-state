@@ -1,13 +1,51 @@
 {
   "tallies": {
     "confirmed": 0,
-    "contradicted": 0,
-    "inconclusive": 4
+    "contradicted": 1,
+    "inconclusive": 5
   },
   "recent": [
-    {"ticker": "SOFI", "as_of": "2026-09-21T14:15:00Z", "lean": "neutral", "outcome": "inconclusive", "pct_change": null},
-    {"ticker": "DUOL", "as_of": "2026-09-21T14:15:00Z", "lean": "bullish", "outcome": "inconclusive", "pct_change": null},
-    {"ticker": "RYAAY", "as_of": "2026-09-21T09:24:05Z", "lean": "bullish", "outcome": "inconclusive", "pct_change": null},
-    {"ticker": "UBER", "as_of": "2026-09-21T09:24:05Z", "lean": "bullish", "outcome": "inconclusive", "pct_change": null}
+    {
+      "ticker": "AVAV",
+      "as_of": "2026-09-22T14:22:48Z",
+      "lean": "bullish",
+      "outcome": "contradicted",
+      "pct_change": -2.61
+    },
+    {
+      "ticker": "UBER",
+      "as_of": "2026-09-21T23:22:08Z",
+      "lean": "neutral",
+      "outcome": "inconclusive",
+      "pct_change": -1.72
+    },
+    {
+      "ticker": "SOFI",
+      "as_of": "2026-09-21T14:15:00Z",
+      "lean": "neutral",
+      "outcome": "inconclusive",
+      "pct_change": null
+    },
+    {
+      "ticker": "DUOL",
+      "as_of": "2026-09-21T14:15:00Z",
+      "lean": "bullish",
+      "outcome": "inconclusive",
+      "pct_change": null
+    },
+    {
+      "ticker": "RYAAY",
+      "as_of": "2026-09-21T09:24:05Z",
+      "lean": "bullish",
+      "outcome": "inconclusive",
+      "pct_change": null
+    },
+    {
+      "ticker": "UBER",
+      "as_of": "2026-09-21T09:24:05Z",
+      "lean": "bullish",
+      "outcome": "inconclusive",
+      "pct_change": null
+    }
   ]
 }
