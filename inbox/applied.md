@@ -6,3 +6,4 @@
 - 2026-09-25T13:08:08Z | ping | test | loop check
 - 2026-09-25T13:25:24Z | goal 4000000 huf by 2027-12 | setting
 - 2026-09-25T21:18:57Z | ping | test | loop check
+- 2026-09-28T02:00:37Z | withdraw 95 usd | applied | cash 1.83 | nav 819.89
