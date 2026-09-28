@@ -1,38 +1,6 @@
 {
   "events": [
     {
-      "event_id": "ryaay-alphavalue-target-cut-2550-20260922",
-      "first_seen": "2026-09-22T23:22:00Z",
-      "tickers": [
-        "RYAAY"
-      ],
-      "headline_fingerprint": "ryanair alphavalue cuts target to eur25.50 from eur26.90 reduces eps forecasts sept 22 2026"
-    },
-    {
-      "event_id": "ryaay-oleary-no-fuel-surcharge-20260923",
-      "first_seen": "2026-09-23T14:24:00Z",
-      "tickers": [
-        "RYAAY"
-      ],
-      "headline_fingerprint": "ryanair ceo oleary says no fuel surcharge despite higher jet fuel prices sept 23 2026"
-    },
-    {
-      "event_id": "nvo-capital-markets-day-selloff-7.7pct-20260921",
-      "first_seen": "2026-09-23T16:19:50Z",
-      "tickers": [
-        "NVO"
-      ],
-      "headline_fingerprint": "novo nordisk capital markets day post-wegovy growth strategy stock falls 7.7pct sept 21 2026"
-    },
-    {
-      "event_id": "asml-dutch-pm-trump-match-act-export-curbs-20260924",
-      "first_seen": "2026-09-24T22:12:23Z",
-      "tickers": [
-        "ASML"
-      ],
-      "headline_fingerprint": "dutch pm jetten discusses match act with trump to prevent new us export curbs on asml sept 24 2026"
-    },
-    {
       "event_id": "ryaay-boeing-737max10-first-delivery-spring2027-20260925",
       "first_seen": "2026-09-25T07:10:00Z",
       "tickers": [
