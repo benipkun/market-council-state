@@ -325,6 +325,13 @@
               "Autonomous ride-hailing (Waymo, Tesla, and now Uber's own Wayve/Pony.ai partnerships) is moving from pilot to multi-city reality faster than most models assumed a year ago -- does Uber's aggregator position protect it, or does owning none of the underlying AV stack leave it exposed to being disintermediated by whichever AV operator gets cheapest per-mile cost first?",
               "This position is ~71% of NAV purely because nothing else has been added at comparable size, not because of a fresh decision to concentrate here today -- if you were building the portfolio from cash right now, would you still put 71% of it into UBER, or does the honest answer suggest a rebalancing decision is overdue regardless of the trim-math already logged?"
             ]
+          },
+          "graded": {
+            "checked_at": "2026-09-28T11:08:00Z",
+            "price_then": 69.89,
+            "price_now": 69.62,
+            "pct_change": -0.39,
+            "outcome": "inconclusive"
           }
         }
       ]
@@ -368,6 +375,13 @@
               "If a further US/Dutch export-control tightening materially cuts ASML's addressable China business, how would you find out, and is that a risk you can reverse out of quickly given how monopolistic and thinly substitutable this niche is?",
               "As a Euro-based business reporting in EUR with a USD ADR, how much of any near-term price move here is FX (EUR/USD) versus the underlying semiconductor-capex cycle?"
             ]
+          },
+          "graded": {
+            "checked_at": "2026-09-28T11:08:00Z",
+            "price_then": 1727.98,
+            "price_now": 1743.94,
+            "pct_change": 0.92,
+            "outcome": "inconclusive"
           }
         },
         {
@@ -407,6 +421,13 @@
               "If the market is right that competition and patent expiry structurally cap Novo's growth rather than this being a sentiment overreaction, how would you find out, and how many more quarters of share/margin erosion would confirm it?",
               "Novo trades as a USD ADR against a DKK-denominated business -- do you have a view on that FX exposure, and on how the Danish/EU pharma regulatory regime differs from the US Medicare-pricing risk already hitting the stock?"
             ]
+          },
+          "graded": {
+            "checked_at": "2026-09-28T11:08:00Z",
+            "price_then": 38.42,
+            "price_now": 38.8,
+            "pct_change": 0.99,
+            "outcome": "inconclusive"
           }
         }
       ]
