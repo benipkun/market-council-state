@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#0d0f15" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f5f6f8" media="(prefers-color-scheme: light)">
+<link rel="icon" href="../icon-192.png" type="image/png">
+<title>Caterpillar (CAT) research</title>
+<style>
+:root{--bg:#0d0f15;--sf:#161a23;--sf2:#1d222c;--bd:#2a3140;--tx:#e9ebf0;--dim:#8f96a6;--ac:#6ea8fe;--acs:#18243b;
+--up:#3fb98c;--ups:#12281f;--dn:#e0715f;--dns:#2a1714;--grid:#232a37;--s1:#3987e5;color-scheme:dark}
+@media (prefers-color-scheme: light){
+:root{--bg:#f5f6f8;--sf:#ffffff;--sf2:#edeff3;--bd:#d8dbe2;--tx:#15181e;--dim:#5d6373;--ac:#2557c7;--acs:#e4ecfc;
+--up:#17794f;--ups:#dcefe5;--dn:#b0402d;--dns:#f8e5e1;--grid:#e6e8ee;--s1:#2a78d6;color-scheme:light}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+a{color:var(--ac)}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+.up{color:var(--up)}.dn{color:var(--dn)}
+header{max-width:760px;margin:0 auto;padding:calc(10px + env(safe-area-inset-top)) 16px 14px}
+.back{display:inline-flex;align-items:center;min-height:40px;font-size:13.5px;font-weight:700;text-decoration:none}
+h1{font-size:25px;line-height:1.2;margin:4px 0 3px;letter-spacing:-.02em}
+.sub{font-size:12.5px;color:var(--dim)}
+.px{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin-top:12px}
+.px b{font-size:30px;letter-spacing:-.02em}
+.px span{font-size:14px;font-weight:700}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
+nav div{max-width:760px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:8px 16px;scrollbar-width:none}
+nav div::-webkit-scrollbar{display:none}
+nav a{flex:none;font-size:12.5px;font-weight:700;padding:7px 12px;border-radius:99px;background:var(--sf2);color:var(--dim);text-decoration:none;white-space:nowrap}
+main{max-width:760px;margin:0 auto;padding:14px 16px calc(36px + env(safe-area-inset-bottom))}
+section{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:16px;margin-bottom:14px;scroll-margin-top:62px}
+h2{display:flex;align-items:center;gap:10px;font-size:17px;line-height:1.25;margin:0 0 12px;letter-spacing:-.01em}
+.n{flex:none;width:26px;height:26px;border-radius:8px;background:var(--acs);color:var(--ac);font-size:13px;font-weight:800;
+display:inline-flex;align-items:center;justify-content:center}
+p{margin:0 0 10px}
+p:last-child{margin-bottom:0}
+.verdict{border:2px solid var(--ac);background:var(--acs)}
+.verdict .n{background:var(--ac);color:var(--bg)}
+.big{font-size:21px;font-weight:800;line-height:1.3;margin-bottom:8px}
+.note{font-size:12px;color:var(--dim)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+@media (min-width:640px){.tiles{grid-template-columns:repeat(4,1fr)}}
+.tile{background:var(--sf2);border-radius:11px;padding:11px 12px}
+.tl{font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--dim)}
+.tv{font-size:21px;font-weight:800;margin-top:3px;letter-spacing:-.02em}
+.ts{font-size:11.5px;color:var(--dim);margin-top:1px}
+ul{margin:0;padding-left:18px}
+li{margin-bottom:8px}
+li:last-child{margin-bottom:0}
+.ev{display:flex;gap:12px;padding:11px 0;border-top:1px solid var(--bd)}
+.ev:first-child{border-top:0;padding-top:0}
+.ev .d{flex:none;width:52px;font-size:12px;font-weight:800;color:var(--dim);padding-top:2px}
+.ev .c{font-weight:800}
+.cases{display:grid;grid-template-columns:1fr;gap:10px}
+@media (min-width:560px){.cases{grid-template-columns:1fr 1fr}}
+.case{border-radius:11px;padding:13px}
+.case.bull{background:var(--ups)}
+.case.bear{background:var(--dns)}
+.case h3{margin:0 0 8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.case.bull h3{color:var(--up)}
+.case.bear h3{color:var(--dn)}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--bd);font-size:14px}
+.kv:first-child{border-top:0;padding-top:0}
+.kv span:first-child{color:var(--dim)}
+.kv b{white-space:nowrap}
+.math{background:var(--sf2);border-radius:10px;padding:11px 13px;margin:12px 0;font-size:14px}
+.chart{position:relative;margin:2px 0 4px}
+.chart svg{display:block;width:100%;touch-action:pan-y}
+.gl{stroke:var(--grid);stroke-width:1}
+.ax{fill:var(--dim);font-size:10.5px}
+.lbl{fill:var(--tx);font-size:11.5px;font-weight:700}
+.xh{stroke:var(--dim);stroke-width:1}
+.tip{position:absolute;top:4px;pointer-events:none;background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:7px 9px;
+font-size:12px;line-height:1.45;box-shadow:0 4px 14px rgba(0,0,0,.25);white-space:nowrap}
+.tip b{display:block}
+details{margin-top:6px}
+summary{cursor:pointer;font-size:12.5px;font-weight:700;color:var(--ac);min-height:34px;display:flex;align-items:center}
+.tw{max-height:320px;overflow:auto;border:1px solid var(--bd);border-radius:10px}
+table{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
+th{position:sticky;top:0;background:var(--sf);text-align:left;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);
+padding:7px 9px;border-bottom:1px solid var(--bd)}
+td{padding:6px 9px;border-bottom:1px solid var(--bd)}
+tr:last-child td{border-bottom:0}
+.r{text-align:right}
+footer{font-size:11.5px;color:var(--dim);line-height:1.6;padding:2px 4px 0}
+</style>
+</head>
+<body>
+<header>
+<a class="back" href="../#today">&larr; Market Council</a>
+<h1>Caterpillar (CAT)</h1>
+<div class="sub">Heads-up and opinion &middot; written 28 Sep 2026 &middot; prices to the 25 Sep close</div>
+<div class="px"><b class="mono">$821.58</b><span class="up mono">+2.0% on the day</span></div>
+<div class="sub">23% below its 30 Jun peak of $1,064.90</div>
+</header>
+<nav aria-label="Sections"><div>
+<a href="#verdict">Verdict</a><a href="#numbers">Numbers</a><a href="#price">Price</a><a href="#earnings">Earnings</a>
+<a href="#drivers">Drivers</a><a href="#moves">Recent moves</a><a href="#cases">Bull vs bear</a><a href="#valuation">Valuation</a>
+<a href="#you">For you</a><a href="#next">Watch next</a>
+</div></nav>
+<main>
+
+<section id="verdict" class="verdict">
+<h2><span class="n">1</span>Verdict</h2>
+<div class="big">Great business, expensive stock.</div>
+<p>Caterpillar's profits are surging on power equipment for AI data centres, and it keeps beating forecasts.
+But at about 34 times the last year's earnings, the price already assumes that boom lasts for years.</p>
+<p><b>My call: worth watching, not worth chasing.</b> The next real test is the third-quarter report in late October.</p>
+<p class="note">Opinion, not personal financial advice.</p>
+</section>
+
+<section id="numbers">
+<h2><span class="n">2</span>Key numbers</h2>
+<div class="tiles">
+<div class="tile"><div class="tl">Price</div><div class="tv mono">$821.58</div><div class="ts">25 Sep close</div></div>
+<div class="tile"><div class="tl">From peak</div><div class="tv mono dn">&minus;23%</div><div class="ts">peak $1,064.90, 30 Jun</div></div>
+<div class="tile"><div class="tl">Price / earnings</div><div class="tv mono">34&times;</div><div class="ts">usual range about 15&ndash;20&times;</div></div>
+<div class="tile"><div class="tl">Last quarter</div><div class="tv mono up">$8.17</div><div class="ts">per share, $6.25 expected</div></div>
+</div>
+</section>
+
+<section id="price">
+<h2><span class="n">3</span>Price, last 100 trading days</h2>
+<div class="chart" id="c-price"></div>
+<p>It peaked at $1,064.90 on 30 Jun, then fell back. Results day (4 Aug) briefly lifted it to $935 before it closed at $876.54,
+and through September it has closed between $779 and $822. News reports still put it up roughly 40% on the year.</p>
+<details><summary>Show the daily closes</summary><div class="tw" id="t-price"></div></details>
+</section>
+
+<section id="earnings">
+<h2><span class="n">4</span>Earnings per share, by quarter</h2>
+<div class="chart" id="c-eps"></div>
+<p>It beat expectations in each of the last four quarters, and the latest was the biggest jump:
+$8.17 against $6.25 expected, 73% more than a year earlier.</p>
+<details><summary>Show reported vs expected</summary><div class="tw" id="t-eps"></div></details>
+</section>
+
+<section id="drivers">
+<h2><span class="n">5</span>What's driving it</h2>
+<ul>
+<li><b>Power for AI data centres.</b> Its generators and gas turbines are in short supply as data centres race for electricity.
+This is now what moves the stock.</li>
+<li><b>Fresh order signal (25 Sep).</b> An AI lab agreed to reimburse the developer Atlas for another 283 MW of Caterpillar power
+equipment: customers are paying up front to secure supply.</li>
+<li><b>Core business.</b> Construction and mining machines, with self-driving haul trucks now expanding to two more quarries in Virginia.</li>
+<li><b>Dividend.</b> A long record of raising it every year, though the yield is small at this price.</li>
+</ul>
+</section>
+
+<section id="moves">
+<h2><span class="n">6</span>Recent moves</h2>
+<div class="ev"><div class="d">4 Aug</div><div><span class="c up">+5.6%</span> to $876.54. Results beat forecasts by 31%; it touched $935 during the day.</div></div>
+<div class="ev"><div class="d">14 Sep</div><div><span class="c dn">&minus;4.2%</span> to $784.00. Worry that the AI power trade is cooling after AI executives talked about slowing down.</div></div>
+<div class="ev"><div class="d">24 Sep</div><div><span class="c dn">&minus;0.8%</span> to $805.25, on a day long-term US interest rates hit their highest since 2004.</div></div>
+<div class="ev"><div class="d">25 Sep</div><div><span class="c up">+2.0%</span> to $821.58. The Atlas 283 MW news came out that morning.</div></div>
+</section>
+
+<section id="cases">
+<h2><span class="n">7</span>Bull case vs bear case</h2>
+<div class="cases">
+<div class="case bull"><h3>Bull case</h3><ul>
+<li>Earnings are accelerating, not just rising: up 73% on a year earlier last quarter.</li>
+<li>Customers are paying ahead to lock in power equipment, and the order backlog is large.</li>
+<li>A top-quality industrial with pricing power and a big service business.</li>
+</ul></div>
+<div class="case bear"><h3>Bear case</h3><ul>
+<li>Priced for perfection: about 34 times earnings for a company that usually trades at 15&ndash;20 times.</li>
+<li>It now trades like an AI stock: any sign of slower AI spending hits it.</li>
+<li>Higher interest rates weigh on construction and mining demand.</li>
+<li>Insiders sold about $260M of stock over the past year (GuruFocus).</li>
+</ul></div>
+</div>
+</section>
+
+<section id="valuation">
+<h2><span class="n">8</span>Valuation check</h2>
+<div class="kv"><span>Earnings, last four quarters</span><b class="mono">$23.82 a share</b></div>
+<div class="kv"><span>Price &divide; those earnings</span><b class="mono">34.5&times;</b></div>
+<div class="kv"><span>If last quarter repeats (&times;4 = $32.68)</span><b class="mono">about 25&times;</b></div>
+<div class="math">To sit at a more normal 20&ndash;25 times the last year's earnings, Caterpillar needs yearly earnings of about
+<b>$33&ndash;41 a share</b>: 38&ndash;72% more than the last twelve months.</div>
+<p>So the bet is simple: the second-quarter jump has to be the new normal, and then keep growing. If it is, today's price is
+roughly fair. If that quarter was a peak, the stock has room to fall.</p>
+</section>
+
+<section id="you">
+<h2><span class="n">9</span>Fit with your portfolio</h2>
+<ul>
+<li>One share costs about $822, so a small position would be a fractional share.</li>
+<li>It would be another single-company bet next to your largest holding, not something that spreads your risk.
+If spreading risk is the goal, a broad fund does that better than any one stock.</li>
+<li>It fell 23% from its peak in under three months. Size anything so a move like that would not hurt.</li>
+</ul>
+</section>
+
+<section id="next">
+<h2><span class="n">10</span>What to watch next</h2>
+<ul>
+<li><b>Third-quarter results, late October.</b> The date is not in my data yet; last year's report came on 29 Oct.</li>
+<li><b>Power-generation orders and backlog.</b> Still growing, or levelling off?</li>
+<li><b>Guidance for next year.</b> Does management expect the data-centre demand to continue?</li>
+<li><b>AI spending headlines</b> from the big cloud companies, and <b>long-term interest rates</b>.</li>
+</ul>
+<p class="note" style="margin-top:12px">In the app: Watch tab &rarr; set a price alert on CAT, or ask for an update after the results.</p>
+</section>
+
+<footer>
+<p><b>Sources.</b> Prices: Alpha Vantage daily closes, 5 May to 25 Sep 2026. Earnings: Alpha Vantage, reported against expected
+earnings per share. News: the Alpha Vantage news feed (Stock Titan, 24/7 Wall St., GuruFocus, Yahoo Finance).</p>
+<p>The opinion is Claude's, written for Ben on 28 Sep 2026. It is not personal financial advice. This page sits in a public
+repository, so it holds no balances.</p>
+</footer>
+</main>
+<script>
+(function(){
+"use strict";
+var MINUS=String.fromCharCode(8722);
+var MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var P="05-05:904.59,05-06:926.93,05-07:895.69,05-08:897.45,05-11:926.79,05-12:912.14,05-13:902.30,05-14:920.22,05-15:888.31,"+
+"05-18:863.95,05-19:860.15,05-20:872.56,05-21:865.95,05-22:879.89,05-26:908.55,05-27:909.93,05-28:887.67,05-29:875.87,"+
+"06-01:865.36,06-02:909.81,06-03:926.18,06-04:940.48,06-05:904.28,06-08:915.64,06-09:914.70,06-10:856.16,06-11:897.63,"+
+"06-12:910.57,06-15:933.93,06-16:945.46,06-17:955.92,06-18:985.82,06-22:1022.28,06-23:984.24,06-24:994.45,06-25:1057.01,"+
+"06-26:997.47,06-29:1033.19,06-30:1064.90,07-01:991.41,07-02:963.53,07-06:969.92,07-07:940.12,07-08:948.08,07-09:938.39,"+
+"07-10:952.41,07-13:931.47,07-14:933.34,07-15:914.30,07-16:877.17,07-17:880.28,07-20:864.30,07-21:889.97,07-22:889.31,"+
+"07-23:894.54,07-24:888.73,07-27:873.28,07-28:840.85,07-29:782.71,07-30:809.14,07-31:814.81,08-03:830.03,08-04:876.54,"+
+"08-05:871.08,08-06:856.96,08-07:842.19,08-10:837.58,08-11:843.37,08-12:855.60,08-13:854.60,08-14:856.57,08-17:881.65,"+
+"08-18:840.87,08-19:816.15,08-20:815.39,08-21:827.90,08-24:811.02,08-25:811.29,08-26:821.93,08-27:817.00,08-28:800.25,"+
+"08-31:797.47,09-01:779.16,09-02:792.28,09-03:800.14,09-04:813.94,09-08:822.48,09-09:815.56,09-10:805.00,09-11:818.57,"+
+"09-14:784.00,09-15:783.54,09-16:782.72,09-17:798.57,09-18:808.99,09-21:816.50,09-22:808.01,09-23:812.02,09-24:805.25,"+
+"09-25:821.58";
+var price=P.split(",").map(function(x){var a=x.split(":");return {d:a[0],v:Number(a[1])};});
+var EPS=[["Q3 24",5.17,5.35],["Q4 24",5.14,5.03],["Q1 25",4.25,4.34],["Q2 25",4.72,4.90],
+["Q3 25",4.95,4.52],["Q4 25",5.16,4.71],["Q1 26",5.54,4.64],["Q2 26",8.17,6.25]];
+function $(id){return document.getElementById(id);}
+function usd(v,dp){dp=dp==null?2:dp;return (v<0?MINUS:"")+"$"+Math.abs(v).toLocaleString("en-US",{minimumFractionDigits:dp,maximumFractionDigits:dp});}
+function pct(v){return (v<0?MINUS:"+")+Math.abs(v).toFixed(1)+"%";}
+function day(md){var p=md.split("-");return Number(p[1])+" "+MON[Number(p[0])-1];}
+function qtr(q){var p=q.split(" ");return p[0]+" 20"+p[1];}
+function tipAt(box,svg,tip,W,xi){
+tip.hidden=false;
+var r=svg.getBoundingClientRect(), px=xi*r.width/W, tw=tip.offsetWidth;
+tip.style.left=Math.max(0,Math.min(r.width-tw,px+10>r.width-tw?px-tw-10:px+10))+"px";
+}
+function lineChart(){
+var box=$("c-price"), W=Math.max(280,box.clientWidth||320), H=210, L=46, R=58, T=14, B=24, n=price.length;
+var lo=700, hi=1100, st=100, ip=0, i, v;
+for(i=1;i<n;i++){if(price[i].v>price[ip].v)ip=i;}
+function X(k){return L+(W-L-R)*k/(n-1);}
+function Y(val){return T+(H-T-B)*(1-(val-lo)/(hi-lo));}
+var s='<svg viewBox="0 0 '+W+' '+H+'" height="'+H+'" role="img" aria-label="Caterpillar closing price, last 100 trading days">';
+for(v=lo;v<=hi;v+=st){var y=Y(v).toFixed(1);
+s+='<line class="gl" x1="'+L+'" x2="'+(W-R)+'" y1="'+y+'" y2="'+y+'"/><text class="ax" x="'+(L-6)+'" y="'+y+'" dy="3.5" text-anchor="end">$'+v.toLocaleString("en-US")+'</text>';}
+for(i=0;i<n;i++){if(i===0||price[i].d.slice(0,2)!==price[i-1].d.slice(0,2)){
+s+='<text class="ax" x="'+X(i).toFixed(1)+'" y="'+(H-6)+'">'+MON[Number(price[i].d.slice(0,2))-1]+'</text>';}}
+s+='<path d="'+price.map(function(p,k){return (k?"L":"M")+X(k).toFixed(1)+" "+Y(p.v).toFixed(1);}).join(" ")+
+'" fill="none" style="stroke:var(--s1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>';
+var xp=X(ip), yp=Y(price[ip].v), xe=X(n-1), ye=Y(price[n-1].v);
+s+='<circle cx="'+xp.toFixed(1)+'" cy="'+yp.toFixed(1)+'" r="4" style="fill:var(--s1);stroke:var(--sf)" stroke-width="2"/>'+
+'<text class="lbl" x="'+(xp+8).toFixed(1)+'" y="'+yp.toFixed(1)+'" dy="4">Peak '+usd(price[ip].v,0)+'</text>'+
+'<circle cx="'+xe.toFixed(1)+'" cy="'+ye.toFixed(1)+'" r="4" style="fill:var(--s1);stroke:var(--sf)" stroke-width="2"/>'+
+'<text class="lbl" x="'+(xe+8).toFixed(1)+'" y="'+ye.toFixed(1)+'" dy="4">'+usd(price[n-1].v,0)+'</text>'+
+'<line class="xh" x1="0" x2="0" y1="'+T+'" y2="'+(H-B)+'" visibility="hidden"/></svg><div class="tip" hidden></div>';
+box.innerHTML=s;
+var svg=box.querySelector("svg"), xh=box.querySelector(".xh"), tip=box.querySelector(".tip");
+function show(ev){
+var r=svg.getBoundingClientRect(), x=(ev.clientX-r.left)*W/r.width;
+var k=Math.max(0,Math.min(n-1,Math.round((x-L)/(W-L-R)*(n-1)))), xi=X(k);
+xh.setAttribute("x1",xi);xh.setAttribute("x2",xi);xh.setAttribute("visibility","visible");
+var chg=k?(price[k].v/price[k-1].v-1)*100:null;
+tip.innerHTML='<b>'+day(price[k].d)+'</b>'+usd(price[k].v)+(chg==null?"":" &middot; "+pct(chg));
+tipAt(box,svg,tip,W,xi);
+}
+function hide(){xh.setAttribute("visibility","hidden");tip.hidden=true;}
+svg.addEventListener("pointermove",show);svg.addEventListener("pointerdown",show);svg.addEventListener("pointerleave",hide);
+}
+function barChart(){
+var box=$("c-eps"), W=Math.max(280,box.clientWidth||320), H=196, L=34, R=6, T=20, B=24, n=EPS.length;
+var lo=0, hi=9, st=3, band=(W-L-R)/n, bw=Math.min(26,band*0.56), rr=4, i;
+function Y(val){return T+(H-T-B)*(1-(val-lo)/(hi-lo));}
+var y0=Y(0), s='<svg viewBox="0 0 '+W+' '+H+'" height="'+H+'" role="img" aria-label="Caterpillar earnings per share by quarter">';
+for(var v=lo;v<=hi;v+=st){var y=Y(v).toFixed(1);
+s+='<line class="gl" x1="'+L+'" x2="'+(W-R)+'" y1="'+y+'" y2="'+y+'"/><text class="ax" x="'+(L-6)+'" y="'+y+'" dy="3.5" text-anchor="end">$'+v+'</text>';}
+for(i=0;i<n;i++){
+var x=L+band*i+(band-bw)/2, yt=Y(EPS[i][1]);
+s+='<path d="M'+x.toFixed(1)+' '+y0.toFixed(1)+' V'+(yt+rr).toFixed(1)+' Q'+x.toFixed(1)+' '+yt.toFixed(1)+' '+(x+rr).toFixed(1)+' '+yt.toFixed(1)+
+' H'+(x+bw-rr).toFixed(1)+' Q'+(x+bw).toFixed(1)+' '+yt.toFixed(1)+' '+(x+bw).toFixed(1)+' '+(yt+rr).toFixed(1)+' V'+y0.toFixed(1)+' Z" style="fill:var(--s1)"/>'+
+'<text class="ax" x="'+(x+bw/2).toFixed(1)+'" y="'+(H-6)+'" text-anchor="middle">'+EPS[i][0]+'</text>';
+}
+var xl=L+band*(n-1)+band/2;
+s+='<text class="lbl" x="'+xl.toFixed(1)+'" y="'+(Y(EPS[n-1][1])-6).toFixed(1)+'" text-anchor="middle">'+usd(EPS[n-1][1])+'</text></svg><div class="tip" hidden></div>';
+box.innerHTML=s;
+var svg=box.querySelector("svg"), tip=box.querySelector(".tip");
+function show(ev){
+var r=svg.getBoundingClientRect(), x=(ev.clientX-r.left)*W/r.width;
+var k=Math.max(0,Math.min(n-1,Math.floor((x-L)/band))), e=EPS[k];
+tip.innerHTML='<b>'+qtr(e[0])+'</b>Reported '+usd(e[1])+'<br>Expected '+usd(e[2])+'<br>'+(e[1]>=e[2]?"Beat ":"Missed ")+pct((e[1]/e[2]-1)*100);
+tipAt(box,svg,tip,W,L+band*k+band/2);
+}
+function hide(){tip.hidden=true;}
+svg.addEventListener("pointermove",show);svg.addEventListener("pointerdown",show);svg.addEventListener("pointerleave",hide);
+}
+function tables(){
+var rows=price.slice().reverse().map(function(p,k,a){
+var prev=a[k+1], chg=prev?(p.v/prev.v-1)*100:null;
+return '<tr><td>'+day(p.d)+'</td><td class="r">'+usd(p.v)+'</td><td class="r '+(chg==null?"":(chg>=0?"up":"dn"))+'">'+(chg==null?"":pct(chg))+'</td></tr>';
+}).join("");
+$("t-price").innerHTML='<table><thead><tr><th>Date</th><th class="r">Close</th><th class="r">Day</th></tr></thead><tbody>'+rows+'</tbody></table>';
+$("t-eps").innerHTML='<table><thead><tr><th>Quarter</th><th class="r">Reported</th><th class="r">Expected</th><th class="r">Surprise</th></tr></thead><tbody>'+
+EPS.slice().reverse().map(function(e){var sp=(e[1]/e[2]-1)*100;
+return '<tr><td>'+qtr(e[0])+'</td><td class="r">'+usd(e[1])+'</td><td class="r">'+usd(e[2])+'</td><td class="r '+(sp>=0?"up":"dn")+'">'+pct(sp)+'</td></tr>';}).join("")+
+'</tbody></table>';
+}
+function draw(){lineChart();barChart();}
+tables();draw();
+var rt=null;
+window.addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(draw,150);});
+})();
+</script>
+</body>
+</html>

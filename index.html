@@ -281,6 +281,7 @@ footer{margin-top:26px;font-size:11.5px;color:var(--dim);line-height:1.55}
 <div id="today-cash"></div>
 <div id="today-alerts"></div>
 <div id="today-thesis"></div>
+<div id="today-research"></div>
 <div class="sh"><h2>Needs attention</h2><span class="note" id="n-picks"></span></div>
 <div id="picks"></div>
 <div class="sh"><h2>Mispriced</h2><span class="note" id="n-mis"></span></div>
@@ -508,7 +509,7 @@ var TABS=["today","portfolio","log","watch","review"];
 var MONEY=["buy","sell","deposit","withdraw"];
 var FILES={digest:"digests/latest.json",treasury:"treasury/snapshot.json",ledger:"treasury/ledger.json",
 track:"state/track_record.json",history:"digests/history.json",paper:"state/paper.json",fx:"state/fx.json",
-alerts:"state/alerts.json",alstat:"state/alerts_status.json",plan:"state/plan.json",status:"state/status.json",theses:"state/theses.json"};
+alerts:"state/alerts.json",alstat:"state/alerts_status.json",plan:"state/plan.json",status:"state/status.json",theses:"state/theses.json",research:"research/index.json"};
 var S={};
 var DASH=String.fromCharCode(8212),MINUS=String.fromCharCode(8722),MID=String.fromCharCode(183),
 ELL=String.fromCharCode(8230),ARROW=String.fromCharCode(8594),NL=String.fromCharCode(10),
@@ -1200,6 +1201,16 @@ tile("Your check-in",esc(dayLabel(dCheck)),th.check_in?shortDate(th.check_in):""
 '<div class="pact"><button class="btn sm" data-altk="'+esc(th.ticker)+'">Set a price alert</button>'+
 '<button class="btn sm" data-log="1" data-t="'+esc(th.ticker)+'" data-act="buy">Log a buy</button></div>';
 }
+function renderResearch(){
+var el=$("today-research"), notes=((S.research&&S.research.notes)||[]).filter(function(x){return /^research[/][a-z0-9._-]+[.]html$/.test(String(x.url||""));});
+notes.sort(function(a,b){return String(b.date).localeCompare(String(a.date));});
+if(!notes.length){el.innerHTML="";return;}
+el.innerHTML='<div class="sh"><h2>Research notes</h2><span class="note">tap to open</span></div>'+notes.slice(0,3).map(function(x){
+return '<a href="'+esc(x.url)+'" style="display:flex;gap:12px;align-items:center;padding:12px 14px;margin-bottom:8px;background:var(--sf);border:1px solid var(--bd);border-radius:12px;color:var(--tx);text-decoration:none">'+
+'<span class="tk" style="min-width:44px">'+esc(x.ticker||"")+'</span><span style="flex:1;min-width:0"><b style="display:block">'+esc(x.title)+'</b>'+
+'<span class="note">'+esc(shortDate(x.date))+(x.summary?" "+MID+" "+esc(x.summary):"")+'</span></span><span style="color:var(--ac);font-weight:800">'+ARROW+'</span></a>';
+}).join("");
+}
 var ADIR="below";
 function addAlert(){
 var tk=($("a-tick").value||"").trim().toUpperCase().replace(/[^A-Z0-9.-]/g,""), px=num($("a-px").value);
@@ -1356,7 +1367,7 @@ fstat("",""); syncForm(); show("log");
 if(!d.t&&(F.act==="deposit"||F.act==="withdraw"))$("f-amt").focus();
 }
 function renderAll(offline){
-health(offline); renderToday(); renderPortfolio(); renderToken(); quickChips(); preview(); renderWatch(); renderThesis(); renderLogRecent();
+health(offline); renderToday(); renderPortfolio(); renderToken(); quickChips(); preview(); renderWatch(); renderThesis(); renderResearch(); renderLogRecent();
 if(current==="review")renderReview();
 }
 document.addEventListener("click",function(e){
