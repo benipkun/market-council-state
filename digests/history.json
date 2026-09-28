@@ -233,6 +233,13 @@
               "SOFI is already trading essentially at its DCF fair value ($16.65) -- is adding a new starter/half position here a better use of capital than adding to UBER's much larger DCF discount, or to SPY as a diversifier?",
               "If the stablecoin rollout produces no measurable revenue or cost benefit within a year, how would you actually find out, and would you unwind this position before or after that evidence arrives?"
             ]
+          },
+          "graded": {
+            "checked_at": "2026-09-28T09:08:00Z",
+            "price_then": 17.255,
+            "price_now": 16.58,
+            "pct_change": -3.91,
+            "outcome": "contradicted"
           }
         }
       ]
@@ -276,6 +283,13 @@
               "If this turns out to be structural deceleration rather than a market overreaction, how would you find out, and how many more quarters of weak growth would it take?"
             ],
             "note": "A starter-sized position limits the cost of being wrong while the next earnings report (est. Dec 3, 2026) provides more data."
+          },
+          "graded": {
+            "checked_at": "2026-09-28T09:08:00Z",
+            "price_then": 19.64,
+            "price_now": 18.27,
+            "pct_change": -6.98,
+            "outcome": "contradicted"
           }
         }
       ]
