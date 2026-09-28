@@ -464,6 +464,13 @@
               "Every dollar of the ~$267 cash buffer is implicitly a bet that nothing else on the watchlist (SOFI, CHWY, the European sleeve) is a better use of new capital than adding further to a position already at ~71% of NAV -- is that actually true, or is it inertia?",
               "This concentration arose from UBER simply not being trimmed while everything else stayed small, not from a fresh decision made today to hold 71% of the portfolio in one name -- if assembling this portfolio from cash right now, would that same weighting be chosen again?"
             ]
+          },
+          "graded": {
+            "checked_at": "2026-09-28T16:08:09Z",
+            "price_then": 69.42,
+            "price_now": 68.425,
+            "pct_change": -1.43,
+            "outcome": "inconclusive"
           }
         }
       ]
