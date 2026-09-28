@@ -1,25 +1,45 @@
 {
-  "as_of": "2026-09-28T21:08:00Z",
-  "picks": [],
-  "scrap": [
+  "as_of": "2026-09-28T23:08:00Z",
+  "picks": [
     {
-      "ticker": "DUOL",
-      "headline": "Price $143.51 (-2.87% vs prior close $147.75), fresh Alpha Vantage quote -- the sharpest single-day move on the watchlist this cycle. Web search found only already-logged items (CEO von Ahn's Sept 16 share sale, Brawl Stars crossover, prior Evercore target-double) -- no fresh catalyst identified for today's drop. Overvalued gap vs consensus $134.29 (carried) narrowed to ~6.9% (was ~10.0%), now well under the 20-25% short-thesis threshold.",
-      "severity": 2,
-      "first_seen": "2026-09-25T21:10:00Z"
-    },
-    {
-      "ticker": "RYAAY",
-      "headline": "Price $55.30 (+2.33% vs prior close $54.04), fresh Alpha Vantage quote (ADR trades on Nasdaq, only updates during US hours; European home session (Euronext Dublin) already closed for the day). Web search: BofA reiterated Buy and raised its target modestly to EUR28 from EUR27.50 (incremental, new dedupe fingerprint logged); Boeing 737 MAX10 delivery timeline already logged Sept 25 morning cycle. No fresh material catalyst identified for today's size of move. Mispricing thesis narrowed to ~34.4% vs $74.30 target (carried), still above the 20-25% range but established/unchanged reason, not re-flagged.",
-      "severity": 2,
-      "first_seen": "2026-09-25T21:10:00Z"
-    },
-    {
-      "ticker": "ASML",
-      "headline": "Price $1743.94 (+1.24% vs prior close $1722.50), fresh Alpha Vantage quote (ADR only updates during US hours; European home session (Amsterdam/XETRA) already closed for the day). No fresh news beyond the already-logged Dutch PM/MATCH Act item from Sept 24. Mispricing gap narrowed to ~22.4% vs consensus $2135.00 (carried), still below the 25% flag threshold, not re-flagged.",
+      "ticker": "UBER",
+      "lean": "neutral",
+      "confidence": 3,
       "severity": 1,
-      "first_seen": "2026-09-25T21:10:00Z"
-    },
+      "brief": "Daily long-term check-in on the largest holding, independent of today's news",
+      "why": "Scheduled daily governance check-in on the portfolio's dominant position, not triggered by a specific news catalyst.",
+      "price_at_pick": 68.16,
+      "bull_case": "DCF ($121.43) and even the analyst consensus target ($104.56) sit far above the current $68.16 price, and the ride-share/delivery platform continues to scale revenue and bookings.",
+      "bear_case": "Shares are down sharply from cost basis, sit below both the 50d ($73.39) and 200d ($75.27) SMAs, and carry event risk from pending litigation (CA wrongful-death ruling), the Delivery Hero acquisition's integration/financing load, and intensifying robotaxi competition (Tesla Cybercab, Waymo, Uber's own WeRide/Avomo partnerships).",
+      "risks": [
+        "concentration",
+        "litigation",
+        "competition",
+        "integration-risk"
+      ],
+      "position_suggestion": {
+        "tier": "none",
+        "suggested_size_usd": 0.0,
+        "suggested_size_pct_of_cash": 0.0,
+        "resulting_pct_nav": 78.94,
+        "execution_floor_usd": 50.0,
+        "basis": "Not a sizing event -- this is the scheduled daily long-term check-in, not a new signal.",
+        "concentration_note": "UBER is already ~78.94% of NAV, far above the ~25% single-name guideline; any further addition is out of the question regardless of thesis strength.",
+        "caveat": "Mechanical sizing based on this portfolio's own numbers, not personalized financial advice."
+      },
+      "advisor_questions": {
+        "framing": "Business decision -- whether to keep holding, trim, or let a concentrated position ride",
+        "questions": [
+          "This position is ~79% of NAV -- did it get there by a deliberate decision at each stage, or by drift as the rest of the book stayed small and this one grew (or fell less than it could have)?",
+          "If the concentration thesis is wrong -- if litigation, competition, or the Delivery Hero integration go badly -- how would you actually find out, and how soon, versus how long it would take to unwind a position this large without moving the price against yourself?",
+          "On a 5-10 year view, does Uber's moat (network density, driver/rider liquidity) look durable against Waymo-style robotaxi economics that could disintermediate the marketplace model entirely, or is the moat itself the open question?",
+          "Is holding (or adding to) UBER at these levels still the best use of the next dollar versus trimming toward the index (SPY) for diversification, given the position is already more than three times the guideline cap?"
+        ],
+        "note": "Same question as every daily check-in until the position size changes: is 79% in one name a position the user would build from scratch today, or only one they're holding because it's already there?"
+      }
+    }
+  ],
+  "scrap": [
     {
       "ticker": "UBER",
       "headline": "Price $69.62 (fresh FMP quote-short, +0.57% vs prior close $69.225), after-hours, unchanged from the prior cycle's after-hours print. Fresh FMP DCF $120.24 and price-target consensus $104.56 both re-confirmed via FMP, match stored values. FMP general insider-trade feed (unfiltered SEC Form-4 stream) shows no UBER-specific filings. Web search: only the recurring 24/7 Wall St./Evercore 'Uber could double' piece and a trailing-90-day consensus 2026 EPS revision ($3.2665 from $2.9557), both already reflected in prior cycles -- no fresh single-day catalyst. Mispricing thesis (~72.7% vs DCF, ~50.2% vs consensus) unchanged, established, not re-flagged. Next earnings 2026-10-29 (carried).",
@@ -673,6 +693,66 @@
       "headline": "Price $38.42 (medium confidence, web search -- FMP/Alpha Vantage exhausted; ADR only updates during US hours, European home session (Copenhagen) closed), -0.95% vs carried $38.79. Web search found only already-logged items (share-repurchase-programme progress, pipeline-rebuilding narrative, GLP-1 competitive pressure). Analyst consensus target refreshed to $46.35 (close to carried $47.23, kept). Now an actual portfolio holding, currently modestly underwater. Mispricing gap vs consensus ~23.0%, still below the 25% flag threshold, not re-flagged.",
       "severity": 2,
       "first_seen": "2026-09-28T21:08:00Z"
+    },
+    {
+      "ticker": "UBER",
+      "headline": "Price $68.16 unchanged vs prior cycle (fresh FMP quote-short, after-hours print carried from regular-session close); DCF $121.43 and consensus target $104.56 re-confirmed unchanged; next earnings 2026-11-03 re-confirmed via FMP earnings-calendar. No fresh UBER-specific catalyst this cycle.",
+      "severity": 1,
+      "first_seen": "2026-09-28T23:08:00Z"
+    },
+    {
+      "ticker": "SPY",
+      "headline": "Price $765.61 (fresh FMP quote-short), essentially flat vs prior cycle's $765.56. Broad market context unchanged.",
+      "severity": 1,
+      "first_seen": "2026-09-28T23:08:00Z"
+    },
+    {
+      "ticker": "SOFI",
+      "headline": "Price $15.93 unchanged (fresh FMP quote-short); DCF $16.34 re-confirmed via FMP, still near parity with price, no mispricing flag.",
+      "severity": 1,
+      "first_seen": "2026-09-28T23:08:00Z"
+    },
+    {
+      "ticker": "CHWY",
+      "headline": "Price $18.30 unchanged (web, medium confidence -- FMP quote-short rate-gated after UBER/SPY/SOFI this cycle). No new catalyst beyond already-logged Sept 11 JPMorgan downgrade and Sept 19 growth-story scrutiny piece.",
+      "severity": 1,
+      "first_seen": "2026-09-28T23:08:00Z"
+    },
+    {
+      "ticker": "DUOL",
+      "headline": "Web search again returned internally inconsistent prices ($133.69-$142.62 range); carried forward at $143.51 per established practice. The 'Form 4 for 28 September' Investing.com piece is the same von Ahn conversion/sale (txn date Sept 24, filed Sept 28) already logged in dedupe_log last cycle, not a new filing -- continuing pattern of insider selling (CEO, GC, and a director all sold in September) but no new fingerprint.",
+      "severity": 1,
+      "first_seen": "2026-09-28T23:08:00Z"
+    },
+    {
+      "ticker": "AVAV",
+      "headline": "Price $153.04 unchanged (web, medium confidence). New analyst price-target cuts: BofA to $185 from $225 (Buy maintained), Jefferies to $204 from $229 (Buy maintained), following the $464.8M Army LOCUST laser contract and Q1 FY2027 results (revenue $480.5M, bookings $683M, backlog $1.5B) with margin/cash-flow pressure noted. Ratings held at Buy; established undervalued gap narrows slightly but stays well above the mispricing threshold -- not a fresh reason to re-flag.",
+      "severity": 2,
+      "first_seen": "2026-09-28T23:08:00Z"
+    },
+    {
+      "ticker": "RYAAY",
+      "headline": "No fresh comparable price found this cycle; carried forward at $55.30. Analyst support continues (Bernstein, J.P. Morgan, Barclays all reiterated Buy Sept 23-24, already known); buyback-related share cancellation completed Sept 21, old news.",
+      "severity": 1,
+      "first_seen": "2026-09-28T23:08:00Z"
+    },
+    {
+      "ticker": "ASML",
+      "headline": "Home-market Xetra/Euronext price EUR 1534.60 found via web search, not comparable to the USD ADR without FX conversion; ADR carried forward at $1743.94 per established practice. Next earnings 2026-10-14 re-confirmed.",
+      "severity": 1,
+      "first_seen": "2026-09-28T23:08:00Z"
+    },
+    {
+      "ticker": "SAP",
+      "headline": "Home-market Xetra price ~EUR 184.78-185.92 found via web search, not comparable to the USD ADR without FX conversion; ADR carried forward at $206.36. News: cloud backlog reached EUR 22.9B in Q2 2026 (+27%), new 'Customer Influence' feature launching Oct 6 -- incremental, no price-moving catalyst identified in USD terms.",
+      "severity": 1,
+      "first_seen": "2026-09-28T23:08:00Z"
+    },
+    {
+      "ticker": "NVO",
+      "headline": "Price $38.42 unchanged (web, medium confidence). Options put/call ratio rising to 1.29 (vs historical ~0.71), signaling increased hedging/bearish positioning, but no fresh fundamental catalyst; Q2 2026 earnings beat cited in search results is stale (already known, not from this period).",
+      "severity": 1,
+      "first_seen": "2026-09-28T23:08:00Z"
     }
   ],
   "technicals": {
@@ -688,7 +768,7 @@
       "region": "US"
     },
     "SPY": {
-      "price": 765.56,
+      "price": 765.61,
       "sma50": 761.1532,
       "sma200": 718.0134,
       "rsi14": 52.47,

@@ -546,6 +546,48 @@
           }
         }
       ]
+    },
+    {
+      "as_of": "2026-09-28T23:08:00Z",
+      "picks": [
+        {
+          "ticker": "UBER",
+          "lean": "neutral",
+          "confidence": 3,
+          "severity": 1,
+          "brief": "Daily long-term check-in on the largest holding, independent of today's news",
+          "why": "Scheduled daily governance check-in on the portfolio's dominant position, not triggered by a specific news catalyst.",
+          "price_at_pick": 68.16,
+          "bull_case": "DCF ($121.43) and even the analyst consensus target ($104.56) sit far above the current $68.16 price, and the ride-share/delivery platform continues to scale revenue and bookings.",
+          "bear_case": "Shares are down sharply from cost basis, sit below both the 50d ($73.39) and 200d ($75.27) SMAs, and carry event risk from pending litigation (CA wrongful-death ruling), the Delivery Hero acquisition's integration/financing load, and intensifying robotaxi competition (Tesla Cybercab, Waymo, Uber's own WeRide/Avomo partnerships).",
+          "risks": [
+            "concentration",
+            "litigation",
+            "competition",
+            "integration-risk"
+          ],
+          "position_suggestion": {
+            "tier": "none",
+            "suggested_size_usd": 0.0,
+            "suggested_size_pct_of_cash": 0.0,
+            "resulting_pct_nav": 78.94,
+            "execution_floor_usd": 50.0,
+            "basis": "Not a sizing event -- this is the scheduled daily long-term check-in, not a new signal.",
+            "concentration_note": "UBER is already ~78.94% of NAV, far above the ~25% single-name guideline; any further addition is out of the question regardless of thesis strength.",
+            "caveat": "Mechanical sizing based on this portfolio's own numbers, not personalized financial advice."
+          },
+          "advisor_questions": {
+            "framing": "Business decision -- whether to keep holding, trim, or let a concentrated position ride",
+            "questions": [
+              "This position is ~79% of NAV -- did it get there by a deliberate decision at each stage, or by drift as the rest of the book stayed small and this one grew (or fell less than it could have)?",
+              "If the concentration thesis is wrong -- if litigation, competition, or the Delivery Hero integration go badly -- how would you actually find out, and how soon, versus how long it would take to unwind a position this large without moving the price against yourself?",
+              "On a 5-10 year view, does Uber's moat (network density, driver/rider liquidity) look durable against Waymo-style robotaxi economics that could disintermediate the marketplace model entirely, or is the moat itself the open question?",
+              "Is holding (or adding to) UBER at these levels still the best use of the next dollar versus trimming toward the index (SPY) for diversification, given the position is already more than three times the guideline cap?"
+            ],
+            "note": "Same question as every daily check-in until the position size changes: is 79% in one name a position the user would build from scratch today, or only one they're holding because it's already there?"
+          }
+        }
+      ]
     }
   ]
 }
