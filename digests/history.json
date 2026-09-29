@@ -507,6 +507,13 @@
               "Wayve's London robotaxi launch (with safety drivers) is a live, ongoing test of whether Uber's aggregator model coexists with AV operators or gets squeezed by them -- what specific data point from that rollout would change your read on Uber's long-term moat?",
               "This position is still ~71% of NAV without a fresh decision made today to hold it there -- does today's non-event simply confirm inertia, or has something in the last few days actually strengthened the case for staying this concentrated?"
             ]
+          },
+          "graded": {
+            "checked_at": "2026-09-29T06:08:00Z",
+            "price_then": 69.22,
+            "price_now": 68.16,
+            "pct_change": -1.53,
+            "outcome": "inconclusive"
           }
         }
       ]
