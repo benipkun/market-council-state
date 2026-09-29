@@ -7,6 +7,14 @@
         "DUOL"
       ],
       "headline_fingerprint": "duolingo ceo von ahn form4 conversion and sale of 38758 shares at 150.4501 transaction date sept 24 2026 filed sept 28 2026 leaving 7924 shares direct"
+    },
+    {
+      "event_id": "sofi-form144-insider-sale-20260927",
+      "first_seen": "2026-09-29T07:08:00Z",
+      "tickers": [
+        "SOFI"
+      ],
+      "headline_fingerprint": "sofi technologies insider or large holder files form 144 sept 27 2026 signaling intent to sell restricted or control shares"
     }
   ]
 }

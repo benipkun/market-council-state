@@ -1,67 +1,7 @@
 {
-  "as_of": "2026-09-29T06:08:00Z",
+  "as_of": "2026-09-29T07:08:00Z",
   "picks": [],
   "scrap": [
-    {
-      "ticker": "UBER",
-      "headline": "Price $69.62 unchanged vs Friday's close (FMP quote-short fresh-confirmed, pre-US-premarket Monday, no new session yet). Fresh FMP DCF $121.31 (was $120.24) and consensus $104.56 fresh-confirmed. Web search found only Uber's Spain/Madrid Level-4 robotaxi permit (WeRide/Avomo partnership) -- this dates to ~Sept 10, already stale by the time of this cycle, and the already-logged Costco 47-state expansion; no fresh catalyst. Mispricing thesis (~74.3% DCF / ~50.2% consensus) unchanged, established, not re-flagged. Next earnings 2026-10-29 (carried).",
-      "severity": 1,
-      "first_seen": "2026-09-28T06:08:00Z"
-    },
-    {
-      "ticker": "SPY",
-      "headline": "Price $771.35 unchanged vs Friday's close (FMP quote-short fresh-confirmed). No market-wide catalyst found; pre-US-premarket Monday.",
-      "severity": 1,
-      "first_seen": "2026-09-28T06:08:00Z"
-    },
-    {
-      "ticker": "SOFI",
-      "headline": "Price $16.58 unchanged vs Friday's close (FMP quote-short fresh-confirmed). Fresh FMP consensus target $21.58 confirmed (matches stored); DCF $16.41 (carried) still essentially at parity with price and used as the primary fair-value method, so no mispricing flag despite the wider gap to consensus. No fresh catalyst found.",
-      "severity": 1,
-      "first_seen": "2026-09-28T06:08:00Z"
-    },
-    {
-      "ticker": "CHWY",
-      "headline": "Price $18.27 unchanged vs Friday's close (Alpha Vantage fresh-confirmed, same daily bar), still near its 52-week low ($17.40). Web search found nothing new beyond already-logged items. Mispricing thesis (~73.9% vs $31.78 target, carried -- FMP analyst endpoint rate-limited this cycle) unchanged, established (possible value-trap), not re-flagged.",
-      "severity": 2,
-      "first_seen": "2026-09-28T06:08:00Z"
-    },
-    {
-      "ticker": "DUOL",
-      "headline": "Price $143.51 unchanged vs Friday's close (Alpha Vantage fresh-confirmed, same daily bar). No fresh catalyst found. Overvalued gap vs consensus $134.29 (carried) ~6.9%, well under the 20-25% short-thesis threshold, not flagged.",
-      "severity": 1,
-      "first_seen": "2026-09-28T06:08:00Z"
-    },
-    {
-      "ticker": "AVAV",
-      "headline": "Price $152.05 unchanged vs Friday's close (Alpha Vantage fresh-confirmed, same daily bar). Web search found nothing new beyond already-logged analyst target cuts. Undervaluation thesis (~45.7% vs $221.50 consensus, carried -- FMP analyst endpoint rate-limited this cycle) unchanged, not re-flagged.",
-      "severity": 1,
-      "first_seen": "2026-09-28T06:08:00Z"
-    },
-    {
-      "ticker": "RYAAY",
-      "headline": "Price $55.30 unchanged vs Friday's close (Alpha Vantage fresh-confirmed; ADR only updates during US hours, European home session (Euronext Dublin) not yet open, opens ~07:00 UTC). Mispricing thesis (~34.4% vs $74.30 target, carried) unchanged, established, not re-flagged.",
-      "severity": 1,
-      "first_seen": "2026-09-28T06:08:00Z"
-    },
-    {
-      "ticker": "ASML",
-      "headline": "Price $1743.94 unchanged vs Friday's close (Alpha Vantage fresh-confirmed; ADR only updates during US hours, European home session (Amsterdam/XETRA) not yet open). No fresh ASML-specific news found. Mispricing gap vs consensus $2135.00 (carried) ~22.4%, still below the 25% flag threshold, not re-flagged.",
-      "severity": 1,
-      "first_seen": "2026-09-28T06:08:00Z"
-    },
-    {
-      "ticker": "SAP",
-      "headline": "Price $210.68 (Alpha Vantage, high confidence -- upgraded from last cycle's web-search estimate of ~$210.71; ADR only updates during US hours, European home session (XETRA/Frankfurt) not yet open). No fresh SAP-specific news found. Mispricing gap ~16.3% vs consensus $245.01 (carried), below threshold, not flagged.",
-      "severity": 1,
-      "first_seen": "2026-09-28T06:08:00Z"
-    },
-    {
-      "ticker": "NVO",
-      "headline": "Price $38.80 (Alpha Vantage, high confidence -- upgraded from last cycle's web-search estimate of ~$38.17; ADR only updates during US hours, European home session (Copenhagen) not yet open), +1.65% vs the prior cycle's carried estimate. Web search surfaced a Singapore regulatory approval of Wegovy for a new liver-disease indication and continued CEO Doustdar commentary on a possible direct NYSE listing -- both incremental, neither a quantifiable fair-value catalyst, logged for visibility only. Mispricing gap vs consensus $47.23 (carried) ~21.7%, still below the 25% flag threshold, not re-flagged.",
-      "severity": 2,
-      "first_seen": "2026-09-28T06:08:00Z"
-    },
     {
       "ticker": "UBER",
       "headline": "Price $69.62 unchanged vs last cycle's close (fresh Alpha Vantage GLOBAL_QUOTE confirms same Sept 25 daily bar -- Monday, pre-US-premarket). FMP DCF fresh-confirmed $121.31 matches stored value. FMP latest-insider-trade feed shows no new UBER filings. Web search found only already-known items (Sept 24 driver-features update, Sept 2 workforce-reduction news). Mispricing thesis (~74.3% DCF / ~50.2% consensus) unchanged, not re-flagged. Next earnings Oct 29, 2026 (carried).",
@@ -721,6 +661,66 @@
       "headline": "Price $38.71 (fresh Alpha Vantage GLOBAL_QUOTE, confirmed Monday Sept 28 close), -0.23% vs prior close $38.80 -- European home session (Copenhagen) not yet open. Web search found only already-logged items (share-repurchase-programme progress through Sept 25, and NVO presenting 44 abstracts at the EASD 2026 conference in Milan Sept 28-Oct 2 covering Wegovy/Ozempic/CagriSema/zenagamtide data) -- incremental, no quantifiable fair-value catalyst. Now an actual portfolio holding, currently modestly underwater. Mispricing gap vs consensus $47.23 (carried) ~18.0%, now below the 20-25% flag threshold (was ~23.0%), not re-flagged.",
       "severity": 2,
       "first_seen": "2026-09-29T06:08:00Z"
+    },
+    {
+      "ticker": "UBER",
+      "headline": "Price $68.16 unchanged (fresh FMP quote-short; US market closed since Monday's close, pre-European-open Tuesday, no new session yet). Fresh FMP DCF $121.43 and consensus $104.56 both re-confirmed via FMP, match stored exactly. FMP earnings-calendar re-confirms next earnings 2026-11-03. No fresh UBER-specific catalyst found; already-logged Costco 47-state expansion and Spain L4 robotaxi permit remain the latest items. Mispricing thesis (~78.2% DCF / ~53.4% consensus upside-to-price) unchanged, established, not re-flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-29T07:08:00Z"
+    },
+    {
+      "ticker": "SPY",
+      "headline": "Price $765.61 unchanged (fresh FMP quote-short). Web search confirms broad risk-off continuing: S&P futures ~-0.2%, Treasury yields still elevated after Monday's selloff, ongoing US-Iran Strait-of-Hormuz uncertainty though Saudi Arabia restored oil flow through a key pipeline. Macro-driven, no stock-specific signal.",
+      "severity": 1,
+      "first_seen": "2026-09-29T07:08:00Z"
+    },
+    {
+      "ticker": "SOFI",
+      "headline": "Price $15.93 unchanged (fresh FMP quote-short). Fresh FMP DCF $16.34 re-confirmed, essentially at parity with price (primary fair-value method), no mispricing flag despite the wider ~35% gap to the $21.58 consensus target. New fact: an insider/large holder filed Form 144 on Sept 27 signaling intent to sell restricted/control shares (quantity not disclosed in coverage found); stock also flagged as nearing a technical support level (~$14.88) after the recent rate-sensitive-fintech pullback. Not a portfolio holding, not severity-4+, logged for visibility only.",
+      "severity": 2,
+      "first_seen": "2026-09-29T07:08:00Z"
+    },
+    {
+      "ticker": "CHWY",
+      "headline": "Price $18.61 unchanged vs prior cycle (fresh Alpha Vantage GLOBAL_QUOTE, same Sept 28 daily bar). FMP analyst-consensus endpoint quota-exhausted this cycle (after UBER/SOFI calls); fair value carried at $31.78. Web search found only already-logged items (Sept 9 Q2 beat, Sept 11 JPMorgan/Evercore downgrades, Sept 14 shelf filing). Mispricing thesis (~70.7% upside-to-price vs $31.78 consensus target, carried) unchanged, established (possible value-trap), not re-flagged.",
+      "severity": 2,
+      "first_seen": "2026-09-29T07:08:00Z"
+    },
+    {
+      "ticker": "DUOL",
+      "headline": "Price $134.30 unchanged vs prior cycle (fresh Alpha Vantage GLOBAL_QUOTE, same Sept 28 daily bar -- the post-drop level from the prior cycle's -6.4% move). FMP analyst-consensus quota-exhausted this cycle; fair value carried at $134.29, essentially at parity with price (~0% gap), not a mispricing flag either direction. Web search again returned internally inconsistent price snapshots ($133.69-$142.62 same-page spread) -- disregarded per established practice, AV price used. No new company-specific catalyst beyond the already-logged von Ahn Form 4 (dedupe_log).",
+      "severity": 1,
+      "first_seen": "2026-09-29T07:08:00Z"
+    },
+    {
+      "ticker": "AVAV",
+      "headline": "Price $147.23 unchanged vs prior cycle (fresh Alpha Vantage GLOBAL_QUOTE, same Sept 28 daily bar). FMP analyst-consensus quota-exhausted this cycle; fair value carried at $219.35. Web search found only already-logged items (BofA target cut to $185, LOCUST contract wins, Q1 FY2027 beat) plus an independent GuruFocus fair-value estimate of $255.52 (42.4% below), corroborating the established undervaluation direction. Gap ~49.0% upside-to-price vs consensus (carried), well above the mispricing threshold but unchanged from prior cycles with no fresh articulable reason, not re-flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-29T07:08:00Z"
+    },
+    {
+      "ticker": "RYAAY",
+      "headline": "Price $55.13 unchanged vs prior cycle (fresh Alpha Vantage GLOBAL_QUOTE, same Sept 28 daily bar; Euronext Dublin home session just opened at 07:00 UTC, ADR itself only updates during US hours). Web search found only already-logged items (JPMorgan EUR32 target Sept 23, BofA EUR28 target, Sept 2 FY27 traffic-target trim, Sept 15 buyback). Mispricing thesis (~34.8% upside-to-price vs $74.30 target, carried) unchanged, established, not re-flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-29T07:08:00Z"
+    },
+    {
+      "ticker": "ASML",
+      "headline": "Alpha Vantage GLOBAL_QUOTE timed out repeatedly this cycle (4 retries, apparent indicator/quote-endpoint instability beyond the usual rate limit); FMP quote-short quota already exhausted after UBER/SPY/SOFI. USD ADR price carried forward at $1771.41 (last confirmed prior cycle). Web search returned only the EUR-denominated Amsterdam/XETRA home-market price (EUR1,534.60, +0.79% vs EUR1,522.60 prior close) -- not directly comparable to the USD ADR without FX conversion, logged for visibility only, not used to override. News: CEO comments on EUV manufacturing barriers (Sept 28) and expanded High-NA EUV collaborations with TSMC/Samsung/Intel (Sept 8, already known) -- strategic, not a fresh price-moving catalyst. Mispricing gap ~20.5% vs consensus $2135.00 (both carried), at the edge of but not clearing the flag threshold on unchanged inputs, not re-flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-29T07:08:00Z"
+    },
+    {
+      "ticker": "SAP",
+      "headline": "Alpha Vantage GLOBAL_QUOTE timed out this cycle; FMP quote-short quota exhausted. USD ADR price carried forward at $209.31 (last confirmed prior cycle). Web search returned only the EUR-denominated XETRA home-market price (EUR184.02, within the day's EUR178.88-186.76 range) -- not directly comparable to the USD ADR without FX conversion, not used to override. No fresh SAP-specific catalyst found (Sept 17 CEO AI commentary and routine security patch-day news are not price-moving). Mispricing gap ~17.1% vs consensus $245.01 (both carried), below the 20-25% flag threshold, not flagged.",
+      "severity": 1,
+      "first_seen": "2026-09-29T07:08:00Z"
+    },
+    {
+      "ticker": "NVO",
+      "headline": "Price $38.71 unchanged vs prior cycle (fresh Alpha Vantage GLOBAL_QUOTE, same Sept 28 daily bar; Copenhagen home session just opened). FMP analyst-consensus quota-exhausted this cycle; fair value carried at $47.23. Web search found only already-logged items (put/call ratio elevated at 1.29 vs historical ~0.71, signaling cautious/hedged positioning; EASD 2026 Milan conference abstracts Sept 28-Oct 2) -- no quantifiable fresh catalyst. Now an actual portfolio holding, currently modestly underwater. Mispricing gap ~22.0% upside-to-price vs consensus (carried), still below the 25% flag threshold, not re-flagged.",
+      "severity": 2,
+      "first_seen": "2026-09-29T07:08:00Z"
     }
   ],
   "technicals": {
