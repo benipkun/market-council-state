@@ -250,6 +250,24 @@
       "amount_huf": null,
       "fx_usd_huf": null,
       "reconciled": false
+    },
+    {
+      "id": "selftest-20260929T211659Z",
+      "at": "2026-09-29T21:17:27Z",
+      "line": "ping",
+      "source": "queue",
+      "action": "ping",
+      "ticker": null,
+      "usd": null,
+      "fee": null,
+      "qty": null,
+      "price": null,
+      "status": "test",
+      "reason": "loop check",
+      "cash_before": 1.83,
+      "cash_after": 1.83,
+      "nav_after": 819.68,
+      "reconciled": false
     }
   ],
   "expected_cash": 1.83,
