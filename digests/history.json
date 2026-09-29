@@ -638,6 +638,48 @@
           }
         }
       ]
+    },
+    {
+      "as_of": "2026-09-29T21:10:32Z",
+      "picks": [
+        {
+          "ticker": "DUOL",
+          "lean": "bullish",
+          "confidence": 3,
+          "severity": 4,
+          "signal_type": "confirmed_news",
+          "brief": "DA Davidson raised its price target 9% to $175 from $160 (Buy reiterated), citing in-house data pointing to accelerating Q3 daily-active-user growth (25.6-27.6% YoY); shares jumped ~6% intraday to the low-$140s.",
+          "why": "A credible sell-side shop's channel-check data on accelerating DAU growth pulled forward optimism ahead of the Nov 11 print, and the market re-rated the stock nearly a full week before any confirmed earnings number.",
+          "price_at_pick": 141.17,
+          "bull_case": "If Q3 DAU growth actually lands in the 25.6-27.6% range DA Davidson is projecting, it would reaccelerate a growth story that had been decelerating and pressured by insider selling and soft 2026 guidance -- monetization (subscriptions, ads) has scaled alongside user growth in past quarters.",
+          "bear_case": "This is one analyst's estimate of a number the company hasn't reported yet -- DUOL has traded on inconsistent/volatile web-sourced prices all session and the stock is still down ~9.5% over the trailing month; if actual Q3 DAU undershoots the projected range on Nov 11, today's pop likely reverses, and the ongoing CEO/GC/director insider-selling pattern (already logged) argues against reflexively following one bullish note.",
+          "risks": [
+            "rumor/anticipation-stage: priced ahead of confirmed Nov 11 earnings",
+            "single-analyst estimate, not consensus",
+            "ongoing insider selling"
+          ],
+          "position_suggestion": {
+            "tier": "none",
+            "suggested_size_usd": 0.0,
+            "suggested_size_pct_of_cash": 0.0,
+            "resulting_pct_nav": 0.0,
+            "execution_floor_usd": 50.0,
+            "basis": "Small-account ladder (cash $1.83 < $2,000): severity 4 with confidence 3 qualifies for 'half' tier (up to 30% of cash) = $0.55. That computed size is far below the ~$50 practical execution threshold (5% of NAV would be ~$41, so the $50 floor governs), and confidence is only 3 (not >=4), so it is not rounded up. This is worth watching rather than trading -- the honest options are to wait for higher conviction (e.g. the Nov 11 earnings actually confirming the DAU growth) or for cash to accumulate via the pending monthly contribution.",
+            "concentration_note": "Not a factor here -- DUOL is currently unheld (0% of NAV); the floor, not concentration, is what zeroed this suggestion.",
+            "caveat": "Mechanical sizing based on this portfolio's own numbers, not personalized financial advice."
+          },
+          "advisor_questions": {
+            "framing": "Trade decision -- reacting to a single analyst's forward estimate, not a change in the underlying business.",
+            "questions": [
+              "Is chasing a 6% pop on one analyst's DAU projection a better use of the next dollar than adding to UBER, which this pipeline's own DCF still puts at ~72% upside and which you already hold and understand?",
+              "If the Nov 11 print misses DA Davidson's 25.6-27.6% DAU growth range, how quickly would you know you were wrong, and would you have a plan to exit, or would you be reasoning post hoc about why it still makes sense?",
+              "Duolingo's moat is largely brand/habit-loop and content breadth in a category (language learning) where large language models are lowering the cost of building competing tutoring products -- do you have a view on whether that moat is widening or narrowing, independent of this quarter's DAU number?",
+              "Three insiders (CEO, GC, a director) have been selling through September -- is there a price or valuation level at which their selling would make you more cautious regardless of what one bullish analyst note says?"
+            ],
+            "note": "No position sized this cycle (below execution floor), so these are framing questions for if/when conviction or cash reaches a tradeable size."
+          }
+        }
+      ]
     }
   ]
 }
