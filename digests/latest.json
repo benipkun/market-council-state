@@ -1,61 +1,46 @@
 {
-  "as_of": "2026-09-29T13:08:00Z",
-  "picks": [],
+  "as_of": "2026-09-29T15:08:00Z",
+  "picks": [
+    {
+      "ticker": "NVO",
+      "lean": "bullish",
+      "confidence": 3,
+      "severity": 4,
+      "signal_type": "confirmed_news",
+      "brief": "Novo Nordisk announced a deal to in-license an experimental oral obesity pill from China's Jiangsu Hengrui Pharmaceuticals, paying $300M upfront with total potential payments up to $2.6B (Bloomberg, Sept 29) -- a concrete, dollar-quantified step on the post-Wegovy diversification plan laid out at the Sept 21 Capital Markets Day. Price carried at $38.80 (established; not fresh-confirmed this cycle -- FMP/Alpha Vantage quota exhausted, web search returned an ambiguous $38.42 figure not clearly dated to today), still ~21.7% below the $47.23 consensus target.",
+      "why": "This is the first specific, capital-committed action addressing the exact overhang (2032 semaglutide patent cliff / Lilly Zepbound competition) the market has been discounting the stock for -- a named asset and counterparty, not just a stated intention, which is the mechanism that can start closing the pipeline-diversification credibility gap.",
+      "price_at_pick": 38.8,
+      "bull_case": "A real, dollar-quantified deal (not just guidance) gives the '5+ multi-blockbuster medicines by 2030' plan its first concrete building block; oral GLP-1/obesity candidates carry a convenience edge over injectables, and $300M upfront is a small fraction of Novo's cash flow relative to the diversification signal it sends.",
+      "bear_case": "It's an early-stage, in-licensed asset from a Chinese biotech -- years from any revenue and carrying full clinical/regulatory risk; $300M-2.6B is immaterial next to the >$20B revenue base Lilly's Zepbound is already eating into, and one licensing deal doesn't resolve the 2032 patent cliff on the core franchise.",
+      "risks": [
+        "early-stage/clinical-trial risk",
+        "China-sourced-IP regulatory scrutiny",
+        "GLP-1 competitive share loss to Lilly continuing regardless",
+        "DKK/USD FX exposure",
+        "medium-confidence carried price (not fresh-confirmed this cycle)"
+      ],
+      "position_suggestion": {
+        "tier": "none",
+        "suggested_size_usd": 0.0,
+        "suggested_size_pct_of_cash": 0.0,
+        "resulting_pct_nav": 11.72,
+        "execution_floor_usd": 50.0,
+        "basis": "Small-account ladder (cash <$2,000): severity 4 with confidence 3 meets the half-tier rule (up to 30% of cash), but cash is effectively nil ($1.83), so 30% of cash is about $0.55 -- far below the ~$50 practical execution floor. Cash doesn't comfortably allow rounding up to the floor, so this is worth watching, not trading, until conviction improves or cash accumulates (next monthly contribution not yet confirmed landed).",
+        "concentration_note": "NVO is already held at ~11.7% of NAV, nowhere near the ~25% single-name guideline, so concentration isn't the binding constraint here -- the near-zero cash balance is.",
+        "caveat": "Mechanical sizing based on this portfolio's own numbers, not personalized financial advice."
+      },
+      "advisor_questions": {
+        "framing": "business decision -- does this deal actually change the multi-year diversification bet, or is it noise",
+        "questions": [
+          "This is Novo's first dollar-quantified step on the 'beyond Wegovy' diversification plan -- does a $300M-upfront in-license of an early-stage Chinese asset materially change your 5-10 year read on whether Novo can out-diversify the 2032 patent cliff, or is $300M simply too small relative to the >$20B revenue base already under pressure from Lilly to matter yet?",
+          "In-licensing early clinical-stage assets from Chinese biotechs has become a common large-pharma playbook this cycle -- is Novo's execution here differentiated, or is it following the crowd, meaning it buys time rather than a structural edge?",
+          "If this deal's oral candidate fails in later-stage trials (the base-rate outcome for most early in-licensed assets), how would you find out, and would that meaningfully change your read on management's capital-allocation judgment given the stock is already down >70% from its peak on the same underlying competitive/patent story?",
+          "NVO is currently a real (if underwater) position at ~11.7% of NAV -- does today's news change your intended holding period, or is this still the same multi-year GLP-1-franchise-durability bet as when it was first picked?"
+        ]
+      }
+    }
+  ],
   "scrap": [
-    {
-      "ticker": "UBER",
-      "headline": "Price $69.62 (fresh FMP quote-short re-confirmed, pre-market Monday just ahead of the 13:30 UTC US open). Fresh FMP DCF $121.31 and consensus target $104.56 both re-confirmed via FMP, match stored. FMP general insider-trade feed shows no UBER-specific filings. Web search found only already-logged items (Sept 24 driver-feature update, Sept 23 sustainability push, Sept 15 senior-rider options, Sept 2 workforce cuts, Wayve UK autonomous-ride launch) -- nothing new since last cycle. Mispricing thesis (~74.3% DCF / ~50.2% consensus) unchanged, established, not re-flagged. Next earnings 2026-10-29 (carried).",
-      "severity": 1,
-      "first_seen": "2026-09-28T13:11:00Z"
-    },
-    {
-      "ticker": "SPY",
-      "headline": "Price $771.35 unchanged vs prior cycle (fresh FMP quote-short), pre-market just ahead of the US open. No fresh market-wide catalyst search run this cycle; prior cycle's Iran/Strait-of-Hormuz risk-off tone and this week's PCE/jobs data still the operative macro backdrop.",
-      "severity": 1,
-      "first_seen": "2026-09-28T13:11:00Z"
-    },
-    {
-      "ticker": "SOFI",
-      "headline": "Price $16.58 unchanged vs prior cycle (fresh FMP quote-short). Fresh FMP DCF $16.43 re-confirmed, matches stored, still essentially at parity with price (primary fair-value method), no mispricing gap. No fresh catalyst found.",
-      "severity": 1,
-      "first_seen": "2026-09-28T13:11:00Z"
-    },
-    {
-      "ticker": "CHWY",
-      "headline": "FMP quote/DCF/analyst endpoints exhausted this cycle after UBER/SPY/SOFI calls; Alpha Vantage daily 25-request cap already exhausted for the shared key. Price carried at $18.27 -- cross-checked via web search (Yahoo Finance snapshot dated Sept 27 shows CHWY ranging $18.21-$18.66, last $18.32), consistent with the carried price, no material move. Web search found only the already-logged Sept 9 Q2 beat/raised guidance and Sept 11 JPMorgan/Evercore downgrades -- nothing new. Mispricing thesis (~73.9% vs $31.78 target, carried) unchanged, established (possible value-trap), not re-flagged.",
-      "severity": 2,
-      "first_seen": "2026-09-28T13:11:00Z"
-    },
-    {
-      "ticker": "DUOL",
-      "headline": "Price carried at $143.51 (Alpha Vantage cap exhausted, FMP quota exhausted). A web search this cycle returned internally inconsistent snapshot data (one figure implying ~$145, another an unrelated ~$132/-25% figure from a stale cached page) -- disregarded as unreliable, not used to override the carried price. No fresh company-specific catalyst identified. Overvalued gap vs consensus $134.29 (carried) ~6.9%, well under the 20-25% short-thesis threshold, not flagged.",
-      "severity": 1,
-      "first_seen": "2026-09-28T13:11:00Z"
-    },
-    {
-      "ticker": "AVAV",
-      "headline": "Price carried at $152.05 (Alpha Vantage cap exhausted, FMP quota exhausted). A web search this cycle returned an implausible +10.7%/$155.88 figure whose stated dollar and percent changes don't reconcile against each other or the carried price -- disregarded as an unreliable/stale snapshot, not used. No new fact beyond the already-logged $464.8M Army LOCUST contract and analyst target cuts. Undervaluation thesis (~45.7% vs $221.50 consensus, carried) unchanged, established, not re-flagged.",
-      "severity": 1,
-      "first_seen": "2026-09-28T13:11:00Z"
-    },
-    {
-      "ticker": "RYAAY",
-      "headline": "Price carried at $55.30 (ADR only updates during US hours, still pre-market; Alpha Vantage/FMP quota exhausted). Web search returned two mutually inconsistent snapshot prices ($58.00 and $62.57) from apparently different cached dates -- disregarded, not used to override the carried price. No fresh catalyst beyond the already-logged BofA target raise. Mispricing thesis (~34.4% vs $74.30 target, carried) unchanged, established, not re-flagged.",
-      "severity": 1,
-      "first_seen": "2026-09-28T13:11:00Z"
-    },
-    {
-      "ticker": "ASML",
-      "headline": "Price carried at $1743.94 (ADR only updates during US hours; European home session (Amsterdam/XETRA) open since 07:00 UTC; Alpha Vantage/FMP quota exhausted). Web search independently returned the identical $1743.94 figure explicitly dated 'as of Sep 27', confirming no fresh move captured, not a new data point. No fresh ASML-specific news found. Mispricing gap ~22.4% vs consensus $2135.00 (carried), still below the 25% flag threshold, not re-flagged.",
-      "severity": 1,
-      "first_seen": "2026-09-28T13:11:00Z"
-    },
-    {
-      "ticker": "SAP",
-      "headline": "Price carried at $210.68 (ADR only updates during US hours; European home session (XETRA/Frankfurt) open; Alpha Vantage/FMP quota exhausted). A web search this cycle returned an alternate $206.36 figure with no reliable date attached; given other tickers in the same search batch returned demonstrably stale/inconsistent data this cycle, not used to override the carried price -- logged for visibility only. No fresh SAP-specific news found. Mispricing gap ~16.3% vs consensus $245.01 (carried), below threshold, not flagged.",
-      "severity": 1,
-      "first_seen": "2026-09-28T13:11:00Z"
-    },
     {
       "ticker": "NVO",
       "headline": "Price carried at $38.80 (ADR only updates during US hours; European home session (Copenhagen) open; Alpha Vantage/FMP quota exhausted). Web search independently returned the identical $38.80 figure, corroborating no fresh move. No fresh NVO-specific news found this cycle. Mispricing gap ~21.7% vs consensus $47.23 (carried), still below the 25% flag threshold, not re-flagged.",
@@ -721,11 +706,65 @@
       "headline": "FMP plan-gated, Alpha Vantage daily cap exhausted this cycle; ADR only updates during US hours, European home session (Copenhagen) live since 07:00 UTC. Web search returned an ambiguous $38.42/prior-close-$38.80 figure that reads as a stale cached snapshot rather than today's print -- disregarded, price carried forward at $38.80. No fresh NVO-specific catalyst beyond already-logged items (Nanexa licensing deal, EASD 2026 Milan conference data through Oct 2). Now an actual portfolio holding, currently modestly underwater. Mispricing gap ~21.7% vs consensus $47.23 (carried), still below the 25% flag threshold, not re-flagged.",
       "severity": 2,
       "first_seen": "2026-09-29T13:08:00Z"
+    },
+    {
+      "ticker": "UBER",
+      "severity": 1,
+      "headline": "Price $69.07 (fresh FMP quote-short, +1.3% vs prior carried $68.16), catching up ahead of the 13:30 UTC US open. Fresh FMP DCF $119.75 and consensus $104.56 both re-confirmed via FMP, match carried exactly. FMP insider-trade/earnings-calendar/news endpoints plan-gated this cycle (Starter+ tier required). Web search found only already-logged items (Costco 47-state Uber Eats expansion, Spain L4 robotaxi permit, 24/7 Wall St. -13%-in-a-month piece) -- nothing new. Mispricing thesis (~73.4% DCF / ~51.4% consensus upside-to-price) unchanged, established, not re-flagged.",
+      "first_seen": "2026-09-29T15:08:00Z"
+    },
+    {
+      "ticker": "SPY",
+      "severity": 1,
+      "headline": "Price $764.47 (fresh FMP quote-short), -0.15% vs prior carried $765.61. Web search confirms choppy/mixed tone continuing: futures oscillating between +0.2% and -0.26% through the morning, US-Iran Strait-of-Hormuz tensions and elevated oil/yields still the operative macro backdrop, durable goods flat, weak consumer sentiment. Macro-driven, no stock-specific signal.",
+      "first_seen": "2026-09-29T15:08:00Z"
+    },
+    {
+      "ticker": "SOFI",
+      "severity": 1,
+      "headline": "Price $16.14 (fresh FMP quote-short), +1.3% vs prior carried $15.93. Fresh FMP DCF $16.23 re-confirmed (matches carried), still essentially at parity with price (primary fair-value method), no mispricing flag. No fresh SOFI-specific catalyst found beyond the already-logged Sept 27 Form 144 filing.",
+      "first_seen": "2026-09-29T15:08:00Z"
+    },
+    {
+      "ticker": "CHWY",
+      "severity": 2,
+      "headline": "Price $18.78 (medium confidence, web search), +0.9% vs carried $18.61 -- immaterial. FMP quote-short quota exhausted after UBER/SPY/SOFI calls this cycle; FMP analyst/DCF endpoints plan-gated outright (Starter+ tier). Web search found only already-logged items (Sept 9 Q2 beat, Sept 11 JPMorgan downgrade, Sept 26 growth-story-scrutiny piece) -- nothing new. Mispricing thesis (~69.2% vs $31.78 consensus target, carried) unchanged, established (possible value-trap), not re-flagged.",
+      "first_seen": "2026-09-29T15:08:00Z"
+    },
+    {
+      "ticker": "DUOL",
+      "severity": 1,
+      "headline": "Price $134.52 (web, medium confidence), exact match to carried -- confirms no fresh move. FMP/Alpha Vantage both exhausted this cycle. No new catalyst beyond the already-logged von Ahn Form 4. Gap vs consensus $134.29 (carried) essentially zero, not a mispricing flag either direction.",
+      "first_seen": "2026-09-29T15:08:00Z"
+    },
+    {
+      "ticker": "AVAV",
+      "severity": 1,
+      "headline": "Price $147.01 after-hours (web, medium confidence), essentially flat vs carried $147.23. FMP/Alpha Vantage both exhausted this cycle. No new catalyst beyond already-logged $464.8M Army LOCUST contract and BofA/Jefferies target cuts. Undervaluation thesis (~49.2% vs $219.35 consensus, carried) unchanged, established, not re-flagged.",
+      "first_seen": "2026-09-29T15:08:00Z"
+    },
+    {
+      "ticker": "RYAAY",
+      "severity": 1,
+      "headline": "FMP/Alpha Vantage both exhausted this cycle; ADR only updates during US hours. Web search returned the same stale ~June snapshot ($58.00) seen repeatedly this session -- disregarded, price carried forward at $55.13. No fresh catalyst beyond already-logged buyback completion and analyst Buy reiterations. Mispricing thesis (~34.8% vs $74.30 target, carried) unchanged, established, not re-flagged.",
+      "first_seen": "2026-09-29T15:08:00Z"
+    },
+    {
+      "ticker": "ASML",
+      "severity": 1,
+      "headline": "FMP/Alpha Vantage both exhausted this cycle; ADR only updates during US hours, European home session (Amsterdam/XETRA) live since 07:00 UTC. Web search independently confirmed the identical carried price $1771.41 and consensus $2115.34 -- corroborates no fresh move, not a new data point. No fresh ASML-specific news found. Mispricing gap ~19.4% vs consensus (carried), below the 20-25% flag threshold, not flagged.",
+      "first_seen": "2026-09-29T15:08:00Z"
+    },
+    {
+      "ticker": "SAP",
+      "severity": 1,
+      "headline": "FMP/Alpha Vantage both exhausted this cycle; ADR only updates during US hours, European home session (XETRA/Frankfurt) live since 07:00 UTC. Web search returned $210.68, a stale figure recurring from an earlier cycle in this same session (established pattern of unreliable/cached SAP web data) -- disregarded, price carried forward at $209.31. No fresh SAP-specific news found. Mispricing gap ~17.1% vs consensus $245.01 (carried), below threshold, not flagged.",
+      "first_seen": "2026-09-29T15:08:00Z"
     }
   ],
   "technicals": {
     "UBER": {
-      "price": 68.16,
+      "price": 69.07,
       "sma50": 73.3898,
       "sma200": 75.2662,
       "rsi14": 36.36,
@@ -736,7 +775,7 @@
       "region": "US"
     },
     "SPY": {
-      "price": 765.61,
+      "price": 764.47,
       "sma50": 761.1532,
       "sma200": 718.0134,
       "rsi14": 52.47,
@@ -747,7 +786,7 @@
       "region": "US"
     },
     "SOFI": {
-      "price": 15.93,
+      "price": 16.14,
       "sma50": 17.5988,
       "sma200": 19.27328,
       "rsi14": 43.56,
@@ -758,7 +797,7 @@
       "region": "US"
     },
     "CHWY": {
-      "price": 18.61,
+      "price": 18.78,
       "sma50": 22.4,
       "sma200": 25.12,
       "rsi14": 26.79,
@@ -780,7 +819,7 @@
       "region": "US"
     },
     "AVAV": {
-      "price": 147.23,
+      "price": 147.01,
       "sma50": 158.03,
       "sma200": 205.84,
       "rsi14": 52.27,
