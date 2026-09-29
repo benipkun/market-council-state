@@ -1,22 +1,22 @@
 {
-  "as_of": "2026-09-29T15:08:00Z",
+  "as_of": "2026-09-29T16:08:00Z",
   "cash": 1.83,
-  "nav": 818.35,
+  "nav": 817.51,
   "cash_pct_of_nav": 0.22,
   "realized_pl": {
     "mtd": 0.0,
     "ytd": 0.0
   },
   "concentration_flags": [
-    "UBER is ~78.88% of NAV -- a single adverse event (the pending $40M California wrongful-death ruling, broader rideshare-safety litigation wave, the pending Delivery Hero acquisition's integration/financing risk, execution/leverage risk from the EUR4.5B euro bond raise, or intensifying robotaxi competition from Tesla's Cybercab rollout, Waymo, or Uber's own WeRide/Avomo-partnered Madrid robotaxi pilot) would disproportionately hit the portfolio; cash is effectively nil at ~0.22% of NAV, so there is no cushion against a UBER-specific shock."
+    "UBER is ~78.85% of NAV -- a single adverse event (the pending $40M California wrongful-death ruling, broader rideshare-safety litigation wave, the pending Delivery Hero acquisition's integration/financing risk, execution/leverage risk from the EUR4.5B euro bond raise, or intensifying robotaxi competition from Tesla's Cybercab rollout, Waymo, or Uber's own WeRide/Avomo-partnered Madrid robotaxi pilot) would disproportionately hit the portfolio; cash is effectively nil at ~0.22% of NAV, so there is no cushion against a UBER-specific shock."
   ],
   "trim_considerations": [
     {
       "ticker": "UBER",
-      "pct_nav": 78.88,
+      "pct_nav": 78.85,
       "target_pct_nav": 25.0,
-      "excess_usd": 440.92,
-      "note": "Bringing this back to the ~25% single-name guideline would mean reducing exposure by roughly $440.92 -- a consideration, not an instruction, and one that doesn't account for any tax consequences of selling, which this pipeline has no visibility into."
+      "excess_usd": 440.29,
+      "note": "Bringing this back to the ~25% single-name guideline would mean reducing exposure by roughly $440.29 -- a consideration, not an instruction, and one that doesn't account for any tax consequences of selling, which this pipeline has no visibility into."
     }
   ],
   "positions": [
@@ -25,10 +25,10 @@
       "qty": null,
       "basis_mode": "aggregate",
       "cost_basis": 701.75,
-      "market_value": 645.51,
-      "last_price": 69.07,
-      "price_as_of": "2026-09-29T15:08:00Z",
-      "pct_nav": 78.88
+      "market_value": 644.67,
+      "last_price": 68.98,
+      "price_as_of": "2026-09-29T16:08:00Z",
+      "pct_nav": 78.85
     },
     {
       "ticker": "NVO",
@@ -37,8 +37,8 @@
       "cost_basis": 95.0,
       "market_value": 95.89,
       "last_price": 38.8,
-      "price_as_of": "2026-09-29T15:08:00Z",
-      "pct_nav": 11.72
+      "price_as_of": "2026-09-29T16:08:00Z",
+      "pct_nav": 11.73
     },
     {
       "ticker": "CHWY",
@@ -47,8 +47,8 @@
       "cost_basis": 75.12,
       "market_value": 75.12,
       "last_price": 18.78,
-      "price_as_of": "2026-09-29T15:08:00Z",
-      "pct_nav": 9.18
+      "price_as_of": "2026-09-29T16:08:00Z",
+      "pct_nav": 9.19
     }
   ]
 }
