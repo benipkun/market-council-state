@@ -680,6 +680,37 @@
           }
         }
       ]
+    },
+    {
+      "as_of": "2026-09-29T23:08:00Z",
+      "picks": [
+        {
+          "ticker": "UBER",
+          "lean": "neutral",
+          "severity": 1,
+          "brief": "Daily long-term check-in on the largest holding, independent of today's news",
+          "price_at_pick": 68.87,
+          "position_suggestion": {
+            "tier": "none",
+            "suggested_size_usd": 0.0,
+            "suggested_size_pct_of_cash": 0.0,
+            "resulting_pct_nav": 0.0,
+            "execution_floor_usd": 50.0,
+            "basis": "Daily long-term check-in, not a sizing decision -- UBER is already ~78.96% of NAV, far past the ~25% single-name concentration cap, so no incremental position is suggested regardless of today's conviction.",
+            "concentration_note": "UBER's existing position (~78.96% of NAV) is itself the reason no size is suggested -- the concentration cap, not the execution floor, governs here.",
+            "caveat": "Mechanical sizing based on this portfolio's own numbers, not personalized financial advice."
+          },
+          "advisor_questions": {
+            "framing": "Holding decision -- whether to keep, trim, or add to an existing position, not a new trade.",
+            "questions": [
+              "UBER is ~79% of NAV, far above any single-name guideline this pipeline itself flags -- did you decide to concentrate this heavily, or did it get here through price appreciation and cost-basis drift without you re-underwriting the sizing?",
+              "Uber's core moat is network-effect liquidity in ride-hailing and delivery; with robotaxi economics reshaping the cost structure (Waymo, Tesla's Cybercab, and Uber's own AV-partner strategy with WeRide/Avomo), is that multi-year moat widening, or is Uber becoming a lower-margin aggregator layered on top of other companies' AV fleets?",
+              "This pipeline's own DCF has shown a persistent 70%+ gap between UBER's price and fair value for months without closing -- is that a genuine mispricing you're being compensated for waiting on, or a sign the DCF's own growth/margin/discount-rate assumptions are simply wrong and should be revisited?",
+              "With cash near zero and no diversification cushion, if a UBER-specific shock hit (the pending wrongful-death litigation, financing/execution risk from the Delivery Hero deal, or intensifying robotaxi competition), how would you actually respond -- and is holding at this size still the best use of the next dollar versus trimming into SPY or the EU sleeve?"
+            ]
+          }
+        }
+      ]
     }
   ]
 }
