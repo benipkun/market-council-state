@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-09-30T21:07:35Z",
+  "as_of": "2026-09-30T23:11:46Z",
   "cash": 1.83,
   "nav": 813.99,
   "cash_pct_of_nav": 0.22,
@@ -8,7 +8,7 @@
     "ytd": 0.0
   },
   "concentration_flags": [
-    "UBER is ~79.1% of NAV -- a single adverse event (for UBER: the pending $40M California wrongful-death ruling, broader rideshare-safety litigation wave, the pending Delivery Hero acquisition's integration/financing risk, execution/leverage risk from the EUR4.5B euro bond raise, or intensifying robotaxi competition from Tesla's Cybercab rollout, Waymo, or Uber's own WeRide/Avomo-partnered Madrid robotaxi pilot) would disproportionately hit the portfolio; cash is effectively nil at ~0.22% of NAV, so there is no cushion against a UBER-specific shock."
+    "UBER is ~79.1% of NAV -- a single adverse event (pending $40M California wrongful-death ruling, broader rideshare-safety litigation wave, the pending Delivery Hero acquisition's integration/financing risk, execution/leverage risk from the EUR4.5B euro bond raise, or intensifying robotaxi competition from Tesla's Cybercab, Waymo, or Uber's own WeRide/Avomo-partnered Madrid pilot) would disproportionately hit the portfolio; cash is effectively nil at ~0.22% of NAV, so there is no cushion against a UBER-specific shock."
   ],
   "trim_considerations": [
     {
@@ -27,7 +27,7 @@
       "cost_basis": 701.75,
       "market_value": 643.83,
       "last_price": 68.89,
-      "price_as_of": "2026-09-30T21:07:35Z",
+      "price_as_of": "2026-09-30T23:11:46Z",
       "pct_nav": 79.1
     },
     {
@@ -37,7 +37,7 @@
       "cost_basis": 95.0,
       "market_value": 95.17,
       "last_price": 38.51,
-      "price_as_of": "2026-09-30T21:07:35Z",
+      "price_as_of": "2026-09-30T23:11:46Z",
       "pct_nav": 11.69
     },
     {
@@ -47,7 +47,7 @@
       "cost_basis": 75.12,
       "market_value": 73.16,
       "last_price": 18.29,
-      "price_as_of": "2026-09-30T21:07:35Z",
+      "price_as_of": "2026-09-30T23:11:46Z",
       "pct_nav": 8.99
     }
   ]

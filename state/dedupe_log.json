@@ -71,6 +71,14 @@
       ],
       "headline_fingerprint": "aerovironment form 8-k five directors elected one-year terms 2026 annual meeting ending 2027",
       "first_seen": "2026-09-30T21:07:35Z"
+    },
+    {
+      "event_id": "asml-gf-value-overvalued-analysis-20260930",
+      "first_seen": "2026-09-30T23:11:46Z",
+      "tickers": [
+        "ASML"
+      ],
+      "headline_fingerprint": "asml guru focus gf value 1269.61 vs price 1815 approximately 43 pct overvalued intrinsic value model diverges from analyst consensus undervalued read sept 30 2026"
     }
   ]
 }
