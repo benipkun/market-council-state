@@ -1,19 +1,19 @@
 {
-  "books_ran_at": "2026-09-29T21:16:59Z",
+  "books_ran_at": "2026-09-30T21:16:00Z",
   "mode": "FULL",
-  "pipeline_last": "2026-09-29T21:10:32Z",
-  "inbox_last_entry_at": "2026-09-28T21:17:18Z",
+  "pipeline_last": "2026-09-30T21:07:35Z",
+  "inbox_last_entry_at": "2026-09-29T21:17:27Z",
   "fx_date": "2026-09-28",
   "fx_source": "market",
   "paper_positions": 10,
   "paper_open": 10,
   "alerts_active": 0,
-  "alerts_checked_at": "2026-09-30T12:17:00Z",
+  "alerts_checked_at": "2026-09-30T21:16:00Z",
   "loop": {
-    "ping_id": "selftest-20260929T211659Z",
-    "sent_at": "2026-09-29T21:16:59Z",
+    "ping_id": "selftest-20260930T211600Z",
+    "sent_at": "2026-09-30T21:16:00Z",
     "ok": true,
-    "checked_at": "2026-09-29T21:16:59Z"
+    "checked_at": "2026-09-30T21:16:00Z"
   },
   "notified_earnings": [],
   "data_issues": [
