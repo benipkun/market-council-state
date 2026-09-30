@@ -63,6 +63,14 @@
       ],
       "headline_fingerprint": "ryanair declares dividend 0.2011 per unit payable oct 2 2026",
       "first_seen": "2026-09-30T20:13:58Z"
+    },
+    {
+      "event_id": "avav-directors-election-20260930",
+      "tickers": [
+        "AVAV"
+      ],
+      "headline_fingerprint": "aerovironment form 8-k five directors elected one-year terms 2026 annual meeting ending 2027",
+      "first_seen": "2026-09-30T21:07:35Z"
     }
   ]
 }
