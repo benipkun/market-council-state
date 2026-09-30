@@ -1,1 +1,7 @@
-{"amount":150000,"currency":"HUF","frequency":"monthly","last_applied":null,"day_of_month":1}
+{
+  "amount": 150000,
+  "currency": "HUF",
+  "frequency": "monthly",
+  "last_applied": null,
+  "day_of_month": 1
+}
