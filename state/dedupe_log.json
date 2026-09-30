@@ -39,6 +39,30 @@
         "DUOL"
       ],
       "headline_fingerprint": "duolingo da davidson raises price target to 175 from 160 buy reiterated citing q3 dau growth 25.6 to 27.6 pct yoy channel check data"
+    },
+    {
+      "event_id": "asml-highna-euv-delay-20260930",
+      "tickers": [
+        "ASML"
+      ],
+      "headline_fingerprint": "asml high na euv adoption timeline pushes to 2028 2030 samsung sk hynix tsmc delay stock 44 pct above gf value sept 30 2026",
+      "first_seen": "2026-09-30T20:13:58Z"
+    },
+    {
+      "event_id": "spy-august-pce-result-20260930",
+      "tickers": [
+        "SPY"
+      ],
+      "headline_fingerprint": "august pce inflation actual 3.4 pct vs 3.7 pct expected softer than forecast fed october rate cut odds fall to 37 pct dow down 400 pts sept 30 2026",
+      "first_seen": "2026-09-30T20:13:58Z"
+    },
+    {
+      "event_id": "ryaay-dividend-declared-20260930",
+      "tickers": [
+        "RYAAY"
+      ],
+      "headline_fingerprint": "ryanair declares dividend 0.2011 per unit payable oct 2 2026",
+      "first_seen": "2026-09-30T20:13:58Z"
     }
   ]
 }
