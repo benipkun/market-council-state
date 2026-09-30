@@ -2,9 +2,16 @@
   "tallies": {
     "confirmed": 0,
     "contradicted": 3,
-    "inconclusive": 10
+    "inconclusive": 11
   },
   "recent": [
+    {
+      "ticker": "UBER",
+      "as_of": "2026-09-25T23:08:00Z",
+      "lean": "neutral",
+      "outcome": "inconclusive",
+      "pct_change": -0.37
+    },
     {
       "ticker": "UBER",
       "as_of": "2026-09-24T23:12:29Z",

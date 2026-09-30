@@ -550,6 +550,13 @@
               "Elsewhere on the watchlist today AVAV extended its slide to a ~46% discount to consensus with no fresh catalyst, and NVO continued its post-Capital-Markets-Day slide to a fresh multi-week low -- if you're comfortable holding UBER through a similarly wide, catalyst-less gap, why hasn't that same logic been applied to sizing into either of those names instead of leaving cash idle?",
               "This position is still ~71% of NAV with no decision made today to hold it there -- if you were assembling this portfolio from cash right now, would you still put 71% of it into UBER, or does the honest answer point to a rebalancing decision that keeps getting deferred?"
             ]
+          },
+          "graded": {
+            "checked_at": "2026-09-30T09:10:50Z",
+            "price_then": 69.62,
+            "price_now": 69.36,
+            "pct_change": -0.37,
+            "outcome": "inconclusive"
           }
         }
       ]
