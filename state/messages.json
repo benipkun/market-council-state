@@ -1,4 +1,25 @@
 {
-  "messages": [],
-  "notified_picks": {}
+  "messages": [
+    {
+      "id": "20261001T014949Z-setup",
+      "at": "2026-10-01T01:50:16Z",
+      "from": "ben",
+      "text": "Setup test from Claude: in two short sentences, what do today's records say about picks and data health?",
+      "via": "app",
+      "reply_to": null,
+      "status": null
+    },
+    {
+      "id": "20261001T014949Z-setup-r",
+      "at": "2026-10-01T01:50:16Z",
+      "from": "council",
+      "text": "Latest digest (2026-09-30 23:11Z) has one directional pick: ASML bearish (severity 3, GuruFocus-style overvaluation read); UBER is neutral. Data health is degraded: Twelve Data needs authorizing, Alpha Vantage hit its daily limit so FX and AMC quotes are stale, and the MNB source is blocked; the pipeline itself last ran 2026-09-30 21:07Z.",
+      "via": null,
+      "reply_to": "20261001T014949Z-setup",
+      "status": "answered"
+    }
+  ],
+  "notified_picks": {
+    "ASML:bearish": "2026-10-01T01:50:16Z"
+  }
 }
