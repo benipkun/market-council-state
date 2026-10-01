@@ -87,6 +87,22 @@
         "AVAV"
       ],
       "headline_fingerprint": "avav eagle joint venture greece facility reaches operational status oct 1 2026 majority owned by aerovironment"
+    },
+    {
+      "event_id": "avav-autowarcom-budget-20260930",
+      "first_seen": "2026-10-01T09:17:00Z",
+      "tickers": [
+        "AVAV"
+      ],
+      "headline_fingerprint": "pentagon creates autonomous warfare command autowarcom four star combatant command hegseth 74 billion budget proposal triple drone counter-drone spending project agincourt announced sept 30 2026 avav onds ktos rcat umac react"
+    },
+    {
+      "event_id": "sofi-nykredit-13f-stake-20261001",
+      "first_seen": "2026-10-01T09:17:00Z",
+      "tickers": [
+        "SOFI"
+      ],
+      "headline_fingerprint": "nykredit a/s discloses new 13f position in sofi technologies approximately 312985 shares valued 5.6 million q2 2026 filing"
     }
   ]
 }

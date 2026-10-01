@@ -788,6 +788,48 @@
           }
         }
       ]
+    },
+    {
+      "as_of": "2026-10-01T09:17:00Z",
+      "picks": [
+        {
+          "ticker": "AVAV",
+          "lean": "bullish",
+          "confidence": 3,
+          "severity": 4,
+          "signal_type": "confirmed_news",
+          "brief": "Defense Secretary Hegseth announced creation of a new four-star Autonomous Warfare Command ('Autowarcom', operational by Oct 2027) on Sept 30, paired with a proposed $74B budget for drone/counter-drone tech aiming to triple autonomous-warfare spending, plus 'Project Agincourt' to overhaul how the military acquires and fields drones; AVAV, ONDS, KTOS, RCAT and UMAC all reacted overnight.",
+          "why": "A dedicated 4-star command plus a budget line item that explicitly triples planned drone spending structurally expands the addressable federal market for AVAV's loitering-munition and small-UAS product lines (Switchblade, Puma, JUMP), yet the stock's overnight reaction (+0.2% after-hours to $142.50) suggests the market hasn't yet re-rated AVAV for the magnitude of the figure -- buy-the-rumor/sell-the-news lens reads this as fresh and largely unpriced, not a late-stage move.",
+          "price_at_pick": 142.22,
+          "bull_case": "AVAV is already the Pentagon's incumbent loitering-munitions/small-UAS supplier with established trusted-vendor status; a tripled drone budget and new centralized command that streamlines acquisition (the stated goal of Project Agincourt) should disproportionately favor an incumbent who can scale existing qualified programs fastest. This sits on top of an already-established mispricing thesis (~54% upside-to-price vs the $219.35 consensus target, unchanged this cycle).",
+          "bear_case": "This is a sector-wide policy headline, not an AVAV-specific contract award -- $74B is a budget proposal, not appropriated funding, and a new command structure typically takes years to translate into actual purchase orders; the muted +0.2% after-hours move may simply reflect the market correctly treating this as early and uncertain rather than mispriced. AVAV also trades well below both its 50d ($158.66) and 200d ($202.21) SMA with RSI(14) at 38.6 -- a real bearish-momentum backdrop this one headline doesn't reverse.",
+          "risks": [
+            "budget-not-appropriated",
+            "multi-year execution lag",
+            "increased competition for the same dollars",
+            "sector-wide not company-specific"
+          ],
+          "position_suggestion": {
+            "tier": "none",
+            "suggested_size_usd": 0.0,
+            "suggested_size_pct_of_cash": 0.0,
+            "resulting_pct_nav": 0.0,
+            "execution_floor_usd": 50.0,
+            "basis": "Small-account ladder (cash <$2,000): severity 4 + confidence 3 qualifies for the 'half' tier (up to 30% of cash), but cash is $1.83, so 30% = ~$0.55 -- far below the ~$50 execution floor (5% of $808.60 NAV also doesn't exceed it). Cash does not comfortably allow rounding up to the floor, so this is worth watching rather than trading: either wait for the next contribution to land or for the FY27 budget/contract picture to clarify.",
+            "caveat": "Mechanical sizing based on this portfolio's own numbers, not personalized financial advice."
+          },
+          "advisor_questions": {
+            "framing": "A sector-wide policy tailwind feeding an existing long-term thesis, not a new business decision.",
+            "questions": [
+              "Do you understand AVAV's actual product mix (Switchblade loitering munitions, Puma/Raven small UAS, JUMP) well enough to judge whether Autowarcom's dollars flow to AVAV's specific platforms, or to competitors like Kratos and Red Cat instead?",
+              "Is AVAV's incumbent trusted-supplier status a durable moat against the wave of new entrants a tripled budget and a dedicated command will attract, or does more money just mean more competition for the same programs?",
+              "The stock already traded at ~54% upside to consensus before this headline -- does a budget proposal actually move your 5-10 year intrinsic-value estimate, or are you waiting for real contract awards (which take years) before that gap should close?",
+              "If this command reorganization stalls in execution the way many Pentagon reorganizations do, how would you know, and how costly would it be to have acted on the headline rather than on an actual contract?"
+            ],
+            "note": "Budget proposals require Congressional appropriation before any dollar reaches a contractor -- the gap between an announcement like this and an awarded contract is exactly where drone-sector catalysts often stall out."
+          }
+        }
+      ]
     }
   ]
 }
