@@ -111,6 +111,22 @@
         "RYAAY"
       ],
       "headline_fingerprint": "faa delays boeing 737 max 10 certification sept 28 2026 flight management computer software issue vnav disengage go-around sequence ceo oleary expects delay a matter of days plans unchanged 150 firm orders first delivery spring 2027"
+    },
+    {
+      "event_id": "nvo-gurufocus-dcf-gfvalue-convergence-20261001",
+      "first_seen": "2026-10-01T13:14:00Z",
+      "tickers": [
+        "NVO"
+      ],
+      "headline_fingerprint": "gurufocus nvo dcf earnings based intrinsic value 95.39 vs price 37.91 plus gf value 104.84 both converge 60 to 64 pct undervalued oct 1 2026 deeper than analyst consensus read"
+    },
+    {
+      "event_id": "sap-gurufocus-dcf-overvalued-split-20261001",
+      "first_seen": "2026-10-01T13:14:00Z",
+      "tickers": [
+        "SAP"
+      ],
+      "headline_fingerprint": "gurufocus sap dcf earnings based 102.59 and fcf based 138.87 to 150.26 both show overvalued vs price 208.48 while gf value 261.74 and analyst consensus 245.01 disagree showing undervalued methodology split oct 1 2026"
     }
   ]
 }

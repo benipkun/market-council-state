@@ -830,6 +830,82 @@
           }
         }
       ]
+    },
+    {
+      "as_of": "2026-10-01T13:14:00Z",
+      "picks": [
+        {
+          "ticker": "NVO",
+          "lean": "bullish",
+          "confidence": 3,
+          "severity": 4,
+          "signal_type": "mispricing_undervalued",
+          "brief": "Two independent GuruFocus intrinsic-value models now converge on NVO being 60%+ below fair value -- a materially deeper, methodologically-reinforced gap than the analyst-consensus read this pipeline has carried for weeks.",
+          "why": "GuruFocus's proprietary GF Value (~$104.84, ~63.8% undervalued) and an independent earnings-based DCF (~$95.39, ~60.3% undervalued) both newly converge on a much larger gap than the previously-tracked 24.6% consensus-target read, while RSI(14) ~28.6 shows the stock technically oversold on top of the valuation gap.",
+          "price_at_pick": 37.91,
+          "bull_case": "Two independent intrinsic-value models (GF Value ~$104.84, earnings-DCF ~$95.39) both show NVO 60%+ below fair value; the GLP-1/obesity franchise remains durable with the Hengrui oral-pill license and CagriSema Phase 3 data still expanding the pipeline; RSI(14) ~28.6 is oversold, suggesting selling may already be overdone relative to fundamentals.",
+          "bear_case": "NVO's steep YTD decline (-21.9%) reflects real competitive pressure from Eli Lilly's tirzepatide and GLP-1 pricing wars; a persistently depressed multiple could mean the market is pricing in structurally lower margins or share loss that a static DCF model doesn't capture; the FDA's CagriSema NDA decision (Oct 1-Dec 31 window) is a binary Q4 catalyst that could cut either way.",
+          "risks": [
+            "GLP-1 competition",
+            "pricing/reimbursement pressure",
+            "binary FDA catalyst Q4 2026"
+          ],
+          "position_suggestion": {
+            "tier": "none",
+            "suggested_size_usd": 0.0,
+            "suggested_size_pct_of_cash": 0.0,
+            "resulting_pct_nav": 11.59,
+            "execution_floor_usd": 50.0,
+            "basis": "Small-account ladder (cash <$2,000): severity 4 + confidence 3 computes to 'half' tier = up to 30% of cash ($1.83) = $0.55, far below the $50 execution floor (5% of NAV $808.60 = $40.43, so the flat $50 minimum binds). The computed size of $0.55 is below the ~$50 practical execution threshold, so this is worth watching rather than trading -- the honest options are to wait for higher conviction or for cash to accumulate (a HUF 150,000/month contribution is configured but has not yet landed per state/contribution.json).",
+            "caveat": "Mechanical sizing based on this portfolio's own numbers, not personalized financial advice."
+          },
+          "advisor_questions": {
+            "framing": "Whether to add to an already-held long-term GLP-1/obesity-franchise position on a valuation-gap signal.",
+            "questions": [
+              "Is the 60%+ DCF/GF-Value gap evidence of market mispricing, or is the market correctly pricing in a structural shift (GLP-1 price wars, share loss to Lilly) that a backward-looking DCF model can't yet see?",
+              "NVO is already ~11.6% of NAV -- would adding more here be the best use of incremental capital versus adding to UBER (the core holding, with its own large DCF gap) or simply holding cash?",
+              "If the FDA's Q4 CagriSema decision disappoints and the thesis is wrong, how and how soon would that become evident, and is any future add sized so being wrong wouldn't be costly?",
+              "GuruFocus's GF Value reads for NVO have clustered in the 58-63% undervalued range for weeks -- is that a genuine, persistent dislocation, or a slow-to-update model that hasn't caught up to the stock's decline?"
+            ]
+          }
+        },
+        {
+          "ticker": "SAP",
+          "lean": "bearish",
+          "confidence": 2,
+          "severity": 3,
+          "signal_type": "mispricing_overvalued",
+          "company_brief": "SAP SE is Germany's largest software company and the dominant global enterprise resource-planning (ERP) vendor, now mid-transition from license to cloud/SaaS subscription revenue (cloud backlog ~EUR22.9B, +27% YoY) with AI tooling embedded across its suite. Primary listing is Frankfurt/XETRA (ordinary shares, EUR); this pipeline tracks the USD-denominated ADR, so a position carries direct EUR/USD currency exposure on top of equity risk. Next earnings Oct 21, 2026.",
+          "brief": "GuruFocus's own DCF models newly diverge sharply from its GF Value composite and from analyst consensus on SAP -- two separate DCF reads say SAP is 35-51% overvalued, flagging a possible short-thesis the pipeline hasn't carried before.",
+          "why": "Two independent GuruFocus DCF models (earnings-based $102.59, FCF-based $138.87-150.26) both put fair value 35-51% below the $208.48 price, implying the market may be paying for cloud-backlog growth (27% YoY) at a premium that conservative DCF growth/discount-rate assumptions don't support -- though GuruFocus's own GF Value ($261.74) and analyst consensus ($245.01) disagree, both reading undervalued, so this is a genuine methodology split rather than a clean signal.",
+          "price_at_pick": 208.48,
+          "bull_case": "Cloud backlog growing 27% YoY to ~EUR22.9B, AI embedded across the product suite, and GuruFocus's own composite GF Value model ($261.74) actually shows SAP ~20% undervalued -- the bull case rests on a durable enterprise-software moat and a growth narrative that could justify today's multiple despite what the DCF submodels say.",
+          "bear_case": "Two separate GuruFocus DCF models (earnings-based $102.59, FCF-based $138.87-150.26) put fair value 35-51% below the current price, implying the market is paying for growth that conservative discounted-cash-flow math doesn't support; a 12.7% YTD decline already suggests some repricing is underway.",
+          "risks": [
+            "cannot verify real borrow availability/cost for a short",
+            "DCF assumptions (4% growth, 12% discount rate) may understate SAP's actual growth trajectory",
+            "GuruFocus's own models disagree internally (GF Value vs DCF)"
+          ],
+          "position_suggestion": {
+            "tier": "none",
+            "suggested_size_usd": 0.0,
+            "suggested_size_pct_of_cash": 0.0,
+            "resulting_pct_nav": 0.0,
+            "execution_floor_usd": 50.0,
+            "basis": "mispricing_overvalued (short-thesis) picks never get a position size per policy -- the borrow-availability caveat stands in place of sizing.",
+            "caveat": "This is a short-thesis flag; the pipeline cannot verify real borrow availability or cost for SAP, so no size is computed regardless of cash or conviction. Mechanical sizing based on this portfolio's own numbers, not personalized financial advice."
+          },
+          "advisor_questions": {
+            "framing": "Whether a valuation-gap signal on a never-before-held name describes a business worth owning long-term, independent of the short-thesis framing the DCF currently supports.",
+            "questions": [
+              "Is SAP's enterprise-software moat (ERP lock-in, cloud migration) well enough within your circle of competence to judge whether 27%-YoY cloud-backlog growth justifies paying above the earnings-based DCF's fair value?",
+              "GuruFocus's own GF Value model says SAP is ~20% undervalued while its DCF models say 35-51% overvalued -- when two methods from the same source disagree this sharply, how much weight does either number really deserve?",
+              "SAP would be a brand-new position with direct EUR/USD currency exposure on top of equity risk -- does the diversification benefit of a European enterprise-software name outweigh that added currency variable?",
+              "If drawn to the overvaluation case, reversibility matters: there is no way here to confirm borrow cost or availability for a short -- how would this thesis even be actioned in practice?"
+            ]
+          }
+        }
+      ]
     }
   ]
 }
