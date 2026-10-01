@@ -906,6 +906,47 @@
           }
         }
       ]
+    },
+    {
+      "as_of": "2026-10-01T23:17:00Z",
+      "picks": [
+        {
+          "ticker": "UBER",
+          "lean": "neutral",
+          "confidence": 3,
+          "severity": 1,
+          "brief": "Daily long-term check-in on the largest holding, independent of today's news",
+          "why": "Scheduled daily governance check-in on the portfolio's dominant position, not triggered by a specific news catalyst.",
+          "price_at_pick": 67.88,
+          "bull_case": "DCF ($119.20) and even the more conservative analyst consensus target ($104.56) both sit far above the current $67.88 price; Bernstein SocGen reaffirmed Outperform ($95 target) today citing accelerated autonomous-vehicle commercialization (15 cities by year-end).",
+          "bear_case": "Shares sit below both the 50d ($73.05) and 200d ($74.80) SMA with RSI(14) at 35.66, approaching oversold; event risk remains from the pending CA wrongful-death litigation, the Delivery Hero acquisition's integration/financing load, and intensifying robotaxi competition (Waymo, Tesla Cybercab, Uber's own AV partners).",
+          "risks": [
+            "concentration",
+            "litigation",
+            "competition",
+            "integration-risk"
+          ],
+          "position_suggestion": {
+            "tier": "none",
+            "suggested_size_usd": 0.0,
+            "suggested_size_pct_of_cash": 0.0,
+            "resulting_pct_nav": 79.36,
+            "execution_floor_usd": 50.0,
+            "basis": "Not a sizing event -- this is the scheduled daily long-term check-in, not a new signal.",
+            "concentration_note": "UBER is already ~79.36% of NAV, far above the ~25% single-name guideline; any further addition is out of the question regardless of thesis strength.",
+            "caveat": "Mechanical sizing based on this portfolio's own numbers, not personalized financial advice."
+          },
+          "advisor_questions": {
+            "framing": "Business decision -- whether to keep holding, trim, or let a concentrated position ride",
+            "questions": [
+              "RSI(14) has drifted to 35.66, its lowest reading in over a week, while price sits below both the 50d and 200d SMA -- does that technical weakness change anything about the long-term thesis, or is it noise against a DCF gap that has persisted for months?",
+              "Bernstein's reaffirmed $95 target today still implies real upside from here, but it is itself well below the DCF's $119.20 -- when sell-side price targets, consensus, and DCF all disagree this much with each other, which one actually deserves the most weight on a 5-10 year view?",
+              "This position is ~79% of NAV -- did it get there by a deliberate decision at each stage, or by drift as the rest of the book (SOFI, CHWY, the EU sleeve) stayed small? If assembling the portfolio from cash today, would this weighting be chosen again?",
+              "If the Delivery Hero integration or the pending litigation went badly, how would you actually find out, and how soon, versus how long it would take to unwind a position this large without moving the price against yourself?"
+            ]
+          }
+        }
+      ]
     }
   ]
 }
