@@ -79,6 +79,14 @@
         "ASML"
       ],
       "headline_fingerprint": "asml guru focus gf value 1269.61 vs price 1815 approximately 43 pct overvalued intrinsic value model diverges from analyst consensus undervalued read sept 30 2026"
+    },
+    {
+      "event_id": "avav-eagle-jv-operational-20261001",
+      "first_seen": "2026-10-01T06:07:48Z",
+      "tickers": [
+        "AVAV"
+      ],
+      "headline_fingerprint": "avav eagle joint venture greece facility reaches operational status oct 1 2026 majority owned by aerovironment"
     }
   ]
 }
