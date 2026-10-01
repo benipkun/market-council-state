@@ -135,6 +135,15 @@
         "RYAAY"
       ],
       "headline_fingerprint": "rbc capital trims ryanair price target to eur28 from eur29 outperform maintained oct 1 2026 joins morgan stanley jpmorgan citi trims"
+    },
+    {
+      "event_id": "sap-nvo-europe-largest-company-ranking-flip-20261001",
+      "first_seen": "2026-10-01T21:12:00Z",
+      "tickers": [
+        "SAP",
+        "NVO"
+      ],
+      "headline_fingerprint": "novo nordisk regains crown as europe's most valuable company overtaking sap price-relative market cap ranking flip oct 1 2026 reverses earlier sap overtakes novo story from same day"
     }
   ]
 }
