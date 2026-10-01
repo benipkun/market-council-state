@@ -17,6 +17,24 @@
       "via": null,
       "reply_to": "20261001T014949Z-setup",
       "status": "answered"
+    },
+    {
+      "id": "20261001T034519Z-4f72s",
+      "at": "2026-10-01T03:46:10Z",
+      "from": "ben",
+      "text": "Test",
+      "via": "app",
+      "reply_to": null,
+      "status": null
+    },
+    {
+      "id": "20261001T034519Z-4f72s-r",
+      "at": "2026-10-01T03:46:10Z",
+      "from": "council",
+      "text": "Test received, the Trade Inbox is working. Cash is $1.83 and total is $813.99 across UBER, NVO and CHWY. Data health is degraded: Twelve Data needs authorizing and Alpha Vantage hit its daily limit, so FX quotes are stale.",
+      "via": null,
+      "reply_to": "20261001T034519Z-4f72s",
+      "status": "answered"
     }
   ],
   "notified_picks": {
