@@ -1,24 +1,22 @@
 {
-  "books_ran_at": "2026-09-30T21:16:00Z",
+  "books_ran_at": "2026-10-01T21:16:49Z",
   "mode": "FULL",
-  "pipeline_last": "2026-09-30T21:07:35Z",
-  "inbox_last_entry_at": "2026-09-29T21:17:27Z",
-  "fx_date": "2026-09-28",
+  "pipeline_last": "2026-10-01T21:12:00Z",
+  "inbox_last_entry_at": "2026-10-01T03:46:10Z",
+  "fx_date": "2026-10-01",
   "fx_source": "market",
-  "paper_positions": 10,
-  "paper_open": 10,
+  "paper_positions": 14,
+  "paper_open": 14,
   "alerts_active": 0,
-  "alerts_checked_at": "2026-10-01T12:16:54Z",
+  "alerts_checked_at": "2026-10-01T21:16:49Z",
   "loop": {
-    "ping_id": "selftest-20260930T211600Z",
-    "sent_at": "2026-09-30T21:16:00Z",
+    "ping_id": "selftest-20261001T211649Z",
+    "sent_at": "2026-10-01T21:16:49Z",
     "ok": true,
-    "checked_at": "2026-09-30T21:16:00Z"
+    "checked_at": "2026-10-01T21:16:49Z"
   },
   "notified_earnings": [],
   "data_issues": [
-    "MNB: SOAP service and website blocked by network egress",
-    "Twelve Data: connection needs authorizing in claude.ai",
-    "Alpha Vantage: daily rate limit reached (USD/HUF, EUR/HUF and AMC quote not refreshed; previous values kept with old timestamps)"
+    "MNB: SOAP service and website blocked by network egress (Twelve Data market rates used)"
   ]
 }
