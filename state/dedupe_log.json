@@ -127,6 +127,14 @@
         "SAP"
       ],
       "headline_fingerprint": "gurufocus sap dcf earnings based 102.59 and fcf based 138.87 to 150.26 both show overvalued vs price 208.48 while gf value 261.74 and analyst consensus 245.01 disagree showing undervalued methodology split oct 1 2026"
+    },
+    {
+      "event_id": "nvo-nanexa-longacting-injectable-license-20260925",
+      "first_seen": "2026-10-01T14:12:00Z",
+      "tickers": [
+        "NVO"
+      ],
+      "headline_fingerprint": "novo nordisk licenses nanexa pharmashell long acting injectable depot technology eur1.17b usd1.33b up to 5 peptide programs obesity type2 diabetes cardiometabolic announced sept 25 2026 upfront plus milestones"
     }
   ]
 }
