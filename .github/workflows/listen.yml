@@ -1,0 +1,34 @@
+# Picks up messages Ben types into his private ntfy "ask" channel, every five minutes.
+# New messages are committed to inbox/queue/, which starts the Trade Inbox routine; it answers
+# through outbox/queue/ and the "Send phone messages" job. The channel name lives only in the
+# repository secret NTFY_IN, never in the code.
+name: Receive phone messages
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: receive-phone-messages
+  cancel-in-progress: false
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch new messages from ntfy
+        env:
+          NTFY_IN: ${{ secrets.NTFY_IN }}
+        run: |
+          if [ -z "$NTFY_IN" ]; then echo "The NTFY_IN secret is not set yet."; exit 0; fi
+          SINCE=$(cat inbox/ntfy_since.txt 2>/dev/null || echo 10m)
+          curl -sS -m 20 "https://ntfy.sh/$NTFY_IN/json?poll=1&since=$SINCE" -o /tmp/in.jsonl || exit 0
+          python3 ops/ntfy_in.py /tmp/in.jsonl
+          if [ -n "$(git status --porcelain inbox)" ]; then
+            git config user.name "Market Council Messages"
+            git config user.email "routine@market-council.local"
+            git add inbox
+            git commit -q -m "Message from Ben via ntfy"
+            git push -q || (git pull -q --rebase origin main && git push -q)
+          fi

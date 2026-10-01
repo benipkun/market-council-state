@@ -1,0 +1,36 @@
+# Delivers Market Council's messages to Ben's phone.
+# The cloud routines cannot reach ntfy.sh, so they commit each message as a JSON file in
+# outbox/queue/; this job sends every newly added file to his private ntfy channel.
+# The channel name lives only in the repository secret NTFY_OUT, never in the code.
+name: Send phone messages
+on:
+  push:
+    branches: [main]
+    paths: ["outbox/queue/**"]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: send-phone-messages
+  cancel-in-progress: false
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Send new messages to ntfy
+        env:
+          NTFY_OUT: ${{ secrets.NTFY_OUT }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          if [ -z "$NTFY_OUT" ]; then echo "The NTFY_OUT secret is not set yet, so nothing was sent."; exit 0; fi
+          if [ -n "$BEFORE" ] && git cat-file -e "$BEFORE" 2>/dev/null; then RANGE="$BEFORE..$AFTER"; else RANGE="$AFTER~1..$AFTER"; fi
+          git diff --name-only --diff-filter=A "$RANGE" -- outbox/queue | while read -r f; do
+            [ -f "$f" ] || continue
+            jq --arg t "$NTFY_OUT" '{topic: $t, title: (.title // "Market Council"), message: (.message // ""), click: (.click // "https://benipkun.github.io/market-council-state/"), tags: (.tags // [])}' "$f" > /tmp/msg.json || continue
+            code=$(curl -sS -m 20 -o /dev/null -w "%{http_code}" -H "Content-Type: application/json" -d @/tmp/msg.json https://ntfy.sh/)
+            echo "$f sent: HTTP $code"
+          done
