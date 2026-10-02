@@ -1,22 +1,22 @@
 {
-  "as_of": "2026-10-02T21:08:00Z",
+  "as_of": "2026-10-02T23:08:00Z",
   "cash": 1.83,
-  "nav": 803.02,
+  "nav": 802.83,
   "cash_pct_of_nav": 0.23,
   "realized_pl": {
     "mtd": 0.0,
     "ytd": 0.0
   },
   "concentration_flags": [
-    "UBER is ~79.24% of NAV -- a single adverse event (pending $40M California wrongful-death ruling, broader rideshare-safety litigation wave, the pending Delivery Hero acquisition's integration/financing risk, execution/leverage risk from the EUR4.5B euro bond raise, or intensifying robotaxi competition from Tesla's Cybercab, Waymo, or Uber's own AV-partner strategy) would disproportionately hit the portfolio; cash is effectively nil at ~0.23% of NAV, so there is no cushion against a UBER-specific shock."
+    "UBER is ~79.26% of NAV -- a single adverse event (pending $40M California wrongful-death ruling, broader rideshare-safety litigation wave, the pending Delivery Hero acquisition's integration/financing risk, execution/leverage risk from the EUR4.5B euro bond raise, or intensifying robotaxi competition from Tesla's Cybercab, Waymo, or Uber's own AV-partner strategy) would disproportionately hit the portfolio; cash is effectively nil at ~0.23% of NAV, so there is no cushion against a UBER-specific shock."
   ],
   "trim_considerations": [
     {
       "ticker": "UBER",
-      "pct_nav": 79.24,
+      "pct_nav": 79.26,
       "target_pct_nav": 25.0,
-      "excess_usd": 435.55,
-      "note": "Bringing this back to the ~25% single-name guideline would mean reducing exposure by roughly $435.55 -- a consideration, not an instruction, and one that doesn't account for any tax consequences of selling, which this pipeline has no visibility into."
+      "excess_usd": 435.63,
+      "note": "Bringing this back to the ~25% single-name guideline would mean reducing exposure by roughly $435.63 -- a consideration, not an instruction, and one that doesn't account for any tax consequences of selling, which this pipeline has no visibility into."
     }
   ],
   "positions": [
@@ -25,20 +25,20 @@
       "qty": null,
       "basis_mode": "aggregate",
       "cost_basis": 701.75,
-      "market_value": 636.31,
+      "market_value": 636.34,
       "last_price": 68.09,
-      "price_as_of": "2026-10-02T21:08:00Z",
-      "pct_nav": 79.24
+      "price_as_of": "2026-10-02T23:08:00Z",
+      "pct_nav": 79.26
     },
     {
       "ticker": "NVO",
       "qty": 2.471384,
       "basis_mode": "qty",
       "cost_basis": 95.0,
-      "market_value": 92.18,
-      "last_price": 37.3,
-      "price_as_of": "2026-10-02T21:08:00Z",
-      "pct_nav": 11.48
+      "market_value": 91.96,
+      "last_price": 37.21,
+      "price_as_of": "2026-10-02T23:08:00Z",
+      "pct_nav": 11.45
     },
     {
       "ticker": "CHWY",
@@ -47,8 +47,8 @@
       "cost_basis": 75.12,
       "market_value": 72.7,
       "last_price": 18.175,
-      "price_as_of": "2026-10-02T21:08:00Z",
-      "pct_nav": 9.05
+      "price_as_of": "2026-10-02T23:08:00Z",
+      "pct_nav": 9.06
     }
   ]
 }

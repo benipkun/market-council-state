@@ -947,6 +947,47 @@
           }
         }
       ]
+    },
+    {
+      "as_of": "2026-10-02T23:08:00Z",
+      "picks": [
+        {
+          "ticker": "UBER",
+          "lean": "neutral",
+          "confidence": 3,
+          "severity": 1,
+          "brief": "Daily long-term check-in on the largest holding, independent of today's news",
+          "why": "Scheduled daily governance check-in on the portfolio's dominant position, not triggered by a specific news catalyst.",
+          "price_at_pick": 68.09,
+          "bull_case": "DCF ($120.87) and even the more conservative analyst consensus target ($104.56) both sit far above the current ~$68.09 price; Bernstein SocGen's reaffirmed Outperform ($95 target, AV commercialization in 15 cities by year-end) remains the operative bull case.",
+          "bear_case": "Shares sit below both the 50d ($73.05) and 200d ($74.80) SMA with RSI(14) at 36.75; event risk remains from the pending CA wrongful-death litigation, the Delivery Hero acquisition's integration/financing load, and intensifying robotaxi competition (Waymo, Tesla Cybercab, Uber's own AV partners).",
+          "risks": [
+            "concentration",
+            "litigation",
+            "competition",
+            "integration-risk"
+          ],
+          "position_suggestion": {
+            "tier": "none",
+            "suggested_size_usd": 0.0,
+            "suggested_size_pct_of_cash": 0.0,
+            "resulting_pct_nav": 79.26,
+            "execution_floor_usd": 50.0,
+            "basis": "Not a sizing event -- this is the scheduled daily long-term check-in, not a new signal.",
+            "concentration_note": "UBER is already ~79.26% of NAV, far above the ~25% single-name guideline; any further addition is out of the question regardless of thesis strength.",
+            "caveat": "Mechanical sizing based on this portfolio's own numbers, not personalized financial advice."
+          },
+          "advisor_questions": {
+            "framing": "Business decision -- whether to keep holding, trim, or let a concentrated position ride",
+            "questions": [
+              "UBER has now closed essentially flat across an entire day that included a real post-jobs-report market rally (SPY +0.6% on the session) -- does the stock's failure to participate in a broad risk-on day change your read on how the market is treating UBER-specific risk right now, or is it noise?",
+              "The DCF ($120.87) and consensus ($104.56) targets have disagreed with the market price by 50-77% for over a month without the gap closing -- at what point does that persistence become information that the market has a better read on litigation/AV-competition risk than the model, rather than a mispricing worth holding through?",
+              "This position is ~79.26% of NAV -- did it get there by a deliberate decision at each stage, or by drift as the rest of the book (SOFI, CHWY, the EU sleeve) stayed small? If assembling the portfolio from cash today, would this weighting be chosen again?",
+              "If the Delivery Hero integration, the pending wrongful-death litigation, or accelerating robotaxi competition went badly, how would you actually find out, and how soon, versus how long it would take to unwind a position this large without moving the price against yourself?"
+            ]
+          }
+        }
+      ]
     }
   ]
 }

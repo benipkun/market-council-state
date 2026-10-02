@@ -1,14 +1,6 @@
 {
   "events": [
     {
-      "event_id": "duol-davidson-pt-raise-20260929",
-      "first_seen": "2026-09-29T21:10:32Z",
-      "tickers": [
-        "DUOL"
-      ],
-      "headline_fingerprint": "duolingo da davidson raises price target to 175 from 160 buy reiterated citing q3 dau growth 25.6 to 27.6 pct yoy channel check data"
-    },
-    {
       "event_id": "asml-highna-euv-delay-20260930",
       "tickers": [
         "ASML"
