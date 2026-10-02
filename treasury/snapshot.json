@@ -1,7 +1,7 @@
 {
-  "as_of": "2026-10-02T20:08:00Z",
+  "as_of": "2026-10-02T21:08:00Z",
   "cash": 1.83,
-  "nav": 803.11,
+  "nav": 803.02,
   "cash_pct_of_nav": 0.23,
   "realized_pl": {
     "mtd": 0.0,
@@ -15,8 +15,8 @@
       "ticker": "UBER",
       "pct_nav": 79.24,
       "target_pct_nav": 25.0,
-      "excess_usd": 435.62,
-      "note": "Bringing this back to the ~25% single-name guideline would mean reducing exposure by roughly $435.62 -- a consideration, not an instruction, and one that doesn't account for any tax consequences of selling, which this pipeline has no visibility into."
+      "excess_usd": 435.55,
+      "note": "Bringing this back to the ~25% single-name guideline would mean reducing exposure by roughly $435.55 -- a consideration, not an instruction, and one that doesn't account for any tax consequences of selling, which this pipeline has no visibility into."
     }
   ],
   "positions": [
@@ -25,9 +25,9 @@
       "qty": null,
       "basis_mode": "aggregate",
       "cost_basis": 701.75,
-      "market_value": 636.4,
-      "last_price": 68.1,
-      "price_as_of": "2026-10-02T20:08:00Z",
+      "market_value": 636.31,
+      "last_price": 68.09,
+      "price_as_of": "2026-10-02T21:08:00Z",
       "pct_nav": 79.24
     },
     {
@@ -37,7 +37,7 @@
       "cost_basis": 95.0,
       "market_value": 92.18,
       "last_price": 37.3,
-      "price_as_of": "2026-10-02T20:08:00Z",
+      "price_as_of": "2026-10-02T21:08:00Z",
       "pct_nav": 11.48
     },
     {
@@ -47,7 +47,7 @@
       "cost_basis": 75.12,
       "market_value": 72.7,
       "last_price": 18.175,
-      "price_as_of": "2026-10-02T20:08:00Z",
+      "price_as_of": "2026-10-02T21:08:00Z",
       "pct_nav": 9.05
     }
   ]

@@ -1,14 +1,6 @@
 {
   "events": [
     {
-      "event_id": "chwy-mizuho-pt-cut-20260929",
-      "first_seen": "2026-09-29T20:08:22Z",
-      "tickers": [
-        "CHWY"
-      ],
-      "headline_fingerprint": "mizuho cuts chewy price target to 28 from 32 outperform rating maintained"
-    },
-    {
       "event_id": "duol-davidson-pt-raise-20260929",
       "first_seen": "2026-09-29T21:10:32Z",
       "tickers": [
