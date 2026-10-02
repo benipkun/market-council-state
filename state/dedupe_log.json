@@ -184,6 +184,38 @@
         "SAP"
       ],
       "headline_fingerprint": "sap ubs downgrade to neutral from buy price target raised to eur201 from eur164 slow agentic ai agent rollout 17 of 200 h2 cloud backlog deceleration dated august 26 2026"
+    },
+    {
+      "event_id": "nvo-cfra-downgrade-sell-20260923",
+      "first_seen": "2026-10-02T18:08:00Z",
+      "tickers": [
+        "NVO"
+      ],
+      "headline_fingerprint": "cfra downgrades novo nordisk to sell from hold price target usd 38 dated around sept 23 2026"
+    },
+    {
+      "event_id": "avav-locust-international-order-20261002",
+      "first_seen": "2026-10-02T18:08:00Z",
+      "tickers": [
+        "AVAV"
+      ],
+      "headline_fingerprint": "aerovironment receives first international purchase order for locust laser weapon system no dollar figure disclosed oct 2 2026"
+    },
+    {
+      "event_id": "uber-eats-search-latency-20261002",
+      "first_seen": "2026-10-02T18:08:00Z",
+      "tickers": [
+        "UBER"
+      ],
+      "headline_fingerprint": "uber eats rebuilds search pipeline cuts end to end latency 50 pct engineering post no financial quantification oct 2 2026"
+    },
+    {
+      "event_id": "sap-nvidia-joule-studio-integration-undated",
+      "first_seen": "2026-10-02T18:08:00Z",
+      "tickers": [
+        "SAP"
+      ],
+      "headline_fingerprint": "sap nvidia connect openshell runtime isolation joule studio business governance layer authorization identity access management audit trails undated"
     }
   ]
 }
