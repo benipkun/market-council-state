@@ -1,14 +1,6 @@
 {
   "events": [
     {
-      "event_id": "sofi-form144-insider-sale-20260927",
-      "first_seen": "2026-09-29T07:08:00Z",
-      "tickers": [
-        "SOFI"
-      ],
-      "headline_fingerprint": "sofi technologies insider or large holder files form 144 sept 27 2026 signaling intent to sell restricted or control shares"
-    },
-    {
       "event_id": "nvo-hengrui-oral-obesity-pill-license-20260929",
       "first_seen": "2026-09-29T15:08:00Z",
       "tickers": [
@@ -168,6 +160,14 @@
         "NVO"
       ],
       "headline_fingerprint": "novo nordisk wegovy semaglutide post hoc analysis 88 pct trial participants achieve normal liver fat levels mean liver fat 8.8 to 3.1 pct week 72 oct 1 2026"
+    },
+    {
+      "event_id": "novo-direct-ny-listing-consideration-20261002",
+      "first_seen": "2026-10-02T07:11:00Z",
+      "tickers": [
+        "NVO"
+      ],
+      "headline_fingerprint": "novo nordisk considering direct new york listing to replace us adr structure raise us investor profile oct 2 2026 no stated timeline"
     }
   ]
 }
