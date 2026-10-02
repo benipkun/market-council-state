@@ -168,6 +168,14 @@
         "NVO"
       ],
       "headline_fingerprint": "novo nordisk considering direct new york listing to replace us adr structure raise us investor profile oct 2 2026 no stated timeline"
+    },
+    {
+      "event_id": "spy-sept-jobs-report-miss-20261002",
+      "first_seen": "2026-10-02T13:11:00Z",
+      "tickers": [
+        "SPY"
+      ],
+      "headline_fingerprint": "september nonfarm payrolls miss expectations oct 2 2026 futures surge fed october rate cut bets increase 10yr treasury yield eases to 5.18pct 30yr 5.57pct"
     }
   ]
 }
