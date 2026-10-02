@@ -1,14 +1,6 @@
 {
   "events": [
     {
-      "event_id": "nvo-hengrui-oral-obesity-pill-license-20260929",
-      "first_seen": "2026-09-29T15:08:00Z",
-      "tickers": [
-        "NVO"
-      ],
-      "headline_fingerprint": "novo nordisk licenses experimental oral obesity pill from jiangsu hengrui pharmaceuticals 300m upfront up to 2.6b total sept 29 2026"
-    },
-    {
       "event_id": "chwy-mizuho-pt-cut-20260929",
       "first_seen": "2026-09-29T20:08:22Z",
       "tickers": [
@@ -176,6 +168,22 @@
         "SPY"
       ],
       "headline_fingerprint": "september nonfarm payrolls miss expectations oct 2 2026 futures surge fed october rate cut bets increase 10yr treasury yield eases to 5.18pct 30yr 5.57pct"
+    },
+    {
+      "event_id": "ryaay-sept-traffic-report-20261002",
+      "first_seen": "2026-10-02T16:13:00Z",
+      "tickers": [
+        "RYAAY"
+      ],
+      "headline_fingerprint": "ryanair september 2026 traffic report 20.1 million passengers up 4.0 pct yoy over 1000 flights cancelled uk atc outage belgian atc strikes mt etna eruptions"
+    },
+    {
+      "event_id": "sap-ubs-downgrade-neutral-20260826",
+      "first_seen": "2026-10-02T16:13:00Z",
+      "tickers": [
+        "SAP"
+      ],
+      "headline_fingerprint": "sap ubs downgrade to neutral from buy price target raised to eur201 from eur164 slow agentic ai agent rollout 17 of 200 h2 cloud backlog deceleration dated august 26 2026"
     }
   ]
 }
