@@ -95,9 +95,61 @@ def fetch_yahoo(sym, start):
 
 def fetch_twelve(sym):
     url = ("https://api.twelvedata.com/time_series?symbol=" + urllib.parse.quote(sym)
-           + "&interval=1day&outputsize=1300&order=ASC&apikey=" + KEY12)
+           + "&interval=1day&outputsize=5000&order=ASC&adjust=all&apikey=" + KEY12)
+    time.sleep(8)
     vals = http_json(url).get("values") or []
     return sorted((v["datetime"][:10], float(v["close"])) for v in vals)
+
+
+def fetch_cnbc(sym, start):
+    a = datetime.datetime.fromtimestamp(start, datetime.timezone.utc).strftime("%Y%m%d") + "000000"
+    b = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d") + "235959"
+    url = "https://ts-api.cnbc.com/harmony/app/bars/" + urllib.parse.quote(sym) + "/1D/" + a + "/" + b + "/adjusted/EST5EDT.json"
+    bars = (http_json(url).get("barData") or {}).get("priceBars") or []
+    out = {}
+    for x in bars:
+        t = str(x.get("tradeTime") or "")
+        if len(t) >= 8 and x.get("close") not in (None, ""):
+            out[t[:4] + "-" + t[4:6] + "-" + t[6:8]] = float(x["close"])
+    return sorted(out.items())
+
+
+def fetch_cboe(sym):
+    url = "https://cdn.cboe.com/api/global/delayed_quotes/charts/historical/" + urllib.parse.quote(sym) + ".json"
+    data = http_json(url).get("data") or []
+    return sorted((x["date"], float(x["close"])) for x in data if x.get("date") and x.get("close"))
+
+
+def fetch_yields(syms):
+    url = ("https://quote.cnbc.com/quote-html-webservice/restQuote/symbolType/symbol?symbols="
+           + "%7C".join(urllib.parse.quote(s) for s in syms)
+           + "&requestMethod=itv&noform=1&partnerId=2&fund=1&exthrs=1&output=json&events=1")
+    q = (http_json(url).get("FormattedQuoteResult") or {}).get("FormattedQuote") or []
+    if isinstance(q, dict):
+        q = [q]
+    out = {}
+    for x in q:
+        y = str(x.get("dividendyield") or "").replace("%", "").strip()
+        try:
+            out[x.get("symbol")] = float(y) / 100.0
+        except Exception:
+            pass
+    return out
+
+
+# Price sources are tried in this order; one that fails for two symbols in a row is skipped for the rest of the run.
+DEAD = {}
+LAST_ERR = {}
+ADJ = {}
+
+
+def chain(start):
+    c = [("Yahoo Finance", lambda s: fetch_yahoo(s, start), True)]
+    if KEY12:
+        c.append(("Twelve Data", fetch_twelve, True))
+    c.append(("CNBC", lambda s: fetch_cnbc(s, start), False))
+    c.append(("Cboe", fetch_cboe, False))
+    return c
 
 
 def cache_path(sym):
@@ -121,20 +173,21 @@ def load_prices(sym, long_history, log):
     rows, src, err = [], None, None
     if not OFFLINE:
         start = 946684800 if long_history else time.time() - 5 * 366 * 86400
-        for attempt in range(3):
+        for name, fn, adj in chain(start):
+            if DEAD.get(name, 0) >= 2:
+                continue
             try:
-                rows = fetch_yahoo(sym, start)
-                src = "Yahoo Finance"
+                got = fn(sym)
+                if len(got) < 30:
+                    raise ValueError("only " + str(len(got)) + " rows")
+                rows, src = got, name
+                ADJ[sym] = adj
+                DEAD[name] = 0
                 break
             except Exception as e:
-                err = str(e)[:100]
-                time.sleep(2 + 3 * attempt)
-        if len(rows) < 30 and KEY12:
-            try:
-                rows = fetch_twelve(sym)
-                src = "Twelve Data"
-            except Exception as e:
-                err = str(e)[:100]
+                err = name + ": " + str(e)[:80]
+                DEAD[name] = DEAD.get(name, 0) + 1
+                LAST_ERR[name] = str(e)[:120]
     if len(rows) >= 30:
         os.makedirs(CACHE, exist_ok=True)
         with open(cache_path(sym), "w", encoding="utf-8", newline="") as f:
@@ -522,6 +575,22 @@ def main():
         if not OFFLINE:
             time.sleep(0.4)
     ok = [s for s in syms if s in prices]
+    status = {"as_of": started, "ok": len(ok) >= 2 and bench in prices, "symbols": len(syms), "with_prices": len(ok),
+              "by_source": {}, "errors": dict(LAST_ERR)}
+    for s in syms:
+        k = plog.get(s, {}).get("source") or "none"
+        status["by_source"][k] = status["by_source"].get(k, 0) + 1
+    wj("state/engine_status.json", status)
+    if not status["ok"]:
+        print("engine: no usable price history", status)
+        raise SystemExit(1)
+    plain = [s for s in ok if ADJ.get(s) is False]
+    ylds = {}
+    if plain and not OFFLINE:
+        try:
+            ylds = fetch_yields(plain)
+        except Exception as e:
+            status["errors"]["yields"] = str(e)[:120]
     assets = {}
     unclassified = []
     for s in syms:
@@ -530,6 +599,9 @@ def main():
             unclassified.append(s)
         if s in prices:
             m.update(sym_stats(prices[s]))
+            if s in plain:
+                m["price_only"] = True
+                m["div_yield"] = rd(ylds.get(s))
         assets[s] = m
     out = {"as_of": started, "engine": "1.0", "window_days": WINDOW, "unclassified": unclassified}
 
@@ -542,12 +614,17 @@ def main():
     out["corr"] = {"tickers": ok, "m": [[rd(x, 2) for x in row] for row in C], "window_days": len(dates),
                    "from": dates[0], "through": dates[-1], "method": "Pearson correlation of daily returns, adjusted closes"}
     bi = ix.get(bench)
-    rf = assets.get(cashp, {}).get("ret_1Y") or 0.04
+    ca = assets.get(cashp, {})
+    rf = (ca.get("ret_1Y") or 0.0) + (ca.get("div_yield") or 0.0) if ca.get("price_only") else (ca.get("ret_1Y") or 0.04)
+    if rf <= 0:
+        rf = 0.04
     for s in ok:
         i = ix[s]
         beta = float(np.cov(R[:, i], R[:, bi])[0, 1] / np.var(R[:, bi], ddof=1)) if bi is not None else None
         assets[s]["beta_1y"] = rd(beta, 2)
         h = assets[s].get("hist_5y")
+        if h is not None and assets[s].get("price_only"):
+            h = h + (assets[s].get("div_yield") or 0.0)
         capm = rf + (beta or 0) * ERP
         assets[s]["mu_est"] = rd(min(0.25, max(-0.10, 0.5 * capm + 0.5 * (h if h is not None else capm))))
     out["assets"] = assets
@@ -620,6 +697,8 @@ def main():
                      "Return inputs are estimates: half CAPM (risk-free + beta x 5%), half the 5-year average, limited to -10%..+25%.",
                      "Risk-free rate: last 12 months of the Treasury-bill fund " + cashp + ".",
                      "Long only, fully invested, cash left out. HRP has no weight caps by construction."]}
+    if plain:
+        opt["notes"].append("Prices for " + str(len(plain)) + " symbols come without dividends (CNBC or Cboe charts): each one's current dividend yield from CNBC's quote page is added to its return estimate, and volatility and correlations use price changes only.")
     inv = sum(p["w"] for p in pos if p["has_data"])
     if len(hs) >= 2 and inv > 0:
         ii = [ix[t] for t in hs]
@@ -670,10 +749,15 @@ def main():
                      "rule": "Short ideas are shown only when the profile says yes and the risk level is 4 or 5. Every short card states the borrow cost, that the loss has no ceiling, and a stop that must be placed with the order."}
 
     # sources and charts
-    good = [s for s in syms if plog.get(s, {}).get("source") == "Yahoo Finance"]
-    src = [{"name": "Yahoo Finance", "use": "daily price history", "ok": len(good), "of": len(syms), "through": dates[-1],
-            "status": "live" if len(good) == len(syms) else ("partial" if good else "down"),
-            "detail": ", ".join(s for s in syms if s not in good)[:200]}]
+    src = []
+    for name in sorted(k for k in status["by_source"] if k != "none"):
+        src.append({"name": name, "use": "daily price history" + ("" if name in ("Yahoo Finance", "Twelve Data", "saved copy") else ", dividends not included"),
+                    "ok": status["by_source"][name], "of": len(syms), "through": dates[-1], "status": "stale" if name == "saved copy" else "live",
+                    "detail": "last good copy; the live sources did not answer" if name == "saved copy" else ""})
+    if status["by_source"].get("none"):
+        src.append({"name": "Price history", "use": "daily price history", "status": "down",
+                    "detail": "no prices for " + ", ".join(s for s in syms if s not in prices)[:160]})
+    out["price_sources"] = status["by_source"]
     if not OFFLINE:
         try:
             j = http_json("https://data.sec.gov/submissions/CIK0001543151.json", SEC_UA)
@@ -693,6 +777,7 @@ def main():
                              "note": "adjusted daily closes, one year"})
     wj("state/nav_history.json", hist)
     wj("state/quant.json", out)
+    wj("state/engine_status.json", status)
     print("engine ok", started, "symbols", len(ok), "of", len(syms), "level", out.get("stress", {}).get("level"), "health", health["score"])
 
 

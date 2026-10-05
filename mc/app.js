@@ -34,6 +34,7 @@ function rho(a,b){var c=X.quant&&X.quant.corr;if(!c)return null;var i=c.tickers.
 function pos(){var tr=S.treasury||{},nav=num(tr.nav)||0;return MC.positions().map(function(p){var mv=num(p.market_value)||0,cb=num(p.cost_basis);
 return {t:p.ticker,mv:mv,cost:cb,w:nav?mv/nav:0,pl:cb?mv/cb-1:null,sec:A(p.ticker).sector||"Unclassified",px:num(p.last_price)};});}
 function qAge(){return X.quant&&X.quant.as_of;}
+function psrc(){var p=X.quant&&X.quant.price_sources,k=p?Object.keys(p).filter(function(n){return n!=="none";}):[];return k.length?esc(k.join(" and ")):"public";}
 /* later phases plug in here: an add-on file registers slot renderers, tools, checklist tests and extra data files */
 var SL={},TOOLS={},DONE={};
 function slot(name,arg,fallback){var f=SL[name];if(f){try{var h=f(arg);if(h)return h;}catch(e){if(window.console)console.error(e);}}return fallback||"";}
@@ -53,7 +54,7 @@ return out;}
 function renderStrip(){
 var el=$("strip");if(!el)return;var q=X.quant,s=q&&q.stress,src=sources().filter(function(x){return !x.opt;}),live=src.filter(function(x){return x.ok;}).length;
 el.innerHTML=(s?'<button class="stg lvl" data-tab="system" style="background:none">DOOMSDAY LEVEL: '+esc(String(s.level).toUpperCase())+'</button>'+tag(q.as_of,14)
-:'<span class="stg nb">DOOMSDAY LEVEL: NOT BUILT YET</span>')+
+:'<span class="stg stale">DOOMSDAY LEVEL: NO DATA YET</span>')+
 '<button class="stg '+(live===src.length?"live":"stale")+'" data-tab="system" style="background:none">SOURCES '+live+'/'+src.length+' LIVE</button>';}
 
 /* ---------- today: decisions first ---------- */
@@ -140,7 +141,7 @@ el.innerHTML=head("PORTFOLIO CORE","Portfolio",tag(tr.as_of,9))+
 '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px"><span class="lbl">Period</span>'+seg("rng",st.rng,[["1D","1D"],["1W","1W"],["1M","1M"],["YTD","YTD"],["ALL","ALL"]])+'</div>'+tiles+
 (vis?"":'<div class="src" style="margin:8px 0">Amounts are hidden on this device because this page is public; percentages still show. <button class="link" id="pf-show">Show amounts here</button></div>')+
 '<div class="src" style="margin:6px 0 12px">Value and cash: latest treasury snapshot, '+upd(tr.as_of)+". Changes leave out deposits and withdrawals; records began "+sd(days.length?days[0].date:null)+". Volatility: "+(q?(q.window_days+" daily returns, "+upd(q.as_of)):"not calculated yet")+'.</div>'+
-'<div class="g3"><div>'+blk("PORTFOLIO MAP",seg("pv",view,[["map","MAP"],["list","LIST"]]),mapB,"Weights and gains: treasury snapshot. Correlations: "+(q&&q.corr?q.corr.window_days+" trading days to "+sd(q.corr.through)+", Yahoo Finance prices":"not calculated yet")+".")+'</div><div>'+
+'<div class="g3"><div>'+blk("PORTFOLIO MAP",seg("pv",view,[["map","MAP"],["list","LIST"]]),mapB,"Weights and gains: treasury snapshot. Correlations: "+(q&&q.corr?q.corr.window_days+" trading days to "+sd(q.corr.through)+", "+psrc()+" prices":"not calculated yet")+".")+'</div><div>'+
 blk("ALLOCATION",tag(tr.as_of,9),secRows.length?donut(secRows):'<div class="nbx">Needs the calculation engine.</div>',"By sector and asset class; cash counts as its own group.")+
 blk("EXPOSURE",tag(tr.as_of,9),seg("xd",st.xdim,[["stock","STOCK"],["sector","SECTOR"],["country","COUNTRY"],["currency","CURRENCY"],["theme","THEME"]])+'<div class="gap">'+bars(st.xdim,P)+'</div>',"Share of total value. Sector, country, currency and theme labels come from a hand-kept reference list.")+
 '</div></div><div class="row"><button class="btn sm" data-tab="risk">Health check and diversification '+ARROW+'</button><button class="btn sm" data-tab="portfolio">Books, goal and tax '+ARROW+'</button></div>';}
@@ -200,7 +201,7 @@ h+=slot("pp-earn",t,blk("LATEST EARNINGS REVIEW",NB,(tc.next_earnings_date?kv("N
 h+=slot("pp-smart",t,blk("SMART-MONEY ACTIVITY",NB,'<div class="nbx">Insider, politician and large-fund trades, with trade date and filing date. <span class="fl">Upgrade item 10.</span></div>'));
 h+=slot("pp-dec",t,blk("OPEN DECISION CARD",NB,'<div class="nbx">An order ticket with entry, stop and take-profit prices when one is open. <span class="fl">Upgrade item 13.</span></div>'));
 var others=pos().filter(function(p){return p.t!==t;}).map(function(p){return kv("Correlation with "+esc(p.t),f2(rho(t,p.t)));}).join("");
-h+=blk("RISK",q?tag(q.as_of,14):'<span class="stg stale">NO DATA YET</span>',spark(t)+kv("Volatility a year",p1(a.vol_1y,0))+kv("Beta to the S&P 500",f2(a.beta_1y))+kv("From 12-month high",sp(a.from_high_1y,0))+kv("Worst fall in 12 months",sp(a.mdd_1y,0))+others,q?"Data: Yahoo Finance daily prices, "+esc(q.window_days)+" trading days. "+upd(q.as_of)+".":"");
+h+=blk("RISK",q?tag(q.as_of,14):'<span class="stg stale">NO DATA YET</span>',spark(t)+kv("Volatility a year",p1(a.vol_1y,0))+kv("Beta to the S&P 500",f2(a.beta_1y))+kv("From 12-month high",sp(a.from_high_1y,0))+kv("Worst fall in 12 months",sp(a.mdd_1y,0))+others,q?"Data: "+psrc()+" daily prices, "+esc(q.window_days)+" trading days. "+upd(q.as_of)+".":"");
 h+=blk("ABOUT",'',kv("Sector",'<i class="sw" style="background:'+col(a.sector)+'"></i>'+esc(a.sector||DASH))+kv("Country",esc(a.country||DASH))+kv("Earns mostly in",esc(a.ccy||DASH))+kv("Theme",esc(a.theme||DASH)),"Hand-kept reference list.");
 return h+'<div class="row"><button class="btn sm" data-mc="logit" data-t="'+esc(t)+'">Log a trade in '+esc(t)+'</button><button class="btn sm" data-mc="askq" data-q="What do the records say about '+esc(t)+' right now?">Ask the Council about '+esc(t)+'</button></div>';}
 function openPos(t){st.open=t;var el=$("ppanel");if(!el){el=document.createElement("div");el.id="ppanel";el.className="ppanel";el.setAttribute("role","dialog");el.setAttribute("aria-label","Position panel");document.body.appendChild(el);}
@@ -249,7 +250,7 @@ ag("","Consultant","Turns a pick into a size, using a mechanical rule against yo
 ag("","Advisor","Long-term judgment on each pick and one question for you each week.","picks, track record",dg,9,"A1 "+MID+" REPORTS")+
 ag("","Bookkeeper","Exchange rate, paper portfolio, price alerts, the daily brief and the evening summary.","Twelve Data, Alpha Vantage, MNB",stt.books_ran_at,12,"A3 "+MID+" KEEPS RECORDS")+
 ag("","Inbox clerk","Records the trades you log, applies settings, forwards new picks to your phone.","your entries from the app",stt.inbox_last_entry_at,40,"A3 "+MID+" KEEPS RECORDS")+
-ag("","Calculation engine","Not an AI: plain code for correlations, volatility, the health check and the optimiser comparison.","Yahoo Finance price history, treasury snapshot",q&&q.as_of,14,"A3 "+MID+" KEEPS RECORDS")+'</div>'+
+ag("","Calculation engine","Not an AI: plain code for correlations, volatility, the health check and the optimiser comparison.",psrc()+" price history, treasury snapshot",q&&q.as_of,14,"A3 "+MID+" KEEPS RECORDS")+'</div>'+
 slot("cc-extra",null,"")+'<div class="src">Autonomy levels: A1 observes and reports. A2 prepares a decision for your yes or no. A3 keeps the records on its own. No agent has a level that can place an order. A hollow amber dot means the agent is later than its schedule.</div>';}
 
 /* ---------- system ---------- */
@@ -279,7 +280,7 @@ var form='<details class="sub"><summary>Set or change your risk profile</summary
 '<label class="fld"><span>Short selling</span><select id="pr-sh"><option value="off">off</option><option value="on"'+(pr&&pr.allow_shorts?" selected":"")+'>on (needs level 4 or 5)</option></select></label></div><div class="gap"><button class="btn" data-mc="pr-save" style="width:100%">Save risk profile</button></div><div id="pr-stat"></div></details>';
 el.innerHTML=head("SYSTEM","System",tag(stt.books_ran_at,12))+
 (q&&q.stress?blk("MARKET STRESS LEVEL",tag(q.as_of,14),'<div style="font-size:19px;font-weight:800">'+esc(String(q.stress.level).toUpperCase())+'</div>'+kv("S&P 500 fund against its 12-month high",sp(q.stress.spy_from_high,1))+kv("Against its 200-day average",sp(q.stress.spy_vs_200d,1))+kv("20-day volatility, yearly rate",p1(q.stress.spy_vol_20d,0))+
-'<div class="src">'+q.stress.rules.map(esc).join(". ")+'.</div>'+slot("sy-doom",null,'<div class="nbx gap">'+NB+' What to sell, in what order, what to move into and when to return. <span class="fl">Upgrade item 17.</span></div>'),"Prices to "+sd(q.stress.as_of)+", Yahoo Finance."):"")+
+'<div class="src">'+q.stress.rules.map(esc).join(". ")+'.</div>'+slot("sy-doom",null,'<div class="nbx gap">'+NB+' What to sell, in what order, what to move into and when to return. <span class="fl">Upgrade item 17.</span></div>'),"Prices to "+sd(q.stress.as_of)+", "+psrc()+"."):"")+
 '<div class="g2"><div>'+blk("DATA SOURCES",'<span class="stg lvl">'+src.filter(function(s){return s.ok;}).length+"/"+src.filter(function(s){return !s.opt;}).length+' LIVE</span>',sr,"Connector status comes from the last bookkeeping run; engine sources from the last engine run.")+
 blk("PEOPLE AND RISK PROFILES",pr?(pr.set?'<span class="stg live">SET BY YOU</span>':'<span class="stg stale">DEFAULT '+MID+' NOT SET</span>'):NB,prof+form,"The profile sets the limits used by the health check and by every suggested size. More people with private logins: upgrade item 20.")+'</div><div>'+
 blk("ROUTINE RUNS",st.runs?tag(st.runs.at,2):'',runs,"Read live from the repository's commit history and workflow runs.")+
