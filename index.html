@@ -312,6 +312,7 @@ footer{margin-top:26px;font-size:11.5px;color:var(--dim);line-height:1.55}
 <section class="view" id="v-risk" hidden><div class="msg">Loading the risk desk&hellip; If this stays, tap refresh.</div></section>
 <section class="view" id="v-research" hidden><div class="msg">Loading the research desk&hellip; If this stays, tap refresh.</div></section>
 <section class="view" id="v-council" hidden><div class="msg">Loading the council&hellip; If this stays, tap refresh.</div></section>
+<section class="view" id="v-strategy" hidden><div class="msg">Loading the strategy&hellip; If this stays, tap refresh.</div></section>
 <section class="view" id="v-system" hidden><div class="msg">Loading the system screen&hellip; If this stays, tap refresh.</div></section>
 <section class="view" id="v-today">
 <div id="install"></div>
@@ -562,10 +563,10 @@ var K={tok:"mc_gh_token",pf:"mc_show_pf",tab:"mc_tab",pend:"mc_pending",inst:"mc
 var SIG={rumor:"Rumor",confirmed_news:"News",mispricing_undervalued:"Undervalued",
 mispricing_overvalued:"Overvalued",technical:"Technical"};
 var MIS=["mispricing_undervalued","mispricing_overvalued"];
-var TABS=["today","brief","chat","log","portfolio","watch","review","map","risk","research","council","system"];
+var TABS=["today","brief","chat","log","portfolio","watch","review","map","risk","research","council","strategy","system"];
 var AREAS=["today","portfolio","research","council","system"];
-var AREA={today:"today",brief:"today",map:"portfolio",risk:"portfolio",portfolio:"portfolio",log:"portfolio",research:"research",watch:"research",council:"council",chat:"council",system:"system",review:"system"};
-var SUBS={today:[["today","NOW"],["brief","BRIEF"]],portfolio:[["map","MAP"],["risk","RISK"],["portfolio","BOOKS"],["log","LOG A TRADE"]],research:[["research","DESK"],["watch","WATCHLIST"]],council:[["council","TEAM"],["chat","CHAT"]],system:[["system","STATUS"],["review","TRACK RECORD"]]};
+var AREA={today:"today",brief:"today",map:"portfolio",risk:"portfolio",portfolio:"portfolio",log:"portfolio",research:"research",watch:"research",council:"council",chat:"council",strategy:"council",system:"system",review:"system"};
+var SUBS={today:[["today","NOW"],["brief","BRIEF"]],portfolio:[["map","MAP"],["risk","RISK"],["portfolio","BOOKS"],["log","LOG A TRADE"]],research:[["research","DESK"],["watch","WATCHLIST"]],council:[["council","TEAM"],["strategy","STRATEGY"],["chat","CHAT"]],system:[["system","STATUS"],["review","TRACK RECORD"]]};
 var MONEY=["buy","sell","deposit","withdraw"];
 var FILES={digest:"digests/latest.json",treasury:"treasury/snapshot.json",ledger:"treasury/ledger.json",
 track:"state/track_record.json",history:"digests/history.json",paper:"state/paper.json",fx:"state/fx.json",
