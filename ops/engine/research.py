@@ -207,16 +207,22 @@ def openinsider(tk):
 
 
 def dataroma(tk):
-    try:
-        html = get("https://www.dataroma.com/m/stock.php?sym=" + urllib.parse.quote(tk), as_json=False)
-    except Exception:
-        return None
-    out = []
-    for row in re.findall(r"<tr[^>]*>(.*?)</tr>", html, re.S):
-        cells = [re.sub(r"<[^>]+>", "", c).replace("&nbsp;", " ").strip() for c in re.findall(r"<td[^>]*>(.*?)</td>", row, re.S)]
-        if len(cells) >= 4 and "holdings.php" in row:
-            out.append({"investor": cells[1][:70], "pct_of_their_portfolio": num(cells[2]), "recent_activity": cells[3][:40], "shares": num(cells[4]) if len(cells) > 4 else None})
-    return out[:12]
+    out = None
+    for attempt in (0, 1):
+        try:
+            html = get("https://www.dataroma.com/m/stock.php?sym=" + urllib.parse.quote(tk), as_json=False)
+        except Exception:
+            time.sleep(3)
+            continue
+        out = []
+        for row in re.findall(r"<tr[^>]*>(.*?)</tr>", html, re.S):
+            cells = [re.sub(r"<[^>]+>", "", c).replace("&nbsp;", " ").strip() for c in re.findall(r"<td[^>]*>(.*?)</td>", row, re.S)]
+            if len(cells) >= 4 and "holdings.php" in row:
+                out.append({"investor": cells[1][:70], "pct_of_their_portfolio": num(cells[2]), "recent_activity": cells[3][:40], "shares": num(cells[4]) if len(cells) > 4 else None})
+        if out:
+            return out[:12]
+        time.sleep(3)
+    return out
 
 
 def price_move(tk, date, days):
@@ -279,7 +285,26 @@ def card(tk, meta, quant):
                                     "move_1d": price_move(tk, last["reported"] or "", 1), "move_5d": price_move(tk, last["reported"] or "", 5),
                                     "beats_in_last_4": len([h for h in hist if (h["surprise_pct"] or 0) > 0]),
                                     "limits": "Numbers only: results against forecasts and the price reaction. The call itself has not been read."}}
-    oi = openinsider(tk)
+    # A source that does not answer in one run must not wipe what it said before: keep the last good copy for up to 100 days and say so.
+    oldc = rj("research/cards/" + tk + ".json", {}) or {}
+    olds = oldc.get("smart_money") or {}
+
+    def fresh(block):
+        at = str((block or {}).get("as_of") or oldc.get("as_of") or "")
+        try:
+            return (now() - datetime.datetime.strptime(at[:10], "%Y-%m-%d").replace(tzinfo=datetime.timezone.utc)).days <= 100, at
+        except Exception:
+            return False, at
+    oi, oi_at, oi_kept = openinsider(tk), iso(), False
+    if oi is None and (olds.get("insiders") or {}).get("trades"):
+        ok, at = fresh(olds["insiders"])
+        if ok:
+            oi, oi_at, oi_kept = olds["insiders"]["trades"], at, True
+    kh, kh_at, kh_kept = dataroma(tk), iso(), False
+    if not kh and (olds.get("known_investors") or {}).get("holders"):
+        ok, at = fresh(olds["known_investors"])
+        if ok:
+            kh, kh_at, kh_kept = olds["known_investors"]["holders"], at, True
     inst = nq("company/" + tk + "/institutional-holdings?limit=8&type=TOTAL&sortColumn=marketValue&sortOrder=DESC") or {}
     own = (inst.get("ownershipSummary") or {})
     holders = ((inst.get("holdingsTransactions") or {}).get("table") or {}).get("rows") or []
@@ -288,11 +313,11 @@ def card(tk, meta, quant):
     sells = [x for x in (oi or []) if x["type"].startswith("S") and x["traded"] >= cut]
     c["smart_money"] = {"insiders": {"trades": (oi or [])[:12], "open_market_buys_90d": len(buys), "open_market_sales_90d": len(sells),
                                      "buy_value_90d": r(sum(x["value"] or 0 for x in buys), 0), "sale_value_90d": r(sum(abs(x["value"] or 0) for x in sells), 0),
-                                     "source": "OpenInsider (SEC Form 4): filing date and trade date" if oi is not None else None},
+                                     "source": "OpenInsider (SEC Form 4): filing date and trade date" if oi is not None else None, "as_of": oi_at, "kept": oi_kept},
                         "institutions": {"held_pct": num((own.get("SharesOutstandingPCT") or {}).get("value")),
                                          "top": [{"holder": h.get("ownerName"), "shares": num(h.get("sharesHeld")), "change": num(h.get("sharesChange")), "as_of": mdy(h.get("date"))} for h in holders[:8]],
                                          "source": "Nasdaq institutional holdings (13F filings, quarterly, up to 45 days late)"},
-                        "known_investors": {"holders": dataroma(tk), "source": "Dataroma (13F filings of well-known investors, quarterly)"},
+                        "known_investors": {"holders": kh, "source": "Dataroma (13F filings of well-known investors, quarterly)", "as_of": kh_at, "kept": kh_kept},
                         "politicians": {"status": "not available", "reason": "no free source of congressional trades answers from GitHub's servers"}}
     beta = a.get("beta_1y")
     rf = (quant.get("opt") or {}).get("rf") or 0.04
