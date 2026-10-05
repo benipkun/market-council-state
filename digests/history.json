@@ -599,6 +599,13 @@
               "Is holding (or adding to) UBER at these levels still the best use of the next dollar versus trimming toward the index (SPY) for diversification, given the position is already more than three times the guideline cap?"
             ],
             "note": "Same question as every daily check-in until the position size changes: is 79% in one name a position the user would build from scratch today, or only one they're holding because it's already there?"
+          },
+          "graded": {
+            "checked_at": "2026-10-05T09:25:00Z",
+            "price_then": 68.16,
+            "price_now": 68.11,
+            "pct_change": -0.07,
+            "outcome": "inconclusive"
           }
         }
       ]
@@ -642,6 +649,13 @@
               "If this deal's oral candidate fails in later-stage trials (the base-rate outcome for most early in-licensed assets), how would you find out, and would that meaningfully change your read on management's capital-allocation judgment given the stock is already down >70% from its peak on the same underlying competitive/patent story?",
               "NVO is currently a real (if underwater) position at ~11.7% of NAV -- does today's news change your intended holding period, or is this still the same multi-year GLP-1-franchise-durability bet as when it was first picked?"
             ]
+          },
+          "graded": {
+            "checked_at": "2026-10-05T09:25:00Z",
+            "price_then": 38.8,
+            "price_now": 37.32,
+            "pct_change": -3.81,
+            "outcome": "contradicted"
           }
         }
       ]
