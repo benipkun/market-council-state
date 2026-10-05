@@ -153,6 +153,9 @@ def dcf(tk, fin, price, shares, beta, rf, meta):
         eq = ev - a["net_debt"]
         return rows, tv, ev, eq / a["shares"] if a["shares"] else None
     rows, tv, ev, fair = run(A)
+    if fair is None or fair <= 0:
+        return {"status": "not meaningful", "as_of": iso(), "assumptions": A,
+                "reason": "At today's operating margin (%.1f%%) the forecast cash flows do not cover the net debt, so the model gives no positive value. That says the business must improve its margins for the shares to be worth anything on cash flow; it is not a price target." % (100 * margin)}
     sens = []
     for dw in (-0.01, 0.0, 0.01):
         line = []
@@ -212,7 +215,7 @@ def dataroma(tk):
     for row in re.findall(r"<tr[^>]*>(.*?)</tr>", html, re.S):
         cells = [re.sub(r"<[^>]+>", "", c).replace("&nbsp;", " ").strip() for c in re.findall(r"<td[^>]*>(.*?)</td>", row, re.S)]
         if len(cells) >= 4 and "holdings.php" in row:
-            out.append({"investor": cells[1][:70] if cells[0] == "" else cells[0][:70], "pct_of_their_portfolio": num(cells[2]), "recent_activity": cells[3][:40]})
+            out.append({"investor": cells[1][:70], "pct_of_their_portfolio": num(cells[2]), "recent_activity": cells[3][:40], "shares": num(cells[4]) if len(cells) > 4 else None})
     return out[:12]
 
 
@@ -252,7 +255,7 @@ def card(tk, meta, quant):
     news = (nq("news/topic/articlebysymbol?q=" + tk.lower() + "%7Cstocks&offset=0&limit=6&fallback=false") or {}).get("rows") or []
     c["news"] = [{"title": str(n.get("title"))[:160], "date": str(n.get("created") or n.get("ago") or "")[:24], "publisher": n.get("publisher"),
                   "url": "https://www.nasdaq.com" + str(n.get("url") or "")} for n in news[:6]]
-    fl = (nq("company/" + tk + "/sec-filings?limit=6&sortColumn=filed&sortOrder=desc") or {}).get("filings") or {}
+    fl = nq("company/" + tk + "/sec-filings?limit=6&sortColumn=filed&sortOrder=desc") or {}
     c["filings"] = [{"form": x.get("formType"), "filed": mdy(x.get("filed")), "period": mdy(x.get("period")), "company": x.get("companyName"),
                      "url": ((x.get("view") or {}).get("htmlLink"))} for x in (fl.get("rows") or [])[:6]]
     es = ((nq("company/" + tk + "/earnings-surprise") or {}).get("earningsSurpriseTable") or {}).get("rows") or []
