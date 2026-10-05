@@ -1,76 +1,116 @@
 {
   "events": [
     {
-      "event_id": "spy-sept-jobs-report-miss-20261002",
-      "tickers": ["SPY"],
-      "headline_fingerprint": "september nonfarm payrolls miss expectations oct 2 2026 futures surge fed october rate cut bets increase 10yr treasury yield eases to 5.18pct 30yr 5.57pct",
-      "first_seen": "2026-10-02T13:11:00Z"
-    },
-    {
       "event_id": "ryaay-sept-traffic-report-20261002",
-      "tickers": ["RYAAY"],
+      "tickers": [
+        "RYAAY"
+      ],
       "headline_fingerprint": "ryanair september 2026 traffic report 20.1 million passengers up 4.0 pct yoy over 1000 flights cancelled uk atc outage belgian atc strikes mt etna eruptions",
       "first_seen": "2026-10-02T16:13:00Z"
     },
     {
       "event_id": "sap-ubs-downgrade-neutral-20260826",
-      "tickers": ["SAP"],
+      "tickers": [
+        "SAP"
+      ],
       "headline_fingerprint": "sap ubs downgrade to neutral from buy price target raised to eur201 from eur164 slow agentic ai agent rollout 17 of 200 h2 cloud backlog deceleration dated august 26 2026",
       "first_seen": "2026-10-02T16:13:00Z"
     },
     {
       "event_id": "nvo-cfra-downgrade-sell-20260923",
-      "tickers": ["NVO"],
+      "tickers": [
+        "NVO"
+      ],
       "headline_fingerprint": "cfra downgrades novo nordisk to sell from hold price target usd 38 dated around sept 23 2026",
       "first_seen": "2026-10-02T18:08:00Z"
     },
     {
       "event_id": "avav-locust-international-order-20261002",
-      "tickers": ["AVAV"],
+      "tickers": [
+        "AVAV"
+      ],
       "headline_fingerprint": "aerovironment receives first international purchase order for locust laser weapon system no dollar figure disclosed oct 2 2026",
       "first_seen": "2026-10-02T18:08:00Z"
     },
     {
       "event_id": "uber-eats-search-latency-20261002",
-      "tickers": ["UBER"],
+      "tickers": [
+        "UBER"
+      ],
       "headline_fingerprint": "uber eats rebuilds search pipeline cuts end to end latency 50 pct engineering post no financial quantification oct 2 2026",
       "first_seen": "2026-10-02T18:08:00Z"
     },
     {
       "event_id": "sap-nvidia-joule-studio-integration-undated",
-      "tickers": ["SAP"],
+      "tickers": [
+        "SAP"
+      ],
       "headline_fingerprint": "sap nvidia connect openshell runtime isolation joule studio business governance layer authorization identity access management audit trails undated",
       "first_seen": "2026-10-02T18:08:00Z"
     },
     {
       "event_id": "nvo-denecimig-fda-delay-20261004",
-      "tickers": ["NVO"],
+      "tickers": [
+        "NVO"
+      ],
       "headline_fingerprint": "fda extends review timeline for novo nordisk hemophilia candidate denecimig manufacturing facility remediation launch pushed to h1 2027 no safety efficacy issues identified early october 2026",
       "first_seen": "2026-10-05T09:25:00Z"
     },
     {
       "event_id": "nvo-4b-obesity-licensing-hrs1596-ubt251-20261004",
-      "tickers": ["NVO"],
+      "tickers": [
+        "NVO"
+      ],
       "headline_fingerprint": "novo nordisk 4 billion usd strategic licensing deals early stage obesity candidates hrs-1596 ubt251 announced early october 2026",
       "first_seen": "2026-10-05T09:25:00Z"
     },
     {
       "event_id": "uber-bnp-paribas-106-target-20261004",
-      "tickers": ["UBER"],
+      "tickers": [
+        "UBER"
+      ],
       "headline_fingerprint": "bnp paribas sets 106 dollar price target uber falling robotaxi costs unlock massive market growth early october 2026",
       "first_seen": "2026-10-05T09:25:00Z"
     },
     {
       "event_id": "duol-gc-insider-sale-20261004",
-      "tickers": ["DUOL"],
+      "tickers": [
+        "DUOL"
+      ],
       "headline_fingerprint": "duolingo general counsel sells over 8000 shares raises 1.2 million dollars early october 2026",
       "first_seen": "2026-10-05T09:25:00Z"
     },
     {
       "event_id": "uber-wells-fargo-92-target-20261005",
-      "tickers": ["UBER"],
+      "tickers": [
+        "UBER"
+      ],
       "headline_fingerprint": "wells fargo raises uber price target to 92 dollars from 89 overweight maintained q4 gross bookings 64.9 billion forecast 2027 ebitda estimate raised 70bps to 14.1 billion on headcount reduction uplift october 5 2026",
       "first_seen": "2026-10-05T11:12:00Z"
+    },
+    {
+      "event_id": "avav-bofa-goldman-pt-cuts-20261005",
+      "tickers": [
+        "AVAV"
+      ],
+      "headline_fingerprint": "bofa cuts avav price target to 185 from 225 goldman sachs cuts target to 285 from 326 both maintain buy rating october 5 2026",
+      "first_seen": "2026-10-05T14:12:00Z"
+    },
+    {
+      "event_id": "duol-ceo-liquidates-direct-shares-20261005",
+      "tickers": [
+        "DUOL"
+      ],
+      "headline_fingerprint": "duolingo ceo liquidates entire directly held class a share position for 4.3 million dollars early october 2026",
+      "first_seen": "2026-10-05T14:12:00Z"
+    },
+    {
+      "event_id": "sap-buyback-590k-shares-20261005",
+      "tickers": [
+        "SAP"
+      ],
+      "headline_fingerprint": "sap completes buyback of 590000 shares approximately eur 108.37 million ahead of q3 results october 2026",
+      "first_seen": "2026-10-05T14:12:00Z"
     }
   ]
 }

@@ -759,6 +759,13 @@
           "brief": "GuruFocus's GF Value model pegs ASML's intrinsic value at ~$1,270 vs a ~$1,815 ADR price -- ~43% overvalued -- sharply contradicting the ~15-17% *undervalued* read this pipeline has carried all session using analyst consensus ($2,115.91 target). This is a persistent, multi-source-corroborated divergence (GuruFocus has run near-identical 'ASML overvalued 40-45%' pieces repeatedly since August), not a one-off rumor.",
           "why": "Samsung and SK Hynix have pushed High-NA EUV production adoption out to 2028 and TSMC to 2030 (later than prior targets), delaying the next capex upgrade cycle that GF Value's model weights heavily, while sell-side consensus targets have not yet re-rated for the slower adoption curve.",
           "price_at_pick": 1814.75,
+          "graded": {
+            "checked_at": "2026-10-05T14:12:00Z",
+            "price_then": 1814.75,
+            "price_now": 1846.43,
+            "pct_change": 1.75,
+            "outcome": "contradicted"
+          },
           "bull_case": "Analyst consensus (a separate, sell-side-driven method) still sees ~17% upside to $2,115.91; ASML retains an effective monopoly on EUV lithography and its installed-base/service revenue is largely insulated from a High-NA adoption-timing slip; a 2028-2030 push is a multi-year delay, not a demand cancellation.",
           "bear_case": "GuruFocus's intrinsic-value model -- which has flagged ASML as 40-45% overvalued repeatedly since August -- treats the High-NA delay as a material capex-cycle headwind; if the delay compresses ASML's next 2-3 years of High-NA-driven revenue growth, the stock is pricing in an upgrade cycle that keeps slipping.",
           "risks": [
@@ -795,6 +802,13 @@
           "severity": 1,
           "brief": "Daily long-term check-in on the largest holding, independent of today's news",
           "price_at_pick": 68.89,
+          "graded": {
+            "checked_at": "2026-10-05T14:12:00Z",
+            "price_then": 68.89,
+            "price_now": 69.63,
+            "pct_change": 1.07,
+            "outcome": "inconclusive"
+          },
           "position_suggestion": {
             "tier": "none",
             "suggested_size_usd": 0.0,
