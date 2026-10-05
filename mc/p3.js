@@ -91,7 +91,7 @@ else h+='<div class="p3b"><button class="y" data-p3="ans" data-k="morning" data-
 return h+'</div>';}).join("")||'<div class="nbx">Nothing needs a decision today.</div>';
 var open=m.questions.filter(function(q){var c=byId[q.id];return c?(c.status==="open"&&!said(c.id,null)):!said(q.id,q.answer);}).length;
 return M.blk("DECISIONS WAITING FOR YOU",open?'<span class="stg stale">'+open+" WAITING</span>":M.tag(d.as_of,14),'<div class="fl" style="font-size:12px;margin-bottom:4px">Morning check, '+esc(M.sd(m.date))+": "+esc(m.summary.join(" "))+'</div>'+qs+'<div id="p3-stat"></div>',
-"Your answers are saved as small files in the repository and read by the engine. Phone message: "+esc(m.sent_note||"not sent yet today")+". "+M.upd(d.as_of)+".");};
+"Your answers are saved as small files in the repository and read by the engine. Phone message: "+esc(/^sent \d{4}-/.test(m.sent_note||"")?"sent "+MC.when(m.sent_note.slice(5)):(m.sent_note||"not sent yet today"))+". "+M.upd(d.as_of)+".");};
 
 /* ---------- position panel: decision card and hold plan (items 13, 16) ---------- */
 M.slots["pp-dec"]=function(t){var d=D();if(!d)return "";var cs=(d.cards||[]).filter(function(c){return (c.status==="open"||c.status==="approved")&&(c.ticker===t||(c.orders||[]).some(function(o){return o.ticker===t;}));});
@@ -111,7 +111,7 @@ h.range.map(function(r){return "<tr><td>"+r.months+(r.months===1?" month":" mont
 /* ---------- risk: rebalance plan, timed plans, range and goal (items 14, 15, 16) ---------- */
 function planRows(p){return p.status==="stopped"?"stopped":(p.status==="finished"?"finished":"next "+(p.next?M.sd(p.next):DASH));}
 M.slots["rk-extra"]=function(){var d=D();if(!d)return "";var r=d.rebalance,h="";
-if(r){var rows=r.rows.map(function(x){return "<tr><td><b>"+esc(x.t)+"</b>"+(x.eu?' <span class="fl">'+MID+" EU: "+esc(x.eu)+"</span>":"")+"<br><span class='fl'>"+esc(x.name||"")+"</span></td><td>"+pc(x.now,1)+"</td><td>"+pc(x.target,1)+"</td><td>"+(Math.abs(x.change_usd)<1?DASH:(vis()?M.sm(x.change_usd):sg(x.target-x.now,1)))+"</td></tr>";}).join("");
+if(r){var rows=r.rows.map(function(x){return "<tr><td style='white-space:normal'><b>"+esc(x.t)+"</b> <span class='fl'>"+esc(x.name||"")+(x.eu?" "+MID+" EU: "+esc(x.eu):"")+"</span></td><td>"+pc(x.now,1)+"</td><td>"+pc(x.target,1)+"</td><td>"+(Math.abs(x.change_usd)<1?DASH:(vis()?M.sm(x.change_usd):sg(x.target-x.now,1)))+"</td></tr>";}).join("");
 h+=M.blk("REBALANCE PLAN",r.needed?'<span class="stg stale">PART '+r.part+" OF "+r.tranches+" DUE "+esc(M.sd(r.next_part_due)).toUpperCase()+"</span>":'<span class="stg live">IN BALANCE</span>',
 (r.needed?"":'<div class="nbx">Every position is inside its limit. Nothing to rebalance.</div>')+'<div class="ox"><table class="mt"><tr><th>Position</th><th>Now</th><th>Target</th><th>Change</th></tr>'+rows+
 "<tr><td><b>Cash</b></td><td>"+pc(r.cash_now,1)+"</td><td>"+pc(r.cash_target,1)+"</td><td></td></tr></table></div>"+
