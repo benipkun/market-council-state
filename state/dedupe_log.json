@@ -135,6 +135,22 @@
       ],
       "headline_fingerprint": "fourth uber passenger sexual assault mdl bellwether trial begins october 5 2026 judge breyer n.d. cal no verdict yet procedural scheduled per july 13 court order",
       "first_seen": "2026-10-05T21:22:00Z"
+    },
+    {
+      "event_id": "uber-tomtom-nuro-lucid-robotaxi-recirculated-stale-20261005",
+      "tickers": [
+        "UBER"
+      ],
+      "headline_fingerprint": "uber shares jump 5.8 pct tomtom mapping partnership renewal new robotaxi with nuro and lucid san francisco testing gsa uber one federal employee expansion -- undated claim inconsistent with confirmed flat twelve data price action checked and disregarded",
+      "first_seen": "2026-10-05T23:11:00Z"
+    },
+    {
+      "event_id": "nvo-fda-suicidal-ideation-warning-removal-unverified-20261005",
+      "tickers": [
+        "NVO"
+      ],
+      "headline_fingerprint": "fda instructs eli lilly and novo nordisk to remove suicidal thoughts behavior warning from glp-1 drug labels wegovy saxenda zepbound -- no corroborating date found checked and disregarded as unverified timing",
+      "first_seen": "2026-10-05T23:11:00Z"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-05T21:22:00Z",
+  "as_of": "2026-10-05T23:11:00Z",
   "cash": 1.83,
   "nav": 817.06,
   "cash_pct_of_nav": 0.22,
@@ -8,7 +8,7 @@
     "ytd": 0.0
   },
   "concentration_flags": [
-    "UBER is ~79.49% of NAV -- a single adverse event (the fourth Uber sexual-assault MDL bellwether trial beginning Oct 5 2026, the $40M California wrongful-death arbitration award reported mid-September 2026, the separately settled sexual-assault case with no disclosed terms, the pending Delivery Hero acquisition's integration/financing risk, execution/leverage risk from the EUR4.5B euro bond raise, or intensifying robotaxi competition from Tesla's Cybercab, Waymo, or Uber's own AV-partner strategy) would disproportionately hit the portfolio; cash is effectively nil at ~0.22% of NAV, so there is no cushion against a UBER-specific shock."
+    "UBER is ~79.49% of NAV -- a single adverse event (the fourth Uber sexual-assault MDL bellwether trial that began Oct 5 2026, the $40M California wrongful-death arbitration award reported mid-September 2026, the separately settled sexual-assault case with no disclosed terms, the pending Delivery Hero acquisition's integration/financing risk, execution/leverage risk from the EUR4.5B euro bond raise, or intensifying robotaxi competition from Tesla's Cybercab, Waymo, or Uber's own AV-partner strategy) would disproportionately hit the portfolio; cash is effectively nil at ~0.22% of NAV, so there is no cushion against a UBER-specific shock."
   ],
   "trim_considerations": [
     {
@@ -27,7 +27,7 @@
       "cost_basis": 701.75,
       "market_value": 649.47,
       "last_price": 69.495,
-      "price_as_of": "2026-10-05T21:22:00Z",
+      "price_as_of": "2026-10-05T23:11:00Z",
       "pct_nav": 79.49
     },
     {
@@ -37,7 +37,7 @@
       "cost_basis": 95.0,
       "market_value": 92.78,
       "last_price": 37.54,
-      "price_as_of": "2026-10-05T21:22:00Z",
+      "price_as_of": "2026-10-05T23:11:00Z",
       "pct_nav": 11.36
     },
     {
@@ -47,7 +47,7 @@
       "cost_basis": 75.12,
       "market_value": 72.98,
       "last_price": 18.245,
-      "price_as_of": "2026-10-05T21:22:00Z",
+      "price_as_of": "2026-10-05T23:11:00Z",
       "pct_nav": 8.93
     }
   ]
