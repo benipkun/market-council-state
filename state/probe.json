@@ -1,0 +1,139 @@
+{
+ "as_of": "2026-10-05T04:18:09Z",
+ "sources": {
+  "nasdaq quote": {
+   "ok": true,
+   "http": 200,
+   "bytes": 752,
+   "start": "{\"data\":{\"symbol\":\"UBER\",\"companyName\":\"Uber Technologies, Inc. Common Stock\",\"stockType\":\"Common Stock\",\"exchange\":\"NYSE\",\"isNasdaqListed\":false,\"isNasdaq100\":false,\"isHeld\":false,\"primaryData\":{\"lastSalePrice\":\"$68.11\""
+  },
+  "nasdaq financials": {
+   "ok": true,
+   "http": 200,
+   "bytes": 10605,
+   "start": "{\"data\":{\"symbol\":\"UBER\",\"tabs\":{\"incomeStatementTable\":\"Income Statement\",\"balanceSheetTable\":\"Balance Sheet\",\"cashFlowTable\":\"Cash Flow\",\"financialRatiosTable\":\"Financial Ratios\"},\"incomeStatementTable\":{\"asOf\":null,\"h"
+  },
+  "nasdaq financials adr": {
+   "ok": true,
+   "http": 200,
+   "bytes": 10479,
+   "start": "{\"data\":{\"symbol\":\"NVO\",\"tabs\":{\"incomeStatementTable\":\"Income Statement\",\"balanceSheetTable\":\"Balance Sheet\",\"cashFlowTable\":\"Cash Flow\",\"financialRatiosTable\":\"Financial Ratios\"},\"incomeStatementTable\":{\"asOf\":null,\"he"
+  },
+  "nasdaq insider trades": {
+   "ok": true,
+   "http": 200,
+   "bytes": 3785,
+   "start": "{\"data\":{\"title\":null,\"numberOfTrades\":{\"asOf\":null,\"headers\":{\"insiderTrade\":\"Insider Trade\",\"months3\":\"3 Months\",\"months12\":\"12 Months\"},\"rows\":[{\"insiderTrade\":\"Number of Open Market Buys\",\"months3\":\"2\",\"months12\":\"5\""
+  },
+  "nasdaq institutional holders": {
+   "ok": true,
+   "http": 200,
+   "bytes": 3881,
+   "start": "{\"data\":{\"ownershipSummary\":{\"SharesOutstandingPCT\":{\"label\":\"Institutional Ownership\",\"value\":\"94.01%\"},\"ShareoutstandingTotal\":{\"label\":\"Total Shares Outstanding (millions)\",\"value\":\"2,043\"},\"TotalHoldingsValue\":{\"labe"
+  },
+  "nasdaq price target": {
+   "ok": true,
+   "http": 200,
+   "bytes": 1738,
+   "start": "{\"data\":{\"symbol\":\"uber\",\"consensusOverview\":{\"lowPriceTarget\":72.0,\"highPriceTarget\":125.0,\"priceTarget\":102.77,\"buy\":27,\"sell\":0,\"hold\":2},\"historicalConsensus\":[{\"z\":{\"buy\":27,\"hold\":4,\"sell\":0,\"date\":\"10/01/2025\",\"co"
+  },
+  "nasdaq ratings": {
+   "ok": true,
+   "http": 200,
+   "bytes": 877,
+   "start": "{\"data\":{\"symbol\":\"uber\",\"meanRatingType\":\"Buy\",\"ratingsSummary\":\"Based on 39 analysts offering recommendations for 'UBER'.\",\"upgradesDowngrades\":[],\"brokerNames\":[\"B OF A GLBL RES\",\"BARCLAYS CAPITA\",\"BMO CAPITAL MKT\",\"B"
+  },
+  "nasdaq earnings surprise": {
+   "ok": true,
+   "http": 200,
+   "bytes": 946,
+   "start": "{\"data\":{\"symbol\":\"uber\",\"chart\":[{\"x\":\"1785888000\",\"y\":\"0.34\"},{\"x\":\"1778025600\",\"y\":\"0.02\"},{\"x\":\"1770163200\",\"y\":\"-0.08\"},{\"x\":\"1762214400\",\"y\":\"2.44\"}],\"earningsSurpriseTable\":{\"headers\":{\"fiscalQtrEnd\":\"Fiscal Quart"
+  },
+  "nasdaq earnings forecast": {
+   "ok": true,
+   "http": 200,
+   "bytes": 2018,
+   "start": "{\"data\":{\"symbol\":\"uber\",\"quarterlyForecast\":{\"asOf\":null,\"headers\":{\"fiscalEnd\":\"Fiscal Quarter End\",\"consensusEPSForecast\":\"Consensus EPS* Forecast\",\"highEPSForecast\":\"High EPS* Forecast\",\"lowEPSForecast\":\"Low EPS* For"
+  },
+  "nasdaq sec filings": {
+   "ok": true,
+   "http": 200,
+   "bytes": 7941,
+   "start": "{\"data\":{\"symbol\":\"UBER\",\"totalRecords\":79,\"latest\":[{\"label\":\"10-K\",\"value\":\"https://app.quotemedia.com/data/downloadFiling?webmasterId=90423&ref=319780565&type=HTML&symbol=UBER&cdn=4fd5596cb00d3f05de0a3cc4dc1a4578&comp"
+  },
+  "nasdaq news": {
+   "ok": true,
+   "http": 200,
+   "bytes": 3321,
+   "start": "{\"data\":{\"rows\":[{\"title\":\"MercadoLibre vs. Uber Technologies: Which Stock Is a Better Buy in 2026?\",\"image\":\"\",\"created\":\"Oct 4, 2026\",\"ago\":\"13 hours ago\",\"primarysymbol\":\"meli\",\"primarytopic\":\"Markets|4006\",\"publisher"
+  },
+  "nasdaq dividends": {
+   "ok": true,
+   "http": 200,
+   "bytes": 33155,
+   "start": "{\"data\":{\"dividendHeaderValues\":[{\"label\":\"Ex-Dividend Date\",\"value\":\"10/01/2026\"},{\"label\":\"Dividend Yield\",\"value\":\"4.81%\"},{\"label\":\"Annual Dividend\",\"value\":\"$3.738972\"},{\"label\":\"P/E Ratio\",\"value\":\"N/A\"}],\"exDivide"
+  },
+  "nasdaq history": {
+   "ok": true,
+   "http": 200,
+   "bytes": 2774,
+   "start": "{\"data\":{\"symbol\":\"UBER\",\"totalRecords\":23,\"tradesTable\":{\"asOf\":null,\"headers\":{\"date\":\"Date\",\"close\":\"Close/Last\",\"volume\":\"Volume\",\"open\":\"Open\",\"high\":\"High\",\"low\":\"Low\"},\"rows\":[{\"date\":\"10/02/2026\",\"close\":\"$68.11\""
+  },
+  "cnbc quote": {
+   "ok": true,
+   "http": 200,
+   "bytes": 1738,
+   "start": "{\"FormattedQuoteResult\":{\"FormattedQuote\":[{\"symbol\":\"UBER\",\"symbolType\":\"symbol\",\"code\":0,\"name\":\"Uber Technologies, Inc.\",\"shortName\":\"UBER\",\"onAirName\":\"Uber Tech.\",\"altName\":\"Uber Technologies, Inc.\",\"last\":\"68.11\",\""
+  },
+  "sec edgar submissions": {
+   "ok": false,
+   "error": "HTTP Error 403: Forbidden"
+  },
+  "sec edgar feed": {
+   "ok": false,
+   "error": "HTTP Error 403: Forbidden"
+  },
+  "openinsider": {
+   "ok": true,
+   "http": 200,
+   "bytes": 27569,
+   "start": "<!doctype html> <html lang=en> <head> <script type=\"text/javascript\" src=\"/js/sic.js\" async></script> <meta charset=utf-8> <title>UBER - Uber Technologies, Inc - SEC Form 4 Insider Trading Screener - OpenInsider</title> "
+  },
+  "dataroma": {
+   "ok": true,
+   "http": 200,
+   "bytes": 16610,
+   "start": "<!DOCTYPE html> <html lang=\"en-US\"> <head> <!-- Global site tag (gtag.js) - Google Analytics --> <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-53FSPN06Y3\"></script> <script> window.dataLayer = window.d"
+  },
+  "capitol trades": {
+   "ok": false,
+   "error": "HTTP Error 503: Service Unavailable"
+  },
+  "house disclosures index": {
+   "ok": true,
+   "http": 200,
+   "bytes": 62080,
+   "start": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000\u0004HB]G\ufffd!\ufffdad\u0000\u0000 X\u0001\u0000 \u0000$\u00002026FD.txt \u0000 \u0000\u0000\u0000\u0000\u0000\u0001\u0000\u0018\u0000\ufffd\u0001^\ufffdmR\ufffd\u0001\ufffd\u0001^\ufffdmR\ufffd\u00019]\u0004\u001a\ufffd{\ufffd\u0001\ufffd}Is\ufffd\u0232\ufffd\u001a7\ufffd\ufffd\u0007\ufffd\u067c\u0373\ufffdyX\u04a4\ufffd\ufffd\ufffd\ufffdg\ufffd\ufffd\ufffd\ufffdA$,\ufffd\u0005\u0002:\u0000a5\ufffd\ufffd_ef\ufffd*\u0013$%\ufffd#:zr~\u0004PCV\u000e_f}i\ufffd\ufffd\ufffd\ufffd\ufffdu\ufffdm\ufffd\u000fe\ufffd\ufffd~\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdn\ufffdT8\ufffd\ufffd|[\ufffd\ufffd \ufffd(\ufffdV\ufffd\ufffd\\\ufffd/g\ufffd,/\ufffd\ufffd\ufffd?\ufffd4o\ufffd\ufffd\ufffdZ.\ufffdy\ufffdr\ufffd\ufffd\ufffd\u0365\u001b:\ufffd\ufffd\ufffdN\ufffd\u038b\ufffd\u1fe5n\ufffd\ufffd\ufffd\ufffd"
+  },
+  "senate trades dataset": {
+   "ok": false,
+   "error": "HTTP Error 403: Forbidden"
+  },
+  "treasury bill rates": {
+   "ok": true,
+   "http": 200,
+   "bytes": 15766,
+   "start": "Date,\"4 WEEKS BANK DISCOUNT\",\"4 WEEKS COUPON EQUIVALENT\",\"6 WEEKS BANK DISCOUNT\",\"6 WEEKS COUPON EQUIVALENT\",\"8 WEEKS BANK DISCOUNT\",\"8 WEEKS COUPON EQUIVALENT\",\"13 WEEKS BANK DISCOUNT\",\"13 WEEKS COUPON EQUIVALENT\",\"17 W"
+  },
+  "fred 10-year yield": {
+   "ok": false,
+   "error": "The read operation timed out"
+  },
+  "stooq": {
+   "ok": true,
+   "http": 200,
+   "bytes": 796,
+   "start": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"robots\" content=\"noindex,nofollow\"></head><body><noscript>This site requires JavaScript to verify your browser. Please enable JavaScript and reload.</noscript>"
+  }
+ }
+}
