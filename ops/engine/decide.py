@@ -650,19 +650,22 @@ def morning(prev, cards, plans, snap, quant, holds_, smart, answers, now):
 
 def main():
     now = E.now_iso()
+    failed = []
     if not QUICK:
         try:
             import lab
             lab.main()
-        except Exception:
+        except Exception as e:
             print("lab failed")
             traceback.print_exc()
+            failed.append({"part": "testing lab", "error": str(e)[:160]})
         try:
             import strategy
             strategy.main()
-        except Exception:
+        except Exception as e:
             print("strategy failed")
             traceback.print_exc()
+            failed.append({"part": "house strategy", "error": str(e)[:160]})
     quant, snap = E.rj("state/quant.json", None), E.rj("treasury/snapshot.json", {}) or {}
     if not quant or not snap.get("nav"):
         print("decide: no engine numbers or no snapshot")
@@ -739,6 +742,7 @@ def main():
            "doomsday": doom_steps(pos, quant, lim, nav, uni, lab_out),
            "spreading": lab_out.get("spreading"),
            "answers": {"read": len(answers), "last": answers[-1]["at"] if answers else None},
+           "failed": failed if not QUICK else (prev.get("failed") or []),
            "inputs": {"quant": quant.get("as_of"), "books": snap.get("as_of"), "cards": ix.get("as_of"), "lab": lab_out.get("as_of")},
            "disclaimer": "Worked out from written rules and estimates. Not advice. Nothing here places an order; you place every order yourself."}
     out["morning"] = morning(prev.get("morning"), cards, plans, snap, quant, hp, smart, answers, now)
