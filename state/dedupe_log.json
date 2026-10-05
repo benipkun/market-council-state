@@ -111,6 +111,30 @@
       ],
       "headline_fingerprint": "sap completes buyback of 590000 shares approximately eur 108.37 million ahead of q3 results october 2026",
       "first_seen": "2026-10-05T14:12:00Z"
+    },
+    {
+      "event_id": "uber-sexual-assault-case-settled-20261005",
+      "tickers": [
+        "UBER"
+      ],
+      "headline_fingerprint": "uber technologies settled a sexual assault case following jury selection no disclosed terms october 5 2026",
+      "first_seen": "2026-10-05T16:13:00Z"
+    },
+    {
+      "event_id": "ryaay-jpmorgan-buy-eur32-target-20261005",
+      "tickers": [
+        "RYAAY"
+      ],
+      "headline_fingerprint": "jp morgan maintains buy rating eur 32 price target ryanair roughly 34.5 pct above eur 23.79 october 2 price october 2026",
+      "first_seen": "2026-10-05T16:13:00Z"
+    },
+    {
+      "event_id": "asml-277k-buyback-tranche-boa-barclays-buy-20261005",
+      "tickers": [
+        "ASML"
+      ],
+      "headline_fingerprint": "asml reports 277000 share repurchases covering sept 28 through oct 2 bank of america and barclays reiterate buy ahead of oct 14 q3 earnings",
+      "first_seen": "2026-10-05T16:13:00Z"
     }
   ]
 }
