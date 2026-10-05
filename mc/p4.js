@@ -15,6 +15,24 @@ function fall(v){var n=num(v);return n==null?DASH:MINUS+Math.abs(100*n).toFixed(
 function dl(s){return s?M.sd(s)+" "+String(s).slice(0,4):DASH;}
 function mn(s){return String(s==null?"":s).replace(/-(?=\d)/g,MINUS);}
 function det(sum,body,open){return '<details class="p3d"'+(open?" open":"")+'><summary>'+sum+'</summary>'+body+'</details>';}
+/* frequent trading: short-term rules judged after real fees (lab.tactical) */
+function sleeveHtml(){var lab=M.X.lab,t=lab&&lab.tactical;if(!t||t.status!=="ok")return "";var f=t.fee,best=t.rules.filter(function(r){return r.id===t.best;})[0];
+function yr(x){return x&&x.a_year!=null?(x.a_year<=-0.999?"wiped out":sg(x.a_year,1)):DASH;}
+var rows=t.rules.map(function(r){var sl=r.sleeve||{};return "<tr><td style='white-space:normal'>"+(r.id===t.best?"<b>"+esc(r.name)+"</b>":esc(r.name))+"</td><td>"+esc(r.trades)+"</td><td>"+(r.avg_gross==null?DASH:sg(r.avg_gross,2))+"</td><td>"+yr(sl.near_zero)+"</td><td>"+yr(sl.pct_only)+"</td><td>"+yr(sl.usd_1000)+"</td></tr>";}).join("");
+var det2=t.rules.map(function(r){if(!r.sleeve)return det(esc(r.name),'<div class="fl" style="font-size:12px">'+esc(r.rule)+" Too few trades to judge.</div>");var sl=r.sleeve;
+return det(esc(r.name)+(r.passes?"":" "+MID+" fails after costs"),'<div class="fl" style="font-size:12px;margin-bottom:6px">'+esc(r.rule)+'</div>'+
+M.kv("Trades in the test",esc(r.trades)+" (about "+esc(r.per_month)+" a month)")+M.kv("Winning trades",pc(r.win_rate))+M.kv("Average win / average loss",sg(r.avg_win,1)+" / "+sg(r.avg_loss,1))+M.kv("Worst single trade",sg(r.worst,0))+
+M.kv("Typical holding time",esc(r.median_days)+" trading days")+M.kv("Average per trade after 0.25% each way, first half / second half",sg(r.h1_net,2)+" / "+sg(r.h2_net,2))+
+M.kv("Smallest trade that pays the minimum fee on average",r.breakeven_stake?"$"+Math.round(r.breakeven_stake):"none")+
+'<div class="ox"><table class="mt p3w"><tr><th>Run as a sleeve of four trades</th><th>A year</th><th>Worst fall</th><th>Fees paid</th></tr>'+["near_zero","pct_only","usd_5000","usd_1000","usd_200"].map(function(k){var x=sl[k];return "<tr><td>"+esc(x.label)+"</td><td>"+yr(x)+"</td><td>"+fall(x.worst_fall)+"</td><td>$"+Math.round(x.fees)+"</td></tr>";}).join("")+'</table></div>'+
+(r.open.length?'<div class="lbl" style="margin-top:8px">In a trade now, on paper</div>'+r.open.map(function(o){return M.kv("<b>"+esc(o.t)+"</b> since "+esc(M.sd(o.since))+" at $"+M.f2(o.entry),M.sp(o.ret,1));}).join(""):'<div class="fl" style="font-size:12px;margin-top:6px">No open paper trade under this rule.</div>')+
+(r.paper?M.kv("Paper trades closed since "+esc(dl(r.paper.since)),esc(r.paper.closed)+", sum "+M.sp(r.paper.sum_net,1)):""));}).join("");
+return M.blk("FREQUENT TRADING: DOES IT PAY?",'<span class="stg paper">PAPER</span>','<div style="font-size:12.5px;font-weight:700">'+esc(mn(t.verdict))+'</div>'+
+'<div class="q"><b style="color:var(--tx)">What one trade costs you:</b> '+pc(f.pct,2)+" of the order, but at least about $"+M.f2(f.min_usd)+" (one euro). A 100-dollar trade therefore costs about "+pc(2*f.min_usd/100,1)+" to get in and out; only above about 450 dollars does it fall to "+pc(2*f.pct,1)+".</div>"+
+'<div class="ox"><table class="mt p3w"><tr><th>Rule</th><th>Trades</th><th>Average before costs</th><th>No-commission broker</th><th>Your broker, 0.25%</th><th>Your broker, $1,000 sleeve</th></tr>'+rows+'</table></div>'+
+'<div class="src">The last three columns are yearly results of a sleeve holding at most four trades at once. '+(t.cash_yield?"For comparison, short Treasuries pay about "+pc(t.cash_yield,1)+" a year without trading.":"")+'</div>'+det2+
+'<div class="q">'+(best?"The idea itself is not the problem: before costs the rules make money. Costs and trade size decide the result. With a small sleeve at this broker, frequent trading is a way of paying fees.":"No rule survived its costs in both halves of the test.")+" The rules keep running on paper here so you can watch them without paying.</div>",
+esc(t.method)+" Tested "+esc(dl(t.from))+" to "+esc(dl(t.to))+" on "+t.universe.length+" shares and funds: "+esc(t.universe.join(", "))+". Fees: "+esc(f.note)+" Limits: "+esc(t.limits.join(" "))+" "+M.upd(lab.as_of)+".");}
 function html(){var s=M.X.strat;if(!s)return '<div class="msg">The strategy file has not been written yet. It appears after the next engine run.</div>';
 if(s.status!=="ok"||!s.backtest)return M.head("HOUSE STRATEGY","Strategy",'<span class="stg stale">NO DATA</span>')+'<div class="msg">The engine could not load the price history for the strategy ('+esc(s.status)+').</div>';
 var bt=s.backtest,ch=bt.chosen,core=s.core,vis=MC.pfVisible(),h=M.head("HOUSE STRATEGY","Strategy",'<span class="stg paper">PAPER</span>');
@@ -24,7 +42,8 @@ h+=M.blk("THE IDEA",'<span class="stg lvl">VERSION '+esc(s.version)+'</span>','<
 "Built from your risk profile (level "+esc(s.profile.level)+", maximum loss "+pc(s.profile.max_loss)+"). Change the profile under SYSTEM and the choice is made again. "+M.upd(s.as_of)+".");
 h+=M.blk("THE RULES",'',s.rules.map(function(r){return '<div class="p4r"><span class="n">'+r.n+'</span><span>'+esc(r.rule)+'</span><span class="f">Borrowed from: '+esc(r.from)+'</span></div>';}).join(""),"Rules are fixed at go-live ("+esc(dl(s.go_live))+"). Everything after that date is a real test of them.");
 var tg=s.target.filter(function(x){return x.weight>0.0005;}).map(function(x){return "<tr><td style='white-space:normal'><b>"+esc(x.t)+"</b> <span class='fl'>"+esc(x.name)+(x.eu?" "+MID+" EU: "+esc(x.eu):"")+"</span></td><td>"+(x.kind==="core"?"core":(x.kind==="share"?"share":"parked"))+"</td><td>"+pc(x.weight,1)+"</td></tr>";}).join("");
-var gap=s.holdings_gap.map(function(g){return "<tr><td><b>"+esc(g.t)+"</b>"+(g.in_strategy?"":' <span class="fl">not in the strategy</span>')+"</td><td>"+pc(g.now,1)+"</td><td>"+pc(g.target,1)+"</td></tr>";}).join("");
+var keeps=(M.X.dec&&M.X.dec.keeps)||{};
+var gap=s.holdings_gap.map(function(g){return "<tr><td style='white-space:normal'><b>"+esc(g.t)+"</b>"+(g.in_strategy?"":(keeps[g.t]?' <span class="fl">kept by your decision</span>':' <span class="fl">not in the strategy</span>'))+"</td><td>"+pc(g.now,1)+"</td><td>"+pc(g.target,1)+"</td></tr>";}).join("");
 var sig=core.assets.map(function(a){return "<tr><td style='white-space:normal'><b>"+esc(a.t)+"</b> <span class='fl'>"+esc(a.name)+"</span></td><td>"+pc(a.vol_60d)+"</td><td>"+(a.above_avg?"above":"below")+"</td><td>"+pc(a.weight,1)+"</td></tr>";}).join("");
 h+=M.blk("WHAT IT WOULD HOLD TODAY",M.tag(s.as_of,14),'<div class="ox"><table class="mt p3w"><tr><th>Holding</th><th>Part</th><th>Weight</th></tr>'+tg+'</table></div>'+
 '<div class="lbl" style="margin-top:12px">Against what you hold</div><div class="ox"><table class="mt"><tr><th>Position</th><th>You</th><th>Strategy</th></tr>'+gap+'</table></div>'+
@@ -51,6 +70,7 @@ r.checks.map(function(c){return '<div class="p4k"><span>'+esc(c.name)+'<br><span
 h+=M.blk("SHARE SCORECARD",M.tag(s.as_of,14),'<div class="fl" style="font-size:12px">'+esc(ed.note)+" Qualifying shares share at most "+pc(ed.max)+" of the portfolio.</div>"+
 (ed.picks.length?'<div class="q me">Qualifies today: '+ed.picks.map(function(p){return "<b>"+esc(p.t)+"</b> at "+pc(p.weight,1)+" of the portfolio with a stop "+pc(p.stop_pct)+" below the entry";}).join("; ")+".</div>":'<div class="q">No share qualifies today, so the whole strategy sits in the core.</div>')+er,
 "Checks use our own valuation, Nasdaq statements and earnings, OpenInsider and Dataroma, and the engine's price history. This part cannot be back-tested; it is tracked forward from go-live.");
+h+=sleeveHtml();
 var tr=s.track;
 h+=M.blk("PAPER RECORD SINCE GO-LIVE",'<span class="stg paper">PAPER</span>',(tr.days?"":'<div class="nbx">Go-live was '+esc(dl(tr.since))+". The record starts with the next trading day.</div>")+
 M.kv("House core",M.sp(tr.core,1))+M.kv("S&P 500 fund",M.sp(tr.spy,1))+M.kv("60% shares, 40% bonds",M.sp(tr.sixty,1))+M.kv("Your holdings, never traded",M.sp(tr.your_holdings,1)),

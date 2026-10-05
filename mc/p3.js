@@ -102,8 +102,14 @@ return M.blk("OPEN DECISION CARD",'<span class="stg lvl">NONE OPEN</span>','<div
 M.slots["pp-hold"]=function(t){var d=D();if(!d)return "";var h=d.holds&&d.holds[t];
 if(!h)return M.blk("HOLD PLAN",'<span class="stg lvl">NOT HELD</span>','<div class="nbx">You do not hold '+esc(t)+', so there is no hold plan for it.</div>');
 if(!h.range)return M.blk("HOLD PLAN",'<span class="stg stale">NO DATA</span>','<div class="nbx">'+esc(h.why||h.status)+'</div>');
-var lv=h.levels.slice().sort(function(a,b){return b.price-a.price;}),s=h.since_buy;
-return M.blk("HOLD PLAN",M.tag(d.as_of,14),'<div style="font-weight:800;font-size:13px">'+esc(h.status.charAt(0).toUpperCase()+h.status.slice(1))+'</div>'+
+var lv=h.levels.slice().sort(function(a,b){return b.price-a.price;}),s=h.since_buy,k=h.keep,ny=new Date(Date.now()+365*86400000).toISOString().slice(0,10);
+var kp=k?'<div class="q me"><b>Your plan:</b> keep '+esc(t)+(k.target?" until "+px(k.target)+" ("+sg(k.to_target,0)+" from here)":"")+(k.by?", review by "+esc(dl(k.by)):"")+". Set "+esc(M.sd(k.set_at))+"."+(k.reached?" <b>Target reached.</b>":(k.overdue?" <b>The review date has passed.</b>":""))+'</div>'+
+(k.chance_touch!=null?M.kv("Chance of touching the target before the date (model)",pc(k.chance_touch_no_drift)+" to "+pc(k.chance_touch))+M.kv("Chance of being above it on the date itself",pc(k.chance_above_on_date))+'<div class="src">'+esc(k.method)+'</div>':"")+
+'<div class="gap"><button class="btn sm" data-p3="kstop" data-id="'+esc(k.id)+'">Stop keeping (allow trims again)</button></div><div id="kp-stat"></div>':
+'<details class="p3d"><summary>Keep this position with a target</summary><div class="two"><label class="fld"><span>Target price (USD)</span><input id="kp-target" type="number" inputmode="decimal" step="0.01" placeholder="e.g. 80"></label>'+
+'<label class="fld"><span>Review date</span><input id="kp-by" type="date" value="'+ny+'"></label></div><div class="gap"><button class="btn" style="width:100%" data-p3="keep" data-t="'+esc(t)+'">Keep it: do not propose trims</button></div>'+
+'<div class="src">The rebalance plan then leaves this position alone. A card is raised when the target is reached or the review date passes. The health check still shows the concentration.</div></details><div id="kp-stat"></div>';
+return M.blk("HOLD PLAN",M.tag(d.as_of,14),kp+'<div style="font-weight:800;font-size:13px;margin-top:8px">'+esc(h.status.charAt(0).toUpperCase()+h.status.slice(1))+'</div>'+
 (s?'<div class="q">Bought '+esc(M.sd(s.date))+" at "+px(s.price)+". After "+s.days+" trading days the expected range was "+px(s.expected_low)+" to "+px(s.expected_high)+"; the price is "+px(h.price)+".</div>":"")+
 '<div class="lbl" style="margin-top:10px">Where the price should be if nothing changes</div><div class="ox"><table class="mt"><tr><th>In</th><th>Low</th><th>Middle</th><th>High</th></tr>'+
 h.range.map(function(r){return "<tr><td>"+r.months+(r.months===1?" month":" months")+"</td><td>"+px(r.low)+"</td><td>"+px(r.mid)+"</td><td>"+px(r.high)+"</td></tr>";}).join("")+'</table></div>'+
@@ -113,9 +119,9 @@ h.range.map(function(r){return "<tr><td>"+r.months+(r.months===1?" month":" mont
 /* ---------- risk: rebalance plan, timed plans, range and goal (items 14, 15, 16) ---------- */
 function planRows(p){return p.status==="stopped"?"stopped":(p.status==="finished"?"finished":"next "+(p.next?M.sd(p.next):DASH));}
 M.slots["rk-extra"]=function(){var d=D();if(!d)return "";var r=d.rebalance,h="";
-if(r){var rows=r.rows.map(function(x){return "<tr><td style='white-space:normal'><b>"+esc(x.t)+"</b> <span class='fl'>"+esc(x.name||"")+(x.eu?" "+MID+" EU: "+esc(x.eu):"")+"</span></td><td>"+pc(x.now,1)+"</td><td>"+pc(x.target,1)+"</td><td>"+(Math.abs(x.change_usd)<1?DASH:(vis()?M.sm(x.change_usd):sg(x.target-x.now,1)))+"</td></tr>";}).join("");
+if(r){var rows=r.rows.map(function(x){return "<tr><td style='white-space:normal'><b>"+esc(x.t)+"</b> <span class='fl'>"+esc(x.name||"")+(x.eu?" "+MID+" EU: "+esc(x.eu):"")+"</span>"+(x.kept?' <span class="stg lvl">KEPT BY YOU</span>':"")+"</td><td>"+pc(x.now,1)+"</td><td>"+pc(x.target,1)+"</td><td>"+(Math.abs(x.change_usd)<1?DASH:(vis()?M.sm(x.change_usd):sg(x.target-x.now,1)))+"</td></tr>";}).join("");
 h+=M.blk("REBALANCE PLAN",r.needed?'<span class="stg stale">PART '+r.part+" OF "+r.tranches+" DUE "+esc(M.sd(r.next_part_due)).toUpperCase()+"</span>":'<span class="stg live">IN BALANCE</span>',
-(r.needed?"":'<div class="nbx">Every position is inside its limit. Nothing to rebalance.</div>')+'<div class="ox"><table class="mt"><tr><th>Position</th><th>Now</th><th>Target</th><th>Change</th></tr>'+rows+
+(r.needed?"":'<div class="nbx">'+((r.kept||[]).length?"Nothing to rebalance: "+esc(r.kept.join(", "))+" is above the one-company limit, but you chose to keep it. That risk stays in the health check.":"Every position is inside its limit. Nothing to rebalance.")+'</div>')+'<div class="ox"><table class="mt"><tr><th>Position</th><th>Now</th><th>Target</th><th>Change</th></tr>'+rows+
 "<tr><td><b>Cash</b></td><td>"+pc(r.cash_now,1)+"</td><td>"+pc(r.cash_target,1)+"</td><td></td></tr></table></div>"+
 M.kv("Volatility a year (estimate)",pc(r.vol_before)+" now, "+pc(r.vol_after)+" after the plan (profile target "+pc(r.target_vol)+")")+M.kv("Largest position",pc(r.largest_before)+" now, "+pc(r.largest_after)+" after")+
 M.kv("Cost of all the trades (estimate)",amt(r.cost_usd))+'<div class="gap"><button class="btn sm" data-tab="today">Open today\'s decision card</button></div>',esc(r.method)+" "+esc(r.note)+" "+M.upd(d.as_of)+".");}
@@ -210,6 +216,10 @@ if(a==="ans"){var v=b.dataset.v,k=b.dataset.k,box=$("p3-stat2")&&b.closest("#ppa
 post({kind:k,id:id,answer:v},v+" to "+id,box).then(function(ok){if(!ok){b.disabled=false;return;}setLocal(id,v);M.render();if(k==="morning"&&v==="yes"&&id.indexOf("books:")===0)MC.prefill({act:"buy"});});}
 else if(a==="log"){M.closePos();MC.prefill({t:b.dataset.t,act:b.dataset.side,amt:b.dataset.usd});}
 else if(a==="pstop"){b.disabled=true;post({kind:"plan_stop",id:id},"stop plan "+id,"tp-stat");}
+else if(a==="kstop"){b.disabled=true;post({kind:"keep_stop",id:id},"stop keeping "+id,"kp-stat");}
+else if(a==="keep"){var kt=b.dataset.t,tv=num($("kp-target").value),kb=$("kp-by").value;if(tv!=null&&!(tv>0)){MC.toast("The target must be a price above zero, or leave it empty.",true);return;}
+if(kb&&!/^\d{4}-\d\d-\d\d$/.test(kb)){MC.toast("Pick a review date.",true);return;}b.disabled=true;
+post({kind:"keep",id:"keep-"+kt.toLowerCase()+"-"+stamp().toLowerCase(),ticker:kt,target:tv,by:kb||null},"keep "+kt,"kp-stat").then(function(ok){if(!ok)b.disabled=false;});}
 else if(a==="padd"){var t=($("tp-t").value||"").trim().toUpperCase(),am=num($("tp-a").value),n=Math.round(num($("tp-n").value)||0),st=$("tp-s").value;
 if(!/^[A-Z0-9.]{1,12}$/.test(t)||!(am>=1)||!(n>=1&&n<=120)||!/^\d{4}-\d\d-\d\d$/.test(st)){MC.toast("Enter a ticker, an amount of at least 1, a first date and 1 to 120 times.",true);return;}
 post({kind:"plan",id:"p"+stamp().toLowerCase(),ticker:t,usd:am,every:$("tp-e").value,start:st,times:n},"timed plan "+t,"tp-stat");}
