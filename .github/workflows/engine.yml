@@ -1,13 +1,15 @@
-# Market Council calculation engine: correlations, volatility, the portfolio health check and the
-# optimiser comparison. Plain Python on GitHub's servers, so the arithmetic is done by code and can
-# be re-run by anyone. It reads the repository's records and public price history, writes its
-# results to state/, and never places orders. It runs after each bookkeeping run and when the
-# ledger, the risk profile or the engine itself changes.
+# Market Council calculation engine: correlations, volatility, the portfolio health check, the
+# optimiser comparison, research cards, the testing lab and the decision desk. Plain Python on
+# GitHub's servers, so the arithmetic is done by code and can be re-run by anyone. It reads the
+# repository's records and public price history, writes its results to state/ and research/, and
+# never places orders. It runs after each bookkeeping run, when the ledger, the risk profile or the
+# engine itself changes, and when the app records an answer in answers/ (then only the decision
+# desk runs, which takes seconds).
 name: Calculation engine
 on:
   push:
     branches: [main]
-    paths: ["ops/engine/**", "brief/index.html", "treasury/ledger.json", "state/profiles.json"]
+    paths: ["ops/engine/**", "brief/index.html", "treasury/ledger.json", "state/profiles.json", "answers/**"]
   schedule:
     - cron: "40 6,13,21 * * 1-5"
   workflow_dispatch:
@@ -19,7 +21,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
@@ -38,8 +40,21 @@ jobs:
       - name: Run the engine
         env:
           TWELVE_DATA_KEY: ${{ secrets.TWELVE_DATA_KEY }}
+          NTFY_OUT: ${{ secrets.NTFY_OUT }}
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
         run: |
-          for f in ops/engine/engine.py ops/engine/research.py ops/engine/decide.py; do
+          FILES="ops/engine/engine.py ops/engine/research.py ops/engine/decide.py"
+          if [ "$EVENT" = "push" ] && [ -n "$BEFORE" ] && git cat-file -e "$BEFORE" 2>/dev/null; then
+            CHANGED=$(git diff --name-only "$BEFORE" "$AFTER" || true)
+            if [ -n "$CHANGED" ] && ! echo "$CHANGED" | grep -qv '^answers/' && [ -f state/quant.json ] && [ -f state/lab.json ]; then
+              echo "Only answers changed: running the decision desk alone."
+              FILES="ops/engine/decide.py"
+              export MC_QUICK=1
+            fi
+          fi
+          for f in $FILES; do
             if [ -f "$f" ]; then echo "== $f"; python "$f" || echo "$f failed" >> /tmp/engine_failed; fi
           done
       - name: Commit the results
