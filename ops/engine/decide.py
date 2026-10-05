@@ -657,6 +657,12 @@ def main():
         except Exception:
             print("lab failed")
             traceback.print_exc()
+        try:
+            import strategy
+            strategy.main()
+        except Exception:
+            print("strategy failed")
+            traceback.print_exc()
     quant, snap = E.rj("state/quant.json", None), E.rj("treasury/snapshot.json", {}) or {}
     if not quant or not snap.get("nav"):
         print("decide: no engine numbers or no snapshot")
