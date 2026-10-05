@@ -1,8 +1,8 @@
-// Market Council service worker (v4).
+// Market Council service worker (v5).
 // Network first for everything it handles; the cache is only a fallback, so the app still opens
 // with its last good data when the phone is offline or a data source is down.
-var CACHE = "mc-v4";
-var SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./brief/"];
+var CACHE = "mc-v5";
+var SHELL = ["./", "./index.html", "./mc/app.css", "./mc/app.js", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./brief/"];
 self.addEventListener("install", function (e) {
 e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(SHELL); }));
 self.skipWaiting();
