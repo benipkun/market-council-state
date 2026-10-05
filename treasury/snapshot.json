@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-05T09:25:00Z",
+  "as_of": "2026-10-05T11:12:00Z",
   "cash": 1.83,
   "nav": 803.27,
   "cash_pct_of_nav": 0.23,
@@ -27,7 +27,7 @@
       "cost_basis": 701.75,
       "market_value": 636.53,
       "last_price": 68.11,
-      "price_as_of": "2026-10-05T09:25:00Z",
+      "price_as_of": "2026-10-05T11:12:00Z",
       "pct_nav": 79.24
     },
     {
@@ -37,7 +37,7 @@
       "cost_basis": 95.0,
       "market_value": 92.23,
       "last_price": 37.32,
-      "price_as_of": "2026-10-05T09:25:00Z",
+      "price_as_of": "2026-10-05T11:12:00Z",
       "pct_nav": 11.48
     },
     {
@@ -47,7 +47,7 @@
       "cost_basis": 75.12,
       "market_value": 72.68,
       "last_price": 18.17,
-      "price_as_of": "2026-10-05T09:25:00Z",
+      "price_as_of": "2026-10-05T11:12:00Z",
       "pct_nav": 9.05
     }
   ]

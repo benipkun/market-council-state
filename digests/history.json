@@ -698,6 +698,13 @@
               "Three insiders (CEO, GC, a director) have been selling through September -- is there a price or valuation level at which their selling would make you more cautious regardless of what one bullish analyst note says?"
             ],
             "note": "No position sized this cycle (below execution floor), so these are framing questions for if/when conviction or cash reaches a tradeable size."
+          },
+          "graded": {
+            "checked_at": "2026-10-05T11:12:00Z",
+            "price_then": 141.17,
+            "price_now": 144.27,
+            "pct_change": 2.2,
+            "outcome": "confirmed"
           }
         }
       ]
@@ -729,6 +736,13 @@
               "This pipeline's own DCF has shown a persistent 70%+ gap between UBER's price and fair value for months without closing -- is that a genuine mispricing you're being compensated for waiting on, or a sign the DCF's own growth/margin/discount-rate assumptions are simply wrong and should be revisited?",
               "With cash near zero and no diversification cushion, if a UBER-specific shock hit (the pending wrongful-death litigation, financing/execution risk from the Delivery Hero deal, or intensifying robotaxi competition), how would you actually respond -- and is holding at this size still the best use of the next dollar versus trimming into SPY or the EU sleeve?"
             ]
+          },
+          "graded": {
+            "checked_at": "2026-10-05T11:12:00Z",
+            "price_then": 68.87,
+            "price_now": 68.11,
+            "pct_change": -1.1,
+            "outcome": "inconclusive"
           }
         }
       ]

@@ -1,10 +1,24 @@
 {
   "tallies": {
-    "confirmed": 0,
+    "confirmed": 1,
     "contradicted": 4,
-    "inconclusive": 12
+    "inconclusive": 13
   },
   "recent": [
+    {
+      "ticker": "UBER",
+      "as_of": "2026-09-29T23:08:00Z",
+      "lean": "neutral",
+      "outcome": "inconclusive",
+      "pct_change": -1.1
+    },
+    {
+      "ticker": "DUOL",
+      "as_of": "2026-09-29T21:10:32Z",
+      "lean": "bullish",
+      "outcome": "confirmed",
+      "pct_change": 2.2
+    },
     {
       "ticker": "NVO",
       "as_of": "2026-09-29T15:08:00Z",
@@ -93,20 +107,6 @@
       "ticker": "SOFI",
       "as_of": "2026-09-21T14:15:00Z",
       "lean": "neutral",
-      "outcome": "inconclusive",
-      "pct_change": null
-    },
-    {
-      "ticker": "DUOL",
-      "as_of": "2026-09-21T14:15:00Z",
-      "lean": "bullish",
-      "outcome": "inconclusive",
-      "pct_change": null
-    },
-    {
-      "ticker": "RYAAY",
-      "as_of": "2026-09-21T09:24:05Z",
-      "lean": "bullish",
       "outcome": "inconclusive",
       "pct_change": null
     }
