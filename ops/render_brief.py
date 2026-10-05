@@ -395,8 +395,7 @@ TEMPLATE = """<!doctype html>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
-<meta name="theme-color" content="#0d0f15" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#f5f6f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#060a13">
 <link rel="icon" href="../icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <title>Market Council brief</title>
@@ -487,6 +486,15 @@ li{margin-bottom:6px}
 .fix{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--wns);font-size:13.5px}
 .note-link{display:block;padding:11px 12px;border:1px solid var(--bd);border-radius:11px;margin-bottom:8px;text-decoration:none;color:var(--tx)}
 footer{font-size:11.5px;color:var(--dim);line-height:1.6;padding:2px 4px 0}
+:root{--bg:#060a13;--sf:#0a101c;--sf2:#111a2b;--bd:#22304a;--tx:#e6edf7;--dim:#8d9bb5;--ac:#7cc4ff;--acs:#0f2238;--up:#3ddc97;--ups:#0b2a1f;--dn:#ff6b6b;--dns:#33141a;--wn:#f0b429;--wns:#2b2208;--grid:#16203a;--s1:#4aa3ff;--s2:#f2a541;color-scheme:dark}
+body{font:13px/1.55 ui-monospace,"SF Mono","Cascadia Mono","Roboto Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums;background-image:linear-gradient(rgba(124,196,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(124,196,255,.05) 1px,transparent 1px);background-size:28px 28px}
+section,.tile,.pick,.tag,.size,.case,.box,.tw,.fix,.note-link,nav a,.n{border-radius:3px}
+section{background:rgba(10,16,28,.9)}
+h1{text-transform:uppercase;letter-spacing:.12em;font-size:16px}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.1em}
+nav{background:rgba(6,10,19,.96)}
+nav a{text-transform:uppercase;letter-spacing:.06em;font-size:11px;border:1px solid var(--bd);background:var(--sf)}
+.size{background:var(--sf2)}
 </style>
 </head>
 <body>
