@@ -1,0 +1,27 @@
+Market Council valuation,DUOL
+Assumption,Value
+growth_start,0.25
+growth_end,0.04
+ebit_margin,0.1307
+tax_rate,0.21
+capex_pct_revenue,0.0174
+da_pct_revenue,0.0121
+working_capital_pct_of_growth,0.1656
+wacc,0.0719
+terminal_growth,0.025
+net_debt,-1140467.0
+shares,46786.0
+base_revenue,1037589.0
+units,thousands, as reported by the source
+
+Year,Growth,Revenue,EBIT,Tax,Capex,Working capital,Free cash flow
+1,0.25,1296986.0,169516.0,35598.0,22568.0,42956.0,84088.0
+2,0.1975,1553141.0,202996.0,42629.0,27025.0,42419.0,109716.0
+3,0.145,1778346.0,232430.0,48810.0,30943.0,37294.0,136900.0
+4,0.0925,1942844.0,253930.0,53325.0,33805.0,27241.0,163067.0
+5,0.04,2020557.0,264087.0,55458.0,35158.0,12869.0,185050.0
+
+Terminal value,4044270.0
+Enterprise value,3397435.0
+Fair value per share,96.99
+Price,144.27

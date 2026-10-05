@@ -1,0 +1,27 @@
+Market Council valuation,UBER
+Assumption,Value
+growth_start,0.1773
+growth_end,0.04
+ebit_margin,0.107
+tax_rate,0.21
+capex_pct_revenue,0.0065
+da_pct_revenue,0.0113
+working_capital_pct_of_growth,0.0615
+wacc,0.0799
+terminal_growth,0.025
+net_debt,2257000.0
+shares,2042560.0
+base_revenue,52017000.0
+units,thousands, as reported by the source
+
+Year,Growth,Revenue,EBIT,Tax,Capex,Working capital,Free cash flow
+1,0.1773,61239614.0,6552639.0,1376054.0,398057.0,567191.0,4903344.0
+2,0.143,69995348.0,7489502.0,1572795.0,454970.0,538478.0,5714207.0
+3,0.1087,77600342.0,8303237.0,1743680.0,504402.0,467707.0,6464331.0
+4,0.0743,83367988.0,8920375.0,1873279.0,541892.0,354710.0,7092552.0
+5,0.04,86702707.0,9277190.0,1948210.0,563568.0,205085.0,7540068.0
+
+Terminal value,140775404.0
+Enterprise value,120776425.0
+Fair value per share,58.02
+Price,68.11

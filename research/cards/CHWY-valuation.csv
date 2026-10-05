@@ -1,0 +1,27 @@
+Market Council valuation,CHWY
+Assumption,Value
+growth_start,0.0759
+growth_end,0.04
+ebit_margin,0.0202
+tax_rate,0.21
+capex_pct_revenue,0.0103
+da_pct_revenue,0.0103
+working_capital_pct_of_growth,0.0719
+wacc,0.0754
+terminal_growth,0.025
+net_debt,-878800.0
+shares,401927.0
+base_revenue,12601500.0
+units,thousands, as reported by the source
+
+Year,Growth,Revenue,EBIT,Tax,Capex,Working capital,Free cash flow
+1,0.0759,13557954.0,273871.0,57513.0,139647.0,68769.0,147589.0
+2,0.0669,14465320.0,292199.0,61362.0,148993.0,65240.0,165598.0
+3,0.058,15303585.0,309132.0,64918.0,157627.0,60271.0,183943.0
+4,0.049,16053078.0,324272.0,68097.0,165347.0,53889.0,202286.0
+5,0.04,16695201.0,337243.0,70821.0,171961.0,46169.0,220253.0
+
+Terminal value,4479352.0
+Enterprise value,3847047.0
+Fair value per share,11.76
+Price,18.17

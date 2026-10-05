@@ -1,0 +1,27 @@
+Market Council valuation,AMC
+Assumption,Value
+growth_start,0.0742
+growth_end,0.04
+ebit_margin,-0.0036
+tax_rate,0.21
+capex_pct_revenue,0.0508
+da_pct_revenue,0.07
+working_capital_pct_of_growth,0.0
+wacc,0.1114
+terminal_growth,0.025
+net_debt,3613700.0
+shares,892605.0
+base_revenue,4848900.0
+units,thousands, as reported by the source
+
+Year,Growth,Revenue,EBIT,Tax,Capex,Working capital,Free cash flow
+1,0.0742,5208688.0,-18751.0,0.0,264601.0,0.0,81256.0
+2,0.0657,5550639.0,-19982.0,0.0,281972.0,0.0,86590.0
+3,0.0571,5867580.0,-21123.0,0.0,298073.0,0.0,91534.0
+4,0.0486,6152451.0,-22149.0,0.0,312545.0,0.0,95978.0
+5,0.04,6398549.0,-23035.0,0.0,325046.0,0.0,99817.0
+
+Terminal value,1184172.0
+Enterprise value,1029992.0
+Fair value per share,-2.89
+Price,2.77

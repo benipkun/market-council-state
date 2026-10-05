@@ -1,0 +1,27 @@
+Market Council valuation,ASML
+Assumption,Value
+growth_start,0.193
+growth_end,0.04
+ebit_margin,0.346
+tax_rate,0.21
+capex_pct_revenue,0.0482
+da_pct_revenue,0.0314
+working_capital_pct_of_growth,0.0
+wacc,0.12
+terminal_growth,0.025
+net_debt,-10489000.0
+shares,385418.0
+base_revenue,38366200.0
+units,thousands, as reported by the source
+
+Year,Growth,Revenue,EBIT,Tax,Capex,Working capital,Free cash flow
+1,0.193,45770877.0,15836723.0,3325712.0,2206156.0,0.0,11742061.0
+2,0.1547,52853920.0,18287456.0,3840366.0,2547559.0,0.0,13559145.0
+3,0.1165,59011401.0,20417945.0,4287768.0,2844350.0,0.0,15138785.0
+4,0.0783,63629044.0,22015649.0,4623286.0,3066920.0,0.0,16323395.0
+5,0.04,66174205.0,22896275.0,4808218.0,3189597.0,0.0,16976331.0
+
+Terminal value,183165677.0
+Enterprise value,156008500.0
+Fair value per share,None
+Price,1867.31

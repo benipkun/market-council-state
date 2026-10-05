@@ -1,0 +1,27 @@
+Market Council valuation,NVO
+Assumption,Value
+growth_start,0.2415
+growth_end,0.04
+ebit_margin,0.413
+tax_rate,0.21
+capex_pct_revenue,0.1946
+da_pct_revenue,0.0711
+working_capital_pct_of_growth,0.213
+wacc,0.0884
+terminal_growth,0.025
+net_debt,14570000.0
+shares,4427931.0
+base_revenue,48598000.0
+units,thousands, as reported by the source
+
+Year,Growth,Revenue,EBIT,Tax,Capex,Working capital,Free cash flow
+1,0.2415,60334417.0,24918114.0,5232804.0,11741078.0,2499857.0,9734153.0
+2,0.1911,71865832.0,29680589.0,6232924.0,13985091.0,2456191.0,12116043.0
+3,0.1407,81980948.0,33858132.0,7110208.0,15953493.0,2154520.0,14468757.0
+4,0.0904,89389977.0,36918060.0,7752793.0,17395289.0,1578123.0,16547483.0
+5,0.04,92965576.0,38394783.0,8062904.0,18091101.0,761603.0,18089027.0
+
+Terminal value,292448780.0
+Enterprise value,245501119.0
+Fair value per share,None
+Price,37.32
