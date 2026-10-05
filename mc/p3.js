@@ -64,6 +64,7 @@ var ln=svg.querySelector(".xh");ln.setAttribute("x1",xi);ln.setAttribute("x2",xi
 var tip=box.querySelector(".p3tip");tip.innerHTML="<b>"+esc(dl(c.dates[i]))+"</b>"+c.series.map(function(s){return '<div><i style="background:'+s.color+'"></i>'+esc(s.short||s.name)+" "+c.fmt(s.vals[i])+'</div>';}).join("");
 tip.hidden=false;tip.style.left=Math.min(r.width-152,Math.max(0,xi/c.W*r.width-75))+"px";}
 document.addEventListener("pointermove",hov);document.addEventListener("pointerdown",hov);
+M.chart=chart;
 
 /* ---------- decision cards (item 13) ---------- */
 function order(o,c){var h='<div class="p3o"><span class="s">'+esc(o.side.toUpperCase())+'</span><b>'+esc(o.ticker)+'</b> '+esc(o.name||"")+'<br>'+
