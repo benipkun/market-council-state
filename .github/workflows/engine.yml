@@ -1,0 +1,54 @@
+# Market Council calculation engine: correlations, volatility, the portfolio health check and the
+# optimiser comparison. Plain Python on GitHub's servers, so the arithmetic is done by code and can
+# be re-run by anyone. It reads the repository's records and public price history, writes its
+# results to state/, and never places orders. It runs after each bookkeeping run and when the
+# ledger, the risk profile or the engine itself changes.
+name: Calculation engine
+on:
+  push:
+    branches: [main]
+    paths: ["ops/engine/**", "brief/index.html", "treasury/ledger.json", "state/profiles.json"]
+  schedule:
+    - cron: "40 6,13,21 * * 1-5"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: calculation-engine
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install numpy and scipy
+        run: pip install --quiet numpy scipy
+      - name: Restore the last good price files
+        uses: actions/cache@v4
+        with:
+          path: .cache/prices
+          key: prices-${{ github.run_id }}
+          restore-keys: prices-
+      - name: Run the engine
+        env:
+          TWELVE_DATA_KEY: ${{ secrets.TWELVE_DATA_KEY }}
+        run: |
+          for f in ops/engine/engine.py ops/engine/research.py ops/engine/decide.py; do
+            if [ -f "$f" ]; then echo "== $f"; python "$f" || echo "$f failed" >> /tmp/engine_failed; fi
+          done
+      - name: Commit the results
+        run: |
+          git config user.name "Market Council Engine"
+          git config user.email "engine@market-council.local"
+          git add -A state research
+          if git diff --cached --quiet; then echo "Nothing changed."; else
+            git commit -q -m "Engine: results $(date -u +%Y-%m-%dT%H:%MZ)"
+            for i in 1 2 3; do git pull -q --rebase origin main && git push -q && break; sleep 5; done
+          fi
+          if [ -s /tmp/engine_failed ]; then cat /tmp/engine_failed; exit 1; fi

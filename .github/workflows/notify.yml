@@ -28,9 +28,12 @@ jobs:
         run: |
           if [ -z "$NTFY_OUT" ]; then echo "The NTFY_OUT secret is not set yet, so nothing was sent."; exit 0; fi
           if [ -n "$BEFORE" ] && git cat-file -e "$BEFORE" 2>/dev/null; then RANGE="$BEFORE..$AFTER"; else RANGE="$AFTER~1..$AFTER"; fi
+          rm -f /tmp/failed
           git diff --name-only --diff-filter=A "$RANGE" -- outbox/queue | while read -r f; do
             [ -f "$f" ] || continue
             jq --arg t "$NTFY_OUT" '{topic: $t, title: (.title // "Market Council"), message: (.message // ""), click: (.click // "https://benipkun.github.io/market-council-state/"), tags: (.tags // [])}' "$f" > /tmp/msg.json || continue
-            code=$(curl -sS -m 20 -o /dev/null -w "%{http_code}" -H "Content-Type: application/json" -d @/tmp/msg.json https://ntfy.sh/)
+            code=$(curl -sS -m 20 --retry 4 --retry-delay 6 --retry-all-errors -o /dev/null -w "%{http_code}" -H "Content-Type: application/json" -d @/tmp/msg.json https://ntfy.sh/ || echo failed)
             echo "$f sent: HTTP $code"
+            [ "$code" = "200" ] || echo "$f" >> /tmp/failed
           done
+          if [ -s /tmp/failed ]; then echo "Not delivered after five attempts:"; cat /tmp/failed; exit 1; fi

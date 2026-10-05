@@ -1,4 +1,6 @@
-# Picks up messages Ben types into his private ntfy "ask" channel, every five minutes.
+# Picks up messages Ben types into his private ntfy "ask" channel. GitHub runs the five-minute
+# schedule only every few hours on a quiet repository, so it also runs after every pipeline and
+# bookkeeping push.
 # New messages are committed to inbox/queue/, which starts the Trade Inbox routine; it answers
 # through outbox/queue/ and the "Send phone messages" job. The channel name lives only in the
 # repository secret NTFY_IN, never in the code.
@@ -7,6 +9,9 @@ on:
   schedule:
     - cron: "*/5 * * * *"
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["digests/latest.json", "brief/index.html"]
 permissions:
   contents: write
 concurrency:
