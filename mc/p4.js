@@ -18,7 +18,7 @@ function det(sum,body,open){return '<details class="p3d"'+(open?" open":"")+'><s
 /* frequent trading: short-term rules judged after real fees (lab.tactical) */
 function sleeveHtml(){var lab=M.X.lab,t=lab&&lab.tactical;if(!t||t.status!=="ok")return "";var f=t.fee,best=t.rules.filter(function(r){return r.id===t.best;})[0];
 function yr(x){return x&&x.a_year!=null?(x.a_year<=-0.999?"wiped out":sg(x.a_year,1)):DASH;}
-var rows=t.rules.map(function(r){var sl=r.sleeve||{};return "<tr><td style='white-space:normal'>"+(r.id===t.best?"<b>"+esc(r.name)+"</b>":esc(r.name))+"</td><td>"+esc(r.trades)+"</td><td>"+(r.avg_gross==null?DASH:sg(r.avg_gross,2))+"</td><td>"+yr(sl.near_zero)+"</td><td>"+yr(sl.pct_only)+"</td><td>"+yr(sl.usd_1000)+"</td></tr>";}).join("");
+var rows=t.rules.map(function(r){var sl=r.sleeve||{};return "<tr><td style='white-space:normal'>"+(r.id===t.best?"<b>"+esc(r.name)+"</b>":esc(r.name))+"</td><td>"+yr(sl.near_zero)+"</td><td>"+yr(sl.pct_only)+"</td><td>"+yr(sl.usd_1000)+"</td></tr>";}).join("");
 var det2=t.rules.map(function(r){if(!r.sleeve)return det(esc(r.name),'<div class="fl" style="font-size:12px">'+esc(r.rule)+" Too few trades to judge.</div>");var sl=r.sleeve;
 return det(esc(r.name)+(r.passes?"":" "+MID+" fails after costs"),'<div class="fl" style="font-size:12px;margin-bottom:6px">'+esc(r.rule)+'</div>'+
 M.kv("Trades in the test",esc(r.trades)+" (about "+esc(r.per_month)+" a month)")+M.kv("Winning trades",pc(r.win_rate))+M.kv("Average win / average loss",sg(r.avg_win,1)+" / "+sg(r.avg_loss,1))+M.kv("Worst single trade",sg(r.worst,0))+
@@ -29,8 +29,8 @@ M.kv("Smallest trade that pays the minimum fee on average",r.breakeven_stake?"$"
 (r.paper?M.kv("Paper trades closed since "+esc(dl(r.paper.since)),esc(r.paper.closed)+", sum "+M.sp(r.paper.sum_net,1)):""));}).join("");
 return M.blk("FREQUENT TRADING: DOES IT PAY?",'<span class="stg paper">PAPER</span>','<div style="font-size:12.5px;font-weight:700">'+esc(mn(t.verdict))+'</div>'+
 '<div class="q"><b style="color:var(--tx)">What one trade costs you:</b> '+pc(f.pct,2)+" of the order, but at least about $"+M.f2(f.min_usd)+" (one euro). A 100-dollar trade therefore costs about "+pc(2*f.min_usd/100,1)+" to get in and out; only above about 450 dollars does it fall to "+pc(2*f.pct,1)+".</div>"+
-'<div class="ox"><table class="mt p3w"><tr><th>Rule</th><th>Trades</th><th>Average before costs</th><th>No-commission broker</th><th>Your broker, 0.25%</th><th>Your broker, $1,000 sleeve</th></tr>'+rows+'</table></div>'+
-'<div class="src">The last three columns are yearly results of a sleeve holding at most four trades at once. '+(t.cash_yield?"For comparison, short Treasuries pay about "+pc(t.cash_yield,1)+" a year without trading.":"")+'</div>'+det2+
+'<div class="ox"><table class="mt p3w"><tr><th>Rule, result a year</th><th>No-fee broker</th><th>Your broker, big trades</th><th>Your broker, $1,000 sleeve</th></tr>'+rows+'</table></div>'+
+'<div class="src">Yearly results of a sleeve holding at most four trades at once. "Big trades" means every trade is over 450 dollars, so only the 0.25% applies. '+(t.cash_yield?"For comparison, short Treasuries pay about "+pc(t.cash_yield,1)+" a year without trading.":"")+'</div>'+det2+
 '<div class="q">'+(best?"The idea itself is not the problem: before costs the rules make money. Costs and trade size decide the result. With a small sleeve at this broker, frequent trading is a way of paying fees.":"No rule survived its costs in both halves of the test.")+" The rules keep running on paper here so you can watch them without paying.</div>",
 esc(t.method)+" Tested "+esc(dl(t.from))+" to "+esc(dl(t.to))+" on "+t.universe.length+" shares and funds: "+esc(t.universe.join(", "))+". Fees: "+esc(f.note)+" Limits: "+esc(t.limits.join(" "))+" "+M.upd(lab.as_of)+".");}
 function html(){var s=M.X.strat;if(!s)return '<div class="msg">The strategy file has not been written yet. It appears after the next engine run.</div>';
