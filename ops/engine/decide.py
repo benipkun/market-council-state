@@ -64,7 +64,7 @@ def read_answers():
         if not n.endswith(".json"):
             continue
         a = E.rj("answers/" + n, None)
-        if not isinstance(a, dict) or str(a.get("kind")) not in ("decision", "morning", "plan", "plan_stop"):
+        if not isinstance(a, dict) or str(a.get("kind")) not in ("decision", "morning", "plan", "plan_stop", "keep", "keep_stop"):
             continue
         at = str(a.get("at") or "")
         if not re.fullmatch(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ", at):
@@ -107,11 +107,72 @@ def port_vol(weights, quant):
     return float(math.sqrt(max(0.0, ws @ R @ ws)))
 
 
+# ---------------------------------------------------------------- positions Ben has decided to keep, with his own target and review date
+def keep_plans(answers, pos, now):
+    stopped = set(a["id"] for a in answers if a.get("kind") == "keep_stop")
+    by, out = {p["t"]: p for p in pos}, {}
+    for a in answers:
+        if a.get("kind") != "keep" or a["id"] in stopped:
+            continue
+        t = txt(a.get("ticker"), 12).upper()
+        if not re.fullmatch(r"[A-Z0-9.]{1,12}", t) or t not in by:
+            continue
+        try:
+            target = float(a.get("target")) if a.get("target") not in (None, "") else None
+        except Exception:
+            target = None
+        try:
+            due = day(a.get("by")).isoformat() if a.get("by") else None
+        except Exception:
+            due = None
+        p = by[t]
+        s, mu, sig = p["px"], float(p.get("mu") or 0.0), float(p.get("vol") or 0.3)
+        k = {"id": a["id"], "ticker": t, "target": r2(target) if target and target > 0 else None, "by": due, "set_at": a["at"], "note": txt(a.get("note"), 160) or None,
+             "price": r2(s), "weight": r2(p["w"], 4), "reached": False, "overdue": False}
+        if k["target"] and s > 0:
+            k["to_target"] = r2(target / s - 1, 4)
+            k["reached"] = bool(s >= target)
+            if due and not k["reached"] and day(due) > day(now):
+                yrs = (day(due) - day(now)).days / 365.0
+                b, nu, sd = math.log(target / s), mu - sig * sig / 2, sig * math.sqrt(yrs)
+                k["chance_touch"] = r2(min(1.0, phi((-b + nu * yrs) / sd) + math.exp(2 * nu * b / (sig * sig)) * phi((-b - nu * yrs) / sd)), 4)
+                k["chance_touch_no_drift"] = r2(min(1.0, 2 * phi(-b / sd)), 4)
+                k["chance_above_on_date"] = r2(phi((nu * yrs - b) / sd), 4)
+                k["method"] = ("Chance that a price moving at random with last year's volatility (%s) and the engine's return estimate (%s a year) touches the target "
+                               "before the date. With no assumed return at all it is the lower figure. A model estimate, not a forecast." % (pc(sig), pc(mu, 1)))
+        k["overdue"] = bool(due and day(due) <= day(now) and not k["reached"])
+        out[t] = k
+    return out
+
+
+def keep_cards(keeps, pos, lim, nav):
+    out, by = [], {p["t"]: p for p in pos}
+    for t, k in keeps.items():
+        p = by[t]
+        over = max(0.0, p["w"] - lim["stock_cap"]) * nav
+        if not (k["reached"] or k["overdue"]) or over < MIN_ORDER or not p["px"]:
+            continue
+        hit = k["reached"]
+        out.append({"key": "KEEP:" + t, "kind": "target" if hit else "review", "ticker": t,
+                    "title": ("%s reached your target of %s: sell %s to bring it to the %s limit" % (t, usd(k["target"]), usd(over), pc(lim["stock_cap"]))) if hit else
+                             ("%s has not reached %s by %s: sell %s to bring it to the %s limit" % (t, usd(k["target"]), k["by"], usd(over), pc(lim["stock_cap"]))),
+                    "title_plain": ("%s reached your target of %s: sell down to the %s limit" % (t, usd(k["target"]), pc(lim["stock_cap"]))) if hit else
+                                   ("%s has not reached %s by %s: sell down to the %s limit" % (t, usd(k["target"]), k["by"], pc(lim["stock_cap"]))),
+                    "orders": [{"side": "sell", "ticker": t, "name": p["name"], "usd": r2(over), "pct_nav": r2(over / nav, 4), "ref_price": r2(p["px"], 4),
+                                "limit": r2(p["px"] * 0.995), "qty": r2(over / p["px"], 4)}],
+                    "why": [("You set %s as the target for %s on %s; the last close is %s." if hit else "You set %s as the target for %s on %s, to be reached by the review date; the last close is %s.")
+                            % (usd(k["target"]), t, k["set_at"][:10], usd(p["px"])),
+                            "%s is %s of the portfolio; the limit for one company in your profile is %s." % (t, pc(p["w"], 1), pc(lim["stock_cap"]))],
+                    "against": ["Saying no keeps the position as it is; set a new target and date on the position's hold plan so the plan stays explicit."],
+                    "method": "Raised because the position you chose to keep has reached its target, or its review date has passed. Amount = the part above the one-company limit."})
+    return out
+
+
 # ---------------------------------------------------------------- item 14: the rebalance plan
-def rebalance(pos, quant, lim, nav, uni, ix):
+def rebalance(pos, quant, lim, nav, uni, ix, kept=()):
     cap, fund_cap, min_cash = lim["stock_cap"], E.FUND_CAP, lim["min_cash"]
     cur = {p["t"]: p["w"] for p in pos}
-    tgt = {p["t"]: min(p["w"], cap if p["cls"] == "Equity" else fund_cap) for p in pos}
+    tgt = {p["t"]: (p["w"] if p["t"] in kept else min(p["w"], cap if p["cls"] == "Equity" else fund_cap)) for p in pos}
     free = 1.0 - sum(tgt.values()) - min_cash
     wide = (quant.get("opt") or {}).get("wide") or {}
     tw = dict(zip(wide.get("tickers") or [], ((wide.get("methods") or {}).get("target") or {}).get("w") or []))
@@ -139,17 +200,18 @@ def rebalance(pos, quant, lim, nav, uni, ix):
     for t in sorted(tgt, key=lambda k: (k not in cur, -cur.get(k, 0.0), -tgt[k])):
         a = assets.get(t) or {}
         rows.append({"t": t, "name": a.get("name") or (meta.get(t) or {}).get("name") or t, "cls": a.get("cls"), "now": r2(cur.get(t, 0.0), 4),
-                     "target": r2(tgt[t], 4), "change_usd": r2((tgt[t] - cur.get(t, 0.0)) * nav), "eu": (meta.get(t) or {}).get("eu")})
+                     "target": r2(tgt[t], 4), "change_usd": r2((tgt[t] - cur.get(t, 0.0)) * nav), "eu": (meta.get(t) or {}).get("eu"), "kept": t in kept,
+                     "over_limit": bool(t in cur and cur[t] > (cap if a.get("cls", "Equity") == "Equity" else fund_cap) + 0.02)})
     cash_now = max(0.0, 1.0 - sum(cur.values()))
     before, after = port_vol(cur, quant), port_vol(tgt, quant)
     turnover = sum(abs(tgt[t] - cur.get(t, 0.0)) for t in tgt) * nav
-    return {"needed": bool(needed), "rows": rows, "cur": cur, "tgt": tgt, "cash_now": r2(cash_now, 4), "cash_target": r2(max(0.0, 1.0 - sum(tgt.values())), 4),
+    return {"needed": bool(needed), "kept": sorted(t for t in kept if t in cur), "rows": rows, "cur": cur, "tgt": tgt, "cash_now": r2(cash_now, 4), "cash_target": r2(max(0.0, 1.0 - sum(tgt.values())), 4),
             "vol_before": r2(before, 4), "vol_after": r2(after, 4), "target_vol": lim.get("target_vol"), "largest_before": r2(max(cur.values()) if cur else 0, 4),
             "largest_after": r2(max(tgt.values()) if tgt else 0, 4), "turnover_usd": r2(turnover), "cost_usd": r2(turnover * COST), "tranches": TRANCHES,
             "method": "Every position above its limit (%s for one company, %s for one fund) is cut to the limit; positions under their limit are "
                       "left alone; %s is kept as cash; the money released goes into the funds the engine's target-volatility mix uses, in the "
-                      "same proportions. Done in %d parts about a month apart. Volatility is worked out from the last 252 trading days of "
-                      "prices and is an estimate." % (pc(cap), pc(fund_cap), pc(min_cash), TRANCHES),
+                      "same proportions. Done in %d parts about a month apart. A position you chose to keep is never trimmed by this plan. "
+                      "Volatility is worked out from the last 252 trading days of prices and is an estimate." % (pc(cap), pc(fund_cap), pc(min_cash), TRANCHES),
             "note": "Fund tickers are US-listed stand-ins. In the EU buy the equivalent listed here if your broker offers it; check its cost first."}
 
 
@@ -299,7 +361,7 @@ def settle(prev_cards, answers, ledger, now):
     return cards
 
 
-def merge_cards(cards, wanted, now):
+def merge_cards(cards, wanted, now, reasons=None):
     today = day(now)
     live = {}
     for c in cards:
@@ -309,7 +371,7 @@ def merge_cards(cards, wanted, now):
     for c in cards:
         if c["status"] == "open" and c["key"] not in keys:
             c["status"], c["closed_at"] = "withdrawn", now
-            c["closed_why"] = "the numbers that raised it no longer hold"
+            c["closed_why"] = (reasons or {}).get(c["key"]) or "the numbers that raised it no longer hold"
         elif c["status"] == "open" and day(c["expires"]) < today:
             c["status"], c["closed_at"], c["closed_why"] = "expired", now, "no answer within %d days" % CARD_DAYS
     for w in wanted:
@@ -679,7 +741,8 @@ def main():
     pos = positions(snap, quant)
     answers = read_answers()
 
-    plan = rebalance(pos, quant, lim, nav, uni, ix)
+    keeps = keep_plans(answers, pos, now)
+    plan = rebalance(pos, quant, lim, nav, uni, ix, set(keeps))
     old = settle(prev.get("cards") or [], answers, ledger, now)
     done = [c for c in old if c.get("kind") == "rebalance" and c["status"] in ("approved", "done")]
     part = min(TRANCHES, len(done) + 1)
@@ -724,18 +787,21 @@ def main():
                    "next": max(due, day(now)).isoformat(), "note": "Rebalance plan: part %d of %d." % (part, TRANCHES)}
     rows, buy = screen(ix, pos, quant, lim, nav, cash, council, now)
     shorts, short_cards = short_ideas(ix, pos, quant, lim, nav)
-    wanted += buy + sell_cards(pos, prof, nav) + short_cards
-    cards = merge_cards(old, wanted, now)
+    wanted += buy + sell_cards(pos, prof, nav) + short_cards + keep_cards(keeps, pos, lim, nav)
+    cards = merge_cards(old, wanted, now, {"REBAL": "you chose to keep " + ", ".join(sorted(keeps))} if keeps else None)
     for k in ("cur", "tgt"):
         plan.pop(k, None)
     plan["part"], plan["next_part_due"] = part, max(due, day(now)).isoformat() if plan["needed"] else None
 
     hp = holds(pos, quant, ix, digest, ledger, prof)
+    for t, k in keeps.items():
+        if t in hp:
+            hp[t]["keep"] = k
     pvol = (quant.get("portfolio") or {}).get("vol_1y")
     pmu = sum(p["w"] * (p.get("mu") or 0.0) for p in pos)
     plans = timed_plans(answers, ledger, now, tranche)
     out = {"as_of": now, "profile": {"label": prof.get("label"), "level": prof.get("risk_level"), "max_loss_pct": prof.get("max_loss_pct"), "limits": lim},
-           "cards": cards, "screen": rows, "shorts": shorts, "rebalance": plan, "plans": plans, "holds": hp,
+           "cards": cards, "screen": rows, "shorts": shorts, "rebalance": plan, "plans": plans, "holds": hp, "keeps": keeps,
            "portfolio_range": {"months": 12, "low": r2(math.exp((pmu - pvol * pvol / 2) - Z80 * pvol) - 1, 4), "mid": r2(math.exp(pmu - pvol * pvol / 2) - 1, 4),
                                "high": r2(math.exp((pmu - pvol * pvol / 2) + Z80 * pvol) - 1, 4), "mu": r2(pmu, 4), "vol": pvol} if pvol else None,
            "goal": goal(E.rj("state/plan.json", {}), nav, E.rj("state/fx.json", {}), pvol, pmu, now),

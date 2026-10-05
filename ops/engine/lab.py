@@ -380,6 +380,160 @@ def signals(tickers, spy, extra):
                        "Weekly data hides anything faster than a week."]}
 
 
+# ---------------------------------------------------------------- frequent trading: short-term rules judged trade by trade, after real fees
+FEE_PCT = 0.0025      # broker's commission on the order value
+FEE_MIN = 1.12        # broker's minimum fee per trade in dollars (one euro, estimate)
+SLOTS = 4             # the trading sleeve holds at most four trades at once, a quarter of the sleeve each
+TRULES = [("pullback", "Pullback in an uptrend", "Buy when the price is above its 200-day average and the 2-day RSI falls under 10. Sell at a close above the 5-day average, after 10 trading days, or 8% under the entry."),
+          ("dip", "Deep dip", "Buy when the 14-day RSI falls under 30. Sell when it rises over 55, after 30 trading days, or 12% under the entry."),
+          ("breakout", "Breakout", "Buy at a new 55-day closing high above the 200-day average. Sell at a close under the lowest close of the previous 20 days."),
+          ("three_down", "Three down days", "Buy after three lower closes in a row above the 200-day average. Sell at the first higher close or after 5 trading days.")]
+NOT_TRADED = ("SHY", "IEF", "TLT", "LQD", "TIP", "BNDX", "BIL")
+
+
+def trades_for(rule, px):
+    n, out, i = len(px), [], 200
+    m200, m5, r2, r14 = sma(px, 200), sma(px, 5), rsi(px, 2), rsi(px, 14)
+    with np.errstate(invalid="ignore"):
+        while i < n:
+            if rule == "pullback":
+                enter = px[i] > m200[i] and r2[i] < 10
+            elif rule == "dip":
+                enter = r14[i] < 30
+            elif rule == "breakout":
+                enter = px[i] > m200[i] and px[i] >= np.max(px[i - 54:i + 1])
+            else:
+                enter = px[i] > m200[i] and px[i] < px[i - 1] < px[i - 2] < px[i - 3]
+            if not enter:
+                i += 1
+                continue
+            e, j, done = i, i + 1, None
+            while j < n:
+                held = j - e
+                if rule == "pullback":
+                    ex = px[j] > m5[j] or held >= 10 or px[j] <= px[e] * 0.92
+                elif rule == "dip":
+                    ex = r14[j] > 55 or held >= 30 or px[j] <= px[e] * 0.88
+                elif rule == "breakout":
+                    ex = px[j] < np.min(px[j - 20:j])
+                else:
+                    ex = px[j] > px[j - 1] or held >= 5
+                if ex:
+                    done = j
+                    break
+                j += 1
+            out.append((e, done if done is not None else n - 1, done is None))
+            i = (done if done is not None else n) + 1
+    return out
+
+
+def sleeve(recs, start_usd, pct, min_fee):
+    # trades taken in the order they start, at most SLOTS at once, each a quarter of the sleeve's value at that moment
+    eq, peak, mdd, busy, taken, fees = float(start_usd), float(start_usd), 0.0, [], 0, 0.0
+    events = sorted(recs, key=lambda x: (x["entry"], x["t"]))
+    for x in events:
+        busy = [b for b in busy if b > x["entry"]]
+        if len(busy) >= SLOTS or eq <= 0:
+            continue
+        stake = eq / SLOTS
+        fee = 2 * max(pct * stake, min_fee)
+        eq += stake * x["ret"] - fee
+        fees += fee
+        taken += 1
+        busy.append(x["exit"])
+        peak = max(peak, eq)
+        mdd = min(mdd, eq / peak - 1)
+    return eq, mdd, taken, fees
+
+
+def tactical(tickers, spy, prev):
+    uni = [t for t in tickers if t not in NOT_TRADED]
+    data = {}
+    for t in uni:
+        rows = E.read_cache(t)[-1260:]
+        if len(rows) >= 460:
+            data[t] = arr(rows)
+    if not data:
+        return {"status": "no price history"}
+    last = spy[-1][0]
+    first = min(d[0][200] for d in data.values())
+    mid = sorted(set(x for d in data.values() for x in d[0][200:]))
+    mid = mid[len(mid) // 2]
+    yrs = max(0.5, (len(spy) and len([1 for d, v in spy if d >= first])) / 252.0)
+    go = ((prev or {}).get("tactical") or {}).get("go_live") or last
+    rules = []
+    for rid, name, text in TRULES:
+        recs, open_now, new_today = [], [], []
+        for t, (dates, px) in data.items():
+            for e, x, is_open in trades_for(rid, px):
+                ret = float(px[x] / px[e] - 1)
+                if is_open:
+                    open_now.append({"t": t, "since": dates[e], "entry": r4(float(px[e]), 2), "last": r4(float(px[x]), 2), "ret": r4(ret), "days": int(x - e)})
+                    if dates[e] == last:
+                        new_today.append(t)
+                else:
+                    recs.append({"t": t, "entry": dates[e], "exit": dates[x], "days": int(x - e), "ret": ret})
+        row = {"id": rid, "name": name, "rule": text, "trades": len(recs), "open": sorted(open_now, key=lambda z: z["since"], reverse=True), "new_today": new_today}
+        if len(recs) >= 20:
+            g = np.array([z["ret"] for z in recs])
+            h1 = np.array([z["ret"] for z in recs if z["entry"] < mid] or [0.0])
+            h2 = np.array([z["ret"] for z in recs if z["entry"] >= mid] or [0.0])
+            wins, losses = float(np.sum(g[g > 0])), float(-np.sum(g[g < 0]))
+            cost = 2 * FEE_PCT
+            row.update({"win_rate": r4(float(np.mean(g > 0)), 3), "avg_gross": r4(float(np.mean(g))), "avg_net": r4(float(np.mean(g)) - cost),
+                        "avg_win": r4(float(np.mean(g[g > 0])) if np.any(g > 0) else 0.0), "avg_loss": r4(float(np.mean(g[g < 0])) if np.any(g < 0) else 0.0),
+                        "worst": r4(float(np.min(g))), "median_days": int(np.median([z["days"] for z in recs])), "profit_factor": r4(wins / losses if losses > 0 else None, 2),
+                        "h1_net": r4(float(np.mean(h1)) - cost), "h2_net": r4(float(np.mean(h2)) - cost), "h1_trades": int(len(h1)), "h2_trades": int(len(h2)),
+                        "per_month": r4(len(recs) / (yrs * 12), 1)})
+            row["passes"] = bool(row["h1_net"] > 0 and row["h2_net"] > 0 and len(recs) >= 60)
+            row["breakeven_stake"] = r4(2 * FEE_MIN / float(np.mean(g)), 0) if float(np.mean(g)) > 0 else None
+            sl = {}
+            for key, label, start, pct, mf in (("near_zero", "A broker with no commission: 0.05% a trade for the spread", 1000.0, 0.0005, 0.0),
+                                               ("pct_only", "0.25% a trade, no minimum (your broker on trades over 450 dollars)", 1000.0, FEE_PCT, 0.0),
+                                               ("usd_200", "Your broker, sleeve of 200 dollars", 200.0, FEE_PCT, FEE_MIN),
+                                               ("usd_1000", "Your broker, sleeve of 1,000 dollars", 1000.0, FEE_PCT, FEE_MIN),
+                                               ("usd_5000", "Your broker, sleeve of 5,000 dollars", 5000.0, FEE_PCT, FEE_MIN)):
+                eq, mdd, taken, fees = sleeve(recs, start, pct, mf)
+                sl[key] = {"label": label, "start": start, "end": r4(max(eq, 0.0), 0), "a_year": r4((eq / start) ** (1 / yrs) - 1 if eq > 0 else -1.0),
+                           "worst_fall": r4(max(mdd, -1.0)), "trades": taken, "fees": r4(fees, 0)}
+            row["sleeve"] = sl
+            live = [z for z in recs if z["entry"] > go]
+            row["paper"] = {"since": go, "closed": len(live), "sum_net": r4(sum(z["ret"] - cost for z in live)), "open": len([z for z in open_now if z["since"] > go])}
+        else:
+            row["passes"] = False
+        rules.append(row)
+    ok = [r for r in rules if r.get("passes")]
+    best = max(ok, key=lambda r: r["sleeve"]["near_zero"]["a_year"]) if ok else None
+    cash = None
+    try:
+        y2 = E.read_cache("s_US2Y") or []
+        cash = y2[-1][1] / 100.0 if y2 else None
+    except Exception:
+        cash = None
+    verdict = ("%d of the %d short-term rules kept a positive average per trade after a 0.25%% commission in both halves of the test." % (len(ok), len(rules)))
+    if best:
+        b = best["sleeve"]
+        verdict += (" Run as a real sleeve of four trades at a time, the best ('%s') made %s a year at your broker's 0.25%%, %s a year on a 1,000-dollar sleeve once the "
+                    "one-euro minimum applies, and %s a year at a broker with no commission." % (
+                        best["name"], E.pc(b["pct_only"]["a_year"]), E.pc(b["usd_1000"]["a_year"]), E.pc(b["near_zero"]["a_year"])))
+        if cash:
+            verdict += " Short Treasuries pay about %s a year for doing nothing." % E.pc(cash)
+    else:
+        verdict += " None is worth trading for real."
+    return {"status": "ok", "from": first, "to": last, "years": round(yrs, 1), "universe": sorted(data.keys()), "go_live": go, "rules": rules, "best": best["id"] if best else None,
+            "cash_yield": r4(cash) if cash else None,
+            "fee": {"pct": FEE_PCT, "min_usd": FEE_MIN, "slots": SLOTS,
+                    "note": "Commission of 0.25% of the order with a minimum of one euro per trade once the plan's free trades are used (broker's published terms as reported in September 2026; check your own plan)."},
+            "verdict": verdict,
+            "method": "Each rule is applied to daily closes of every share and fund on the list. A trade is bought and sold at the close; the result is counted per trade, "
+                      "and the test period is cut in two by date. The sleeve test takes the trades in the order they start, at most four at once, a quarter of the sleeve each, "
+                      "and pays the commission or the minimum fee on every buy and sell.",
+            "limits": ["Closing prices only: real fills differ, and the rules cannot see what happens inside a day.",
+                       "About four years and one list of shares chosen with hindsight; a rule that passed here can stop working.",
+                       "No tax, no currency cost and no dividends are included.",
+                       "The four rules were written down before the test, but testing four and keeping the best still flatters the winner."]}
+
+
 def requests_from_answers():
     out = []
     base = os.path.join(E.ROOT, "answers")
@@ -408,8 +562,11 @@ def main():
         if t and t not in tickers and t != "SPY":
             tickers.append(t)
     out = {"as_of": E.now_iso(), "prices_to": spy[-1][0], "price_note": "Split-adjusted closes without dividends."}
+    prev = E.rj("state/lab.json", {}) or {}
+    funds = [t for t in (E.rj("ops/engine/universe.json", {}) or {}).get("candidates", []) if t not in tickers]
     for key, fn in (("backtests", lambda: backtests(tickers + ["SPY"], spy)), ("doomsday", lambda: doomsday(spy, E.read_cache("SHY"))),
-                    ("spreading", lambda: spreading(spy)), ("signals", lambda: signals(tickers, spy, requests_from_answers()))):
+                    ("spreading", lambda: spreading(spy)), ("signals", lambda: signals(tickers, spy, requests_from_answers())),
+                    ("tactical", lambda: tactical(tickers + ["SPY"] + funds, spy, prev))):
         try:
             out[key] = fn()
         except Exception as e:
