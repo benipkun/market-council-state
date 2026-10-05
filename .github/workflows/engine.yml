@@ -23,8 +23,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
+      # Always start from the newest main, so a run that waited in the queue builds on the results of the run before it.
       - uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
@@ -64,6 +66,13 @@ jobs:
           git add -A state research
           if git diff --cached --quiet; then echo "Nothing changed."; else
             git commit -q -m "Engine: results $(date -u +%Y-%m-%dT%H:%MZ)"
-            for i in 1 2 3; do git pull -q --rebase origin main && git push -q && break; sleep 5; done
+            # If main moved meanwhile, replay this commit on top of it; where both changed a results file, the fresh results win.
+            pushed=0
+            for i in 1 2 3 4; do
+              if git fetch -q origin main && git rebase -q -X theirs origin/main && git push -q origin HEAD:main; then pushed=1; break; fi
+              git rebase --abort 2>/dev/null || true
+              sleep 5
+            done
+            if [ "$pushed" != "1" ]; then echo "The results could not be saved to the repository."; exit 1; fi
           fi
           if [ -s /tmp/engine_failed ]; then cat /tmp/engine_failed; exit 1; fi
