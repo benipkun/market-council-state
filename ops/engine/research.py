@@ -167,7 +167,7 @@ def dcf(tk, fin, price, shares, beta, rf, meta):
     risks = []
     ni, tx = g(inc, "Net Income"), g(inc, "Income Tax")
     if ni and tx is not None and tx < 0:
-        risks.append("Reported profit includes a tax gain of %.0f (thousands); price-to-earnings and earnings-based fair values overstate the business. This model uses operating profit taxed at %d%% instead." % (-tx, int(TAX * 100)))
+        risks.append("Reported profit includes a tax gain of %s; price-to-earnings and earnings-based fair values overstate the business. This model uses operating profit taxed at %d%% instead." % (("$%.1fbn" % (-tx / 1e6)) if -tx >= 1e6 else ("$%.0fm" % (-tx / 1e3)), int(TAX * 100)))
     if any(m < 0 for m in margins):
         risks.append("Operating profit was negative in at least one of the last %d years, so the margin assumption has a short record." % len(margins))
     if tv / (1 + A["wacc"]) ** 5 > 0.75 * ev:
@@ -255,9 +255,17 @@ def card(tk, meta, quant):
     news = (nq("news/topic/articlebysymbol?q=" + tk.lower() + "%7Cstocks&offset=0&limit=6&fallback=false") or {}).get("rows") or []
     c["news"] = [{"title": str(n.get("title"))[:160], "date": str(n.get("created") or n.get("ago") or "")[:24], "publisher": n.get("publisher"),
                   "url": "https://www.nasdaq.com" + str(n.get("url") or "")} for n in news[:6]]
-    fl = nq("company/" + tk + "/sec-filings?limit=6&sortColumn=filed&sortOrder=desc") or {}
-    c["filings"] = [{"form": x.get("formType"), "filed": mdy(x.get("filed")), "period": mdy(x.get("period")), "company": x.get("companyName"),
-                     "url": ((x.get("view") or {}).get("htmlLink"))} for x in (fl.get("rows") or [])[:6]]
+    frows = (nq("company/" + tk + "/sec-filings?limit=40&sortColumn=filed&sortOrder=desc") or {}).get("rows") or []
+    if not frows:
+        frows = (nq("company/" + tk + "/sec-filings?limit=6&sortColumn=filed&sortOrder=desc") or {}).get("rows") or []
+    # company announcements first; insider forms (3, 4, 5, 144) are covered by the smart-money block
+    fmain = [x for x in frows if str(x.get("formType") or "").upper().split("/")[0] not in ("3", "4", "5", "144", "CERT")]
+
+    def fwhat(x):
+        link = str((x.get("view") or {}).get("htmlLink") or "")
+        return (urllib.parse.parse_qs(urllib.parse.urlparse(link).query).get("formDescription") or [None])[0]
+    c["filings"] = [{"form": x.get("formType"), "what": fwhat(x), "filed": mdy(x.get("filed")), "period": mdy(x.get("period")), "company": x.get("companyName"),
+                     "url": ((x.get("view") or {}).get("htmlLink"))} for x in (fmain or frows)[:6]]
     es = ((nq("company/" + tk + "/earnings-surprise") or {}).get("earningsSurpriseTable") or {}).get("rows") or []
     hist = [{"quarter": x.get("fiscalQtrEnd"), "reported": mdy(x.get("dateReported")), "eps": num(x.get("eps")), "consensus": num(x.get("consensusForecast")),
              "surprise_pct": num(x.get("percentageSurprise"))} for x in es[:4]]
