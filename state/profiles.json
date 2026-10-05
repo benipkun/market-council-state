@@ -1,0 +1,14 @@
+{
+  "active": "ben",
+  "people": [
+    {
+      "id": "ben",
+      "name": "Ben",
+      "risk_level": 3,
+      "horizon_years": 5,
+      "max_loss_pct": 25,
+      "allow_shorts": false,
+      "set_at": "2026-10-05T03:58:54Z"
+    }
+  ]
+}
