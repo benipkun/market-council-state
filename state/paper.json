@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-05T21:17:22Z",
+  "as_of": "2026-10-06T21:17:01Z",
   "rules": {
     "position_selection": "every pick in digests/history.json with lean bullish (long) or bearish (short); neutral picks skipped",
     "notional": "position_suggestion.suggested_size_usd when tier is not 'none' and size > 0 (sized true); otherwise 100 (sized false)",
@@ -20,13 +20,13 @@
       "entry_price": 71.05,
       "spy_entry": 774.15,
       "entry_source": "digest-later",
-      "last_price": 69.495,
-      "spy_last": 774.97,
+      "last_price": 69.08,
+      "spy_last": 779.14,
       "status": "open",
       "closed_at": null,
-      "days_held": 10,
-      "pl_usd": -2.19,
-      "spy_pl_usd": 0.11
+      "days_held": 11,
+      "pl_usd": -2.77,
+      "spy_pl_usd": 0.64
     },
     {
       "id": "2026-09-21T09:24:05Z|RYAAY",
@@ -41,13 +41,13 @@
       "entry_price": 53.51,
       "spy_entry": 774.15,
       "entry_source": "digest-later",
-      "last_price": 54.71,
-      "spy_last": 774.97,
+      "last_price": 55.87,
+      "spy_last": 779.14,
       "status": "open",
       "closed_at": null,
-      "days_held": 10,
-      "pl_usd": 2.24,
-      "spy_pl_usd": 0.11
+      "days_held": 11,
+      "pl_usd": 4.41,
+      "spy_pl_usd": 0.64
     },
     {
       "id": "2026-09-21T14:15:00Z|DUOL",
@@ -62,13 +62,13 @@
       "entry_price": 148.17,
       "spy_entry": 774.15,
       "entry_source": "digest-later",
-      "last_price": 147.07,
-      "spy_last": 774.97,
+      "last_price": 148.21,
+      "spy_last": 779.14,
       "status": "open",
       "closed_at": null,
-      "days_held": 10,
-      "pl_usd": -0.74,
-      "spy_pl_usd": 0.11
+      "days_held": 11,
+      "pl_usd": 0.03,
+      "spy_pl_usd": 0.64
     },
     {
       "id": "2026-09-22T14:22:48Z|AVAV",
@@ -83,13 +83,13 @@
       "entry_price": 156.13,
       "spy_entry": 773.67,
       "entry_source": "digest",
-      "last_price": 139.275,
-      "spy_last": 774.97,
+      "last_price": 143.54,
+      "spy_last": 779.14,
       "status": "open",
       "closed_at": null,
-      "days_held": 9,
-      "pl_usd": -0.86,
-      "spy_pl_usd": 0.01
+      "days_held": 10,
+      "pl_usd": -0.65,
+      "spy_pl_usd": 0.06
     },
     {
       "id": "2026-09-22T15:21:54Z|SOFI",
@@ -104,13 +104,13 @@
       "entry_price": 17.255,
       "spy_entry": 773.41,
       "entry_source": "digest",
-      "last_price": 15.905,
-      "spy_last": 774.97,
+      "last_price": 15.76,
+      "spy_last": 779.14,
       "status": "open",
       "closed_at": null,
-      "days_held": 9,
-      "pl_usd": -1.67,
-      "spy_pl_usd": 0.04
+      "days_held": 10,
+      "pl_usd": -1.85,
+      "spy_pl_usd": 0.16
     },
     {
       "id": "2026-09-22T19:25:47Z|CHWY",
@@ -125,13 +125,13 @@
       "entry_price": 19.64,
       "spy_entry": 774.205,
       "entry_source": "digest",
-      "last_price": 18.25,
-      "spy_last": 774.97,
+      "last_price": 18.145,
+      "spy_last": 779.14,
       "status": "open",
       "closed_at": null,
-      "days_held": 9,
-      "pl_usd": -0.57,
-      "spy_pl_usd": 0.01
+      "days_held": 10,
+      "pl_usd": -0.61,
+      "spy_pl_usd": 0.05
     },
     {
       "id": "2026-09-23T16:19:50Z|ASML",
@@ -146,13 +146,13 @@
       "entry_price": 1727.98,
       "spy_entry": 768.62,
       "entry_source": "digest",
-      "last_price": 1860.525,
-      "spy_last": 774.97,
+      "last_price": 1833.95,
+      "spy_last": 779.14,
       "status": "open",
       "closed_at": null,
-      "days_held": 8,
-      "pl_usd": 7.67,
-      "spy_pl_usd": 0.83
+      "days_held": 9,
+      "pl_usd": 6.13,
+      "spy_pl_usd": 1.37
     },
     {
       "id": "2026-09-23T16:19:50Z|NVO",
@@ -167,13 +167,13 @@
       "entry_price": 38.42,
       "spy_entry": 768.62,
       "entry_source": "digest",
-      "last_price": 37.55,
-      "spy_last": 774.97,
+      "last_price": 37.53,
+      "spy_last": 779.14,
       "status": "open",
       "closed_at": null,
-      "days_held": 8,
-      "pl_usd": -1.81,
-      "spy_pl_usd": 0.66
+      "days_held": 9,
+      "pl_usd": -1.86,
+      "spy_pl_usd": 1.1
     },
     {
       "id": "2026-09-29T15:08:00Z|NVO",
@@ -188,13 +188,13 @@
       "entry_price": 38.8,
       "spy_entry": 764.47,
       "entry_source": "digest",
-      "last_price": 37.55,
-      "spy_last": 774.97,
+      "last_price": 37.53,
+      "spy_last": 779.14,
       "status": "open",
       "closed_at": null,
-      "days_held": 4,
-      "pl_usd": -3.22,
-      "spy_pl_usd": 1.37
+      "days_held": 5,
+      "pl_usd": -3.27,
+      "spy_pl_usd": 1.92
     },
     {
       "id": "2026-09-29T21:10:32Z|DUOL",
@@ -209,13 +209,13 @@
       "entry_price": 141.17,
       "spy_entry": 764.3,
       "entry_source": "digest",
-      "last_price": 147.07,
-      "spy_last": 774.97,
+      "last_price": 148.21,
+      "spy_last": 779.14,
       "status": "open",
       "closed_at": null,
-      "days_held": 4,
-      "pl_usd": 4.18,
-      "spy_pl_usd": 1.4
+      "days_held": 5,
+      "pl_usd": 4.99,
+      "spy_pl_usd": 1.94
     },
     {
       "id": "2026-09-30T23:11:46Z|ASML",
@@ -230,13 +230,13 @@
       "entry_price": 1814.75,
       "spy_entry": 765.73,
       "entry_source": "digest",
-      "last_price": 1860.525,
-      "spy_last": 774.97,
+      "last_price": 1833.95,
+      "spy_last": 779.14,
       "status": "open",
       "closed_at": null,
-      "days_held": 3,
-      "pl_usd": -2.52,
-      "spy_pl_usd": 1.21
+      "days_held": 4,
+      "pl_usd": -1.06,
+      "spy_pl_usd": 1.75
     },
     {
       "id": "2026-10-01T09:17:00Z|AVAV",
@@ -251,13 +251,13 @@
       "entry_price": 142.22,
       "spy_entry": 762.63,
       "entry_source": "digest",
-      "last_price": 139.275,
-      "spy_last": 774.97,
+      "last_price": 143.54,
+      "spy_last": 779.14,
       "status": "open",
       "closed_at": null,
-      "days_held": 2,
-      "pl_usd": -2.07,
-      "spy_pl_usd": 1.62
+      "days_held": 3,
+      "pl_usd": 0.93,
+      "spy_pl_usd": 2.16
     },
     {
       "id": "2026-10-01T13:14:00Z|NVO",
@@ -272,13 +272,13 @@
       "entry_price": 37.91,
       "spy_entry": 762.63,
       "entry_source": "digest",
-      "last_price": 37.55,
-      "spy_last": 774.97,
+      "last_price": 37.53,
+      "spy_last": 779.14,
       "status": "open",
       "closed_at": null,
-      "days_held": 2,
-      "pl_usd": -0.95,
-      "spy_pl_usd": 1.62
+      "days_held": 3,
+      "pl_usd": -1.0,
+      "spy_pl_usd": 2.16
     },
     {
       "id": "2026-10-01T13:14:00Z|SAP",
@@ -293,22 +293,22 @@
       "entry_price": 208.48,
       "spy_entry": 762.63,
       "entry_source": "digest",
-      "last_price": 207.86,
-      "spy_last": 774.97,
+      "last_price": 210.57,
+      "spy_last": 779.14,
       "status": "open",
       "closed_at": null,
-      "days_held": 2,
-      "pl_usd": 0.3,
-      "spy_pl_usd": 1.62
+      "days_held": 3,
+      "pl_usd": -1.0,
+      "spy_pl_usd": 2.16
     }
   ],
   "totals": {
     "positions": 14,
     "open": 14,
     "closed": 0,
-    "pl_usd": -2.21,
-    "spy_pl_usd": 10.72,
-    "diff_usd": -12.93,
+    "pl_usd": 2.42,
+    "spy_pl_usd": 16.75,
+    "diff_usd": -14.33,
     "closed_wins": 0,
     "closed_beat_spy": 0,
     "hit_rate": null
@@ -348,6 +348,11 @@
       "date": "2026-10-05",
       "pl_usd": -2.21,
       "spy_pl_usd": 10.72
+    },
+    {
+      "date": "2026-10-06",
+      "pl_usd": 2.42,
+      "spy_pl_usd": 16.75
     }
   ]
 }
