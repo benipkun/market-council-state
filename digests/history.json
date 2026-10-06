@@ -843,6 +843,13 @@
           "brief": "Defense Secretary Hegseth announced creation of a new four-star Autonomous Warfare Command ('Autowarcom', operational by Oct 2027) on Sept 30, paired with a proposed $74B budget for drone/counter-drone tech aiming to triple autonomous-warfare spending, plus 'Project Agincourt' to overhaul how the military acquires and fields drones; AVAV, ONDS, KTOS, RCAT and UMAC all reacted overnight.",
           "why": "A dedicated 4-star command plus a budget line item that explicitly triples planned drone spending structurally expands the addressable federal market for AVAV's loitering-munition and small-UAS product lines (Switchblade, Puma, JUMP), yet the stock's overnight reaction (+0.2% after-hours to $142.50) suggests the market hasn't yet re-rated AVAV for the magnitude of the figure -- buy-the-rumor/sell-the-news lens reads this as fresh and largely unpriced, not a late-stage move.",
           "price_at_pick": 142.22,
+          "graded": {
+            "checked_at": "2026-10-06T06:13:00Z",
+            "price_then": 142.22,
+            "price_now": 139.365,
+            "pct_change": -2.01,
+            "outcome": "contradicted"
+          },
           "bull_case": "AVAV is already the Pentagon's incumbent loitering-munitions/small-UAS supplier with established trusted-vendor status; a tripled drone budget and new centralized command that streamlines acquisition (the stated goal of Project Agincourt) should disproportionately favor an incumbent who can scale existing qualified programs fastest. This sits on top of an already-established mispricing thesis (~54% upside-to-price vs the $219.35 consensus target, unchanged this cycle).",
           "bear_case": "This is a sector-wide policy headline, not an AVAV-specific contract award -- $74B is a budget proposal, not appropriated funding, and a new command structure typically takes years to translate into actual purchase orders; the muted +0.2% after-hours move may simply reflect the market correctly treating this as early and uncertain rather than mispriced. AVAV also trades well below both its 50d ($158.66) and 200d ($202.21) SMA with RSI(14) at 38.6 -- a real bearish-momentum backdrop this one headline doesn't reverse.",
           "risks": [
@@ -885,6 +892,13 @@
           "brief": "Two independent GuruFocus intrinsic-value models now converge on NVO being 60%+ below fair value -- a materially deeper, methodologically-reinforced gap than the analyst-consensus read this pipeline has carried for weeks.",
           "why": "GuruFocus's proprietary GF Value (~$104.84, ~63.8% undervalued) and an independent earnings-based DCF (~$95.39, ~60.3% undervalued) both newly converge on a much larger gap than the previously-tracked 24.6% consensus-target read, while RSI(14) ~28.6 shows the stock technically oversold on top of the valuation gap.",
           "price_at_pick": 37.91,
+          "graded": {
+            "checked_at": "2026-10-06T06:13:00Z",
+            "price_then": 37.91,
+            "price_now": 37.54,
+            "pct_change": -0.98,
+            "outcome": "inconclusive"
+          },
           "bull_case": "Two independent intrinsic-value models (GF Value ~$104.84, earnings-DCF ~$95.39) both show NVO 60%+ below fair value; the GLP-1/obesity franchise remains durable with the Hengrui oral-pill license and CagriSema Phase 3 data still expanding the pipeline; RSI(14) ~28.6 is oversold, suggesting selling may already be overdone relative to fundamentals.",
           "bear_case": "NVO's steep YTD decline (-21.9%) reflects real competitive pressure from Eli Lilly's tirzepatide and GLP-1 pricing wars; a persistently depressed multiple could mean the market is pricing in structurally lower margins or share loss that a static DCF model doesn't capture; the FDA's CagriSema NDA decision (Oct 1-Dec 31 window) is a binary Q4 catalyst that could cut either way.",
           "risks": [
@@ -921,6 +935,13 @@
           "brief": "GuruFocus's own DCF models newly diverge sharply from its GF Value composite and from analyst consensus on SAP -- two separate DCF reads say SAP is 35-51% overvalued, flagging a possible short-thesis the pipeline hasn't carried before.",
           "why": "Two independent GuruFocus DCF models (earnings-based $102.59, FCF-based $138.87-150.26) both put fair value 35-51% below the $208.48 price, implying the market may be paying for cloud-backlog growth (27% YoY) at a premium that conservative DCF growth/discount-rate assumptions don't support -- though GuruFocus's own GF Value ($261.74) and analyst consensus ($245.01) disagree, both reading undervalued, so this is a genuine methodology split rather than a clean signal.",
           "price_at_pick": 208.48,
+          "graded": {
+            "checked_at": "2026-10-06T06:13:00Z",
+            "price_then": 208.48,
+            "price_now": 207.94,
+            "pct_change": -0.26,
+            "outcome": "inconclusive"
+          },
           "bull_case": "Cloud backlog growing 27% YoY to ~EUR22.9B, AI embedded across the product suite, and GuruFocus's own composite GF Value model ($261.74) actually shows SAP ~20% undervalued -- the bull case rests on a durable enterprise-software moat and a growth narrative that could justify today's multiple despite what the DCF submodels say.",
           "bear_case": "Two separate GuruFocus DCF models (earnings-based $102.59, FCF-based $138.87-150.26) put fair value 35-51% below the current price, implying the market is paying for growth that conservative discounted-cash-flow math doesn't support; a 12.7% YTD decline already suggests some repricing is underway.",
           "risks": [

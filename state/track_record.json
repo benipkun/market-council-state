@@ -1,10 +1,31 @@
 {
   "tallies": {
     "confirmed": 1,
-    "contradicted": 5,
-    "inconclusive": 14
+    "contradicted": 6,
+    "inconclusive": 16
   },
   "recent": [
+    {
+      "ticker": "NVO",
+      "as_of": "2026-10-01T13:14:00Z",
+      "lean": "bullish",
+      "outcome": "inconclusive",
+      "pct_change": -0.98
+    },
+    {
+      "ticker": "SAP",
+      "as_of": "2026-10-01T13:14:00Z",
+      "lean": "bearish",
+      "outcome": "inconclusive",
+      "pct_change": -0.26
+    },
+    {
+      "ticker": "AVAV",
+      "as_of": "2026-10-01T09:17:00Z",
+      "lean": "bullish",
+      "outcome": "contradicted",
+      "pct_change": -2.01
+    },
     {
       "ticker": "ASML",
       "as_of": "2026-09-30T23:11:46Z",
@@ -88,27 +109,6 @@
       "lean": "neutral",
       "outcome": "inconclusive",
       "pct_change": -0.39
-    },
-    {
-      "ticker": "CHWY",
-      "as_of": "2026-09-22T19:25:47Z",
-      "lean": "bullish",
-      "outcome": "contradicted",
-      "pct_change": -6.98
-    },
-    {
-      "ticker": "SOFI",
-      "as_of": "2026-09-22T15:21:54Z",
-      "lean": "bullish",
-      "outcome": "contradicted",
-      "pct_change": -3.91
-    },
-    {
-      "ticker": "AVAV",
-      "as_of": "2026-09-22T14:22:48Z",
-      "lean": "bullish",
-      "outcome": "contradicted",
-      "pct_change": -2.61
     }
   ]
 }
