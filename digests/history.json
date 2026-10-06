@@ -1007,6 +1007,13 @@
               "This position is ~79% of NAV -- did it get there by a deliberate decision at each stage, or by drift as the rest of the book (SOFI, CHWY, the EU sleeve) stayed small? If assembling the portfolio from cash today, would this weighting be chosen again?",
               "If the Delivery Hero integration or the pending litigation went badly, how would you actually find out, and how soon, versus how long it would take to unwind a position this large without moving the price against yourself?"
             ]
+          },
+          "graded": {
+            "checked_at": "2026-10-06T11:08:00Z",
+            "price_then": 67.88,
+            "price_now": 69.48,
+            "pct_change": 2.36,
+            "outcome": "inconclusive"
           }
         }
       ]

@@ -2,9 +2,16 @@
   "tallies": {
     "confirmed": 1,
     "contradicted": 6,
-    "inconclusive": 16
+    "inconclusive": 17
   },
   "recent": [
+    {
+      "ticker": "UBER",
+      "as_of": "2026-10-01T23:17:00Z",
+      "lean": "neutral",
+      "outcome": "inconclusive",
+      "pct_change": 2.36
+    },
     {
       "ticker": "NVO",
       "as_of": "2026-10-01T13:14:00Z",
@@ -102,13 +109,6 @@
       "lean": "bullish",
       "outcome": "inconclusive",
       "pct_change": 0.92
-    },
-    {
-      "ticker": "UBER",
-      "as_of": "2026-09-22T23:22:00Z",
-      "lean": "neutral",
-      "outcome": "inconclusive",
-      "pct_change": -0.39
     }
   ]
 }
