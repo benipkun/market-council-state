@@ -64,7 +64,7 @@ def read_answers():
         if not n.endswith(".json"):
             continue
         a = E.rj("answers/" + n, None)
-        if not isinstance(a, dict) or str(a.get("kind")) not in ("decision", "morning", "plan", "plan_stop", "keep", "keep_stop"):
+        if not isinstance(a, dict) or str(a.get("kind")) not in ("decision", "morning", "plan", "plan_stop", "keep", "keep_stop", "test_card"):
             continue
         at = str(a.get("at") or "")
         if not re.fullmatch(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ", at):
@@ -350,8 +350,12 @@ def settle(prev_cards, answers, ledger, now):
         if a and c["status"] == "open":
             c["status"] = "approved" if a["answer"] == "yes" else "declined"
             c["answered_at"], c["note"] = a["at"], txt(a.get("note"), 200) or None
+            try:
+                c["approved_size"] = float(a["size"]) if a.get("size") and 10 <= float(a["size"]) <= 100000 else None
+            except Exception:
+                c["approved_size"] = None
         if c["status"] == "approved":
-            want = set((o["ticker"], o["side"]) for o in c.get("orders") or [])
+            want = set((o["ticker"], o["side"]) for o in c.get("orders") or []) | set((g["ticker"], "buy") for g in c.get("legs") or [])
             got = set((e["ticker"], e["action"]) for e in trades if str(e.get("at") or "") >= str(c.get("answered_at") or ""))
             if want and (want & got):
                 c["status"], c["done_at"] = "done", now
@@ -371,15 +375,15 @@ def merge_cards(cards, wanted, now, reasons=None):
     for c in cards:
         if c["status"] == "open" and c["key"] not in keys:
             c["status"], c["closed_at"] = "withdrawn", now
-            c["closed_why"] = (reasons or {}).get(c["key"]) or "the numbers that raised it no longer hold"
+            c["closed_why"] = (reasons or {}).get(c["key"]) or (reasons or {}).get(c["key"].split(":")[0] + ":*") or "the numbers that raised it no longer hold"
         elif c["status"] == "open" and day(c["expires"]) < today:
-            c["status"], c["closed_at"], c["closed_why"] = "expired", now, "no answer within %d days" % CARD_DAYS
+            c["status"], c["closed_at"], c["closed_why"] = "expired", now, "no answer before it ran out"
     for w in wanted:
         old = live.get(w["key"])
         if old and old["status"] == "approved":
             continue
         if old and old["status"] == "open":
-            for k in ("title", "title_plain", "orders", "why", "against", "method", "effect", "part"):
+            for k in ("title", "title_plain", "orders", "why", "against", "method", "effect", "part", "source", "source_id", "name", "legs", "entry", "stop", "take_profit", "stop_pct", "target_pct", "exit_rule", "gain_basis", "measured", "sizes", "min_size", "funding", "record", "rank", "greyed", "grey_reason", "profile_size"):
                 if k in w:
                     old[k] = w[k]
             old["refreshed"] = now
@@ -390,7 +394,7 @@ def merge_cards(cards, wanted, now, reasons=None):
         n = len([c for c in cards if c["created"][:10] == now[:10]]) + 1
         c = dict(w)
         c.update({"id": "%s%s-%d" % (w["kind"][0].upper(), now[:10].replace("-", ""), n), "created": now, "status": "open",
-                  "expires": (today + datetime.timedelta(days=CARD_DAYS)).isoformat(), "estimate": True})
+                  "expires": (today + datetime.timedelta(days=int(w.get("valid_days") or CARD_DAYS))).isoformat(), "estimate": True})
         cards.append(c)
     return cards[-40:]
 
@@ -659,8 +663,9 @@ def morning(prev, cards, plans, snap, quant, holds_, smart, answers, now):
     said = {a["id"]: a for a in answers if a.get("kind") in ("morning", "decision")}
     qs = []
     for c in cards:
-        if c["status"] == "open":
-            qs.append({"id": c["id"], "kind": "decision", "text": c["title"] + "?", "text_plain": (c.get("title_plain") or c["title"]) + "?",
+        if c["status"] == "open" and not c.get("greyed"):
+            mark = "" if str(c["title"]).endswith(".") else "?"
+            qs.append({"id": c["id"], "kind": "decision", "text": c["title"] + mark, "text_plain": (c.get("title_plain") or c["title"]) + mark,
                        "detail": (c.get("why") or [""])[0], "yes": "Approve", "no": "Decline"})
     for p in plans:
         if p.get("due") and p.get("kind") != "rebalance":
@@ -707,6 +712,318 @@ def morning(prev, cards, plans, snap, quant, holds_, smart, answers, now):
             except Exception as e:
                 out["sent_note"] = "not delivered: " + str(e)[:80]
         out["message"] = body["message"]
+    return out
+
+
+# ---------------------------------------------------------------- the decision desk: every source of ideas, one kind of card
+SIZES = (100.0, 500.0, 1000.0)     # shown on every card until Ben names his own amount
+FEE_PCT, FEE_MIN = 0.0025, 1.12    # broker: 0.25% of the order, at least one euro (about 1.12 dollars), each way
+PAY_SHARE = 0.10                   # where no measured average exists, an idea "pays" when fees take under a tenth of the planned gain
+DESK_PASS = 5
+DESK_SCORE_MAX = 3                 # the best three scorecard ideas become cards; the others are listed underneath
+RULE_STOP = {"pullback": 0.08, "dip": 0.12}
+EASE = ["trend", "drift", "value", "insiders", "holders", "momentum", "quality"]
+
+
+def fee(x):
+    return max(FEE_PCT * x, FEE_MIN) if x > 0 else 0.0
+
+
+def size_rows(weights, gain, measured, sell_value):
+    def one(s):
+        legs = sum(fee(s * w) for w in weights)
+        cost = 2 * legs + fee(min(s, sell_value or 0.0))
+        g = s * gain
+        pays = (g - cost > 0) if measured else (g > 0 and cost <= PAY_SHARE * g)
+        return {"usd": s, "fees_usd": r2(cost), "fees_pct": r2(cost / s, 4), "gain_usd": r2(g), "net_usd": r2(g - cost), "pays": bool(pays)}
+    smallest = None
+    for s in range(50, 5001, 10):
+        if one(float(s))["pays"]:
+            smallest = s
+            break
+    return [one(s) for s in SIZES], smallest
+
+
+def vol20(t):
+    px = np.array([v for d, v in E.read_cache(t)][-21:], dtype=float)
+    return float(np.std(px[1:] / px[:-1] - 1, ddof=1) * math.sqrt(252)) if len(px) == 21 else None
+
+
+def funding_for(t, pos, keeps, edge_by):
+    weak = [p for p in pos if p["t"] != t and p["t"] not in keeps and (edge_by.get(p["t"]) or {}).get("score") is not None and edge_by[p["t"]]["score"] <= 2]
+    weak.sort(key=lambda p: (edge_by[p["t"]]["score"], -p["mv"]))
+    if not weak:
+        return {"kind": "new_money", "why": "No holding is weak enough to sell for it, and a position you chose to keep is never used."}
+    p, s = weak[0], edge_by[weak[0]["t"]]
+    return {"kind": "paired_sale", "sell": p["t"], "sell_value": r2(p["mv"]), "sell_weight": r2(p["w"], 4),
+            "why": "%s passes %d of %d checks and is not a position you chose to keep." % (p["t"], s["score"], s["of"])}
+
+
+def track(log, key, source, ticker, now, spy_rows):
+    rows = E.read_cache(ticker) if ticker else []
+    if key not in log:
+        log[key] = {"source": source, "ticker": ticker, "first": now[:10], "entry": rows[-1][1] if rows else None, "spy": spy_rows[-1][1] if spy_rows else None}
+    x = log[key]
+    x["last_seen"] = now[:10]
+    if rows and x.get("entry") and spy_rows and x.get("spy"):
+        x["pct"], x["spy_pct"] = r2(rows[-1][1] / x["entry"] - 1, 4), r2(spy_rows[-1][1] / x["spy"] - 1, 4)
+    return x
+
+
+def source_record(log, source):
+    xs = [x for x in log.values() if x.get("source") == source and x.get("pct") is not None]
+    if not xs:
+        return None
+    return {"ideas": len(xs), "since": min(x["first"] for x in xs), "avg": r2(sum(x["pct"] for x in xs) / len(xs), 4), "avg_spy": r2(sum(x["spy_pct"] for x in xs) / len(xs), 4)}
+
+
+def grey(idea, extra=None):
+    rows = idea["sizes"]
+    if extra:
+        idea["greyed"], idea["grey_reason"] = True, extra
+    elif not any(r["pays"] for r in rows):
+        idea["greyed"] = True
+        idea["grey_reason"] = ("Fees eat the gain at 100, 500 and 1,000 dollars." + (" It starts to pay from about {:,} dollars.".format(idea["min_size"]) if idea.get("min_size") else
+                                                                                   " It does not pay at any size up to 5,000 dollars."))
+    else:
+        idea["greyed"], idea["grey_reason"] = False, None
+    return idea
+
+
+def desk_ideas(strat, lab_out, pos, keeps, lim, nav, log, answers, now):
+    ideas, spy_rows = [], E.read_cache("SPY")
+    edge = ((strat or {}).get("edge") or {}).get("rows") or []
+    edge_by = {r["t"]: r for r in edge}
+    held = {p["t"]: p for p in pos}
+    # 1. the seven-check scorecard (watchlist and wide screen): only the best few become cards, the rest are listed
+    qual = [r for r in edge if r.get("qualifies") and E.read_cache(r["t"]) and not (r["t"] in held and held[r["t"]]["w"] >= lim["stock_cap"])]
+    qual.sort(key=lambda r: (-r["score"], -(r["mos"] if r.get("mos") is not None else -9.0), r["t"]))
+    also = [{"t": r["t"], "name": r.get("name") or r["t"], "score": r["score"], "of": r["of"], "source": r.get("source") or "watchlist"} for r in qual[DESK_SCORE_MAX:]]
+    for r in qual[:DESK_SCORE_MAX]:
+        t, rows = r["t"], E.read_cache(r["t"])
+        px = rows[-1][1]
+        sp = max(0.05, 2 * (vol20(t) or 0.3) / math.sqrt(252) * math.sqrt(10))
+        entry = px * 1.005
+        f = funding_for(t, pos, keeps, edge_by)
+        srows, smallest = size_rows([1.0], 2 * sp, False, f.get("sell_value"))
+        track(log, "SCORE:" + t, "scorecard", t, now, spy_rows)
+        ok = [c["name"] for c in r["checks"] if c["pass"]]
+        no = ["%s (%s)" % (c["name"], c["detail"]) for c in r["checks"] if c["pass"] is not True]
+        ideas.append(grey({"key": "SCORE:" + t, "kind": "idea", "source": "Scorecard" + (", wide screen" if r.get("source") == "wide screen" else ""), "source_id": "scorecard",
+                           "ticker": t, "name": r.get("name") or t, "title": "Buy %s: it passes %d of %d checks" % (t, r["score"], r["of"]),
+                           "legs": [{"ticker": t, "name": r.get("name") or t, "weight": 1.0, "ref_price": r2(px), "limit": r2(entry), "eu": None}],
+                           "entry": r2(entry), "stop": r2(entry * (1 - sp)), "take_profit": r2(entry * (1 + 2 * sp)), "stop_pct": r2(sp, 4), "target_pct": r2(2 * sp, 4),
+                           "exit_rule": "Sell at the take-profit or at the stop, whichever comes first. Place the stop with the order.",
+                           "gain_basis": "the gain if the take-profit is reached (%s); if the stop is hit the loss is %s" % (pc(2 * sp), pc(sp)), "measured": False,
+                           "sizes": srows, "min_size": smallest, "funding": f, "valid_days": 14, "rank": 50 + 5 * r["score"],
+                           "profile_size": r2(min(lim["risk_per_trade"] * nav / sp, lim["stock_cap"] * nav)),
+                           "why": ["Passes: " + "; ".join(ok) + "."], "against": ["Not passed: " + "; ".join(no) + "."] if no else [],
+                           "method": "Raised when a share passes at least five of the seven checks and trades above its 200-day average. Stop = twice the 20-day volatility over "
+                                     "ten days (at least 5%); take-profit = twice the stop distance. This source has no back-test; it is tracked on paper."}))
+    # 2. short-term rules: only the entries made at the latest close
+    tac = (lab_out or {}).get("tactical") or {}
+    for rule in tac.get("rules") or []:
+        for o in [z for z in rule.get("open") or [] if z.get("days") == 0]:
+            t, px, st = o["t"], float(o["entry"]), RULE_STOP.get(rule["id"])
+            gain = float(rule.get("avg_gross") or 0.0)
+            f = funding_for(t, pos, keeps, edge_by)
+            srows, smallest = size_rows([1.0], gain, True, f.get("sell_value"))
+            key = "RULE:%s:%s:%s" % (rule["id"], t, o["since"])
+            track(log, key, "rule:" + rule["id"], t, now, spy_rows)
+            ideas.append(grey({"key": key, "kind": "idea", "source": "Short-term rule: " + rule["name"], "source_id": "rule:" + rule["id"], "ticker": t, "name": t,
+                               "title": "%s: buy %s at the close price" % (rule["name"], t),
+                               "legs": [{"ticker": t, "name": t, "weight": 1.0, "ref_price": r2(px), "limit": r2(px * 1.002), "eu": None}],
+                               "entry": r2(px), "stop": r2(px * (1 - st)) if st else None, "take_profit": r2(px * (1 + float(rule.get("avg_win") or 0))) if rule.get("avg_win") else None,
+                               "stop_pct": st, "target_pct": rule.get("avg_win"), "exit_rule": rule.get("rule"),
+                               "gain_basis": "the average result of this rule per trade in the back-test (%s before costs)" % pc(gain, 2), "measured": True,
+                               "sizes": srows, "min_size": smallest, "funding": f, "valid_days": 1, "rank": 30 + (10 if rule.get("passes") else 0),
+                               "why": ["The rule's entry condition was met at the last close: " + str(rule.get("rule"))],
+                               "against": ["The take-profit shown is the rule's average winning trade, not a fixed target; the rule itself decides the exit.",
+                                           "Daily closing prices only: your fill will differ."],
+                               "method": "Signal from daily closes. Size is your choice; the fee test uses the rule's measured average result per trade."},
+                              None if rule.get("passes") else "This rule fails its own test after costs, so the signal is shown for information only."))
+    # 3. the house strategy's core, while none of it is held
+    core = (strat or {}).get("core") or {}
+    assets = [a for a in core.get("assets") or [] if (a.get("weight") or 0) > 0.005]
+    tot = sum(a["weight"] for a in assets)
+    chosen = [v for v in ((strat or {}).get("backtest") or {}).get("variants") or [] if v.get("chosen")]
+    if assets and tot > 0 and chosen and sum(held[a["t"]]["w"] for a in assets if a["t"] in held) < 0.05:
+        f = funding_for(None, pos, keeps, edge_by)
+        w = [a["weight"] / tot for a in assets]
+        srows, smallest = size_rows(w, float(chosen[0]["cagr"]), False, f.get("sell_value"))
+        ideas.append(grey({"key": "CORE", "kind": "idea", "source": "House strategy", "source_id": "core", "ticker": None, "name": "House core",
+                           "title": "Start the house core: %d funds in equal-risk proportions" % len(assets),
+                           "legs": [{"ticker": a["t"], "name": a["name"], "weight": r2(x, 4), "ref_price": a.get("price"), "limit": r2(float(a["price"]) * 1.005) if a.get("price") else None,
+                                     "eu": a.get("eu")} for a, x in zip(assets, w)],
+                           "entry": None, "stop": None, "take_profit": None, "stop_pct": None, "target_pct": None,
+                           "exit_rule": "No stop and no target: hold, and reset the proportions once a month (each reset costs fees again).",
+                           "gain_basis": "the back-test's average yearly return of this mix (%s a year, 2005 to 2026)" % pc(chosen[0]["cagr"], 1), "measured": False,
+                           "sizes": srows, "min_size": smallest, "funding": f, "valid_days": 30, "rank": 40,
+                           "why": ["In the back-test this mix made %s a year with a worst fall of %s, against %s for the S&P 500 fund." % (
+                               pc(chosen[0]["cagr"], 1), pc(abs(chosen[0]["mdd"])), pc(abs([v for v in strat["backtest"]["variants"] if v["id"] == "spy"][0]["mdd"]))),
+                               "None of it is held today."],
+                           "against": ["It made less than the S&P 500 fund over the test; what it buys is a smaller worst fall.",
+                                       "Fund tickers are US-listed stand-ins; in the EU buy the listed equivalent your broker offers.",
+                                       "Small amounts split over several funds pay the minimum fee several times."],
+                           "method": "The house strategy's core mix for your risk profile, in today's proportions."}))
+    # 4. a test card, when the app asks for one
+    for a in answers:
+        if a.get("kind") == "test_card":
+            ideas.append({"key": "TEST:" + a["id"], "kind": "test", "source": "Test", "source_id": "test", "ticker": None, "name": "Test",
+                          "title": "Test card: answer yes or no. Nothing is bought or sold.", "legs": [], "sizes": [], "greyed": False, "valid_days": 3, "rank": 99,
+                          "why": ["This card only checks that a card reaches your phone and that your answer comes back to the desk."], "against": [],
+                          "method": "Raised on request as a delivery test."})
+    for x in ideas:
+        x.setdefault("title_plain", x["title"])
+    ideas.sort(key=lambda x: (bool(x.get("greyed")), -x.get("rank", 0)))
+    return ideas, edge_by, also
+
+
+def near_misses(edge, scr, tech):
+    seen, pool = set(), []
+    for r in list(edge) + list((scr or {}).get("rows") or []):
+        if r.get("t") in seen or r.get("qualifies"):
+            continue
+        seen.add(r["t"])
+        miss = sorted([c for c in r.get("checks") or [] if c.get("pass") is not True], key=lambda c: EASE.index(c["id"]) if c["id"] in EASE else 9)
+        need = max(1, DESK_PASS - r["score"])
+        trend = [c for c in miss if c["id"] == "trend"]
+        pick = (trend + [c for c in miss if c["id"] != "trend"])[:max(need, 1 if trend else 0)] if trend else miss[:need]
+        if len(pick) < need:
+            continue
+        gap = None
+        tk = (tech or {}).get(r["t"]) or {}
+        if tk.get("fair_value") and tk.get("price"):
+            gap = r2(float(tk["price"]) / float(tk["fair_value"]) - 1, 4)
+        pool.append({"t": r["t"], "name": r.get("name") or r["t"], "score": r["score"], "of": r["of"], "need": need, "source": r.get("source") or ("wide screen" if "region" in r else "watchlist"),
+                     "missing": [{"check": c["name"], "now": c["detail"], "needs": c.get("needs")} for c in pick],
+                     "pipeline_gap": gap, "price": r.get("price"), "held": bool(r.get("held")), "order": 0 if r.get("held") else (2 if "region" in r else 1)})
+    pool.sort(key=lambda x: (x["need"], x["order"], -x["score"], x["t"]))
+    return pool[:3]
+
+
+def gate_of(h):
+    h = str(h or "")
+    if re.search(r"not re-flagged|established|continuation|already[ -]flagged|unchanged, not", h):
+        return "standing"
+    if re.search(r"disregard|stale|mismatch|unconfirmed|not adopted", h):
+        return "stale"
+    if re.search(r"no mispricing|near-parity|below threshold|under threshold|within", h):
+        return "nogap"
+    if re.search(r"[Nn]o fresh|no material|flat|no new", h):
+        return "nofresh"
+    return "other"
+
+
+def funnel(prev_days, latest, history, seed, strat, lab_out, scr, cards, now):
+    days = dict(prev_days or {})
+    for row in seed or []:
+        d = row.get("day")
+        if d and d not in days:
+            days[d] = {k: int(row.get(k) or 0) for k in ("runs", "reviewed", "standing", "stale", "nogap", "nofresh", "other")}
+    fresh = {}
+    for s in (latest or {}).get("scrap") or []:
+        d = str(s.get("first_seen") or "")[:10]
+        if len(d) != 10:
+            continue
+        x = fresh.setdefault(d, {"runs": set(), "reviewed": 0, "standing": 0, "stale": 0, "nogap": 0, "nofresh": 0, "other": 0})
+        x["runs"].add(s.get("first_seen"))
+        x["reviewed"] += 1
+        x[gate_of(s.get("headline"))] += 1
+    for d, x in fresh.items():
+        x["runs"] = len(x["runs"])
+        old = days.get(d) or {}
+        if x["reviewed"] >= int(old.get("reviewed") or 0):
+            days[d] = x
+    picks = {}
+    for e in list((history or {}).get("entries") or []) + [{"as_of": (latest or {}).get("as_of"), "picks": (latest or {}).get("picks") or []}]:
+        d = str(e.get("as_of") or "")[:10]
+        for p in e.get("picks") or []:
+            k = "picks" if p.get("lean") in ("bullish", "bearish") else "neutral"
+            key = (d, p.get("ticker"), p.get("lean"), str(e.get("as_of")))
+            picks.setdefault(d, {"picks": set(), "neutral": set()})[k].add(key)
+    keep = sorted(days)[-15:]
+    days = {d: days[d] for d in keep}
+    win = sorted(days)[-10:]
+    tot = {k: sum(int(days[d].get(k) or 0) for d in win) for k in ("runs", "reviewed", "standing", "stale", "nogap", "nofresh", "other")}
+    tot["picks"] = sum(len((picks.get(d) or {}).get("picks") or ()) for d in win)
+    tot["neutral_checkins"] = sum(len((picks.get(d) or {}).get("neutral") or ()) for d in win)
+    last_pick = max([d for d, v in picks.items() if v["picks"]] or [None], key=lambda z: z or "")
+    edge = ((strat or {}).get("edge") or {}).get("rows") or []
+    tac = (lab_out or {}).get("tactical") or {}
+    openc = [c for c in cards if c["status"] == "open"]
+    return days, {"window": {"from": win[0] if win else None, "to": win[-1] if win else None, "trading_days": len(win)},
+                  "pipeline": dict(tot, last_pick=last_pick, per_day=[dict(days[d], day=d, picks=len((picks.get(d) or {}).get("picks") or ())) for d in win],
+                                   note="The hourly pipeline flags a share only when its gap is newly crossed or fresh news arrives; an established gap is reviewed and dropped every hour."),
+                  "scorecard": {"watchlist": len([r for r in edge if r.get("source") != "wide screen"]), "wide_screen": (scr or {}).get("funnel"),
+                                "from_wide_screen": len([r for r in edge if r.get("source") == "wide screen"]), "qualify": len([r for r in edge if r.get("qualifies")]),
+                                "cards": len([c for c in openc if c.get("source_id") == "scorecard"]), "screen_as_of": (scr or {}).get("as_of")},
+                  "short_term": {"rules": [{"id": r["id"], "name": r["name"], "passes": r.get("passes"), "signals_10d": r.get("signals_10d"), "new_today": r.get("new_today")} for r in tac.get("rules") or []],
+                                 "cards": len([c for c in openc if str(c.get("source_id") or "").startswith("rule:")])},
+                  "house": {"cards": len([c for c in openc if c.get("source_id") == "core"])},
+                  "cards_open": len([c for c in openc if not c.get("greyed")]), "cards_greyed": len([c for c in openc if c.get("greyed")])}
+
+
+def bar_check(paper_picks):
+    rows = []
+    for p in (paper_picks or {}).get("positions") or []:
+        t, d0, n = p.get("ticker"), str(p.get("flagged_at") or "")[:10], float(p.get("notional_usd") or 0)
+        before = [v for d, v in E.read_cache(t) if d <= d0]
+        if n <= 0 or p.get("pl_usd") is None:
+            continue
+        up = bool(len(before) >= 200 and before[-1] > float(np.mean(before[-200:])))
+        rows.append({"t": t, "date": d0, "lean": p.get("lean"), "trend_up": up, "pct": float(p["pl_usd"]) / n, "spy_pct": float(p.get("spy_pl_usd") or 0) / n})
+
+    def agg(xs):
+        if not xs:
+            return {"n": 0, "avg": None, "avg_spy": None, "names": []}
+        return {"n": len(xs), "avg": r2(sum(x["pct"] for x in xs) / len(xs), 4), "avg_spy": r2(sum(x["spy_pct"] for x in xs) / len(xs), 4),
+                "names": ["%s %s" % (x["t"], x["date"][5:]) for x in xs]}
+    new = [x for x in rows if x["lean"] == "bullish" and x["trend_up"]]
+    return {"since": min([x["date"] for x in rows] or [None], key=lambda z: z or ""), "old_bar": agg(rows), "with_trend_gate": agg(new),
+            "dropped_by_gate": agg([x for x in rows if x not in new]),
+            "note": "Old bar: every bullish or bearish pick the hourly pipeline made, in its practice book. New bar, as far as it can be rebuilt: only bullish picks whose price "
+                    "was above its 200-day average on the day. The other five checks cannot be rebuilt for past dates, because insider, holder and valuation data were not saved "
+                    "before 5 October. Equal weight per pick; a few weeks of data, so this is an indication, not proof."}
+
+
+def push(title, message, tag, now):
+    topic = os.environ.get("NTFY_OUT")
+    if not topic or E.OFFLINE:
+        return "not sent: no phone channel in this run"
+    try:
+        body = {"topic": topic, "title": title, "message": message, "click": APP + "#today", "tags": [tag]}
+        req = urllib.request.Request("https://ntfy.sh/", data=json.dumps(body).encode("utf-8"), headers={"Content-Type": "application/json"})
+        with urllib.request.urlopen(req, timeout=20) as r:
+            return ("sent " + now) if r.status == 200 else "not delivered"
+    except Exception as e:
+        return "not delivered: " + str(e)[:80]
+
+
+def sgn(x, n=1):
+    return ("+" if float(x) >= 0 else "-") + pc(abs(float(x)), n)
+
+
+def idea_records(ideas, log, strat, lab_out):
+    out = {}
+    sr = source_record(log, "scorecard")
+    out["scorecard"] = {"paper": sr, "text": (("On paper since %s: %d idea%s, %s on average against %s for the S&P 500 fund over the same days. " % (
+        sr["since"], sr["ideas"], "" if sr["ideas"] == 1 else "s", sgn(sr["avg"]), sgn(sr["avg_spy"]))) if sr else "On paper: the record starts today. ")
+        + "No back-test exists for this source."}
+    tr = (strat or {}).get("track") or {}
+    ch = [v for v in ((strat or {}).get("backtest") or {}).get("variants") or [] if v.get("chosen")]
+    if ch:
+        out["core"] = {"paper": tr, "text": "Back-test 2005 to 2026: %s a year, worst fall %s. On paper since %s: %s against %s for the S&P 500 fund." % (
+            pc(ch[0]["cagr"], 1), pc(abs(ch[0]["mdd"])), tr.get("since"), sgn(tr.get("core") or 0), sgn(tr.get("spy") or 0))}
+    tac = (lab_out or {}).get("tactical") or {}
+    for rule in tac.get("rules") or []:
+        if rule.get("avg_gross") is None:
+            continue
+        pp = rule.get("paper") or {}
+        out["rule:" + rule["id"]] = {"paper": pp, "text": "Back-test over %s years: %d trades, %s winners, %s a trade before costs. On paper since %s: %d closed, %s in total after costs." % (
+            tac.get("years"), rule.get("trades") or 0, pc(rule.get("win_rate") or 0), sgn(rule.get("avg_gross") or 0, 2), pp.get("since"), pp.get("closed") or 0, sgn(pp.get("sum_net") or 0))}
+    for x in ideas:
+        x["record"] = (out.get(x.get("source_id")) or {}).get("text")
     return out
 
 
@@ -788,7 +1105,26 @@ def main():
     rows, buy = screen(ix, pos, quant, lim, nav, cash, council, now)
     shorts, short_cards = short_ideas(ix, pos, quant, lim, nav)
     wanted += buy + sell_cards(pos, prof, nav) + short_cards + keep_cards(keeps, pos, lim, nav)
-    cards = merge_cards(old, wanted, now, {"REBAL": "you chose to keep " + ", ".join(sorted(keeps))} if keeps else None)
+    # every other source of ideas joins the same desk: scorecard passes, short-term rule entries, the house core
+    strat_out, scr = E.rj("state/strategy.json", {}) or {}, E.rj("state/screen.json", {}) or {}
+    log = dict(prev.get("ideas_log") or {})
+    ideas, edge_by, also = desk_ideas(strat_out, lab_out, pos, set(keeps), lim, nav, log, answers, now)
+    records = idea_records(ideas, log, strat_out, lab_out)
+    wanted += ideas
+    reasons = {"RULE:*": "the entry signal was for one day only", "SCORE:*": "the share no longer passes five of the seven checks", "TEST:*": "the test is over",
+               "CORE": "part of the house core is now held, or the strategy changed"}
+    if keeps:
+        reasons["REBAL"] = "you chose to keep " + ", ".join(sorted(keeps))
+    cards = merge_cards(old, wanted, now, reasons)
+    notified, push_note = list(prev.get("notified") or []), prev.get("push_note")
+    fresh = [c for c in cards if c["status"] == "open" and not c.get("greyed") and c["id"] not in notified]
+    if fresh:
+        msg = "%d new card%s on your desk: %s%s. Open the app to answer yes or no." % (
+            len(fresh), "" if len(fresh) == 1 else "s", "; ".join((c.get("title_plain") or c["title"]) for c in fresh[:3]),
+            "" if len(fresh) <= 3 else " and %d more" % (len(fresh) - 3))
+        push_note = push("Decision desk", msg, "bell", now)
+        if push_note.startswith("sent"):
+            notified += [c["id"] for c in fresh]
     for k in ("cur", "tgt"):
         plan.pop(k, None)
     plan["part"], plan["next_part_due"] = part, max(due, day(now)).isoformat() if plan["needed"] else None
@@ -811,6 +1147,15 @@ def main():
            "failed": failed if not QUICK else (prev.get("failed") or []),
            "inputs": {"quant": quant.get("as_of"), "books": snap.get("as_of"), "cards": ix.get("as_of"), "lab": lab_out.get("as_of")},
            "disclaimer": "Worked out from written rules and estimates. Not advice. Nothing here places an order; you place every order yourself."}
+    days, fn = funnel(prev.get("funnel_days"), digest, E.rj("digests/history.json", {}), E.rj("ops/engine/funnel_seed.json", []), strat_out, lab_out, scr, cards, now)
+    out["desk"] = {"near": near_misses((strat_out.get("edge") or {}).get("rows") or [], scr, digest.get("technicals") or {}), "funnel": fn,
+                   "bar_check": bar_check(E.rj("state/paper.json", {})), "records": records, "sizes": list(SIZES), "also": also, "card_limit": DESK_SCORE_MAX,
+                   "fee": {"pct": FEE_PCT, "min_usd": FEE_MIN, "pay_share": PAY_SHARE,
+                           "note": "0.25% of the order, at least one euro, each way; the free trades in your plan are not counted. Check the fee in your broker's app."},
+                   "screen": {k: scr.get(k) for k in ("as_of", "status", "funnel", "limits", "added", "fails_by_check", "runtime_s", "method", "sources")} if scr else None}
+    cutoff = (day(now) - datetime.timedelta(days=60)).isoformat()
+    out["ideas_log"] = {k: v for k, v in log.items() if str(v.get("last_seen") or "") >= cutoff}
+    out["funnel_days"], out["notified"], out["push_note"] = days, notified[-80:], push_note
     out["morning"] = morning(prev.get("morning"), cards, plans, snap, quant, hp, smart, answers, now)
     E.wj("state/decisions.json", out)
     E.wj("state/paper_book.json", paper(E.rj("state/paper_book.json", None), cards, pos, snap, now))

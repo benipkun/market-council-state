@@ -473,7 +473,9 @@ def tactical(tickers, spy, prev):
                         new_today.append(t)
                 else:
                     recs.append({"t": t, "entry": dates[e], "exit": dates[x], "days": int(x - e), "ret": ret})
-        row = {"id": rid, "name": name, "rule": text, "trades": len(recs), "open": sorted(open_now, key=lambda z: z["since"], reverse=True), "new_today": new_today}
+        cut10 = spy[-10][0] if len(spy) >= 10 else last
+        row = {"id": rid, "name": name, "rule": text, "trades": len(recs), "open": sorted(open_now, key=lambda z: z["since"], reverse=True), "new_today": new_today,
+               "signals_10d": len([z for z in recs if z["entry"] >= cut10]) + len([z for z in open_now if z["since"] >= cut10])}
         if len(recs) >= 20:
             g = np.array([z["ret"] for z in recs])
             h1 = np.array([z["ret"] for z in recs if z["entry"] < mid] or [0.0])

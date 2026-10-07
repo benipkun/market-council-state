@@ -391,7 +391,8 @@ def edge_scores(ix, spy_rows, lim, held):
         nxt = (tech.get(t) or {}).get("next_earnings_date")
         r = score_checks(c.get("mos"), c.get("fair"), ((card.get("valuation") or {}).get("assumptions") or {}).get("ebit_margin"), px, spy_mom,
                          sm.get("insiders"), (sm.get("known_investors") or {}).get("holders"), (card.get("earnings") or {}).get("review"), nxt)
-        r.update({"t": t, "held": t in held, "name": card.get("name") or t, "price": r4(float(px[-1]), 2) if px else None, "source": c.get("source") or "watchlist"})
+        r.update({"t": t, "held": t in held, "name": card.get("name") or t, "price": r4(float(px[-1]), 2) if px else None, "source": c.get("source") or "watchlist",
+                  "mos": c.get("mos"), "fair": c.get("fair")})
         rows.append(r)
     rows.sort(key=lambda r: (-r["score"], r["t"]))
     return rows
