@@ -1,7 +1,7 @@
 {
-  "as_of": "2026-10-07T07:08:00Z",
+  "as_of": "2026-10-07T09:08:00Z",
   "cash": 1.83,
-  "nav": 812.72,
+  "nav": 812.74,
   "cash_pct_of_nav": 0.23,
   "realized_pl": {
     "mtd": 0.0,
@@ -27,7 +27,7 @@
       "cost_basis": 701.75,
       "market_value": 645.58,
       "last_price": 69.08,
-      "price_as_of": "2026-10-07T07:08:00Z",
+      "price_as_of": "2026-10-07T09:08:00Z",
       "pct_nav": 79.43
     },
     {
@@ -37,7 +37,7 @@
       "cost_basis": 95.0,
       "market_value": 92.75,
       "last_price": 37.53,
-      "price_as_of": "2026-10-07T07:08:00Z",
+      "price_as_of": "2026-10-07T09:08:00Z",
       "pct_nav": 11.41
     },
     {
@@ -45,9 +45,9 @@
       "qty": 4,
       "basis_mode": "qty",
       "cost_basis": 75.12,
-      "market_value": 72.56,
-      "last_price": 18.14,
-      "price_as_of": "2026-10-07T07:08:00Z",
+      "market_value": 72.58,
+      "last_price": 18.145,
+      "price_as_of": "2026-10-07T09:08:00Z",
       "pct_nav": 8.93
     }
   ]

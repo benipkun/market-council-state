@@ -167,6 +167,14 @@
       ],
       "headline_fingerprint": "aerovironment selected for a 10 year single award indefinite delivery indefinite quantity idiq contract early october 2026 no dollar figure or specific date disclosed in search summary price exactly flat vs carried not adopted as fresh catalyst",
       "first_seen": "2026-10-07T07:08:00Z"
+    },
+    {
+      "event_id": "sofi-18.36-price-mismatch-stale-20261007",
+      "tickers": [
+        "SOFI"
+      ],
+      "headline_fingerprint": "sofi stock trading at 18.36 dollars claim found via web search wildly inconsistent with confirmed twelve data structured price of 15.76 checked and disregarded as stale or mismatched",
+      "first_seen": "2026-10-07T09:08:00Z"
     }
   ]
 }

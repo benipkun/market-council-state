@@ -2,9 +2,16 @@
   "tallies": {
     "confirmed": 1,
     "contradicted": 6,
-    "inconclusive": 17
+    "inconclusive": 18
   },
   "recent": [
+    {
+      "ticker": "UBER",
+      "as_of": "2026-10-02T23:08:00Z",
+      "lean": "neutral",
+      "outcome": "inconclusive",
+      "pct_change": 1.45
+    },
     {
       "ticker": "UBER",
       "as_of": "2026-10-01T23:17:00Z",
@@ -102,13 +109,6 @@
       "lean": "bullish",
       "outcome": "inconclusive",
       "pct_change": 0.99
-    },
-    {
-      "ticker": "ASML",
-      "as_of": "2026-09-23T16:19:50Z",
-      "lean": "bullish",
-      "outcome": "inconclusive",
-      "pct_change": 0.92
     }
   ]
 }
