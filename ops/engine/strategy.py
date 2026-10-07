@@ -331,50 +331,68 @@ def backtest(data, tgt, tilt, max_loss, keep, keep_why=None):
                        "The share scorecard cannot be back-tested, because past insider, holder and valuation data were not saved. It is tracked forward on paper from today."]}
 
 
+def score_checks(mos, fair, em, px, spy_mom, ins, kh, rv, next_results=None):
+    # The seven checks, one place for the watchlist and the wide screen. Each failed check also says what would make it pass.
+    checks = []
+
+    def add(cid, name, ok, detail, needs):
+        checks.append({"id": cid, "name": name, "pass": bool(ok) if ok is not None else None, "detail": detail, "needs": None if ok else needs})
+    last = float(px[-1]) if len(px) else None
+    add("value", "Price at or below our fair value", (mos >= 0) if mos is not None else None,
+        ("price is %s our estimate" % ((E.pc(abs(mos), 0) + " below") if mos >= 0 else (E.pc(abs(mos), 0) + " above"))) if mos is not None else "no per-share estimate",
+        ("a price at or under $%.2f, our fair value (%s from here)" % (fair, E.pc(fair / last - 1, 0))) if (fair and last and mos is not None) else
+        "a per-share fair value, which the free statements do not give for this company")
+    add("quality", "Operating margin of 8% or more", (em >= 0.08) if em is not None else None, ("operating margin %s" % E.pc(em, 1)) if em is not None else "no statements",
+        "an operating margin of 8% or more in the next annual results" if em is not None else "company statements from the free source")
+    if len(px) > 260:
+        mom = px[-22] / px[-253] - 1
+        add("momentum", "Beat the S&P 500 fund over 12 months (latest month left out)", mom > spy_mom, "%s against %s for the fund" % (E.pc(mom, 0), E.pc(spy_mom, 0)),
+            "to gain about %s on the fund over the 12-month window" % E.pc(max(0.0, spy_mom - mom), 0))
+        avg = float(np.mean(px[-200:]))
+        add("trend", "Price above its 200-day average", px[-1] > avg, "price %.2f, average %.2f" % (px[-1], avg),
+            "a close above $%.2f, its 200-day average (%s from here)" % (avg, E.pc(avg / px[-1] - 1, 0)))
+    else:
+        add("momentum", "Beat the S&P 500 fund over 12 months (latest month left out)", None, "not enough price history", "a year of price history")
+        add("trend", "Price above its 200-day average", None, "not enough price history", "a year of price history")
+    ins = ins or {}
+    nb, bv, sv = ins.get("open_market_buys_90d"), ins.get("buy_value_90d") or 0, ins.get("sale_value_90d") or 0
+    add("insiders", "Insiders bought more than they sold in 90 days", (nb >= 1 and bv > sv) if nb is not None else None,
+        ("%d purchases, %d sales" % (nb, ins.get("open_market_sales_90d") or 0)) if nb is not None else "no insider data",
+        "an open-market purchase by an insider larger than recent sales" if nb is not None else "insider filings, which foreign companies do not make in the US")
+    if kh is not None:
+        adds = [h for h in kh if str(h.get("recent_activity") or "").lower().startswith(("add", "buy"))]
+        add("holders", "Two or more well-known investors hold it and one added lately", len(kh) >= 2 and len(adds) >= 1, "%d hold it, %d added or bought" % (len(kh), len(adds)),
+            "the next quarterly fund filings to show two holders with one adding")
+    else:
+        add("holders", "Two or more well-known investors hold it and one added lately", None, "no holder data", "an answer from the holdings source")
+    rv = rv or {}
+    if rv.get("surprise_pct") is not None and rv.get("move_5d") is not None:
+        add("drift", "Last results beat forecasts and the price rose over five days", rv["surprise_pct"] > 0 and rv["move_5d"] > 0,
+            "surprise %+.0f%%, five-day move %s" % (rv["surprise_pct"], E.pc(rv["move_5d"], 1)),
+            ("results on %s that beat forecasts, with a higher price five days later" % next_results) if next_results else
+            "the next results to beat forecasts, with a higher price five days later")
+    else:
+        add("drift", "Last results beat forecasts and the price rose over five days", None, "no earnings data", "an earnings history from the free source")
+    score = len([k for k in checks if k["pass"]])
+    trend_ok = [k for k in checks if k["id"] == "trend"][0]["pass"] is True
+    return {"score": score, "of": len(checks), "known": len([k for k in checks if k["pass"] is not None]), "qualifies": bool(score >= EDGE_PASS and trend_ok),
+            "trend_ok": trend_ok, "checks": checks}
+
+
 def edge_scores(ix, spy_rows, lim, held):
     rows, spy = [], [v for d, v in spy_rows]
     spy_mom = (spy[-22] / spy[-253] - 1) if len(spy) > 260 else 0.0
+    tech = (E.rj("digests/latest.json", {}) or {}).get("technicals") or {}
     for c in (ix or {}).get("cards") or []:
         t = c.get("t")
         card = E.rj("research/cards/" + str(t) + ".json", {}) or {}
         px = [v for d, v in E.read_cache(t)]
-        checks = []
-
-        def add(cid, name, ok, detail):
-            checks.append({"id": cid, "name": name, "pass": bool(ok) if ok is not None else None, "detail": detail})
-        mos, val = c.get("mos"), card.get("valuation") or {}
-        add("value", "Price at or below our fair value", (mos >= 0) if mos is not None else None,
-            ("price is %s our estimate" % ((E.pc(abs(mos), 0) + " below") if mos >= 0 else (E.pc(abs(mos), 0) + " above"))) if mos is not None else "no per-share estimate")
-        em = (val.get("assumptions") or {}).get("ebit_margin")
-        add("quality", "Operating margin of 8% or more", (em >= 0.08) if em is not None else None, ("operating margin %s" % E.pc(em, 1)) if em is not None else "no statements")
-        if len(px) > 260:
-            mom = px[-22] / px[-253] - 1
-            add("momentum", "Beat the S&P 500 fund over 12 months (latest month left out)", mom > spy_mom, "%s against %s for the fund" % (E.pc(mom, 0), E.pc(spy_mom, 0)))
-            avg = float(np.mean(px[-200:]))
-            add("trend", "Price above its 200-day average", px[-1] > avg, "price %.2f, average %.2f" % (px[-1], avg))
-        else:
-            add("momentum", "Beat the S&P 500 fund over 12 months (latest month left out)", None, "not enough price history")
-            add("trend", "Price above its 200-day average", None, "not enough price history")
-        ins = ((card.get("smart_money") or {}).get("insiders")) or {}
-        nb, bv, sv = ins.get("open_market_buys_90d"), ins.get("buy_value_90d") or 0, ins.get("sale_value_90d") or 0
-        add("insiders", "Insiders bought more than they sold in 90 days", (nb >= 1 and bv > sv) if nb is not None else None,
-            ("%d purchases, %d sales" % (nb, ins.get("open_market_sales_90d") or 0)) if nb is not None else "no insider data")
-        kh = (((card.get("smart_money") or {}).get("known_investors")) or {}).get("holders")
-        if kh is not None:
-            adds = [h for h in kh if str(h.get("recent_activity") or "").lower().startswith(("add", "buy"))]
-            add("holders", "Two or more well-known investors hold it and one added lately", len(kh) >= 2 and len(adds) >= 1, "%d hold it, %d added or bought" % (len(kh), len(adds)))
-        else:
-            add("holders", "Two or more well-known investors hold it and one added lately", None, "no holder data")
-        rv = ((card.get("earnings") or {}).get("review")) or {}
-        if rv.get("surprise_pct") is not None and rv.get("move_5d") is not None:
-            add("drift", "Last results beat forecasts and the price rose over five days", rv["surprise_pct"] > 0 and rv["move_5d"] > 0,
-                "surprise %+.0f%%, five-day move %s" % (rv["surprise_pct"], E.pc(rv["move_5d"], 1)))
-        else:
-            add("drift", "Last results beat forecasts and the price rose over five days", None, "no earnings data")
-        score = len([k for k in checks if k["pass"]])
-        known = len([k for k in checks if k["pass"] is not None])
-        trend_ok = [k for k in checks if k["id"] == "trend"][0]["pass"] is True
-        rows.append({"t": t, "held": t in held, "score": score, "of": len(checks), "known": known, "qualifies": bool(score >= EDGE_PASS and trend_ok), "checks": checks})
+        sm = card.get("smart_money") or {}
+        nxt = (tech.get(t) or {}).get("next_earnings_date")
+        r = score_checks(c.get("mos"), c.get("fair"), ((card.get("valuation") or {}).get("assumptions") or {}).get("ebit_margin"), px, spy_mom,
+                         sm.get("insiders"), (sm.get("known_investors") or {}).get("holders"), (card.get("earnings") or {}).get("review"), nxt)
+        r.update({"t": t, "held": t in held, "name": card.get("name") or t, "price": r4(float(px[-1]), 2) if px else None, "source": c.get("source") or "watchlist"})
+        rows.append(r)
     rows.sort(key=lambda r: (-r["score"], r["t"]))
     return rows
 

@@ -206,13 +206,14 @@ def openinsider(tk):
     return out
 
 
-def dataroma(tk):
+def dataroma(tk, tries=2):
     out = None
-    for attempt in (0, 1):
+    for attempt in range(tries):
         try:
             html = get("https://www.dataroma.com/m/stock.php?sym=" + urllib.parse.quote(tk), as_json=False)
         except Exception:
-            time.sleep(3)
+            if attempt + 1 < tries:
+                time.sleep(3)
             continue
         out = []
         for row in re.findall(r"<tr[^>]*>(.*?)</tr>", html, re.S):
@@ -221,7 +222,8 @@ def dataroma(tk):
                 out.append({"investor": cells[1][:70], "pct_of_their_portfolio": num(cells[2]), "recent_activity": cells[3][:40], "shares": num(cells[4]) if len(cells) > 4 else None})
         if out:
             return out[:12]
-        time.sleep(3)
+        if attempt + 1 < tries:
+            time.sleep(3)
     return out
 
 
@@ -334,17 +336,26 @@ def main():
             + [t.get("ticker") for t in (rj("state/theses.json", {}) or {}).get("theses", [])]:
         if t and t not in tks and (uni.get(t, {}).get("cls", "Equity") == "Equity"):
             tks.append(t)
+    # the best names from the daily wide screen get a full card too, so the scorecard and the decision desk can use them
+    watch, smeta = set(tks), {}
+    for a in ((rj("state/screen.json", {}) or {}).get("added") or [])[:10]:
+        t = str(a.get("t") or "")
+        if re.fullmatch(r"[A-Z]{1,5}", t) and t not in tks:
+            tks.append(t)
+            smeta[t] = {"name": str(a.get("name") or t)[:60], "sector": "Financials" if a.get("sector") == "Finance" else a.get("sector"),
+                        "country": a.get("country") or "United States", "cls": "Equity"}
     index, alerts = [], []
     held = set(p.get("ticker") for p in snap.get("positions", []))
     for t in tks:
         try:
-            c = card(t, uni.get(t, {"name": t}), quant)
+            c = card(t, uni.get(t) or smeta.get(t) or {"name": t}, quant)
         except Exception as e:
             c = {"ticker": t, "as_of": iso(), "error": str(e)[:160]}
         wj("research/cards/" + t + ".json", c)
         v = c.get("valuation") or {}
         sm = (c.get("smart_money") or {}).get("insiders") or {}
-        index.append({"t": t, "as_of": c["as_of"], "held": t in held, "valued": v.get("status") == "valued", "fair": v.get("fair_value_per_share"),
+        index.append({"t": t, "as_of": c["as_of"], "held": t in held, "source": "watchlist" if t in watch else "wide screen", "name": c.get("name"),
+                      "valued": v.get("status") == "valued", "fair": v.get("fair_value_per_share"),
                       "mos": v.get("margin_of_safety"), "rating": (c.get("analysts") or {}).get("rating"), "target": (c.get("analysts") or {}).get("target_mean"),
                       "insider_buys_90d": sm.get("open_market_buys_90d"), "insider_sales_90d": sm.get("open_market_sales_90d"), "error": c.get("error")})
         recent = (now() - datetime.timedelta(days=14)).strftime("%Y-%m-%d")
