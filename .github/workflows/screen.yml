@@ -1,0 +1,54 @@
+# Market Council wide screen: once every trading day, before the calculation engine's morning run,
+# it puts a few hundred large US and European shares through the seven-check scorecard and writes
+# state/screen.json. The engine then builds full cards for the best few. Public pages only; it
+# never places orders. It also runs when the screen itself is changed, and can be started by hand.
+name: Wide screen
+on:
+  push:
+    branches: [main]
+    paths: ["ops/engine/screen.py", ".github/workflows/screen.yml"]
+  schedule:
+    - cron: "20 5 * * 1-5"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: wide-screen
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install numpy and scipy
+        run: pip install --quiet numpy scipy
+      - name: Restore the last good price files
+        uses: actions/cache@v4
+        with:
+          path: .cache/prices
+          key: prices-${{ github.run_id }}
+          restore-keys: prices-
+      - name: Run the screen
+        run: python ops/engine/screen.py
+      - name: Commit the results
+        run: |
+          git config user.name "Market Council Engine"
+          git config user.email "engine@market-council.local"
+          git add -A state/screen.json
+          if git diff --cached --quiet; then echo "Nothing changed."; else
+            git commit -q -m "Wide screen: results $(date -u +%Y-%m-%dT%H:%MZ)"
+            pushed=0
+            for i in 1 2 3 4; do
+              if git fetch -q origin main && git rebase -q -X theirs origin/main && git push -q origin HEAD:main; then pushed=1; break; fi
+              git rebase --abort 2>/dev/null || true
+              sleep 5
+            done
+            if [ "$pushed" != "1" ]; then echo "The results could not be saved to the repository."; exit 1; fi
+          fi
