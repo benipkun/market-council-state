@@ -1,0 +1,27 @@
+Market Council valuation,STX
+Assumption,Value
+growth_start,0.182
+growth_end,0.04
+ebit_margin,0.3357
+tax_rate,0.21
+capex_pct_revenue,0.0467
+da_pct_revenue,0.0226
+working_capital_pct_of_growth,0.1856
+wacc,0.0863
+terminal_growth,0.025
+net_debt,1861000.0
+shares,228719.0
+base_revenue,12195000.0
+units,thousands, as reported by the source
+
+Year,Growth,Revenue,EBIT,Tax,Capex,Working capital,Free cash flow
+1,0.182,14414490.0,4838944.0,1016178.0,673157.0,411937.0,3063439.0
+2,0.1465,16526213.0,5547850.0,1165048.0,771774.0,391936.0,3592584.0
+3,0.111,18360622.0,6163661.0,1294369.0,857441.0,340466.0,4086335.0
+4,0.0755,19746849.0,6629017.0,1392094.0,922178.0,257284.0,4503741.0
+5,0.04,20536723.0,6894178.0,1447777.0,959065.0,146601.0,4804865.0
+
+Terminal value,80342359.0
+Enterprise value,68575264.0
+Fair value per share,None
+Price,790.9

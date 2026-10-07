@@ -1,0 +1,27 @@
+Market Council valuation,BDX
+Assumption,Value
+growth_start,0.0499
+growth_end,0.04
+ebit_margin,0.1181
+tax_rate,0.21
+capex_pct_revenue,0.0348
+da_pct_revenue,0.1127
+working_capital_pct_of_growth,0.0
+wacc,0.0863
+terminal_growth,0.025
+net_debt,18322000.0
+shares,272387.0
+base_revenue,21840000.0
+units,thousands, as reported by the source
+
+Year,Growth,Revenue,EBIT,Tax,Capex,Working capital,Free cash flow
+1,0.0499,22929816.0,2708011.0,568682.0,797958.0,0.0,3925562.0
+2,0.0474,24017263.0,2836439.0,595652.0,835801.0,0.0,4111731.0
+3,0.045,25096838.0,2963937.0,622427.0,873370.0,0.0,4296554.0
+4,0.0425,26162827.0,3089830.0,648864.0,910466.0,0.0,4479050.0
+5,0.04,27209340.0,3213423.0,674819.0,946885.0,0.0,4658212.0
+
+Terminal value,77890168.0
+Enterprise value,68237061.0
+Fair value per share,183.25
+Price,180.66
