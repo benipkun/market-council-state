@@ -59,11 +59,13 @@ jobs:
           for f in $FILES; do
             if [ -f "$f" ]; then echo "== $f"; python "$f" || echo "$f failed" >> /tmp/engine_failed; fi
           done
+          # Rebuild the daily brief from the fresh results, so the brief and the app always show the same desk.
+          if [ -f ops/render_brief.py ]; then python ops/render_brief.py || echo "The brief was not rebuilt this run."; fi
       - name: Commit the results
         run: |
           git config user.name "Market Council Engine"
           git config user.email "engine@market-council.local"
-          git add -A state research
+          git add -A state research brief
           if git diff --cached --quiet; then echo "Nothing changed."; else
             git commit -q -m "Engine: results $(date -u +%Y-%m-%dT%H:%MZ)"
             # If main moved meanwhile, replay this commit on top of it; where both changed a results file, the fresh results win.
