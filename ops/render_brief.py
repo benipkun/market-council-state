@@ -241,7 +241,15 @@ def main():
 
     # 1. At a glance
     diff = num(totals.get("diff_usd"))
-    glance = tile("Picks this cycle", str(len(picks)), "{} news, {} mispriced".format(len(news), len(mis)))
+    dec = obj(load("state/decisions.json"))
+    desk = obj(dec.get("desk"))
+    open_cards = [obj(c) for c in arr(dec.get("cards")) if obj(c).get("status") == "open"]
+    live = [c for c in open_cards if not c.get("greyed")]
+    grey = [c for c in open_cards if c.get("greyed")]
+    near = [obj(x) for x in arr(desk.get("near"))][:3]
+    glance = tile("On your decision desk", str(len(live)),
+                  "waiting for your yes or no" if live else "closest candidates are listed below", "up" if live else "")
+    glance += tile("New picks this cycle", str(len(picks)), "{} news, {} mispriced".format(len(news), len(mis)))
     glance += tile("Practice picks vs SPY", usd(diff, 2, True) if diff is not None else "&mdash;",
                    "ahead of the index" if (diff or 0) >= 0 else "behind the index",
                    "up" if (diff or 0) >= 0 else "dn")
@@ -252,6 +260,38 @@ def main():
     glance += tile("Data", "OK" if not issues else "{} issue{}".format(len(issues), "" if len(issues) == 1 else "s"),
                    "all sources working" if not issues else "see System health", "up" if not issues else "wn")
     sections.append(("glance", "At a glance", '<div class="tiles">{}</div>'.format(glance), ""))
+
+    # Decision desk: standing ideas from every source. A card stays until it is answered or expires,
+    # so this section is not empty just because nothing new crossed a line this hour.
+    if dec:
+        body = ""
+        for c in live:
+            levels = ""
+            if num(c.get("entry")) is not None and num(c.get("stop")) is not None and num(c.get("take_profit")) is not None:
+                levels = '<p class="note">Entry about {} &middot; stop-loss {} &middot; take-profit {} &middot; estimates</p>'.format(
+                    usd(c.get("entry")), usd(c.get("stop")), usd(c.get("take_profit")))
+            body += '<div class="pick"><div class="pt"><span class="tk">{}</span>{}</div><p>{}</p>{}<p class="note">Valid until {}</p></div>'.format(
+                e(c.get("ticker") or str(c.get("kind") or "card").upper()), tag(c.get("source") or c.get("kind") or "card"),
+                e(c.get("title_plain") or c.get("title")), levels, day(c.get("expires")))
+        if not live:
+            body += '<p class="empty">No card passes every gate right now. The closest candidates, and what each still needs:</p>'
+        if near and not live:
+            rows = ""
+            for x in near:
+                needs = "; ".join(str(obj(m).get("needs")) for m in arr(x.get("missing")) if obj(m).get("needs"))
+                rows += '<div class="kv"><span><b>{}</b><br>{}</span><span class="r">{} of {} checks<br><span class="note">needs {}</span></span></div>'.format(
+                    e(x.get("t")), e(x.get("name")), e(x.get("score")), e(x.get("of") or 7), e(needs or "more data"))
+            body += '<div class="box">{}</div>'.format(rows)
+        if grey:
+            body += '<p class="note">{} more idea{} shown in the app as not worth it at small sizes, because fees would take the gain.</p>'.format(
+                len(grey), "" if len(grey) == 1 else "s")
+        hours = None
+        made = parse(dec.get("as_of"))
+        if made is not None:
+            hours = (now - made).total_seconds() / 3600
+        body += '<p class="note">Desk refreshed {}{}. <a href="../">Open the app</a> to see sizes, fees and funding, and to answer. Nothing is bought or sold for you.</p>'.format(
+            ago(dec.get("as_of"), now), " &middot; <b>stale</b>" if hours is not None and hours > 36 else "")
+        sections.append(("desk", "Decision desk", body, ""))
 
     # 2 and 3. Picks
     if news:
