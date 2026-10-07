@@ -159,6 +159,14 @@
       ],
       "headline_fingerprint": "aerovironment 20 million air force research laboratory ceramic materials contract plus wsj report trump administration considering funding deals with domestic drone manufacturers october 6 2026 -- search summary claimed 19.3 pct price jump wildly inconsistent with confirmed structured plus1.77 pct move checked and disregarded as mismatched magnitude",
       "first_seen": "2026-10-06T18:12:00Z"
+    },
+    {
+      "event_id": "avav-10yr-idiq-contract-vague-20261007",
+      "tickers": [
+        "AVAV"
+      ],
+      "headline_fingerprint": "aerovironment selected for a 10 year single award indefinite delivery indefinite quantity idiq contract early october 2026 no dollar figure or specific date disclosed in search summary price exactly flat vs carried not adopted as fresh catalyst",
+      "first_seen": "2026-10-07T07:08:00Z"
     }
   ]
 }
