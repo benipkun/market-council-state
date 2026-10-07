@@ -13,7 +13,7 @@ function pc(v,d){return M.p1(v,d==null?0:d);}
 function sg(v,d){var n=num(v);return n==null?DASH:(n>0?"+":(n<0?MINUS:""))+Math.abs(100*n).toFixed(d==null?1:d)+"%";}
 function fall(v){var n=num(v);return n==null?DASH:MINUS+Math.abs(100*n).toFixed(0)+"%";}
 function dl(s){return s?M.sd(s)+" "+String(s).slice(0,4):DASH;}
-function mn(s){return String(s==null?"":s).replace(/-(?=\d)/g,MINUS);}
+function mn(s){return String(s==null?"":s).replace(/(^|[\s(])-(?=\d)/g,"$1"+MINUS);}
 function det(sum,body,open){return '<details class="p3d"'+(open?" open":"")+'><summary>'+sum+'</summary>'+body+'</details>';}
 /* frequent trading: short-term rules judged after real fees (lab.tactical) */
 function sleeveHtml(){var lab=M.X.lab,t=lab&&lab.tactical;if(!t||t.status!=="ok")return "";var f=t.fee,best=t.rules.filter(function(r){return r.id===t.best;})[0];

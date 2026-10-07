@@ -31,7 +31,7 @@ function dl(s){return s?M.sd(s)+" "+String(s).slice(0,4):DASH;}
 function list(a){return a&&a.length?'<ul class="p3l">'+a.map(function(x){return "<li>"+esc(x&&x.t?(vis()?x.t:x.plain):x)+"</li>";}).join("")+"</ul>":"";}
 function ttl(c){return vis()?c.title:(c.title_plain||c.title);}
 function local(){try{return JSON.parse(localStorage.getItem(LS)||"{}")||{};}catch(e){return {};}}
-function setLocal(id,a){var L=local();L[id]={answer:a,at:new Date().toISOString()};Object.keys(L).forEach(function(k){if(Date.now()-new Date(L[k].at).getTime()>3*86400000)delete L[k];});try{localStorage.setItem(LS,JSON.stringify(L));}catch(e){}}
+function setLocal(id,a,size){var L=local();L[id]={answer:a,at:new Date().toISOString(),size:size||null};Object.keys(L).forEach(function(k){if(Date.now()-new Date(L[k].at).getTime()>3*86400000)delete L[k];});try{localStorage.setItem(LS,JSON.stringify(L));}catch(e){}}
 function stamp(){return new Date().toISOString().replace(/[-:]/g,"").replace(/[.][0-9]+Z$/,"")+"-"+Math.random().toString(36).slice(2,7);}
 function post(obj,label,box){obj.at=new Date().toISOString().replace(/[.][0-9]+Z$/,"Z");var tok=MC.store(MC.K.tok),path="answers/"+stamp()+".json",body=JSON.stringify(obj);
 function say(k,h){var e=box&&$(box);if(e)e.innerHTML='<div class="stat '+k+'">'+h+'</div>';else MC.toast(h,k==="err");}
@@ -73,13 +73,38 @@ function order(o,c){var h='<div class="p3o"><span class="s">'+esc(o.side.toUpper
 (o.eu?'<br>EU-listed equivalent: <b>'+esc(o.eu)+'</b>':"")+(o.tax_note?'<br>'+esc(vis()?o.tax_note:(o.tax_plain||"")):"");
 if(c.status==="approved")h+='<div class="gap"><button class="btn sm" data-p3="log" data-t="'+esc(o.ticker)+'" data-side="'+esc(o.side)+'" data-usd="'+esc(o.usd)+'">Placed it? Log this trade</button></div>';
 return h+'</div>';}
-function cardBody(c){var e=c.effect,h=(c.orders||[]).map(function(o){return order(o,c);}).join("");
+/* an idea card from the unified desk: legs, entry / stop / target, sizes with fees, funding, source and its record */
+function d0(v){return "$"+Math.round(num(v)||0).toLocaleString("en-US");}
+function fundText(f,sizes){if(!f)return "";if(f.kind!=="paired_sale")return "<b>Paid for by:</b> new money. "+esc(f.why||"");
+var h="<b>Paid for by:</b> selling "+esc(f.sell)+". "+esc(f.why||"");
+if(vis()&&sizes&&sizes.length)h+=" "+sizes.map(function(r){var s=Math.min(r.usd,f.sell_value||0),n=r.usd-s;return "At "+d0(r.usd)+": "+(n<1?"all from the sale":d0(s)+" from the sale and "+d0(n)+" of new money");}).join(". ")+".";
+else h+=" Larger amounts need new money on top.";return h;}
+function ideaBody(c){var h='<div class="fl" style="font-size:11.5px;margin:6px 0">Source: <b style="color:var(--tx)">'+esc(c.source||"")+"</b> "+MID+" valid until "+esc(M.sd(c.expires))+'</div>';
+if(c.kind==="test")return h+list(c.why)+'<div class="src">'+esc(c.method||"")+'</div>';
+var sz=c.approved_size||(local()[c.id]||{}).size;
+h+=(c.legs||[]).map(function(g){return '<div class="p3o"><span class="s">BUY</span><b>'+esc(g.ticker)+'</b> '+esc(g.name||"")+(c.legs.length>1?" "+MID+" "+pc(g.weight)+" of the amount":"")+
+(g.limit?'<br>Limit '+px(g.limit)+" "+MID+" last close "+px(g.ref_price):"")+(g.eu?'<br>EU-listed equivalent: <b>'+esc(g.eu)+'</b>':"")+
+(c.status==="approved"&&sz?'<div class="gap"><button class="btn sm" data-p3="log" data-t="'+esc(g.ticker)+'" data-side="buy" data-usd="'+(sz*g.weight).toFixed(2)+'">Placed it? Log '+d0(sz*g.weight)+" of "+esc(g.ticker)+'</button></div>':"")+'</div>';}).join("");
+if(c.entry)h+=M.kv("Entry (limit)",px(c.entry))+(c.stop?M.kv("Stop-loss",px(c.stop)+" ("+MINUS+pc(c.stop_pct,1)+")"):M.kv("Stop-loss","set by the rule, see below"))+(c.take_profit?M.kv(c.measured?"Take-profit (the rule's average win)":"Take-profit",px(c.take_profit)+" (+"+pc(c.target_pct,1)+")"):"");
+h+='<div class="fl" style="font-size:12px;margin:6px 0">'+esc(c.exit_rule||"")+'</div>';
+if((c.sizes||[]).length)h+='<div class="ox"><table class="mt p3w"><tr><th>Amount</th><th>Fees in and out</th><th>'+(c.measured?"Average result":"Planned gain")+'</th><th>After fees</th><th>Pays</th></tr>'+c.sizes.map(function(r){return "<tr><td>"+d0(r.usd)+"</td><td>$"+M.f2(r.fees_usd)+" ("+pc(r.fees_pct,1)+")</td><td>$"+M.f2(r.gain_usd)+"</td><td>"+M.sm(r.net_usd)+"</td><td>"+(r.pays?"yes":"no")+"</td></tr>";}).join("")+'</table></div>'+
+'<div class="src">Gain used: '+esc(c.gain_basis||"")+". "+(c.measured?"It pays when that is more than the fees.":"It counts as paying when fees take less than a tenth of that gain.")+(c.min_size?" Smallest amount that pays: about "+d0(c.min_size)+".":" It does not pay at any amount up to $5,000.")+
+(c.profile_size&&vis()?" Your risk profile's size for this stop: "+d0(c.profile_size)+".":"")+'</div>';
+h+='<div class="q">'+fundText(c.funding,c.sizes)+'</div>'+(c.record?'<div class="q"><b style="color:var(--tx)">Track record of this source:</b> '+esc(mns(c.record))+'</div>':"");
+h+='<div class="lbl" style="margin-top:10px">Why</div>'+list(c.why)+((c.against||[]).length?'<div class="lbl" style="margin-top:10px">Against it</div>'+list(c.against):"");
+return h+'<div class="src">'+esc(c.method||"")+" Estimate, not advice. You place every order yourself.</div>";}
+function mns(s){return String(s==null?"":s).replace(/(^|[\s(])-(?=\d)/g,"$1"+MINUS);}
+function cardBody(c){if(c.legs)return ideaBody(c);var e=c.effect,h=(c.orders||[]).map(function(o){return order(o,c);}).join("");
 h+='<div class="lbl" style="margin-top:10px">Why</div>'+list(c.why)+'<div class="lbl" style="margin-top:10px">Against it</div>'+list(c.against);
 if(e)h+='<div style="margin-top:8px">'+M.kv("Volatility a year (estimate)",pc(e.vol_before)+" now, "+pc(e.vol_after_part)+" after this part, "+pc(e.vol_after_all)+" after all parts")+M.kv("Largest position",pc(e.largest_before)+" now, "+pc(e.largest_after_part)+" after this part, "+pc(e.largest_after_all)+" after all parts")+'</div>';
 return h+'<div class="src">'+esc(c.method||"")+" Estimate, not advice. You place every order yourself.</div>";}
 function cardState(c){var s=said(c.id,c.status==="approved"?"yes":(c.status==="declined"?"no":null),c.answered_at);
-if(c.status==="open"&&!s)return '<div class="p3b"><button class="y" data-p3="ans" data-k="decision" data-id="'+esc(c.id)+'" data-v="yes">Approve</button><button data-p3="ans" data-k="decision" data-id="'+esc(c.id)+'" data-v="no">Decline</button></div>';
-if(c.status==="open"||c.status==="approved"||c.status==="declined")return '<div class="q me">You said <b>'+(s.a==="yes"?"YES":"NO")+'</b> '+MID+" "+esc(MC.when(s.at))+(s.rec?(s.a==="yes"?". Place the orders yourself in your broker, then log each one.":". Not raised again for 14 days."):". Waiting for the engine to record it.")+'</div>';
+if(c.greyed&&c.status==="open")return '<div class="q"><b style="color:var(--tx)">Not offered:</b> '+esc(c.grey_reason||"fees eat the gain")+'</div>';
+if(c.status==="open"&&!s&&c.kind==="idea"){var ok=(c.sizes||[]).filter(function(r){return r.pays;});
+return '<div class="p3b" style="flex-wrap:wrap">'+ok.map(function(r){return '<button class="y" data-p3="ans" data-k="decision" data-id="'+esc(c.id)+'" data-v="yes" data-size="'+r.usd+'">Yes, '+d0(r.usd)+'</button>';}).join("")+'<button data-p3="ans" data-k="decision" data-id="'+esc(c.id)+'" data-v="no">No</button></div>';}
+if(c.status==="open"&&!s)return '<div class="p3b"><button class="y" data-p3="ans" data-k="decision" data-id="'+esc(c.id)+'" data-v="yes">'+(c.kind==="test"?"Yes":"Approve")+'</button><button data-p3="ans" data-k="decision" data-id="'+esc(c.id)+'" data-v="no">'+(c.kind==="test"?"No":"Decline")+'</button></div>';
+if(c.kind==="test"&&(c.status==="open"||c.status==="approved"||c.status==="declined"))return '<div class="q me">You said <b>'+(s.a==="yes"?"YES":"NO")+'</b> '+MID+" "+esc(MC.when(s.at))+(s.rec?". The answer came back to the desk: the loop works.":". Waiting for the engine to record it.")+'</div>';
+if(c.status==="open"||c.status==="approved"||c.status==="declined")return '<div class="q me">You said <b>'+(s.a==="yes"?"YES":"NO")+((c.approved_size||(local()[c.id]||{}).size)&&s.a==="yes"?" at "+d0(c.approved_size||(local()[c.id]||{}).size):"")+'</b> '+MID+" "+esc(MC.when(s.at))+(s.rec?(s.a==="yes"?". Place the orders yourself in your broker, then log each one.":". Not raised again for 14 days."):". Waiting for the engine to record it.")+'</div>';
 return '<div class="q">'+esc(c.status.toUpperCase())+(c.closed_why?": "+esc(c.closed_why):(c.logged?": "+esc(c.logged):""))+'</div>';}
 function cardTag(c){return c.status==="open"?M.tag(c.refreshed||c.created,14):'<span class="stg lvl">'+esc(c.status.toUpperCase())+'</span>';}
 function cardBlock(c){return M.blk("DECISION CARD "+esc(c.id),cardTag(c),'<div style="font-weight:800;font-size:14px;margin-bottom:6px">'+esc(ttl(c))+'</div>'+cardState(c)+cardBody(c),"Raised "+esc(MC.when(c.created))+", expires "+esc(M.sd(c.expires))+".");}
@@ -92,11 +117,33 @@ else if(s)h+='<div class="q me">You said <b>'+(s.a==="yes"?esc(q.yes):esc(q.no))
 else h+='<div class="p3b"><button class="y" data-p3="ans" data-k="morning" data-id="'+esc(q.id)+'" data-v="yes">'+esc(q.yes)+'</button><button data-p3="ans" data-k="morning" data-id="'+esc(q.id)+'" data-v="no">'+esc(q.no)+'</button></div>';
 return h+'</div>';}).join("")||'<div class="nbx">Nothing needs a decision today.</div>';
 var open=m.questions.filter(function(q){var c=byId[q.id];return c?(c.status==="open"&&!said(c.id,null)):!said(q.id,q.answer);}).length;
-return M.blk("DECISIONS WAITING FOR YOU",open?'<span class="stg stale">'+open+" WAITING</span>":M.tag(d.as_of,14),'<div class="fl" style="font-size:12px;margin-bottom:4px">Morning check, '+esc(M.sd(m.date))+": "+esc(m.summary.join(" "))+'</div>'+qs+'<div id="p3-stat"></div>',
-"Your answers are saved as small files in the repository and read by the engine. Phone message: "+esc(/^sent \d{4}-/.test(m.sent_note||"")?"sent "+MC.when(m.sent_note.slice(5)):(m.sent_note||"not sent yet today"))+". "+M.upd(d.as_of)+".");};
+return M.blk("DECISION DESK",open?'<span class="stg stale">'+open+" WAITING</span>":M.tag(d.as_of,14),'<div class="fl" style="font-size:12px;margin-bottom:4px">Morning check, '+esc(M.sd(m.date))+": "+esc(mns(m.summary.join(" ")))+'</div>'+qs+'<div id="p3-stat"></div>',
+"Every source of ideas ends here as the same kind of card. Your answers are saved as small files in the repository and read by the engine. Phone message: "+esc(/^sent \d{4}-/.test(m.sent_note||"")?"sent "+MC.when(m.sent_note.slice(5)):(m.sent_note||"not sent yet today"))+". "+M.upd(d.as_of)+".")+deskExtra(d);};
+function deskExtra(d){var k=d.desk;if(!k)return "";var h="",grey=(d.cards||[]).filter(function(c){return c.status==="open"&&c.greyed;}),near=k.near||[];
+if(grey.length)h+=M.blk("NOT WORTH IT AT YOUR BROKER'S FEES",'<span class="stg lvl">'+grey.length+" SHOWN</span>",grey.map(function(c){return '<details class="p3d"><summary>'+esc(ttl(c))+'</summary><div class="q"><b style="color:var(--tx)">Why it is greyed out:</b> '+esc(c.grey_reason||"")+'</div>'+cardBody(c)+'</details>';}).join(""),
+"Real signals, kept visible so you can see what the fees do to them. "+esc((k.fee||{}).note||""));
+if(near.length)h+=M.blk("CLOSEST CANDIDATES",'<span class="stg lvl">'+near.length+" NEAREST</span>",near.map(function(n){return '<div class="p3q"><div class="t"><button class="idea" style="margin:0" data-mc="pos" data-t="'+esc(n.t)+'">'+esc(n.t)+'</button> '+MID+" "+n.score+" of "+n.of+" checks "+MID+" needs "+n.need+" more</div>"+
+n.missing.map(function(x){return '<div class="q"><b style="color:var(--tx)">'+esc(x.check)+':</b> now '+esc(mns(x.now))+'. <b style="color:var(--tx)">Becomes a card with:</b> '+esc(mns(x.needs||""))+".</div>";}).join("")+
+(n.pipeline_gap!=null&&n.pipeline_gap<-0.15?'<div class="d">The hourly pipeline has it '+pc(-n.pipeline_gap)+" under an outside fair-value model. That gap alone does not make a card; the share has to pass the checks.</div>":"")+'</div>';}).join(""),
+"The three ideas nearest to a card, from the watchlist and the wide screen, with the price or event that would get each one there.");
+return h+funnelHtml(k,d);}
+function funnelHtml(k,d){var f=k.funnel;if(!f)return "";var p=f.pipeline,sc=f.scorecard,w=sc.wide_screen,b=k.bar_check,s=k.screen,h="";
+h+='<div class="lbl">Hourly pipeline, last '+f.window.trading_days+' trading days</div>'+M.kv("Runs / candidates reviewed",p.runs+" / "+p.reviewed)+M.kv("Picks made",p.picks+" (last on "+(p.last_pick?esc(M.sd(p.last_pick)):"none")+"), plus "+p.neutral_checkins+" neutral check-ins")+
+M.kv("Dropped: established gap, not flagged again",p.standing)+M.kv("Dropped: no fresh news or price move",p.nofresh)+M.kv("Dropped: no value gap",p.nogap)+M.kv("Dropped: news judged stale or unreliable",p.stale)+M.kv("Dropped: other",p.other)+
+'<div class="src">'+esc(p.note)+" The reasons are read from the pipeline's own notes.</div>";
+h+='<div class="lbl" style="margin-top:12px">Seven-check scorecard</div>'+M.kv("Watchlist shares scored",sc.watchlist)+(w?M.kv("Wide screen: on the exchange list / large and liquid / screened",w.listed+" / "+w.large_and_liquid+" / "+w.screened)+
+M.kv("With prices / in an upward trend",w.with_prices+" / "+w.upward_trend)+M.kv("With statements / three of five or better",w.with_statements+" / "+w.three_of_five_or_better)+
+M.kv("Fully scored / qualify / given a full card",w.fully_scored+" / "+w.qualify+" / "+w.handed_to_research):M.kv("Wide screen","no result yet"))+M.kv("Qualify now / on the desk as cards",sc.qualify+" / "+sc.cards);
+h+='<div class="lbl" style="margin-top:12px">Short-term rules, entries in the last 10 trading days</div>'+f.short_term.rules.map(function(r){return M.kv(esc(r.name)+(r.passes?"":" (fails after costs)"),(r.signals_10d==null?DASH:r.signals_10d)+" entries, "+(r.new_today||[]).length+" at the last close");}).join("")+
+M.kv("On the desk as cards, greyed ones included",f.short_term.cards)+M.kv("House strategy cards",f.house.cards);
+if(b&&b.old_bar&&b.old_bar.n)h+='<div class="lbl" style="margin-top:12px">Old bar against new bar, since '+esc(M.sd(b.since))+'</div>'+M.kv("Old bar: every pipeline pick",b.old_bar.n+" picks, "+sg(b.old_bar.avg,1)+" against "+sg(b.old_bar.avg_spy,1)+" for the S&P 500 fund")+
+M.kv("The new bar's trend check alone would have kept",b.with_trend_gate.n+" picks, "+sg(b.with_trend_gate.avg,1)+" against "+sg(b.with_trend_gate.avg_spy,1))+M.kv("And dropped",b.dropped_by_gate.n+" picks, "+sg(b.dropped_by_gate.avg,1)+" against "+sg(b.dropped_by_gate.avg_spy,1))+'<div class="src">'+esc(b.note)+'</div>';
+if(s&&s.limits)h+='<div class="lbl" style="margin-top:12px">Wide screen: added to research, and the limits it hit</div>'+((s.added||[]).map(function(a){return M.kv("<b>"+esc(a.t)+"</b> "+esc(a.name||""),a.score+" of 7");}).join("")||'<div class="fl" style="font-size:12px">Nothing was added in the last run.</div>')+
+list(s.limits)+'<div class="src">'+esc(s.method||"")+" "+esc(s.sources||"")+" "+M.upd(s.as_of)+".</div>";
+return M.blk("WHERE IDEAS STOPPED",M.tag(d.as_of,14),'<details class="p3d"><summary>Open the count for every source</summary>'+h+'</details>',"Counted from the repository's own records: at which gate each source drops its ideas.");}
 
 /* ---------- position panel: decision card and hold plan (items 13, 16) ---------- */
-M.slots["pp-dec"]=function(t){var d=D();if(!d)return "";var cs=(d.cards||[]).filter(function(c){return (c.status==="open"||c.status==="approved")&&(c.ticker===t||(c.orders||[]).some(function(o){return o.ticker===t;}));});
+M.slots["pp-dec"]=function(t){var d=D();if(!d)return "";var cs=(d.cards||[]).filter(function(c){return (c.status==="open"||c.status==="approved")&&(c.ticker===t||(c.orders||[]).some(function(o){return o.ticker===t;})||(c.legs||[]).some(function(o){return o.ticker===t;}));});
 if(cs.length)return cs.map(cardBlock).join("")+'<div id="p3-stat2"></div>';var r=(d.screen||[]).filter(function(x){return x.t===t;})[0];
 return M.blk("OPEN DECISION CARD",'<span class="stg lvl">NONE OPEN</span>','<div class="nbx">'+(r?"No card for "+esc(t)+": "+esc(r.why)+".":"No rule has raised a card for "+esc(t)+".")+'</div>',"Cards are raised by written rules: a buy needs the price at least 20% under our own fair value and free cash; a sell is raised at your maximum loss; trims come from the rebalance plan. "+M.upd(d.as_of)+".");};
 M.slots["pp-hold"]=function(t){var d=D();if(!d)return "";var h=d.holds&&d.holds[t];
@@ -213,7 +260,8 @@ M.done[18]=function(){var d=D();return !!(d&&d.morning);};M.done[19]=function(){
 document.addEventListener("change",function(e){var s=e.target&&e.target.dataset?e.target.dataset.p3sel:null;if(!s)return;ui[s]=e.target.value;M.render();});
 document.addEventListener("click",function(e){var b=e.target.closest("[data-p3]");if(!b)return;var a=b.dataset.p3,id=b.dataset.id;
 if(a==="ans"){var v=b.dataset.v,k=b.dataset.k,box=$("p3-stat2")&&b.closest("#ppanel")?"p3-stat2":"p3-stat";b.disabled=true;
-post({kind:k,id:id,answer:v},v+" to "+id,box).then(function(ok){if(!ok){b.disabled=false;return;}setLocal(id,v);M.render();if(k==="morning"&&v==="yes"&&id.indexOf("books:")===0)MC.prefill({act:"buy"});});}
+var body={kind:k,id:id,answer:v},sz=num(b.dataset.size);if(sz)body.size=sz;
+post(body,v+" to "+id,box).then(function(ok){if(!ok){b.disabled=false;return;}setLocal(id,v,sz);M.render();if(k==="morning"&&v==="yes"&&id.indexOf("books:")===0)MC.prefill({act:"buy"});});}
 else if(a==="log"){M.closePos();MC.prefill({t:b.dataset.t,act:b.dataset.side,amt:b.dataset.usd});}
 else if(a==="pstop"){b.disabled=true;post({kind:"plan_stop",id:id},"stop plan "+id,"tp-stat");}
 else if(a==="kstop"){b.disabled=true;post({kind:"keep_stop",id:id},"stop keeping "+id,"kp-stat");}
