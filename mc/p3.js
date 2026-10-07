@@ -81,9 +81,10 @@ if(vis()&&sizes&&sizes.length)h+=" "+sizes.map(function(r){var s=Math.min(r.usd,
 else h+=" Larger amounts need new money on top.";return h;}
 function ideaBody(c){var h='<div class="fl" style="font-size:11.5px;margin:6px 0">Source: <b style="color:var(--tx)">'+esc(c.source||"")+"</b> "+MID+" valid until "+esc(M.sd(c.expires))+'</div>';
 if(c.kind==="test")return h+list(c.why)+'<div class="src">'+esc(c.method||"")+'</div>';
+if(c.stale)h+='<div class="q" style="color:var(--wn)"><b>Stale price.</b> The last price on this card is from '+esc(M.sd(c.price_at))+'. Check the live price before you act.</div>';
 var sz=c.approved_size||(local()[c.id]||{}).size;
 h+=(c.legs||[]).map(function(g){return '<div class="p3o"><span class="s">BUY</span><b>'+esc(g.ticker)+'</b> '+esc(g.name||"")+(c.legs.length>1?" "+MID+" "+pc(g.weight)+" of the amount":"")+
-(g.limit?'<br>Limit '+px(g.limit)+" "+MID+" last close "+px(g.ref_price):"")+(g.eu?'<br>EU-listed equivalent: <b>'+esc(g.eu)+'</b>':"")+
+(g.limit?'<br>Limit '+px(g.limit)+" "+MID+" last close "+px(g.ref_price)+(c.price_at?" ("+esc(M.sd(c.price_at))+")":""):"")+(g.eu?'<br>EU-listed equivalent: <b>'+esc(g.eu)+'</b>':"")+
 (c.status==="approved"&&sz?'<div class="gap"><button class="btn sm" data-p3="log" data-t="'+esc(g.ticker)+'" data-side="buy" data-usd="'+(sz*g.weight).toFixed(2)+'">Placed it? Log '+d0(sz*g.weight)+" of "+esc(g.ticker)+'</button></div>':"")+'</div>';}).join("");
 if(c.entry)h+=M.kv("Entry (limit)",px(c.entry))+(c.stop?M.kv("Stop-loss",px(c.stop)+" ("+MINUS+pc(c.stop_pct,1)+")"):M.kv("Stop-loss","set by the rule, see below"))+(c.take_profit?M.kv(c.measured?"Take-profit (the rule's average win)":"Take-profit",px(c.take_profit)+" (+"+pc(c.target_pct,1)+")"):"");
 h+='<div class="fl" style="font-size:12px;margin:6px 0">'+esc(c.exit_rule||"")+'</div>';
