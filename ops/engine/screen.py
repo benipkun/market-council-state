@@ -24,7 +24,7 @@ N_US, N_EU = 240, 60          # universe size: the largest by market value
 STATEMENTS_MAX = 160          # statements are fetched for at most this many shares in an upward trend
 FINALISTS = 40                # insider and holder pages are fetched only for these
 ADD_MAX = 10                  # at most this many are handed to the research engine for a full card
-BUDGET = 14 * 60              # seconds; the run stops adding work after this
+BUDGET = 19 * 60              # seconds; the run stops adding work after this (the job itself is cut off at 25 minutes)
 SECTOR = {"Finance": "Financials"}
 
 
@@ -139,8 +139,9 @@ def main():
         es = ((RS.nq("company/" + x["t"] + "/earnings-surprise") or {}).get("earningsSurpriseTable") or {}).get("rows") or []
         misses = misses + 1 if (fin is None and not es) else 0
         meta = {"name": x["name"], "sector": SECTOR.get(x["sector"], x["sector"]), "country": x["country"], "cls": "Equity"}
+        x["beta"] = beta_of(x["pxs"], spy)
         try:
-            v = RS.dcf(x["t"], fin, x["last"], x["cap"] / x["last"] / 1000.0, beta_of(x["pxs"], spy), rf, meta)
+            v = RS.dcf(x["t"], fin, x["last"], x["cap"] / x["last"] / 1000.0, x["beta"], rf, meta)
         except Exception as e:
             v = {"status": "not valued", "reason": str(e)[:80]}
         x["fair"], x["mos"] = v.get("fair_value_per_share"), v.get("margin_of_safety")
@@ -175,7 +176,8 @@ def main():
             time.sleep(0.6)
         r = ST.score_checks(x["mos"], x["fair"], x["em"], x["pxs"], spy_mom, ins, kh, x["rv"])
         r.update({"t": x["t"], "name": x["name"], "region": x["region"], "country": x["country"], "sector": x["sector"], "cap_bn": round(x["cap"] / 1e9, 1),
-                  "price": round(x["last"], 2), "momentum": round(x["mom"], 4), "on_watchlist": x["t"] in mine})
+                  "price": round(x["last"], 2), "momentum": round(x["mom"], 4), "on_watchlist": x["t"] in mine,
+                  "beta": round(x["beta"], 3) if x.get("beta") is not None else None})
         rows.append(r)
     rows.sort(key=lambda z: (-z["score"], -z["momentum"]))
     funnel["fully_scored"] = len(rows)
@@ -185,7 +187,7 @@ def main():
         for c in z["checks"]:
             if c["pass"] is not True:
                 fails[c["id"]] = fails.get(c["id"], 0) + 1
-    added = [{"t": z["t"], "name": z["name"], "sector": z["sector"], "country": z["country"], "region": z["region"], "score": z["score"],
+    added = [{"t": z["t"], "name": z["name"], "sector": z["sector"], "country": z["country"], "region": z["region"], "score": z["score"], "beta": z.get("beta"),
               "why": "passes " + ", ".join(c["id"] for c in z["checks"] if c["pass"])} for z in rows if z["score"] >= 4 and z["trend_ok"] and not z["on_watchlist"]][:ADD_MAX]
     funnel["handed_to_research"] = len(added)
     out["limits"] += ["European companies are covered only through their US listings. They file no US insider forms and their statements give no per-share value here, so they can pass five checks at most.",

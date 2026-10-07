@@ -383,7 +383,7 @@ def merge_cards(cards, wanted, now, reasons=None):
         if old and old["status"] == "approved":
             continue
         if old and old["status"] == "open":
-            for k in ("title", "title_plain", "orders", "why", "against", "method", "effect", "part", "source", "source_id", "name", "legs", "entry", "stop", "take_profit", "stop_pct", "target_pct", "exit_rule", "gain_basis", "measured", "sizes", "min_size", "funding", "record", "rank", "greyed", "grey_reason", "profile_size"):
+            for k in ("title", "title_plain", "orders", "why", "against", "method", "effect", "part", "source", "source_id", "name", "legs", "entry", "stop", "take_profit", "stop_pct", "target_pct", "exit_rule", "gain_basis", "measured", "sizes", "min_size", "funding", "record", "rank", "greyed", "grey_reason", "profile_size", "price_at", "stale"):
                 if k in w:
                     old[k] = w[k]
             old["refreshed"] = now
@@ -744,6 +744,14 @@ def size_rows(weights, gain, measured, sell_value):
     return [one(s) for s in SIZES], smallest
 
 
+def stale(day, now):
+    # a price counts as stale when it is more than four calendar days old (a long weekend is three)
+    try:
+        return (datetime.date.fromisoformat(str(now)[:10]) - datetime.date.fromisoformat(str(day)[:10])).days > 4
+    except Exception:
+        return False
+
+
 def vol20(t):
     px = np.array([v for d, v in E.read_cache(t)][-21:], dtype=float)
     return float(np.std(px[1:] / px[:-1] - 1, ddof=1) * math.sqrt(252)) if len(px) == 21 else None
@@ -815,7 +823,7 @@ def desk_ideas(strat, lab_out, pos, keeps, lim, nav, log, answers, now):
                            "entry": r2(entry), "stop": r2(entry * (1 - sp)), "take_profit": r2(entry * (1 + 2 * sp)), "stop_pct": r2(sp, 4), "target_pct": r2(2 * sp, 4),
                            "exit_rule": "Sell at the take-profit or at the stop, whichever comes first. Place the stop with the order.",
                            "gain_basis": "the gain if the take-profit is reached (%s); if the stop is hit the loss is %s" % (pc(2 * sp), pc(sp)), "measured": False,
-                           "sizes": srows, "min_size": smallest, "funding": f, "valid_days": 14, "rank": 50 + 5 * r["score"],
+                           "sizes": srows, "min_size": smallest, "funding": f, "valid_days": 14, "rank": 50 + 5 * r["score"], "price_at": rows[-1][0], "stale": stale(rows[-1][0], now),
                            "profile_size": r2(min(lim["risk_per_trade"] * nav / sp, lim["stock_cap"] * nav)),
                            "why": ["Passes: " + "; ".join(ok) + "."], "against": ["Not passed: " + "; ".join(no) + "."] if no else [],
                            "method": "Raised when a share passes at least five of the seven checks and trades above its 200-day average. Stop = twice the 20-day volatility over "
@@ -825,6 +833,13 @@ def desk_ideas(strat, lab_out, pos, keeps, lim, nav, log, answers, now):
     for rule in tac.get("rules") or []:
         for o in [z for z in rule.get("open") or [] if z.get("days") == 0]:
             t, px, st = o["t"], float(o["entry"]), RULE_STOP.get(rule["id"])
+            lvl, trail = None, []
+            if rule["id"] == "breakout":
+                # the rule's own exit is a close under the lowest close of the previous 20 days: show today's level of that line as the stop
+                prev = [v for d, v in E.read_cache(t)][-21:-1]
+                if len(prev) == 20 and min(prev) < px:
+                    lvl, st = min(prev), r2(1 - min(prev) / px, 4)
+                    trail = ["The stop shown is today's level of the rule's exit line (the lowest close of the last 20 days); it moves up as that low rises, so check it again each day."]
             gain = float(rule.get("avg_gross") or 0.0)
             f = funding_for(t, pos, keeps, edge_by)
             srows, smallest = size_rows([1.0], gain, True, f.get("sell_value"))
@@ -833,13 +848,13 @@ def desk_ideas(strat, lab_out, pos, keeps, lim, nav, log, answers, now):
             ideas.append(grey({"key": key, "kind": "idea", "source": "Short-term rule: " + rule["name"], "source_id": "rule:" + rule["id"], "ticker": t, "name": t,
                                "title": "%s: buy %s at the close price" % (rule["name"], t),
                                "legs": [{"ticker": t, "name": t, "weight": 1.0, "ref_price": r2(px), "limit": r2(px * 1.002), "eu": None}],
-                               "entry": r2(px), "stop": r2(px * (1 - st)) if st else None, "take_profit": r2(px * (1 + float(rule.get("avg_win") or 0))) if rule.get("avg_win") else None,
+                               "entry": r2(px), "stop": r2(lvl) if lvl else (r2(px * (1 - st)) if st else None), "take_profit": r2(px * (1 + float(rule.get("avg_win") or 0))) if rule.get("avg_win") else None,
                                "stop_pct": st, "target_pct": rule.get("avg_win"), "exit_rule": rule.get("rule"),
                                "gain_basis": "the average result of this rule per trade in the back-test (%s before costs)" % pc(gain, 2), "measured": True,
-                               "sizes": srows, "min_size": smallest, "funding": f, "valid_days": 1, "rank": 30 + (10 if rule.get("passes") else 0),
+                               "sizes": srows, "min_size": smallest, "funding": f, "valid_days": 1, "rank": 30 + (10 if rule.get("passes") else 0), "price_at": o["since"], "stale": stale(o["since"], now),
                                "why": ["The rule's entry condition was met at the last close: " + str(rule.get("rule"))],
                                "against": ["The take-profit shown is the rule's average winning trade, not a fixed target; the rule itself decides the exit.",
-                                           "Daily closing prices only: your fill will differ."],
+                                           "Daily closing prices only: your fill will differ."] + trail,
                                "method": "Signal from daily closes. Size is your choice; the fee test uses the rule's measured average result per trade."},
                               None if rule.get("passes") else "This rule fails its own test after costs, so the signal is shown for information only."))
     # 3. the house strategy's core, while none of it is held

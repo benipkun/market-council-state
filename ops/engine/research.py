@@ -344,6 +344,9 @@ def main():
             tks.append(t)
             smeta[t] = {"name": str(a.get("name") or t)[:60], "sector": "Financials" if a.get("sector") == "Finance" else a.get("sector"),
                         "country": a.get("country") or "United States", "cls": "Equity"}
+            # the screen measured this share's beta from a year of prices; use it, so the card values the share the way the screen did
+            if isinstance(a.get("beta"), (int, float)) and "beta_1y" not in (quant.setdefault("assets", {}).setdefault(t, {})):
+                quant["assets"][t]["beta_1y"] = float(a["beta"])
     index, alerts = [], []
     held = set(p.get("ticker") for p in snap.get("positions", []))
     for t in tks:
