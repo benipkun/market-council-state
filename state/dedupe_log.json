@@ -1,22 +1,6 @@
 {
   "events": [
     {
-      "event_id": "ryaay-analyst-target-revisions-citi-ms-db-20261005",
-      "tickers": [
-        "RYAAY"
-      ],
-      "headline_fingerprint": "citi lowers ryanair target eur 31.50 from 32.20 buy morgan stanley lowers target eur 27.20 from 27.60 overweight deutsche bank raises target eur 30 from 27 buy home listed shares october 5 2026",
-      "first_seen": "2026-10-05T20:14:00Z"
-    },
-    {
-      "event_id": "avav-rbc-downgrade-recirculated-stale-july2026",
-      "tickers": [
-        "AVAV"
-      ],
-      "headline_fingerprint": "rbc capital downgraded aerovironment outperform to sector perform price target 180 from 210 july 9 2026 recirculated in search results october 2026 stale not fresh",
-      "first_seen": "2026-10-05T20:14:00Z"
-    },
-    {
       "event_id": "uber-mdl-bellwether-trial-4-begins-20261005",
       "tickers": [
         "UBER"
