@@ -7,10 +7,10 @@ tax_rate,0.21
 capex_pct_revenue,0.1946
 da_pct_revenue,0.0711
 working_capital_pct_of_growth,0.213
-wacc,0.0883
+wacc,0.0882
 terminal_growth,0.025
 net_debt,14570000.0
-shares,4427352.0
+shares,4427931.0
 base_revenue,48598000.0
 units,thousands, as reported by the source
 
@@ -21,7 +21,7 @@ Year,Growth,Revenue,EBIT,Tax,Capex,Working capital,Free cash flow
 4,0.0904,89389977.0,36918060.0,7752793.0,17395289.0,1578123.0,16547483.0
 5,0.04,92965576.0,38394783.0,8062904.0,18091101.0,761603.0,18089027.0
 
-Terminal value,292910785.0
-Enterprise value,245907300.0
+Terminal value,293374251.0
+Enterprise value,246314772.0
 Fair value per share,None
-Price,38.27
+Price,38.26
