@@ -1,30 +1,6 @@
 {
   "events": [
     {
-      "event_id": "avav-bofa-goldman-pt-cuts-20261005",
-      "tickers": [
-        "AVAV"
-      ],
-      "headline_fingerprint": "bofa cuts avav price target to 185 from 225 goldman sachs cuts target to 285 from 326 both maintain buy rating october 5 2026",
-      "first_seen": "2026-10-05T14:12:00Z"
-    },
-    {
-      "event_id": "duol-ceo-liquidates-direct-shares-20261005",
-      "tickers": [
-        "DUOL"
-      ],
-      "headline_fingerprint": "duolingo ceo liquidates entire directly held class a share position for 4.3 million dollars early october 2026",
-      "first_seen": "2026-10-05T14:12:00Z"
-    },
-    {
-      "event_id": "sap-buyback-590k-shares-20261005",
-      "tickers": [
-        "SAP"
-      ],
-      "headline_fingerprint": "sap completes buyback of 590000 shares approximately eur 108.37 million ahead of q3 results october 2026",
-      "first_seen": "2026-10-05T14:12:00Z"
-    },
-    {
       "event_id": "uber-sexual-assault-case-settled-20261005",
       "tickers": [
         "UBER"
