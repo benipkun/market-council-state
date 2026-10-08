@@ -1,14 +1,6 @@
 {
   "events": [
     {
-      "event_id": "uber-wells-fargo-92-target-20261005",
-      "tickers": [
-        "UBER"
-      ],
-      "headline_fingerprint": "wells fargo raises uber price target to 92 dollars from 89 overweight maintained q4 gross bookings 64.9 billion forecast 2027 ebitda estimate raised 70bps to 14.1 billion on headcount reduction uplift october 5 2026",
-      "first_seen": "2026-10-05T11:12:00Z"
-    },
-    {
       "event_id": "avav-bofa-goldman-pt-cuts-20261005",
       "tickers": [
         "AVAV"
