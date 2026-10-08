@@ -1,38 +1,6 @@
 {
   "events": [
     {
-      "event_id": "nvo-denecimig-fda-delay-20261004",
-      "tickers": [
-        "NVO"
-      ],
-      "headline_fingerprint": "fda extends review timeline for novo nordisk hemophilia candidate denecimig manufacturing facility remediation launch pushed to h1 2027 no safety efficacy issues identified early october 2026",
-      "first_seen": "2026-10-05T09:25:00Z"
-    },
-    {
-      "event_id": "nvo-4b-obesity-licensing-hrs1596-ubt251-20261004",
-      "tickers": [
-        "NVO"
-      ],
-      "headline_fingerprint": "novo nordisk 4 billion usd strategic licensing deals early stage obesity candidates hrs-1596 ubt251 announced early october 2026",
-      "first_seen": "2026-10-05T09:25:00Z"
-    },
-    {
-      "event_id": "uber-bnp-paribas-106-target-20261004",
-      "tickers": [
-        "UBER"
-      ],
-      "headline_fingerprint": "bnp paribas sets 106 dollar price target uber falling robotaxi costs unlock massive market growth early october 2026",
-      "first_seen": "2026-10-05T09:25:00Z"
-    },
-    {
-      "event_id": "duol-gc-insider-sale-20261004",
-      "tickers": [
-        "DUOL"
-      ],
-      "headline_fingerprint": "duolingo general counsel sells over 8000 shares raises 1.2 million dollars early october 2026",
-      "first_seen": "2026-10-05T09:25:00Z"
-    },
-    {
       "event_id": "uber-wells-fargo-92-target-20261005",
       "tickers": [
         "UBER"
@@ -175,6 +143,14 @@
       ],
       "headline_fingerprint": "sofi stock trading at 18.36 dollars claim found via web search wildly inconsistent with confirmed twelve data structured price of 15.76 checked and disregarded as stale or mismatched",
       "first_seen": "2026-10-07T09:08:00Z"
+    },
+    {
+      "event_id": "avav-990m-army-contract-baird-upgrade-unverified-20261008",
+      "tickers": [
+        "AVAV"
+      ],
+      "headline_fingerprint": "aerovironment wins up to 990 million dollar us army contract baird upgrades to outperform -- undated claim wildly inconsistent with confirmed exactly flat twelve data price action checked and disregarded as stale unverified",
+      "first_seen": "2026-10-08T11:09:00Z"
     }
   ]
 }
