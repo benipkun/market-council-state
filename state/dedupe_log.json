@@ -1,14 +1,6 @@
 {
   "events": [
     {
-      "event_id": "uber-mdl-bellwether-trial-4-begins-20261005",
-      "tickers": [
-        "UBER"
-      ],
-      "headline_fingerprint": "fourth uber passenger sexual assault mdl bellwether trial begins october 5 2026 judge breyer n.d. cal no verdict yet procedural scheduled per july 13 court order",
-      "first_seen": "2026-10-05T21:22:00Z"
-    },
-    {
       "event_id": "uber-tomtom-nuro-lucid-robotaxi-recirculated-stale-20261005",
       "tickers": [
         "UBER"
