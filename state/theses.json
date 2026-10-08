@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-07T21:20:00Z",
+  "as_of": "2026-10-08T21:20:00Z",
   "theses": [
     {
       "id": "movie-bet",
@@ -11,11 +11,11 @@
       "stake_note": "Your plan: about $100, only money you are prepared to lose.",
       "status": "watching",
       "quote": {
-        "price": 2.88,
-        "change_pct": -2.37,
+        "price": 2.875,
+        "change_pct": -0.17,
         "low_52w": 0.93,
         "high_52w": 3.4,
-        "at": "2026-10-07T21:20:00Z",
+        "at": "2026-10-08T21:20:00Z",
         "source": "Twelve Data"
       },
       "films": [
