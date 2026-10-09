@@ -10,7 +10,7 @@ working_capital_pct_of_growth,0.0
 wacc,0.12
 terminal_growth,0.025
 net_debt,-10489000.0
-shares,385516.0
+shares,384834.0
 base_revenue,38366200.0
 units,thousands, as reported by the source
 
@@ -24,4 +24,4 @@ Year,Growth,Revenue,EBIT,Tax,Capex,Working capital,Free cash flow
 Terminal value,183165677.0
 Enterprise value,156008500.0
 Fair value per share,None
-Price,1800.44
+Price,1783.04
