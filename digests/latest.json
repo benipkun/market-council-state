@@ -1,67 +1,7 @@
 {
-  "as_of": "2026-10-09T07:08:00Z",
+  "as_of": "2026-10-09T09:10:00Z",
   "picks": [],
   "scrap": [
-    {
-      "ticker": "NVO",
-      "severity": 1,
-      "first_seen": "2026-10-08T06:10:00Z",
-      "headline": "Price $38.26 (Twelve Data), exactly flat vs carried, same Oct 7 close bar. RSI carried 28.64 (not fresh this cycle, still oversold-territory, price unchanged). Web search found no fresh dated NVO catalyst for today; only already-logged recaps. Now an actual portfolio holding, currently modestly underwater. Mispricing gap ~25.9% vs $47.23 consensus (carried) -- continuation of the established 20-27% range (GuruFocus GF Value convergence thesis remains operative, ~172.9% vs $104.84 GF Value), not a fresh crossing, not re-flagged."
-    },
-    {
-      "ticker": "UBER",
-      "severity": 2,
-      "first_seen": "2026-10-08T07:13:00Z",
-      "headline": "Price $68.45 confirmed (Twelve Data), exactly flat vs carried -- European session just opened (~07:00 UTC), US cash session not yet open (13:30 UTC), same Oct 7 daily close bar continues. Fresh RSI(14) 39.8971 (Alpha Vantage), essentially unchanged from carried 39.90. FMP DCF $110.78/consensus $104.72 re-confirmed unchanged (only UBER/SOFI FMP-dcf/price-target-accessible). AV insider-transactions check hit the 25/day rate cap this cycle, not re-verified (last known: empty since Sept 20). Web search found no fresh dated UBER catalyst for today -- only already-logged recaps (Uber Eats retailer expansion, Detroit pension-fund shareholder suit, Wayve London robotaxi signups, Delivery Hero/Ninja bid complication, NYC driver-deactivation law blocked, Lime IPO stake), none dated to today. Mispricing thesis (~61.9% DCF / ~53.0% consensus upside-to-price) unchanged, established, not re-flagged."
-    },
-    {
-      "ticker": "SPY",
-      "severity": 1,
-      "first_seen": "2026-10-08T07:13:00Z",
-      "headline": "Price $777.31 confirmed (Twelve Data), essentially flat vs carried $777.22 -- pre-market, US session not yet open (13:30 UTC). No fresh stock-specific signal."
-    },
-    {
-      "ticker": "SOFI",
-      "severity": 1,
-      "first_seen": "2026-10-08T07:13:00Z",
-      "headline": "Price $15.67 confirmed (Twelve Data), essentially flat vs carried $15.66. FMP DCF $15.69/consensus $21.58 re-confirmed, DCF essentially at parity with price (established convention of using DCF over consensus for SOFI fair value), no mispricing flag. Web search (combined query) found no fresh SoFi-specific catalyst for today."
-    },
-    {
-      "ticker": "CHWY",
-      "severity": 1,
-      "first_seen": "2026-10-08T07:13:00Z",
-      "headline": "Price $18.2961 confirmed (Twelve Data), essentially flat vs carried $18.22. No fresh catalyst found beyond the already-logged Sept 9 Q2 beat-and-raise. Mispricing thesis (~73.7% vs $31.78 consensus target, carried, FMP gated) unchanged, established (possible value-trap), not re-flagged."
-    },
-    {
-      "ticker": "DUOL",
-      "severity": 1,
-      "first_seen": "2026-10-08T07:13:00Z",
-      "headline": "Price $151.50 confirmed (Twelve Data), essentially flat vs carried $151.72. No new catalyst beyond already-logged GC/CEO insider-selling storyline and J.P. Morgan Oct 2 Hold/$135 target. Gap vs consensus $134.29 (carried, pre-Evercore, likely stale) ~12.8% overvalued on price, still well below the 20-25% flag threshold."
-    },
-    {
-      "ticker": "AVAV",
-      "severity": 1,
-      "first_seen": "2026-10-08T07:13:00Z",
-      "headline": "Price $139.05 confirmed (Twelve Data), essentially flat vs carried $138.86. Web search found no fresh dated AVAV catalyst for today -- only already-logged/background items (July 2026 Investor Day FY2030 targets, FY26 annual results, Space Force contract termination/goodwill impairment, tariff-driven drone-sector rally, ongoing shareholder securities litigation). Undervaluation thesis (~57.7% vs $219.35 consensus, carried, FMP gated) unchanged, established, not re-flagged."
-    },
-    {
-      "ticker": "RYAAY",
-      "severity": 1,
-      "first_seen": "2026-10-08T07:13:00Z",
-      "headline": "USD ADR price $56.00 confirmed (Twelve Data), exactly flat vs carried -- European home session (Euronext Dublin) just opened (~07:00 UTC). Web search (combined EU query) returned no Ryanair-specific results this cycle. No fresh catalyst found beyond already-logged items (Oct 19 earnings date, FY27 traffic-growth target, mixed analyst target revisions). Mispricing thesis (~32.7% vs $74.30 target, carried, FMP gated) unchanged, established, not re-flagged."
-    },
-    {
-      "ticker": "ASML",
-      "severity": 1,
-      "first_seen": "2026-10-08T07:13:00Z",
-      "headline": "USD ADR price $1808.00 confirmed (Twelve Data), essentially flat vs carried $1804.96 -- European home session (Amsterdam) just opened. Web search (combined EU query) surfaced only older background (June 2026 record EUR580B market-cap milestone, Sept 2025 SAP/ASML market-cap-leadership swap) -- nothing dated to today. GF Value overvaluation flag ~42.4% vs $1269.61 (carried) -- continuation of the established 42-47% range, not re-flagged (weak flag, Step 3). Consensus-undervaluation read ~17.0% vs $2115.91 (carried), below threshold."
-    },
-    {
-      "ticker": "SAP",
-      "severity": 1,
-      "first_seen": "2026-10-08T07:13:00Z",
-      "headline": "USD ADR price $210.13 confirmed (Twelve Data), exactly flat vs carried -- European home session (XETRA) just opened. Web search (combined EU query) found no fresh SAP-specific catalyst; Q3 2026 results confirmed for Oct 21 (carried). Mispricing gap ~22.0% vs consensus $256.29 (carried) -- continuation, within the established 20-25% range, no new articulable reason, not a fresh flag; DCF-overvaluation short-thesis (~$102.59 fair value, carried) remains unresolved, borrow-availability caveat stands."
-    },
     {
       "ticker": "NVO",
       "severity": 1,
@@ -721,6 +661,66 @@
       "severity": 1,
       "first_seen": "2026-10-09T07:08:00Z",
       "headline": "Price $38.155 (Twelve Data, prepost), -0.07% vs carried $38.18, immaterial. Web search (combined EU query) found no fresh dated NVO catalyst for today; only already-logged recaps. Now an actual portfolio holding, currently modestly underwater. Mispricing gap ~23.6% vs $47.23 consensus (carried) -- continuation of the established 20-27% range (GuruFocus GF Value convergence thesis remains operative, ~174.5% vs $104.84 GF Value), not a fresh crossing, not re-flagged."
+    },
+    {
+      "ticker": "UBER",
+      "severity": 1,
+      "first_seen": "2026-10-09T09:10:00Z",
+      "headline": "Price $70.10 (Twelve Data, prepost), exactly flat vs carried -- European session live since ~07:00 UTC (ADR/US-listed quote unmoved), US cash session not yet open (13:30 UTC). Fresh RSI(14) 48.035223 (Twelve Data, same Oct 8 daily bar), unchanged. FMP DCF $111.32/consensus $104.72 (targetHigh $150/low $74/median $100) re-confirmed essentially unchanged; next earnings date Nov 4, 2026 reconfirmed via FMP calendar. Alpha Vantage insider-transactions check hit the 25/day rate cap this cycle (established daily-exhaustion pattern), not re-verified; last known empty since Sept 20. Web search (UBER-specific) found no fresh dated catalyst for today -- only already-logged stale recaps. Mispricing thesis (~58.8% DCF / ~49.4% consensus upside-to-price) unchanged, established, not re-flagged."
+    },
+    {
+      "ticker": "SPY",
+      "severity": 1,
+      "first_seen": "2026-10-09T09:10:00Z",
+      "headline": "Price $777.52 (Twelve Data, prepost), +0.40% vs carried $774.46, immaterial -- pre-market, US session not yet open (13:30 UTC). No fresh stock-specific signal."
+    },
+    {
+      "ticker": "SOFI",
+      "severity": 1,
+      "first_seen": "2026-10-09T09:10:00Z",
+      "headline": "Price $15.61 (Twelve Data, prepost), exactly flat vs carried. FMP DCF $15.72/consensus $21.58 (targetHigh $29/low $16/median $21.50) re-confirmed unchanged, DCF essentially at parity with price (established convention of using DCF over consensus for SOFI fair value), no mispricing flag. No fresh SoFi-specific catalyst found via web search; Q3 2026 results confirmed for Oct 27 (carried)."
+    },
+    {
+      "ticker": "CHWY",
+      "severity": 1,
+      "first_seen": "2026-10-09T09:10:00Z",
+      "headline": "Price $18.935 (Twelve Data, prepost), exactly flat vs carried. No fresh catalyst found beyond the already-logged Sept 9 Q2 beat-and-raise. Mispricing thesis (~68.0% vs $31.78 consensus target, carried, FMP gated) unchanged, established (possible value-trap), not re-flagged."
+    },
+    {
+      "ticker": "DUOL",
+      "severity": 1,
+      "first_seen": "2026-10-09T09:10:00Z",
+      "headline": "Price $152.00 (Twelve Data, prepost), exactly flat vs carried, same Oct 8 close bar -- the multi-cycle unexplained Oct 7 rally remains stalled/stable. No new catalyst found via web search. Gap vs consensus $134.29 (carried, pre-Evercore, likely stale) ~13.2% overvalued on price, still well below the 20-25% flag threshold."
+    },
+    {
+      "ticker": "AVAV",
+      "severity": 1,
+      "first_seen": "2026-10-09T09:10:00Z",
+      "headline": "Price $137.62 (Twelve Data, prepost), exactly flat vs carried. Web search (combined query) found no fresh dated AVAV catalyst for today; only already-logged/stale items. Undervaluation thesis (~59.4% vs $219.35 consensus, carried, FMP gated) unchanged, established, not re-flagged."
+    },
+    {
+      "ticker": "RYAAY",
+      "severity": 1,
+      "first_seen": "2026-10-09T09:10:00Z",
+      "headline": "USD ADR price $54.04 (Twelve Data, prepost), exactly flat vs carried -- European home session (Euronext Dublin) live since ~07:00 UTC, no fresh move yet. Web search (combined EU query) found no fresh Ryanair-specific catalyst for today. Mispricing thesis (~37.5% vs $74.30 target, carried, FMP gated) unchanged, established, not re-flagged."
+    },
+    {
+      "ticker": "ASML",
+      "severity": 1,
+      "first_seen": "2026-10-09T09:10:00Z",
+      "headline": "USD ADR price $1775.00 (Twelve Data, prepost), exactly flat vs carried -- European home session (Amsterdam) live since ~07:00 UTC. Web search (combined EU query) found no fresh ASML-specific catalyst dated to today; only older background (June 2026 EUR580B market-cap record). Oct 14 Q3 earnings date carried. GF Value overvaluation flag ~39.8% vs $1269.61 (carried) -- continuation of the established 39-47% range, not re-flagged (weak flag, Step 3). Consensus-undervaluation read ~19.2% vs $2115.91 (carried), below threshold."
+    },
+    {
+      "ticker": "SAP",
+      "severity": 1,
+      "first_seen": "2026-10-09T09:10:00Z",
+      "headline": "USD ADR price $212.44 (Twelve Data, prepost), exactly flat vs carried -- European home session (XETRA) live since ~07:00 UTC. Web search (combined EU query) found no fresh SAP-specific catalyst for today; Q3 2026 results confirmed for Oct 21 (carried). Mispricing gap ~20.7% vs consensus $256.29 (carried) -- continuation, within the established 20-25% range, no new articulable reason, not a fresh flag; DCF-overvaluation short-thesis (~$102.59 fair value, carried) remains unresolved, borrow-availability caveat stands."
+    },
+    {
+      "ticker": "NVO",
+      "severity": 1,
+      "first_seen": "2026-10-09T09:10:00Z",
+      "headline": "Price $38.155 (Twelve Data, prepost), exactly flat vs carried. Web search (combined EU query) found no fresh dated NVO catalyst for today; only already-logged recaps. Now an actual portfolio holding, currently modestly underwater. Mispricing gap ~23.6% vs $47.23 consensus (carried) -- continuation of the established 20-27% range (GuruFocus GF Value convergence thesis remains operative, ~174.5% vs $104.84 GF Value), not a fresh crossing, not re-flagged."
     }
   ],
   "technicals": {
@@ -729,14 +729,14 @@
       "sma50": 73.06,
       "sma200": 74.52,
       "rsi14": 48.035223,
-      "fair_value": 110.70538541104547,
+      "fair_value": 111.32202167832786,
       "fair_value_method": "DCF (FMP dcf-advanced)",
       "analyst_consensus_target": 104.72,
       "next_earnings_date": "2026-11-04",
       "region": "US"
     },
     "SPY": {
-      "price": 774.4599,
+      "price": 777.52,
       "sma50": 765.95,
       "sma200": 721.99,
       "rsi14": 58.93,
@@ -751,7 +751,7 @@
       "sma50": 17.4,
       "sma200": 18.79,
       "rsi14": 36.96,
-      "fair_value": 15.638351352866644,
+      "fair_value": 15.724900654837885,
       "fair_value_method": "DCF (FMP dcf-advanced)",
       "analyst_consensus_target": 21.58,
       "next_earnings_date": "2026-10-27",
