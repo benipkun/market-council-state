@@ -1147,6 +1147,45 @@
           }
         }
       ]
+    },
+    {
+      "as_of": "2026-10-09T23:15:00Z",
+      "picks": [
+        {
+          "ticker": "UBER",
+          "lean": "neutral",
+          "confidence": 3,
+          "severity": 1,
+          "brief": "Daily long-term check-in on the largest holding, independent of today's news",
+          "why": "Mandated daily review of the book's dominant position, run regardless of today's (flat) news flow.",
+          "price_at_pick": 71.4,
+          "bull_case": "No new bull case this cycle -- this is a scheduled long-term check-in, not a fresh thesis event.",
+          "bear_case": "No new bear case this cycle -- this is a scheduled long-term check-in, not a fresh thesis event.",
+          "risks": [
+            "concentration (~79% of NAV)"
+          ],
+          "position_suggestion": {
+            "tier": "none",
+            "suggested_size_usd": 0.0,
+            "suggested_size_pct_of_cash": 0.0,
+            "resulting_pct_nav": 79.4,
+            "execution_floor_usd": 50.0,
+            "basis": "No sizing action -- this is the daily advisor check-in, not a new pick. UBER is already far above the 25% concentration guideline.",
+            "concentration_note": "UBER is ~79.4% of NAV, more than 3x the 25% single-name guideline; any further addition is out of the question regardless of thesis strength.",
+            "caveat": "Mechanical sizing based on this portfolio's own numbers, not personalized financial advice."
+          },
+          "advisor_questions": {
+            "framing": "Holding decision -- whether to keep, trim, or add to the book's dominant position, not a trade.",
+            "questions": [
+              "This position is now ~79% of NAV -- did it get there through a deliberate conviction-sizing decision, or through price appreciation and drift from a smaller original stake, and would you choose to put 79% of new money into UBER today at $71.40?",
+              "With Tesla's Cybercab, Waymo's robotaxi expansion, and Uber's own AV-partner strategy (NVIDIA, Zoox, Wayve) all converging on the same market, does Uber's demand-aggregation moat survive a shift toward owned-fleet robotaxi economics, or does it erode as those partners' networks mature?",
+              "The DCF and consensus models imply 45-58% upside to fair value -- over a 5-10 year view, is that gap more likely to close through actual free-cash-flow growth, or does it rest on optimistic take-rate and AV-capex-payback assumptions that may not hold?",
+              "If the thesis is wrong -- margin compression from robotaxi competition, or an adverse outcome in the pending passenger-assault MDL bellwether trials -- how would you find out, and how quickly could a position this size actually be trimmed without moving the price against you?"
+            ],
+            "note": "This is the mandated daily check-in on the book's largest position, independent of today's (flat) news flow."
+          }
+        }
+      ]
     }
   ]
 }
