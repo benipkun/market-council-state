@@ -48,6 +48,12 @@
       "usd_huf": 326.04937,
       "eur_huf": 365.56107,
       "source": "market"
+    },
+    {
+      "date": "2026-10-09",
+      "usd_huf": 325.778,
+      "eur_huf": 364.98482,
+      "source": "market"
     }
   ]
 }
